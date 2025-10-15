@@ -50,7 +50,7 @@ class RoundedTextField extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
       ),
-      style: appStylePoppins(16, kDark, FontWeight.normal),
+      style: appStyle(16, kDark, FontWeight.normal),
     );
   }
 }

@@ -8,13 +8,15 @@ class CustomText extends StatelessWidget {
     required this.label,
     this.size = 16,
     this.color = kDark,
+    this.fontWeight = FontWeight.w600,
   });
   final String label;
   final double size;
   final Color color;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
-    return Text(label, style: appStyle(size, color, FontWeight.w600));
+    return Text(label, style: appStyle(size, color, fontWeight));
   }
 }
