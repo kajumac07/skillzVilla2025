@@ -13,13 +13,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   Future.delayed(const Duration(seconds: 3), () {
-  //     Get.offAll(() => const LoginScreen());
-  //   });
-  // }
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      Get.offAll(() => const LoginScreen());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

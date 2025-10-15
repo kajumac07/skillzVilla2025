@@ -1,4 +1,5 @@
 import 'package:customer_app/app/core/constants/consts.dart';
+import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
@@ -27,15 +28,12 @@ class _LoginScreenState extends State<LoginScreen> {
           Positioned(
             top: 0,
             left: 0,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.87,
-              width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(
-                color: authBackground,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(290),
-                  bottomLeft: Radius.circular(120),
-                ),
+            child: ClipRRect(
+              child: Image.asset(
+                Appimages.authBackground,
+                height: MediaQuery.of(context).size.height * 0.87,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -50,11 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // SizedBox(height: 220.h),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.26),
 
-                  CustomText(
-                    label: "Login as",
-                    size: 24.sp,
-                    color: Colors.black87,
-                  ),
+                  CustomText(label: "Login as", size: 32.sp, color: kDark),
                   SizedBox(height: 24.h),
 
                   // Customer / Service Provider toggle buttons
@@ -83,31 +77,56 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   // Mobile number text field
                   RoundedTextField(
-                    label: "Mobile No.",
-                    icon: Icons.phone,
+                    label: "Mobile/Email ID",
                     obscureText: false,
                     keyboardType: TextInputType.phone,
                   ),
                   SizedBox(height: 16.h),
 
                   // OTP field (simple boxes)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: List.generate(4, (index) {
-                      return Container(
-                        height: 50.h,
-                        width: 50.w,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade400),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: Text(
-                          "-",
-                          style: GoogleFonts.poppins(fontSize: 18.sp),
-                        ),
-                      );
-                    }),
+                  Container(
+                    height: 46.h,
+                    decoration: BoxDecoration(
+                      color: kWhite,
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 8, right: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomText(
+                            label: "OTP",
+                            size: 14,
+                            fontWeight: FontWeight.w300,
+                          ),
+                          Row(
+                            children: List.generate(5, (index) {
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                  right: index != 4 ? 4.w : 0,
+                                ),
+                                child: Container(
+                                  height: 30.h,
+                                  width: 29.w,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.grey.shade400,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.r),
+                                  ),
+                                  child: Text(
+                                    "",
+                                    style: GoogleFonts.poppins(fontSize: 18.sp),
+                                  ),
+                                ),
+                              );
+                            }),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
 
                   SizedBox(height: 30.h),
@@ -160,16 +179,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text.rich(
                       TextSpan(
                         text: "New User ? ",
-                        style: GoogleFonts.poppins(
-                          color: Colors.black87,
-                          fontSize: 14.sp,
-                        ),
+                        style: appStyle(15, kDark, FontWeight.normal),
                         children: [
                           TextSpan(
                             text: "Sign up",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: appStyle(14, kDark, FontWeight.w600),
                           ),
                         ],
                       ),

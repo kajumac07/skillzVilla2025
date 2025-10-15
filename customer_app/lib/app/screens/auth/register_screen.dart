@@ -1,4 +1,5 @@
 import 'package:customer_app/app/core/constants/consts.dart';
+import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
@@ -28,15 +29,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Positioned(
             top: 0,
             left: 0,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.87,
-              width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(
-                color: authBackground,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(290),
-                  bottomLeft: Radius.circular(120),
-                ),
+            child: ClipRRect(
+              child: Image.asset(
+                Appimages.authBackground,
+                height: MediaQuery.of(context).size.height * 0.87,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -51,31 +49,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   // SizedBox(height: 220.h),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.26),
 
-                  CustomText(
-                    label: "Sign Up",
-                    size: 24.sp,
-                    color: Colors.black87,
-                  ),
+                  CustomText(label: "Sign Up", size: 32.sp, color: kDark),
                   SizedBox(height: 24.h),
 
                   // Mobile number text field
                   RoundedTextField(
                     label: "Mobile No.",
-                    icon: Icons.phone,
                     obscureText: false,
                     keyboardType: TextInputType.phone,
                   ),
                   SizedBox(height: 16.h),
                   RoundedTextField(
                     label: "Email",
-                    icon: Icons.email,
                     obscureText: false,
                     keyboardType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: 16.h),
                   RoundedTextField(
                     label: "Password",
-                    icon: Icons.remove_red_eye_outlined,
                     obscureText: true,
                     keyboardType: TextInputType.visiblePassword,
                   ),
@@ -85,12 +76,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     alignment: Alignment.centerRight,
                     child: CustomText(
                       label: "Forgot password?",
-                      size: 14.sp,
-                      color: kPrimary,
+                      size: 12.sp,
+                      color: greyTextColor,
                     ),
                   ),
 
-                  SizedBox(height: 30.h),
+                  SizedBox(height: 20.h),
 
                   CircularButton(
                     buttonColor: kPrimary,
@@ -98,8 +89,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: _submitTap,
                     width: double.infinity,
                   ),
+                  SizedBox(height: 25.h),
 
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+                  // Divider with Or
+                  Row(
+                    children: [
+                      Spacer(),
+                      Expanded(child: Divider(color: Colors.grey.shade400)),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        child: Text(
+                          "Or",
+                          style: GoogleFonts.poppins(color: Colors.black26),
+                        ),
+                      ),
+                      Expanded(child: Divider(color: Colors.grey.shade400)),
+                      Spacer(),
+                    ],
+                  ),
+                  SizedBox(height: 25.h),
+
+                  // Social login buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 22.r,
+                        backgroundColor: Colors.white,
+                        child: Image.asset(
+                          Appimages.googleIcon,
+                          height: 44.h,
+                          width: 44.w,
+                        ),
+                      ),
+                      SizedBox(width: 20.w),
+                      CircleAvatar(
+                        radius: 22.r,
+                        backgroundColor: Colors.white,
+                        child: Icon(Icons.apple, size: 26.sp),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 35.h),
 
                   // Sign up text
                   GestureDetector(
@@ -107,21 +138,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Text.rich(
                       TextSpan(
                         text: "Already have an account ? ",
-                        style: GoogleFonts.poppins(
-                          color: Colors.black87,
-                          fontSize: 14.sp,
-                        ),
+                        style: appStyle(14, kDark, FontWeight.w500),
                         children: [
                           TextSpan(
-                            text: "Login",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w600,
-                            ),
+                            text: "Sign In",
+                            style: appStyle(15, kDark, FontWeight.w600),
                           ),
                         ],
                       ),
                     ),
                   ),
+                  SizedBox(height: 10.h),
                 ],
               ),
             ),

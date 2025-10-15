@@ -8,7 +8,6 @@ class RoundedTextField extends StatelessWidget {
     super.key,
     this.controller,
     required this.label,
-    required this.icon,
     this.suffixIcon,
     required this.obscureText,
     required this.keyboardType,
@@ -17,7 +16,6 @@ class RoundedTextField extends StatelessWidget {
 
   final TextEditingController? controller;
   final String label;
-  final IconData icon;
   final Widget? suffixIcon;
   final bool obscureText;
   final TextInputType keyboardType;
@@ -32,8 +30,8 @@ class RoundedTextField extends StatelessWidget {
       validator: validator,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(color: Colors.grey),
-        prefixIcon: Icon(icon, color: kPrimary.withOpacity(0.7)),
+        labelStyle: appStyle(15, kDark, FontWeight.w200),
+        // prefixIcon: Icon(icon, color: kPrimary.withOpacity(0.7)),
         suffixIcon: suffixIcon,
         filled: true,
         fillColor: kWhite,
@@ -42,11 +40,11 @@ class RoundedTextField extends StatelessWidget {
           horizontal: 12,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18.r),
+          borderRadius: BorderRadius.circular(13.r),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18.r),
+          borderRadius: BorderRadius.circular(13.r),
           borderSide: BorderSide.none,
         ),
       ),

@@ -34,7 +34,10 @@ class CircularButton extends StatelessWidget {
         elevation: 0,
         padding: EdgeInsets.symmetric(vertical: 14.h),
       ),
-      child: Text(buttonText, style: appStyle(15, textColor, FontWeight.w500)),
+      child: Text(
+        buttonText,
+        style: appStyle(15.sp, textColor, FontWeight.w500),
+      ),
     );
   }
 }
