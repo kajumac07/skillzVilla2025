@@ -36,7 +36,7 @@ class CircularButton extends StatelessWidget {
       ),
       child: Text(
         buttonText,
-        style: appStyle(15.sp, textColor, FontWeight.w500),
+        style: appStyle(16.sp, textColor, FontWeight.w600),
       ),
     );
   }

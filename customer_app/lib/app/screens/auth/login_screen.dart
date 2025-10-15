@@ -147,6 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Spacer(),
                     ],
                   ),
+
                   SizedBox(height: 20.h),
 
                   // Social login buttons

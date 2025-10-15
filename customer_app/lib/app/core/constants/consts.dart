@@ -4,10 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 const kPrimary = Color(0xFFD84042);
 const kSecondary = Color(0xFF4FB8CE);
 const kPrimaryLight = Color(0xFFFFD8DB);
-const kSecondaryLight = Color(0xFFDAFAFF);
+const kSecondaryLight = Color(0xFF8EDEEA);
 const authBackground = Color(0xFFF1E7A3);
 const greyBtnColor = Color(0xffE3E8EC);
 const greyTextColor = Color(0xff6E7882);
+const locationbgGrey = Color(0xffF3F4F9);
+const kGrey100 = Color(0xffA4AEB8);
+const kGrey300 = Color(0xff202328);
+const kGrey400 = Color(0xff1E1E1E);
+const surface200 = Color(0xffF3F4F9);
 
 // UI Colors
 const kCardColor = Color(0xFF1E293B);
@@ -16,7 +21,7 @@ const kSplashBackground = Color(0xFF1E293B);
 const kHoverColor = Color(0xFF334155);
 const kOrange = Color(0xffff9900);
 const kTertiary = Color(0xff0078a6);
-const kGray = Color(0xff94A3B8);
+const kGray = Color(0xff2B2C31);
 const kDarkGray = Color(0xff475569);
 const kGrayLight = Color(0xffCBD5E1);
 const kLightWhite = Color(0xffF1F5F9);

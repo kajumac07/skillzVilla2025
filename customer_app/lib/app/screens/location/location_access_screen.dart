@@ -2,8 +2,11 @@ import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
+import 'package:customer_app/app/screens/location/widgets/at_current_location.dart';
+import 'package:customer_app/app/screens/location/widgets/manage_address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class LocationAccessScreen extends StatelessWidget {
   const LocationAccessScreen({super.key});
@@ -14,8 +17,6 @@ class LocationAccessScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Spacer(),
             //image section
@@ -27,19 +28,23 @@ class LocationAccessScreen extends StatelessWidget {
               ),
             ),
             Spacer(),
-            CustomText(label: "Where do you want your service"),
-            SizedBox(height: 20.h),
+            CustomText(
+              label: "Where do you want your service",
+              size: 18.sp,
+              fontWeight: FontWeight.w600,
+            ),
+            SizedBox(height: 40.h),
             CircularButton(
               buttonColor: kPrimary,
               buttonText: "At my Current Location",
-              onPressed: () {},
+              onPressed: () => Get.to(() => AtCurrentLocationScreen()),
               width: width,
             ),
             SizedBox(height: 10.h),
             CircularButton(
               buttonColor: greyBtnColor,
               buttonText: "I’ll enter my location manually",
-              onPressed: () {},
+              onPressed: () => Get.to(() => ManageAddressScreen()),
               width: width,
               textColor: kDark,
             ),
