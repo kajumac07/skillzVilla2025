@@ -5,6 +5,7 @@ const kPrimary = Color(0xFFD84042);
 const kSecondary = Color(0xFF4FB8CE);
 const kPrimaryLight = Color(0xFFFFD8DB);
 const kSecondaryLight = Color(0xFFDAFAFF);
+const authBackground = Color(0xFFF1E7A3);
 
 // UI Colors
 const kCardColor = Color(0xFF1E293B);
