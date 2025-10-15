@@ -1,6 +1,7 @@
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/screens/auth/login_screen.dart';
+import 'package:customer_app/app/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      Get.offAll(() => const LoginScreen());
+      Get.offAll(() => const WelcomeScreen());
     });
   }
 
