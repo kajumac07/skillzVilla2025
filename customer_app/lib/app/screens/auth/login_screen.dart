@@ -1,8 +1,12 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
+import 'package:customer_app/app/global/widgets/custom_text.dart';
+import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
+import 'package:customer_app/app/screens/auth/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -43,14 +47,13 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 220.h),
-                  Text(
-                    "Login as",
-                    style: GoogleFonts.poppins(
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
+                  // SizedBox(height: 220.h),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.26),
+
+                  CustomText(
+                    label: "Login as",
+                    size: 24.sp,
+                    color: Colors.black87,
                   ),
                   SizedBox(height: 24.h),
 
@@ -79,16 +82,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 30.h),
 
                   // Mobile number text field
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: "Mobile No.",
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                  RoundedTextField(
+                    label: "Mobile No.",
+                    icon: Icons.phone,
+                    obscureText: false,
                     keyboardType: TextInputType.phone,
                   ),
                   SizedBox(height: 16.h),
@@ -118,15 +115,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Divider with Or
                   Row(
                     children: [
+                      Spacer(),
                       Expanded(child: Divider(color: Colors.grey.shade400)),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: Text(
                           "Or",
-                          style: GoogleFonts.poppins(color: Colors.grey),
+                          style: GoogleFonts.poppins(color: Colors.black26),
                         ),
                       ),
                       Expanded(child: Divider(color: Colors.grey.shade400)),
+                      Spacer(),
                     ],
                   ),
                   SizedBox(height: 20.h),
@@ -157,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   // Sign up text
                   GestureDetector(
-                    onTap: () {},
+                    onTap: _navigateToRegister,
                     child: Text.rich(
                       TextSpan(
                         text: "New User ? ",
@@ -183,5 +182,9 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  _navigateToRegister() {
+    Get.to(() => const RegisterScreen());
   }
 }
