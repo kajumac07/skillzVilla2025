@@ -66,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: kDark,
               ),
             ),
+            //recommended product
             Container(
               height: MediaQuery.of(context).size.height * 0.26,
               child: ListView.builder(
@@ -82,9 +83,42 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
+            SizedBox(height: 20.h),
+            //in the spot light banner
+            _buildSpotlightBanner(),
           ],
         ),
       ),
+    );
+  }
+
+  //spotlight banner
+  Widget _buildSpotlightBanner() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(Appimages.magicIcon),
+            SizedBox(width: 10.w),
+            CustomText(
+              label: "In The Spotlight",
+              size: 20.sp,
+              fontWeight: FontWeight.bold,
+            ),
+            SizedBox(width: 5.w),
+            Image.asset(Appimages.magicIcon),
+          ],
+        ),
+        //Image banner
+        Container(
+          height: 268.h,
+          width: width,
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage(Appimages.spotLight)),
+          ),
+        ),
+      ],
     );
   }
 

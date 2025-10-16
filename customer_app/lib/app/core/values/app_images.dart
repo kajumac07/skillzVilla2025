@@ -9,6 +9,7 @@ class Appimages {
   static const String timerIcon = "assets/icons/timer.png";
   static const String searchIcon = "assets/icons/search.png";
   static const String starIcon = "assets/icons/star.png";
+  static const String magicIcon = "assets/icons/magic.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";
