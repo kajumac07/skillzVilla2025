@@ -3,6 +3,7 @@ import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
+import 'package:customer_app/app/screens/userSide/home/widgets/need_today_card.dart';
 import 'package:customer_app/app/screens/userSide/home/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,6 +46,14 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
   ];
 
+  // Sample need today data
+  final List<NeedToday> needToday = [
+    NeedToday(name: "Water Purifier", imageUrl: Appimages.waterPurifier),
+    NeedToday(name: "Laptop Service", imageUrl: Appimages.laptopService),
+    NeedToday(name: "Gardening", imageUrl: Appimages.garden),
+    NeedToday(name: "Deep Cleaning", imageUrl: Appimages.deepClean),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,9 +92,45 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
+
             SizedBox(height: 20.h),
             //in the spot light banner
             _buildSpotlightBanner(),
+            // SizedBox(height: 5.h),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //headline
+                Padding(
+                  padding: EdgeInsets.only(left: 18.w, top: 18.h, bottom: 10.h),
+                  child: CustomText(
+                    label: "What do you need today ?",
+                    size: 18.sp,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                //need today product card
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  // color: kRed,
+                  child: ListView.builder(
+                    itemCount: needToday.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (ctx, index) {
+                      final pData = needToday[index];
+                      return NeedTodayCard(
+                        image: pData.imageUrl,
+                        title: pData.name,
+                      );
+                    },
+                  ),
+                ),
+
+                // NeedTodayCard(),
+              ],
+            ),
+
+            SizedBox(height: 30.h),
           ],
         ),
       ),
@@ -405,4 +450,11 @@ class Product {
     required this.rating,
     required this.imageUrl,
   });
+}
+
+class NeedToday {
+  final String name;
+  final String imageUrl;
+
+  NeedToday({required this.name, required this.imageUrl});
 }

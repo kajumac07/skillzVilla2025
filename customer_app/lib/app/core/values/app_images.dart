@@ -20,4 +20,8 @@ class Appimages {
   static const String homeInterior = "assets/images/home_interior_wall.png";
   static const String bodyMassage = "assets/images/body_mess.png";
   static const String spotLight = "assets/images/spotlight.png";
+  static const String deepClean = "assets/images/deep_clean.png";
+  static const String waterPurifier = "assets/images/water_purifier.png";
+  static const String laptopService = "assets/images/laptop.png";
+  static const String garden = "assets/images/gardeing.png";
 }

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const kPrimary = Color(0xFFD84042);
 const kSecondary = Color(0xFF4FB8CE);
-const kPrimaryLight = Color(0xFFFFD8DB);
+const kPrimaryLight = Color(0xFFFFBEBF);
 const kSecondaryLight = Color(0xFF8EDEEA);
 const authBackground = Color(0xFFF1E7A3);
 const greyBtnColor = Color(0xffE3E8EC);
