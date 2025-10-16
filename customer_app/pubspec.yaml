@@ -18,10 +18,19 @@ dependencies:
   flutter_screenutil:
   google_fonts:
   flutter_svg:
+  rename:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.1
+
+#for app logo
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/logo.png"
+  min_sdk_android: 21
 
   flutter_lints: ^5.0.0
 

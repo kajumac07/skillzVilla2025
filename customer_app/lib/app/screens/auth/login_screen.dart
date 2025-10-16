@@ -18,6 +18,27 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  List<TextEditingController> _otpControllers = [];
+  List<FocusNode> _otpFocusNodes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _otpControllers = List.generate(5, (_) => TextEditingController());
+    _otpFocusNodes = List.generate(5, (_) => FocusNode());
+  }
+
+  @override
+  void dispose() {
+    for (var c in _otpControllers) {
+      c.dispose();
+    }
+    for (var f in _otpFocusNodes) {
+      f.dispose();
+    }
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,49 +104,74 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 16.h),
 
-                  // OTP field (simple boxes)
+                  // OTP input field with TextFields
                   Container(
-                    height: 46.h,
+                    height: 60.h,
+                    padding: EdgeInsets.symmetric(horizontal: 12.w),
                     decoration: BoxDecoration(
                       color: kWhite,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 8, right: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomText(
-                            label: "OTP",
-                            size: 14,
-                            fontWeight: FontWeight.w300,
-                          ),
-                          Row(
-                            children: List.generate(5, (index) {
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                  right: index != 4 ? 4.w : 0,
-                                ),
-                                child: Container(
-                                  height: 30.h,
-                                  width: 29.w,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.grey.shade400,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(
+                          label: "OTP",
+                          size: 14,
+                          fontWeight: FontWeight.w300,
+                        ),
+                        Row(
+                          children: List.generate(5, (index) {
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                right: index != 4 ? 4.w : 0,
+                              ),
+                              child: SizedBox(
+                                width: 29.w,
+                                height: 30.h,
+                                child: TextField(
+                                  controller: _otpControllers[index],
+                                  focusNode: _otpFocusNodes[index],
+                                  textAlign: TextAlign.center,
+                                  keyboardType: TextInputType.number,
+                                  maxLength: 1,
+                                  cursorWidth: 1.5,
+                                  cursorColor: Colors.black,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    height: 1.1,
+                                  ),
+                                  decoration: InputDecoration(
+                                    counterText: '',
+                                    contentPadding: EdgeInsets.zero,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade400,
+                                      ),
                                     ),
-                                    borderRadius: BorderRadius.circular(8.r),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderSide: BorderSide(
+                                        color: kPrimary,
+                                        width: 1.3,
+                                      ),
+                                    ),
                                   ),
-                                  child: Text(
-                                    "",
-                                    style: GoogleFonts.poppins(fontSize: 18.sp),
-                                  ),
+                                  onChanged: (value) {
+                                    if (value.isNotEmpty && index < 4) {
+                                      _otpFocusNodes[index + 1].requestFocus();
+                                    } else if (value.isEmpty && index > 0) {
+                                      _otpFocusNodes[index - 1].requestFocus();
+                                    }
+                                  },
                                 ),
-                              );
-                            }),
-                          ),
-                        ],
-                      ),
+                              ),
+                            );
+                          }),
+                        ),
+                      ],
                     ),
                   ),
 

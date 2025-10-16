@@ -4,8 +4,10 @@ import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
+import 'package:customer_app/app/screens/userSide/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ManageAddressScreen extends StatelessWidget {
   const ManageAddressScreen({super.key});
@@ -131,7 +133,7 @@ class ManageAddressScreen extends StatelessWidget {
                     CircularButton(
                       buttonColor: kPrimary,
                       buttonText: "Save Address",
-                      onPressed: () {},
+                      onPressed: () => Get.to(() => HomeScreen()),
                       width: width,
                     ),
                     SizedBox(height: 10),

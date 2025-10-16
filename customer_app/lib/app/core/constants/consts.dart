@@ -13,28 +13,30 @@ const kGrey100 = Color(0xffA4AEB8);
 const kGrey300 = Color(0xff202328);
 const kGrey400 = Color(0xff1E1E1E);
 const surface200 = Color(0xffF3F4F9);
+const k424242 = Color(0xff424242);
+const k909090 = Color(0xff090909);
+const kteal = Color(0xff4FB8CE);
+const k212121 = Color(0xff212121);
 
-// UI Colors
-const kCardColor = Color(0xFF1E293B);
-const kBackground = Color(0xFF0F172A);
-const kSplashBackground = Color(0xFF1E293B);
-const kHoverColor = Color(0xFF334155);
-const kOrange = Color(0xffff9900);
-const kTertiary = Color(0xff0078a6);
-const kGray = Color(0xff2B2C31);
-const kDarkGray = Color(0xff475569);
-const kGrayLight = Color(0xffCBD5E1);
-const kLightWhite = Color(0xffF1F5F9);
 const kWhite = Color(0xfffFFFFF);
 const kDark = Color(0xFF1E1E1E);
 const kRed = Color(0xffFE6150);
 const kSuccess = Color(0xFF6BD16E);
-const kOffWhite = Color(0xffF8FAFC);
-
-// Additional colors from your web design
-const kPinkAccent = Color(0xFFEC4899);
-const kBlueAccent = Color(0xFF3B82F6);
 const kGreenAccent = Color(0xFF10B981);
+
+//linear color combination
+
+const kHeaderLinear = LinearGradient(
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+  colors: [
+    Color(0xD7F09E56),
+    Color(0xA8F3B253),
+    Color(0x78F6C650),
+    Color(0x00FCED4A),
+  ],
+  stops: [0.0, 0.25, 0.5, 1.0],
+);
 
 double height = 825.h;
 double width = 375.w;
