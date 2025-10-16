@@ -17,6 +17,10 @@ const k424242 = Color(0xff424242);
 const k909090 = Color(0xff090909);
 const kteal = Color(0xff4FB8CE);
 const k212121 = Color(0xff212121);
+const kIndicatorColor = Color(0xff83CFDC);
+const kSurface400 = Color(0xffCED6DE);
+const k232323 = Color(0xff232323);
+const k454545 = Color(0xff454545);
 
 const kWhite = Color(0xfffFFFFF);
 const kDark = Color(0xFF1E1E1E);
