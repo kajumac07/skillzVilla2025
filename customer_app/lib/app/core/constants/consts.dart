@@ -22,6 +22,10 @@ const kSurface400 = Color(0xffCED6DE);
 const k232323 = Color(0xff232323);
 const k454545 = Color(0xff454545);
 const kthemeYellow = Color(0xffF1E7A3);
+const kE9E9E9 = Color(0xffE9E9E9);
+const kSurfaceBg = Color(0xffF9F7F7);
+const kFFF9D1 = Color(0xffFFF9D1);
+const kDAFAFF = Color(0xffDAFAFF);
 
 const kWhite = Color(0xfffFFFFF);
 const kDark = Color(0xFF1E1E1E);

@@ -1,4 +1,9 @@
+import 'package:customer_app/app/core/constants/consts.dart';
+import 'package:customer_app/app/core/utils/appStyles.dart';
+import 'package:customer_app/app/global/widgets/custom_text.dart';
+import 'package:customer_app/app/screens/userSide/home/subCategory/widgets/sub_cat_category_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubCategoryDetailsScreen extends StatefulWidget {
   const SubCategoryDetailsScreen({
@@ -18,150 +23,184 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text(
-          'Sub-Category',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          // Header Section
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+          /// ---------------- Background Image ----------------
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 240.h,
+            child: Image.asset(widget.img, fit: BoxFit.cover),
+          ),
+
+          /// ---------------- Back & Profile Buttons ----------------
+          Positioned(
+            top: 50.h,
+            left: 16.w,
+            child: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios_new, size: 20.sp),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 50.h,
+            right: 16.w,
+            child: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Icon(Icons.share, size: 20.sp),
+            ),
+          ),
+
+          /// ---------------- Main Container ----------------
+          Positioned(
+            top: 210.h,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                decoration: BoxDecoration(
+                  color: kWhite,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(22.r),
+                    topRight: Radius.circular(22.r),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.access_time, size: 16, color: Colors.grey),
-                    const SizedBox(width: 4),
-                    const Text(
-                      '4:21',
-                      style: TextStyle(color: Colors.grey, fontSize: 12),
-                    ),
-                    const Spacer(),
+                    /// ---------- Title & Ratings ----------
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Icon(Icons.star, size: 16, color: Colors.orange),
-                        const SizedBox(width: 4),
-                        const Text(
-                          '4.8',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                          ),
+                        CustomText(
+                          label: widget.title,
+                          size: 20.sp,
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(width: 2),
-                        const Text(
-                          'RATINGS',
-                          style: TextStyle(color: Colors.grey, fontSize: 10),
+                        Row(
+                          children: [
+                            Text(
+                              "4.8",
+                              style: appStyle(12.sp, k232323, FontWeight.bold),
+                            ),
+                            Text(
+                              " ⭐ RATINGS",
+                              style: appStyle(12.sp, k232323, FontWeight.bold),
+                            ),
+                          ],
                         ),
                       ],
                     ),
+                    SizedBox(height: 20.h),
+
+                    /// ---------- Horizontal Chips ----------
+                    SizedBox(
+                      height: 90.h,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          SubCatCategoryCard(
+                            img: widget.img,
+                            title: widget.title,
+                            isSelected: true,
+                          ),
+                          SubCatCategoryCard(
+                            img: widget.img,
+                            title: widget.title,
+                            isSelected: false,
+                          ),
+                          SubCatCategoryCard(
+                            img: widget.img,
+                            title: widget.title,
+                            isSelected: false,
+                          ),
+                          SubCatCategoryCard(
+                            img: widget.img,
+                            title: widget.title,
+                            isSelected: false,
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 10.h),
+                    Divider(color: kE9E9E9),
+                    SizedBox(height: 10.h),
+
+                    Text(
+                      "Repairs",
+                      style: appStyle(16.sp, kDark, FontWeight.w400),
+                    ),
+
+                    /// ---------- List of Services ----------
+                    Expanded(
+                      child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.only(bottom: 10.0.h, top: 20.h),
+                            child: _serviceTile(selected: index == 1),
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
-                const SizedBox(height: 16),
-                const Text(
-                  'AC Services',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 16),
-                // Service Type Chips
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
+              ),
+            ),
+          ),
+
+          /// ---------------- Bottom Price Bar ----------------
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+              decoration: BoxDecoration(color: kWhite),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildServiceChip('Repairs', true),
-                      const SizedBox(width: 8),
-                      _buildServiceChip('Maintenance', false),
-                      const SizedBox(width: 8),
-                      _buildServiceChip('Installation', false),
-                      const SizedBox(width: 8),
-                      _buildServiceChip('Gas Refi', false),
+                      Text(
+                        "₹519",
+                        style: appStyle(18, k232323, FontWeight.w400),
+                      ),
+                      Text(
+                        "Inclusive of all taxes",
+                        style: appStyle(10, k454545, FontWeight.w300),
+                      ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
-
-          const Divider(height: 1),
-
-          // Service Items List
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return _buildServiceItem();
-              },
-            ),
-          ),
-
-          // Bottom Book Now Section
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 8,
-                  offset: const Offset(0, -2),
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      '¥519',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'Inclusive of all taxes',
-                      style: TextStyle(color: Colors.grey[600], fontSize: 12),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
+                  ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF4CAF50),
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      backgroundColor: Colors.red.shade400,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 40.w,
+                        vertical: 14.h,
                       ),
                     ),
+                    onPressed: () {},
                     child: const Text(
-                      'Book Now',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      "Book Now",
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
@@ -169,135 +208,158 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
     );
   }
 
-  Widget _buildServiceChip(String text, bool isSelected) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: isSelected ? const Color(0xFF4CAF50) : Colors.grey[200],
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: isSelected ? Colors.white : Colors.black,
-          fontWeight: FontWeight.w500,
+  /// ---------------- Helper Widgets ----------------
+  Widget _categoryChip(String label, IconData icon, bool active) {
+    return Padding(
+      padding: EdgeInsets.only(right: 12.w),
+      child: Container(
+        width: 90.w,
+        decoration: BoxDecoration(
+          color: active ? Colors.blue.shade50 : Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(14.r),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              radius: 20,
+              backgroundColor: Colors.white,
+              child: Icon(icon, color: Colors.blue.shade700),
+            ),
+            SizedBox(height: 4.h),
+            Text(
+              label,
+              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildServiceItem() {
+  Widget _serviceTile({bool selected = false}) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(8.h),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey[300]!),
+        color: selected ? kFFF9D1 : kSurfaceBg,
+        borderRadius: BorderRadius.circular(14.r),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListTile(
+        leading: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              width: 70.w,
+              height: 80.h,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade400,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+
+            /// Counter box — positioned slightly outside bottom edge, centered horizontally
+            Positioned(
+              bottom: -8,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 4.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.grey.shade300),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text("+", style: TextStyle(fontSize: 12)),
+                      SizedBox(width: 6.w),
+                      const Text(
+                        "1",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 6.w),
+                      const Text("-", style: TextStyle(fontSize: 12)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        title: Text(
+          "AC Repairs & Fixing",
+          style: appStyle(13.sp, kGrey400, FontWeight.bold),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text("₹519 ", style: appStyle(13, kGrey300, FontWeight.w300)),
+                Text("₹519", style: appStyle(13, kGrey100, FontWeight.w300)),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconAndTextCircular(
+                  icon: Icons.star,
+                  title: "4.5",
+                  color: kthemeYellow,
+                  isBool: true,
+                ),
+                SizedBox(width: 10.w),
+                IconAndTextCircular(
+                  icon: Icons.timelapse_outlined,
+                  title: "20 mins",
+                  color: kGreenAccent,
+                  isBool: false,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class IconAndTextCircular extends StatelessWidget {
+  const IconAndTextCircular({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.color,
+    required this.isBool,
+  });
+
+  final IconData icon;
+  final String title;
+  final Color color;
+  final bool isBool;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 20.h,
+      width: isBool ? 35.w : 61.w,
+      decoration: BoxDecoration(
+        color: kWhite,
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              const Expanded(
-                child: Text(
-                  'AC Repairs & Fixing',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF4CAF50).withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  '¥519',
-                  style: const TextStyle(
-                    color: Color(0xFF4CAF50),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              const Text(
-                '¥519-',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                  decoration: TextDecoration.lineThrough,
-                ),
-              ),
-              const Spacer(),
-              Row(
-                children: [
-                  const Icon(Icons.star, size: 16, color: Colors.orange),
-                  const SizedBox(width: 4),
-                  const Text(
-                    '4.5',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(width: 8),
-                  Container(
-                    width: 4,
-                    height: 4,
-                    decoration: const BoxDecoration(
-                      color: Colors.grey,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text(
-                    '20 MINS',
-                    style: TextStyle(color: Colors.grey, fontSize: 12),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: IconButton(
-                  icon: const Icon(Icons.remove, size: 16),
-                  onPressed: () {},
-                  padding: EdgeInsets.zero,
-                ),
-              ),
-              const SizedBox(width: 12),
-              const Text(
-                '1',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(width: 12),
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: IconButton(
-                  icon: const Icon(Icons.add, size: 16),
-                  onPressed: () {},
-                  padding: EdgeInsets.zero,
-                ),
-              ),
-            ],
-          ),
+          Icon(icon, color: color, size: 14),
+          Text(title, style: appStyle(10.sp, kGrey300, FontWeight.w300)),
         ],
       ),
     );

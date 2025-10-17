@@ -78,10 +78,26 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Sample need today data
   final List<NeedToday> needToday = [
-    NeedToday(name: "Water Purifier", imageUrl: Appimages.waterPurifier),
-    NeedToday(name: "Laptop Service", imageUrl: Appimages.laptopService),
-    NeedToday(name: "Gardening", imageUrl: Appimages.garden),
-    NeedToday(name: "Deep Cleaning", imageUrl: Appimages.deepClean),
+    NeedToday(
+      name: "Water Purifier",
+      imageUrl: Appimages.waterPurifier,
+      bgImg: Appimages.subCategorybgImg,
+    ),
+    NeedToday(
+      name: "Laptop Service",
+      imageUrl: Appimages.laptopService,
+      bgImg: Appimages.subCategorybgImg,
+    ),
+    NeedToday(
+      name: "Gardening",
+      imageUrl: Appimages.garden,
+      bgImg: Appimages.subCategorybgImg,
+    ),
+    NeedToday(
+      name: "Deep Cleaning",
+      imageUrl: Appimages.deepClean,
+      bgImg: Appimages.subCategorybgImg,
+    ),
   ];
 
   @override
@@ -122,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () => Get.to(
                           () => SubCategoryDetailsScreen(
                             title: pData.name,
-                            img: pData.imageUrl,
+                            img: pData.bgImg,
                           ),
                         ),
                         child: NeedTodayCard(

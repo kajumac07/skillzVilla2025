@@ -30,4 +30,5 @@ class Appimages {
   static const String laptopService = "assets/images/laptop.png";
   static const String garden = "assets/images/gardeing.png";
   static const String slashBg = "assets/images/splash_bg.png";
+  static const String subCategorybgImg = "assets/images/subServiceImage.png";
 }
