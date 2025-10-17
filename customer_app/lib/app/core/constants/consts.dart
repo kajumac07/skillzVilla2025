@@ -21,6 +21,7 @@ const kIndicatorColor = Color(0xff83CFDC);
 const kSurface400 = Color(0xffCED6DE);
 const k232323 = Color(0xff232323);
 const k454545 = Color(0xff454545);
+const kthemeYellow = Color(0xffF1E7A3);
 
 const kWhite = Color(0xfffFFFFF);
 const kDark = Color(0xFF1E1E1E);

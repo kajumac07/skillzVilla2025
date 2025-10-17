@@ -1,12 +1,17 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
+import 'package:customer_app/app/global/models/need_today.dart';
+import 'package:customer_app/app/global/models/product_model.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
+import 'package:customer_app/app/screens/userSide/home/subCategory/sub_category_details_screen.dart';
 import 'package:customer_app/app/screens/userSide/home/widgets/need_today_card.dart';
-import 'package:customer_app/app/screens/userSide/home/widgets/product_card.dart';
+import 'package:customer_app/app/screens/userSide/products/product_card.dart';
+import 'package:customer_app/app/screens/userSide/products/widgets/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,7 +21,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _currentPage = 0;
+
   final List<Map<String, dynamic>> menus = [
+    {"icon": Appimages.searchIcon, "label": "Salon"},
+    {"icon": Appimages.searchIcon, "label": "Cleaning"},
+    {"icon": Appimages.searchIcon, "label": "Repairs"},
+    {"icon": Appimages.searchIcon, "label": "Electrics"},
+    {"icon": Appimages.searchIcon, "label": "Painting"},
     {"icon": Appimages.searchIcon, "label": "Salon"},
     {"icon": Appimages.searchIcon, "label": "Cleaning"},
     {"icon": Appimages.searchIcon, "label": "Repairs"},
@@ -26,6 +38,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Sample product data
   final List<Product> products = [
+    Product(
+      name: "Intense Bathroom Cleaning",
+      price: "\₹455",
+      rating: "4.5",
+      imageUrl: Appimages.bathroomCleaning,
+    ),
+    Product(
+      name: "Home Interior Walls Painting",
+      price: "\₹555",
+      rating: "4.8",
+      imageUrl: Appimages.homeInterior,
+    ),
+    Product(
+      name: "Swedish Stress Body Massage",
+      price: "\₹699",
+      rating: "4.3",
+      imageUrl: Appimages.bodyMassage,
+    ),
     Product(
       name: "Intense Bathroom Cleaning",
       price: "\₹455",
@@ -64,39 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             //Header
             buildTopHeader(),
-            SizedBox(height: 8.h),
             buildBannerCard(),
             SizedBox(height: 2.h),
-            Padding(
-              padding: EdgeInsets.only(left: 18.w, top: 18.h, bottom: 10.h),
-              child: CustomText(
-                label: "Recommended For You",
-                size: 18.sp,
-                color: kDark,
-              ),
-            ),
-            //recommended product
-            Container(
-              height: MediaQuery.of(context).size.height * 0.26,
-              child: ListView.builder(
-                itemCount: products.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (ctx, index) {
-                  final pData = products[index];
-                  return ProductCard(
-                    bgImage: pData.imageUrl,
-                    price: pData.price,
-                    rating: pData.rating,
-                    title: pData.name,
-                  );
-                },
-              ),
-            ),
 
-            SizedBox(height: 20.h),
-            //in the spot light banner
-            _buildSpotlightBanner(),
-            // SizedBox(height: 5.h),
+            // what do you need today
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -112,15 +113,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 //need today product card
                 Container(
                   height: MediaQuery.of(context).size.height * 0.15,
-                  // color: kRed,
                   child: ListView.builder(
                     itemCount: needToday.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (ctx, index) {
                       final pData = needToday[index];
-                      return NeedTodayCard(
-                        image: pData.imageUrl,
-                        title: pData.name,
+                      return GestureDetector(
+                        onTap: () => Get.to(
+                          () => SubCategoryDetailsScreen(
+                            title: pData.name,
+                            img: pData.imageUrl,
+                          ),
+                        ),
+                        child: NeedTodayCard(
+                          image: pData.imageUrl,
+                          title: pData.name,
+                        ),
                       );
                     },
                   ),
@@ -130,7 +138,105 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
 
-            SizedBox(height: 30.h),
+            Padding(
+              padding: EdgeInsets.only(left: 18.w, top: 18.h, bottom: 10.h),
+              child: CustomText(
+                label: "Recommended For You",
+                size: 18.sp,
+                color: kDark,
+              ),
+            ),
+            //recommended product
+            Container(
+              height: MediaQuery.of(context).size.height * 0.26,
+              // color: kRed,
+              child: ListView.builder(
+                itemCount: products.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (ctx, index) {
+                  final pData = products[index];
+                  return GestureDetector(
+                    onTap: () => Get.to(() => ProductDetailsScreen()),
+                    child: ProductCard(
+                      bgImage: pData.imageUrl,
+                      price: pData.price,
+                      rating: pData.rating,
+                      title: pData.name,
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            Container(
+              height: MediaQuery.of(context).size.height * 0.26,
+              // color: kRed,
+              child: ListView.builder(
+                itemCount: products.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (ctx, index) {
+                  final pData = products[index];
+                  return GestureDetector(
+                    onTap: () => Get.to(() => ProductDetailsScreen()),
+                    child: ProductCard(
+                      bgImage: pData.imageUrl,
+                      price: pData.price,
+                      rating: pData.rating,
+                      title: pData.name,
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            SizedBox(height: 20.h),
+            //more category
+            Padding(
+              padding: EdgeInsets.only(left: 18.w, top: 18.h, bottom: 10.h),
+              child: CustomText(
+                label: "More Categories",
+                size: 18.sp,
+                color: kDark,
+              ),
+            ),
+            SizedBox(height: 10.h),
+            //more categories card
+            Container(
+              height: MediaQuery.of(context).size.height * 0.11,
+
+              child: Padding(
+                padding: EdgeInsets.only(left: 8.0),
+                child: ListView.builder(
+                  itemCount: 5,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (ctx, index) {
+                    return Column(
+                      children: [
+                        Container(
+                          height: 68.h,
+                          width: 82.w,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: kPrimaryLight),
+                            color: kWhite,
+                          ),
+                        ),
+                        CustomText(
+                          label: "Water Purifier",
+                          size: 10.sp,
+                          color: kGrey300,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            //in the spot light banner
+            _buildSpotlightBanner(),
+
+            // SizedBox(height: 30.h),
           ],
         ),
       ),
@@ -167,133 +273,156 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  //build Banner card
+  // build Banner Card with Slider
   Widget buildBannerCard() {
-    return Column(
-      children: [
-        //banner
-        Padding(
-          padding: EdgeInsets.only(left: 18.w, right: 18.w, top: 8.h),
-          child: Container(
-            height: 186.h,
-            width: width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(22.r),
-              image: DecorationImage(
-                image: AssetImage(Appimages.homeBannerImage),
-                fit: BoxFit.cover,
-              ),
-            ),
-            clipBehavior: Clip.hardEdge,
-            child: Padding(
-              padding: EdgeInsets.only(left: 8.w, right: 8.w),
-              child: Stack(
-                children: [
-                  // Girl image positioned to the right
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: Image.asset(
-                      Appimages.homeBannerGirl,
-                      height: 180.h,
-                      width: 180.w,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+    final PageController _pageController = PageController();
+    final List<String> bannerImages = [
+      Appimages.homeBannerImage,
+      Appimages.homeBannerImage,
+      Appimages.homeBannerImage,
+    ];
 
-                  // Text content positioned to the left
-                  Positioned(
-                    left: 20.w,
-                    top: 0,
-                    bottom: 0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ShaderMask(
-                          shaderCallback: (bounds) {
-                            return LinearGradient(
-                              colors: [Color(0xffD05506), Color(0xffA93B30)],
-                            ).createShader(bounds);
-                          },
-                          child: Text(
-                            "Pampering\nMade Easy",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
+    return StatefulBuilder(
+      builder: (context, setState) {
+        // int _currentPage = 0;
+
+        return Column(
+          children: [
+            // Banner slider
+            Padding(
+              padding: EdgeInsets.only(left: 18.w, right: 18.w, top: 8.h),
+              child: SizedBox(
+                height: 186.h,
+                width: width,
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: bannerImages.length,
+                  onPageChanged: (index) =>
+                      setState(() => _currentPage = index),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.symmetric(horizontal: 2.w),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(22.r),
+                        image: DecorationImage(
+                          image: AssetImage(bannerImages[index]),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      child: Stack(
+                        children: [
+                          // Girl image (on right)
+                          Positioned(
+                            right: 0,
+                            bottom: 0,
+                            child: Image.asset(
+                              Appimages.homeBannerGirl,
+                              height: 180.h,
+                              width: 180.w,
+                              fit: BoxFit.cover,
                             ),
                           ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Text(
-                          "Women's salon & spa\nservices, just a tap away",
-                          style: appStyle(12, k909090, FontWeight.w300),
-                        ),
-                        SizedBox(height: 8.h),
-                        Container(
-                          height: 24.h,
-                          width: 80.w,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xffEBDC7C),
-                                Color(0xffFFB17D),
-                                Color(0xffE65E60),
+
+                          // Text content (on left)
+                          Positioned(
+                            left: 20.w,
+                            top: 0,
+                            bottom: 0,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ShaderMask(
+                                  shaderCallback: (bounds) {
+                                    return const LinearGradient(
+                                      colors: [
+                                        Color(0xffD05506),
+                                        Color(0xffA93B30),
+                                      ],
+                                    ).createShader(bounds);
+                                  },
+                                  child: Text(
+                                    "Pampering\nMade Easy",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 4.h),
+                                Text(
+                                  "Women's salon & spa\nservices, just a tap away",
+                                  style: appStyle(12, k909090, FontWeight.w300),
+                                ),
+                                SizedBox(height: 8.h),
+                                Container(
+                                  height: 24.h,
+                                  width: 80.w,
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                      colors: [
+                                        Color(0xffEBDC7C),
+                                        Color(0xffFFB17D),
+                                        Color(0xffE65E60),
+                                      ],
+                                    ),
+                                    border: Border.all(
+                                      color: Color(0xffE65E60),
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.r),
+                                  ),
+                                  child: Center(
+                                    child: CustomText(
+                                      label: "Shop Now",
+                                      color: kGrey400,
+                                      size: 12,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
-                            border: Border.all(color: Color(0xffE65E60)),
-                            borderRadius: BorderRadius.circular(12.r),
                           ),
-                          child: Center(
-                            child: CustomText(
-                              label: "Shop Now",
-                              color: kGrey400,
-                              size: 12,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-        ),
-        //indicator
-        SizedBox(height: 15.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            buildSliderIndicator(kIndicatorColor),
-            SizedBox(width: 5.w),
-            buildSliderIndicator(kSurface400),
-            SizedBox(width: 5.w),
-            buildSliderIndicator(kSurface400),
-          ],
-        ),
-      ],
-    );
-  }
 
-  //Slider Indicator
-  Widget buildSliderIndicator(Color color) {
-    return Container(
-      height: 6.h,
-      width: 17.w,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(12.r),
-      ),
+            // Indicator
+            SizedBox(height: 15.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                bannerImages.length,
+                (index) => AnimatedContainer(
+                  duration: Duration(milliseconds: 300),
+                  margin: EdgeInsets.symmetric(horizontal: 5.w),
+                  height: 8.h,
+                  width: _currentPage == index ? 24.w : 8.w,
+                  decoration: BoxDecoration(
+                    color: _currentPage == index
+                        ? kIndicatorColor
+                        : kSurface400,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
   //=========== Top Header ==================
   Widget buildTopHeader() {
     return Container(
-      height: 248.h,
-      width: width,
+      height: 278.h,
+      // width: do,
       decoration: BoxDecoration(gradient: kHeaderLinear),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -402,13 +531,18 @@ class _HomeScreenState extends State<HomeScreen> {
             //menus
             SizedBox(height: 20.h),
 
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.generate(menus.length, (index) {
+            //categories icon
+            Container(
+              height: 70.h,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: menus.length,
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (ctx, index) {
                   final item = menus[index];
                   return Padding(
-                    padding: EdgeInsets.only(right: 12.w),
+                    padding: EdgeInsets.only(right: 22.w),
                     child: Column(
                       children: [
                         Container(
@@ -428,7 +562,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   );
-                }),
+                },
               ),
             ),
           ],
@@ -436,25 +570,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
-
-class Product {
-  final String name;
-  final String price;
-  final String rating;
-  final String imageUrl;
-
-  Product({
-    required this.name,
-    required this.price,
-    required this.rating,
-    required this.imageUrl,
-  });
-}
-
-class NeedToday {
-  final String name;
-  final String imageUrl;
-
-  NeedToday({required this.name, required this.imageUrl});
 }

@@ -10,6 +10,11 @@ class Appimages {
   static const String searchIcon = "assets/icons/search.png";
   static const String starIcon = "assets/icons/star.png";
   static const String magicIcon = "assets/icons/magic.png";
+  static const String hrIcon = "assets/icons/h_r.png";
+  static const String haIcon = "assets/icons/s_r.png";
+  static const String hcIcon = "assets/icons/c_r.png";
+  static const String hcaIcon = "assets/icons/cart.png";
+  static const String haBooking = "assets/icons/booking.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";
@@ -24,4 +29,5 @@ class Appimages {
   static const String waterPurifier = "assets/images/water_purifier.png";
   static const String laptopService = "assets/images/laptop.png";
   static const String garden = "assets/images/gardeing.png";
+  static const String slashBg = "assets/images/splash_bg.png";
 }

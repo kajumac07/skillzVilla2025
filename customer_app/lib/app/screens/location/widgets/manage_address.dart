@@ -5,6 +5,7 @@ import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
 import 'package:customer_app/app/screens/userSide/home/home_screen.dart';
+import 'package:customer_app/app/screens/userSide/root_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -133,7 +134,7 @@ class ManageAddressScreen extends StatelessWidget {
                     CircularButton(
                       buttonColor: kPrimary,
                       buttonText: "Save Address",
-                      onPressed: () => Get.to(() => HomeScreen()),
+                      onPressed: () => Get.to(() => RootScreen()),
                       width: width,
                     ),
                     SizedBox(height: 10),

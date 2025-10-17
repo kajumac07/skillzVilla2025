@@ -22,7 +22,7 @@ class NeedTodayCard extends StatelessWidget {
                 height: 100.h,
                 width: 105.w,
                 decoration: BoxDecoration(
-                  color: kPrimaryLight,
+                  color: kthemeYellow,
                   borderRadius: BorderRadius.circular(22.r),
                 ),
               ),
