@@ -163,46 +163,50 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             //recommended product
-            Container(
-              height: MediaQuery.of(context).size.height * 0.26,
-              // color: kRed,
-              child: ListView.builder(
-                itemCount: products.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (ctx, index) {
-                  final pData = products[index];
-                  return GestureDetector(
-                    onTap: () => Get.to(() => ProductDetailsScreen()),
-                    child: ProductCard(
-                      bgImage: pData.imageUrl,
-                      price: pData.price,
-                      rating: pData.rating,
-                      title: pData.name,
-                    ),
-                  );
-                },
-              ),
-            ),
+            Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.26,
+                  // color: kRed,
+                  child: ListView.builder(
+                    itemCount: products.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (ctx, index) {
+                      final pData = products[index];
+                      return GestureDetector(
+                        onTap: () => Get.to(() => ProductDetailsScreen()),
+                        child: ProductCard(
+                          bgImage: pData.imageUrl,
+                          price: pData.price,
+                          rating: pData.rating,
+                          title: pData.name,
+                        ),
+                      );
+                    },
+                  ),
+                ),
 
-            Container(
-              height: MediaQuery.of(context).size.height * 0.26,
-              // color: kRed,
-              child: ListView.builder(
-                itemCount: products.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (ctx, index) {
-                  final pData = products[index];
-                  return GestureDetector(
-                    onTap: () => Get.to(() => ProductDetailsScreen()),
-                    child: ProductCard(
-                      bgImage: pData.imageUrl,
-                      price: pData.price,
-                      rating: pData.rating,
-                      title: pData.name,
-                    ),
-                  );
-                },
-              ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.26,
+                  // color: kRed,
+                  child: ListView.builder(
+                    itemCount: products.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (ctx, index) {
+                      final pData = products[index];
+                      return GestureDetector(
+                        onTap: () => Get.to(() => ProductDetailsScreen()),
+                        child: ProductCard(
+                          bgImage: pData.imageUrl,
+                          price: pData.price,
+                          rating: pData.rating,
+                          title: pData.name,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
 
             SizedBox(height: 20.h),
@@ -251,8 +255,85 @@ class _HomeScreenState extends State<HomeScreen> {
 
             //in the spot light banner
             _buildSpotlightBanner(),
+            //random products
+            Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.26,
+                  // color: kRed,
+                  child: ListView.builder(
+                    itemCount: products.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (ctx, index) {
+                      final pData = products[index];
+                      return GestureDetector(
+                        onTap: () => Get.to(() => ProductDetailsScreen()),
+                        child: ProductCard(
+                          bgImage: pData.imageUrl,
+                          price: pData.price,
+                          rating: pData.rating,
+                          title: pData.name,
+                        ),
+                      );
+                    },
+                  ),
+                ),
 
-            // SizedBox(height: 30.h),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.26,
+                  // color: kRed,
+                  child: ListView.builder(
+                    itemCount: products.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (ctx, index) {
+                      final pData = products[index];
+                      return GestureDetector(
+                        onTap: () => Get.to(() => ProductDetailsScreen()),
+                        child: ProductCard(
+                          bgImage: pData.imageUrl,
+                          price: pData.price,
+                          rating: pData.rating,
+                          title: pData.name,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10.h),
+            Container(
+              height: 109.h,
+              width: width,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xffE6E6E6), // top
+                    Color(0xffFFDDD3), // bottom
+                  ],
+                  stops: [0.0, 1.0],
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomText(
+                    label: "All Services At Your Door Step.",
+                    size: 18.sp,
+                    color: kGrey300,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  CustomText(
+                    label: "Crafted with Love From SkilzVilla Team ❤️",
+                    size: 10.sp,
+                    color: kGrey300,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

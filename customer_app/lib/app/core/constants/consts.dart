@@ -31,7 +31,7 @@ const kWhite = Color(0xfffFFFFF);
 const kDark = Color(0xFF1E1E1E);
 const kRed = Color(0xffFE6150);
 const kSuccess = Color(0xFF6BD16E);
-const kGreenAccent = Color(0xFF10B981);
+const kGreenAccent = Color(0xFF04BA25);
 
 //linear color combination
 

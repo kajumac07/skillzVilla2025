@@ -1,9 +1,12 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
+import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
+import 'package:customer_app/app/screens/userSide/home/chooseProviderList/choose_provider_list.dart';
 import 'package:customer_app/app/screens/userSide/home/subCategory/widgets/sub_cat_category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SubCategoryDetailsScreen extends StatefulWidget {
   const SubCategoryDetailsScreen({
@@ -145,9 +148,15 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                         padding: EdgeInsets.zero,
                         itemCount: 5,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(bottom: 10.0.h, top: 20.h),
-                            child: _serviceTile(selected: index == 1),
+                          return GestureDetector(
+                            onTap: () => Get.to(() => ChooseProviderLists()),
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                bottom: 10.0.h,
+                                top: 20.h,
+                              ),
+                              child: _serviceTile(selected: index == 1),
+                            ),
                           );
                         },
                       ),
@@ -182,57 +191,17 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                       ),
                     ],
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red.shade400,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 40.w,
-                        vertical: 14.h,
-                      ),
-                    ),
+                  CircularButton(
+                    buttonColor: kPrimary,
+                    buttonText: "Book Now",
                     onPressed: () {},
-                    child: const Text(
-                      "Book Now",
-                      style: TextStyle(color: Colors.white),
-                    ),
+                    width: 150.w,
                   ),
                 ],
               ),
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  /// ---------------- Helper Widgets ----------------
-  Widget _categoryChip(String label, IconData icon, bool active) {
-    return Padding(
-      padding: EdgeInsets.only(right: 12.w),
-      child: Container(
-        width: 90.w,
-        decoration: BoxDecoration(
-          color: active ? Colors.blue.shade50 : Colors.grey.shade100,
-          borderRadius: BorderRadius.circular(14.r),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.white,
-              child: Icon(icon, color: Colors.blue.shade700),
-            ),
-            SizedBox(height: 4.h),
-            Text(
-              label,
-              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
-            ),
-          ],
-        ),
       ),
     );
   }
