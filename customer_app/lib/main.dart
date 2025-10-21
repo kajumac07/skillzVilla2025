@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          // home: const SplashScreen(),
-          home: const RootScreen(),
+          home: const SplashScreen(),
+          // home: const RootScreen(),
         );
       },
     );

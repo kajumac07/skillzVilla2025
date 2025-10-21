@@ -16,6 +16,8 @@ class Appimages {
   static const String hcaIcon = "assets/icons/cart.png";
   static const String haBooking = "assets/icons/booking.png";
   static const String providerIcon = "assets/icons/provider_icon.png";
+  static const String rProviderIcon = "assets/icons/r_provider.png";
+  static const String checkIcon = "assets/icons/check.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";

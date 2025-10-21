@@ -5,7 +5,7 @@ import 'package:customer_app/app/global/models/need_today.dart';
 import 'package:customer_app/app/global/models/product_model.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
-import 'package:customer_app/app/screens/userSide/home/subCategory/sub_category_details_screen.dart';
+import 'package:customer_app/app/screens/userSide/subCategory/sub_category_details_screen.dart';
 import 'package:customer_app/app/screens/userSide/home/widgets/need_today_card.dart';
 import 'package:customer_app/app/screens/userSide/products/product_card.dart';
 import 'package:customer_app/app/screens/userSide/products/widgets/product_details_screen.dart';

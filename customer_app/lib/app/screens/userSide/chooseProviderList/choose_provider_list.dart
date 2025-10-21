@@ -2,9 +2,11 @@ import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/models/provider_model.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
-import 'package:customer_app/app/screens/userSide/home/chooseProviderList/widgets/provider_card.dart';
+import 'package:customer_app/app/screens/userSide/chooseProviderList/widgets/provider_card.dart';
+import 'package:customer_app/app/screens/userSide/products/widgets/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ChooseProviderLists extends StatefulWidget {
   const ChooseProviderLists({super.key});
@@ -91,15 +93,12 @@ class _ChooseProviderListsState extends State<ChooseProviderLists> {
           },
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: CircularButton(
-          buttonColor: kPrimary,
-          buttonText: "Continue",
-          onPressed: () {},
-        ),
+      bottomNavigationBar: CircularButton(
+        buttonColor: kPrimary,
+        buttonText: "Continue",
+        onPressed: () => Get.to(() => ProductDetailsScreen()),
       ),
-      backgroundColor: const Color(0xfff5f5f5),
+      // backgroundColor: const Color(0xfff5f5f5),
     );
   }
 }

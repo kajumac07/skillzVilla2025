@@ -10,6 +10,7 @@ const greyBtnColor = Color(0xffE3E8EC);
 const greyTextColor = Color(0xff6E7882);
 const locationbgGrey = Color(0xffF3F4F9);
 const kGrey100 = Color(0xffA4AEB8);
+const kGrey200 = Color(0xff6E7882);
 const kGrey300 = Color(0xff202328);
 const kGrey400 = Color(0xff1E1E1E);
 const surface200 = Color(0xffF3F4F9);
@@ -25,7 +26,9 @@ const kthemeYellow = Color(0xffF1E7A3);
 const kE9E9E9 = Color(0xffE9E9E9);
 const kSurfaceBg = Color(0xffF9F7F7);
 const kFFF9D1 = Color(0xffFFF9D1);
+const kE2D02A = Color(0xffE2D02A);
 const kDAFAFF = Color(0xffDAFAFF);
+const c8c8c8 = Color(0xffC8C8C8);
 
 const kWhite = Color(0xfffFFFFF);
 const kDark = Color(0xFF1E1E1E);
