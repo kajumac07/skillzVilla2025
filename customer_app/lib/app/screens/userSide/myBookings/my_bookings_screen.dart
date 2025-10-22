@@ -3,8 +3,10 @@ import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
+import 'package:customer_app/app/screens/userSide/myBookings/widgets/track_my_bookings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class MyBookingsScreen extends StatefulWidget {
   const MyBookingsScreen({super.key});
@@ -104,7 +106,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'House Deep Cleaning',
+                          'Laptop Service',
                           style: appStyle(14.sp, kGrey400, FontWeight.bold),
                         ),
                         Text(
@@ -161,7 +163,13 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                 CircularButton(
                   buttonColor: kPrimary,
                   buttonText: "Track",
-                  onPressed: () {},
+                  onPressed: () => Get.to(
+                    () => TrackMyBookingsScren(
+                      title: "Laptop Service",
+                      img: Appimages.laptopService,
+                      status: BookingStatus.ongoing,
+                    ),
+                  ),
                   width: width,
                   height: 40.h,
                 ),
@@ -180,7 +188,13 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                     SizedBox(width: 10.h),
                     Expanded(
                       child: OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () => Get.to(
+                          () => TrackMyBookingsScren(
+                            title: "Laptop Service",
+                            img: Appimages.laptopService,
+                            status: BookingStatus.scheduled,
+                          ),
+                        ),
 
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(color: kGrey100),

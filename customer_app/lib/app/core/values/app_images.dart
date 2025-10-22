@@ -21,6 +21,10 @@ class Appimages {
   static const String checkOffer = "assets/icons/checkout_offer.png";
   static const String cartComponent = "assets/icons/cart_comp.png";
   static const String coupon = "assets/icons/coupon.png";
+  static const String bookingTime = "assets/icons/book_clock.png";
+  static const String bookingCalendar = "assets/icons/book_calen.png";
+  static const String bookingLoc = "assets/icons/book_map.png";
+  static const String bookingProfile = "assets/icons/book_profile.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";
@@ -38,4 +42,5 @@ class Appimages {
   static const String slashBg = "assets/images/splash_bg.png";
   static const String subCategorybgImg = "assets/images/subServiceImage.png";
   static const String bookingConfirmed = "assets/images/booking_confirmed.png";
+  static const String bookingMap = "assets/images/booking_map.png";
 }
