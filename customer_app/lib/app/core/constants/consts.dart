@@ -29,6 +29,7 @@ const kFFF9D1 = Color(0xffFFF9D1);
 const kE2D02A = Color(0xffE2D02A);
 const kDAFAFF = Color(0xffDAFAFF);
 const c8c8c8 = Color(0xffC8C8C8);
+const k343434 = Color(0xff343434);
 
 const kWhite = Color(0xfffFFFFF);
 const kDark = Color(0xFF1E1E1E);

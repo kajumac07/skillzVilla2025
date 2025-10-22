@@ -6,6 +6,7 @@ import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/reuse_text_and_description.dart';
+import 'package:customer_app/app/screens/userSide/cart/cart_screen.dart';
 import 'package:customer_app/app/screens/userSide/products/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -217,6 +218,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ],
                         ),
                       ),
+
                       SizedBox(height: 80.h),
                     ],
                   ),
@@ -252,7 +254,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   CircularButton(
                     buttonColor: kPrimary,
                     buttonText: "Book Now",
-                    onPressed: () {},
+                    onPressed: () => Get.to(() => CartScreen()),
                     width: 150.w,
                   ),
                 ],
