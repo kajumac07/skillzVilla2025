@@ -2,8 +2,10 @@ import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
+import 'package:customer_app/app/screens/userSide/booking/booking_confirmed_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class PayModeScreen extends StatefulWidget {
   const PayModeScreen({super.key});
@@ -69,7 +71,7 @@ class _PayModeScreenState extends State<PayModeScreen> {
           CircularButton(
             buttonColor: kPrimary,
             buttonText: "Continue",
-            onPressed: () {},
+            onPressed: () => Get.to(() => const BookingConfirmedScreen()),
             width: width,
           ),
           // Other Recommended Options
