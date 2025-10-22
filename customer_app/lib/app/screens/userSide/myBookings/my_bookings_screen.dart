@@ -3,6 +3,7 @@ import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
+import 'package:customer_app/app/screens/userSide/myBookings/widgets/scheduled_booking.dart';
 import 'package:customer_app/app/screens/userSide/myBookings/widgets/track_my_bookings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -181,7 +182,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                       child: CircularButton(
                         buttonColor: kPrimary,
                         buttonText: "Reschedule",
-                        onPressed: () {},
+                        onPressed: () => Get.to(() => CustomerBookingsScreen()),
                         height: 40.h,
                       ),
                     ),
