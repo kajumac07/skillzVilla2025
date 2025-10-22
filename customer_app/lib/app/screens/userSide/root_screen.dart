@@ -1,6 +1,7 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/screens/userSide/home/home_screen.dart';
+import 'package:customer_app/app/screens/userSide/myBookings/my_bookings_screen.dart';
 import 'package:flutter/material.dart';
 
 class RootScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _RootScreenState extends State<RootScreen> {
     const AccountPage(),
     const CategoryPage(),
     const CartPage(),
-    const BookingPage(),
+    const MyBookingsScreen(),
   ];
 
   @override
@@ -156,14 +157,5 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(child: Text('Cart Page'));
-  }
-}
-
-class BookingPage extends StatelessWidget {
-  const BookingPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text('Booking Page'));
   }
 }

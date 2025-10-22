@@ -32,7 +32,7 @@ class CircularButton extends StatelessWidget {
         ),
         minimumSize: Size(width, height),
         elevation: 0,
-        padding: EdgeInsets.symmetric(vertical: 14.h),
+        // padding: EdgeInsets.symmetric(vertical: 14.h),
       ),
       child: Text(
         buttonText,
