@@ -25,6 +25,14 @@ class Appimages {
   static const String bookingCalendar = "assets/icons/book_calen.png";
   static const String bookingLoc = "assets/icons/book_map.png";
   static const String bookingProfile = "assets/icons/book_profile.png";
+  static const String editIcon = "assets/icons/edit.png";
+  static const String notiIcon = "assets/icons/noti.png";
+  static const String pStar = "assets/icons/p_star.png";
+  static const String pSetting = "assets/icons/p_setting.png";
+  static const String pDoc = "assets/icons/p_doc.png";
+  static const String aSkilzVilla = "assets/icons/about_skilvilla.png";
+  static const String faq = "assets/icons/faq.png";
+  static const String policies = "assets/icons/policies.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";
