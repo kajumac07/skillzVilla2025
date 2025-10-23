@@ -4,7 +4,10 @@ import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/icon_tap_image.dart';
+import 'package:customer_app/app/global/widgets/list_tile_options.dart';
 import 'package:customer_app/app/screens/notifications/notification_screens.dart';
+import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_address_screen.dart';
+import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -48,7 +51,10 @@ class ProfileScreen extends StatelessWidget {
             width: width,
             margin: EdgeInsets.all(12.h),
             padding: EdgeInsets.all(12.h),
-            decoration: BoxDecoration(color: kWhite),
+            decoration: BoxDecoration(
+              color: kWhite,
+              borderRadius: BorderRadius.circular(8.r),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -62,16 +68,23 @@ class ProfileScreen extends StatelessWidget {
                 ListTileOptions(
                   imageName: Appimages.pStar,
                   title: 'My Ratings & Reviews',
+                  onTap: () {},
                 ),
                 ListTileOptions(
                   imageName: Appimages.mapIcon,
                   title: 'Manage Address',
+                  onTap: () => Get.to(() => ManageProfileAddressscreens()),
                 ),
                 ListTileOptions(
                   imageName: Appimages.pSetting,
-                  title: 'Manage Address',
+                  title: 'Settings',
+                  onTap: () => Get.to(() => ProfileSettingsScreen()),
                 ),
-                ListTileOptions(imageName: Appimages.pDoc, title: 'Documents'),
+                ListTileOptions(
+                  imageName: Appimages.pDoc,
+                  title: 'Documents',
+                  onTap: () {},
+                ),
               ],
             ),
           ),
@@ -81,7 +94,10 @@ class ProfileScreen extends StatelessWidget {
             width: width,
             margin: EdgeInsets.all(12.h),
             padding: EdgeInsets.all(12.h),
-            decoration: BoxDecoration(color: kWhite),
+            decoration: BoxDecoration(
+              color: kWhite,
+              borderRadius: BorderRadius.circular(8.r),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -95,46 +111,23 @@ class ProfileScreen extends StatelessWidget {
                 ListTileOptions(
                   imageName: Appimages.aSkilzVilla,
                   title: 'About SkillzVilla',
+                  onTap: () {},
                 ),
-                ListTileOptions(imageName: Appimages.faq, title: 'FAQ'),
+                ListTileOptions(
+                  imageName: Appimages.faq,
+                  title: 'FAQ',
+                  onTap: () {},
+                ),
                 ListTileOptions(
                   imageName: Appimages.policies,
                   title: 'Policies',
+                  onTap: () {},
                 ),
               ],
             ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class ListTileOptions extends StatelessWidget {
-  const ListTileOptions({
-    super.key,
-    required this.imageName,
-    required this.title,
-  });
-  final String imageName;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Image.asset(
-        imageName,
-        height: 24.h,
-        width: 24.w,
-        color: kSecondary,
-      ),
-      title: CustomText(
-        label: title,
-        size: 16.sp,
-        color: kGrey300,
-        fontWeight: FontWeight.w500,
-      ),
-      trailing: Icon(Icons.arrow_forward_ios),
     );
   }
 }

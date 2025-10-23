@@ -33,6 +33,8 @@ class Appimages {
   static const String aSkilzVilla = "assets/icons/about_skilvilla.png";
   static const String faq = "assets/icons/faq.png";
   static const String policies = "assets/icons/policies.png";
+  static const String language = "assets/icons/lng.png";
+  static const String privacy = "assets/icons/privacy.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";
