@@ -9,6 +9,7 @@ import 'package:customer_app/app/screens/notifications/notification_screens.dart
 import 'package:customer_app/app/screens/userSide/coupons/coupons_screens.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_address_screen.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_settings_screen.dart';
+import 'package:customer_app/app/screens/userSide/wallets/wallet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -84,6 +85,11 @@ class ProfileScreen extends StatelessWidget {
                   imageName: Appimages.pDoc,
                   title: 'Documents',
                   onTap: () => Get.to(() => CouponsScreens()),
+                ),
+                ListTileOptions(
+                  imageName: Appimages.pDoc,
+                  title: 'Wallet',
+                  onTap: () => Get.to(() => WalletScreen()),
                 ),
               ],
             ),

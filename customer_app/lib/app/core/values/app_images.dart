@@ -53,4 +53,5 @@ class Appimages {
   static const String subCategorybgImg = "assets/images/subServiceImage.png";
   static const String bookingConfirmed = "assets/images/booking_confirmed.png";
   static const String bookingMap = "assets/images/booking_map.png";
+  static const String walletBackground = "assets/images/Wallet.png";
 }
