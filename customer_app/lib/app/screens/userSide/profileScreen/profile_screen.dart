@@ -7,6 +7,7 @@ import 'package:customer_app/app/global/widgets/icon_tap_image.dart';
 import 'package:customer_app/app/global/widgets/list_tile_options.dart';
 import 'package:customer_app/app/screens/notifications/notification_screens.dart';
 import 'package:customer_app/app/screens/userSide/coupons/coupons_screens.dart';
+import 'package:customer_app/app/screens/userSide/profileScreen/widgets/my_reviews_nd_rating.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_address_screen.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_settings_screen.dart';
 import 'package:customer_app/app/screens/userSide/wallets/wallet_screen.dart';
@@ -139,7 +140,7 @@ class ProfileScreen extends StatelessWidget {
                   ListTileOptions(
                     imageName: Appimages.pStar,
                     title: 'My Ratings & Reviews',
-                    onTap: () {},
+                    onTap: () => Get.to(() => MyReviewsNdRatingScreen()),
                   ),
                   ListTileOptions(
                     imageName: Appimages.mapIcon,
