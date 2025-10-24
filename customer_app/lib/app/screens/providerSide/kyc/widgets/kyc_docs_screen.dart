@@ -1,0 +1,122 @@
+import 'package:customer_app/app/core/constants/consts.dart';
+import 'package:customer_app/app/global/widgets/custom_text.dart';
+import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class KycDocsScreen extends StatelessWidget {
+  const KycDocsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: CustomText(
+          label: "KYC",
+          size: 20.sp,
+          color: kGrey400,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      body: Column(
+        children: [
+          UploadIDCard(
+            primaryBg: Color(0xffF6FEFF),
+            borderColor: kSecondary,
+            secondaryBg: kSecondaryLight,
+            label: "ID No:",
+            iconColor: kSecondary,
+          ),
+
+          UploadIDCard(
+            primaryBg: Color(0xffFFF8F8),
+            borderColor: kPrimaryLight,
+            secondaryBg: kPrimaryLight,
+            label: "License No. :",
+            iconColor: kPrimary,
+          ),
+          UploadIDCard(
+            primaryBg: Color(0xffF7F2DE),
+            borderColor: kFFF9D1,
+            secondaryBg: kFFF9D1,
+            label: "License No. :",
+            iconColor: Color(0xffF1E7A3),
+            isUploadDocs: true,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class UploadIDCard extends StatelessWidget {
+  const UploadIDCard({
+    super.key,
+    required this.primaryBg,
+    required this.borderColor,
+    required this.secondaryBg,
+    required this.label,
+    required this.iconColor,
+    this.isUploadDocs = false,
+  });
+  final Color primaryBg;
+  final Color borderColor;
+  final Color secondaryBg;
+  final String label;
+  final Color iconColor;
+  final bool isUploadDocs;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(12.h),
+      margin: EdgeInsets.all(12.h),
+      decoration: BoxDecoration(
+        color: primaryBg,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: borderColor),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          isUploadDocs
+              ? CustomText(label: "Upload Docs", size: 14.sp, color: kGrey300)
+              : RoundedTextField(
+                  label: label,
+                  obscureText: false,
+                  keyboardType: TextInputType.name,
+                  isBorderEnable: true,
+                ),
+          SizedBox(height: 10.h),
+
+          Container(
+            height: 95.h,
+            width: width,
+            decoration: BoxDecoration(
+              color: secondaryBg,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 25.r,
+                  backgroundColor: iconColor,
+                  child: Icon(Icons.cloud_upload_outlined, color: kWhite),
+                ),
+                SizedBox(height: 2.h),
+                CustomText(
+                  label: "Upload Images",
+                  size: 14.sp,
+                  color: kGrey300,
+                  fontWeight: FontWeight.w300,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

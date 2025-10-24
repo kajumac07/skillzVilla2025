@@ -4,8 +4,10 @@ import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/fourty_two_circle_icon.dart';
+import 'package:customer_app/app/screens/providerSide/kyc/kyc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ProviderHomeScreen extends StatefulWidget {
   const ProviderHomeScreen({super.key});
@@ -243,7 +245,14 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
             //top icon section
             Row(
               children: [
-                Image.asset(Appimages.personIcon, height: 42.h, width: 42.w),
+                GestureDetector(
+                  onTap: () => Get.to(() => KycScreen()),
+                  child: Image.asset(
+                    Appimages.personIcon,
+                    height: 42.h,
+                    width: 42.w,
+                  ),
+                ),
                 Spacer(),
                 //indicator
                 Container(
