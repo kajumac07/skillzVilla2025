@@ -6,6 +6,7 @@ import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/icon_tap_image.dart';
 import 'package:customer_app/app/global/widgets/list_tile_options.dart';
 import 'package:customer_app/app/screens/notifications/notification_screens.dart';
+import 'package:customer_app/app/screens/userSide/coupons/coupons_screens.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_address_screen.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,6 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(width: 10.w),
         ],
       ),
-
       body: Column(
         children: [
           //top Profile Section
@@ -83,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
                 ListTileOptions(
                   imageName: Appimages.pDoc,
                   title: 'Documents',
-                  onTap: () {},
+                  onTap: () => Get.to(() => CouponsScreens()),
                 ),
               ],
             ),

@@ -47,7 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // SizedBox(height: 220.h),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.26),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.22),
 
                   CustomText(label: "Sign Up", size: 32.sp, color: kDark),
                   SizedBox(height: 24.h),
@@ -130,7 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 35.h),
+                  SizedBox(height: 30.h),
 
                   // Sign up text
                   GestureDetector(

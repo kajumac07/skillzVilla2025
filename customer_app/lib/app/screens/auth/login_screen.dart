@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // SizedBox(height: 220.h),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.26),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.25),
 
                   CustomText(label: "Login as", size: 32.sp, color: kDark),
                   SizedBox(height: 24.h),
@@ -218,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
 
-                  SizedBox(height: 90.h),
+                  SizedBox(height: 50.h),
 
                   // Sign up text
                   GestureDetector(
