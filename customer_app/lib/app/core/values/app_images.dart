@@ -35,6 +35,8 @@ class Appimages {
   static const String policies = "assets/icons/policies.png";
   static const String language = "assets/icons/lng.png";
   static const String privacy = "assets/icons/privacy.png";
+  static const String helpCenter = "assets/icons/help_center.png";
+  static const String walletIcon = "assets/icons/wallet_icon.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";
@@ -54,4 +56,5 @@ class Appimages {
   static const String bookingConfirmed = "assets/images/booking_confirmed.png";
   static const String bookingMap = "assets/images/booking_map.png";
   static const String walletBackground = "assets/images/Wallet.png";
+  static const String profileBg = "assets/images/profile_bg.png";
 }

@@ -38,99 +38,188 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(width: 10.w),
         ],
       ),
-      body: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            //top Profile Section
+            // Container(
+            //   height: 224.h,
+            //   width: width,
+            //   margin: EdgeInsets.all(12),
+            //   decoration: BoxDecoration(
+            //     image: DecorationImage(
+            //       image: AssetImage(Appimages.profileBg),
+            //       fit: BoxFit.cover,
+            //     ),
+            //   ),
+            // ),
+
+            // Top Profile Section with overlapping card
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                // Background image
+                Container(
+                  height: 224.h,
+                  width: width,
+                  margin: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(Appimages.profileBg),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                ),
+
+                // Overlapping Card
+                Positioned(
+                  bottom: -50.h, // controls how much overlaps
+                  left: 16.w,
+                  right: 16.w,
+                  child: Container(
+                    height: 80.h,
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    decoration: BoxDecoration(
+                      color: kWhite,
+                      borderRadius: BorderRadius.circular(12.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: kPrimaryLight,
+                          blurRadius: 6,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildProfileOption(
+                          image: Appimages.walletIcon,
+                          title: 'Wallet',
+                          onTap: () => Get.to(() => WalletScreen()),
+                        ),
+                        _buildProfileOption(
+                          image: Appimages.privacy,
+                          title: 'My Bookings',
+                          onTap: () {},
+                        ),
+                        _buildProfileOption(
+                          image: Appimages.helpCenter,
+                          title: 'Help & Support',
+                          onTap: () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 70.h),
+
+            //Your Information
+            Container(
+              width: width,
+              margin: EdgeInsets.all(12.h),
+              padding: EdgeInsets.all(12.h),
+              decoration: BoxDecoration(
+                color: kWhite,
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //heading section
+                  CustomText(
+                    label: "Your Information",
+                    size: 20.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  CustomDivider(),
+                  ListTileOptions(
+                    imageName: Appimages.pStar,
+                    title: 'My Ratings & Reviews',
+                    onTap: () {},
+                  ),
+                  ListTileOptions(
+                    imageName: Appimages.mapIcon,
+                    title: 'Manage Address',
+                    onTap: () => Get.to(() => ManageProfileAddressscreens()),
+                  ),
+                  ListTileOptions(
+                    imageName: Appimages.pSetting,
+                    title: 'Settings',
+                    onTap: () => Get.to(() => ProfileSettingsScreen()),
+                  ),
+                  ListTileOptions(
+                    imageName: Appimages.pDoc,
+                    title: 'Documents',
+                    onTap: () => Get.to(() => CouponsScreens()),
+                  ),
+                ],
+              ),
+            ),
+
+            //More
+            Container(
+              width: width,
+              margin: EdgeInsets.all(12.h),
+              padding: EdgeInsets.all(12.h),
+              decoration: BoxDecoration(
+                color: kWhite,
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //heading section
+                  CustomText(
+                    label: "More",
+                    size: 20.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  CustomDivider(),
+                  ListTileOptions(
+                    imageName: Appimages.aSkilzVilla,
+                    title: 'About SkillzVilla',
+                    onTap: () {},
+                  ),
+                  ListTileOptions(
+                    imageName: Appimages.faq,
+                    title: 'FAQ',
+                    onTap: () {},
+                  ),
+                  ListTileOptions(
+                    imageName: Appimages.policies,
+                    title: 'Policies',
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProfileOption({
+    required String image,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          //top Profile Section
-          // Container(
-          //   height: 224.h,
-          //   width: width,
-          //   decoration: BoxDecoration(color: kPrimary),
-          // ),
-
-          //Your Information
-          Container(
-            width: width,
-            margin: EdgeInsets.all(12.h),
-            padding: EdgeInsets.all(12.h),
-            decoration: BoxDecoration(
-              color: kWhite,
-              borderRadius: BorderRadius.circular(8.r),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //heading section
-                CustomText(
-                  label: "Your Information",
-                  size: 20.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-                CustomDivider(),
-                ListTileOptions(
-                  imageName: Appimages.pStar,
-                  title: 'My Ratings & Reviews',
-                  onTap: () {},
-                ),
-                ListTileOptions(
-                  imageName: Appimages.mapIcon,
-                  title: 'Manage Address',
-                  onTap: () => Get.to(() => ManageProfileAddressscreens()),
-                ),
-                ListTileOptions(
-                  imageName: Appimages.pSetting,
-                  title: 'Settings',
-                  onTap: () => Get.to(() => ProfileSettingsScreen()),
-                ),
-                ListTileOptions(
-                  imageName: Appimages.pDoc,
-                  title: 'Documents',
-                  onTap: () => Get.to(() => CouponsScreens()),
-                ),
-                ListTileOptions(
-                  imageName: Appimages.pDoc,
-                  title: 'Wallet',
-                  onTap: () => Get.to(() => WalletScreen()),
-                ),
-              ],
-            ),
-          ),
-
-          //More
-          Container(
-            width: width,
-            margin: EdgeInsets.all(12.h),
-            padding: EdgeInsets.all(12.h),
-            decoration: BoxDecoration(
-              color: kWhite,
-              borderRadius: BorderRadius.circular(8.r),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //heading section
-                CustomText(
-                  label: "More",
-                  size: 20.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-                CustomDivider(),
-                ListTileOptions(
-                  imageName: Appimages.aSkilzVilla,
-                  title: 'About SkillzVilla',
-                  onTap: () {},
-                ),
-                ListTileOptions(
-                  imageName: Appimages.faq,
-                  title: 'FAQ',
-                  onTap: () {},
-                ),
-                ListTileOptions(
-                  imageName: Appimages.policies,
-                  title: 'Policies',
-                  onTap: () {},
-                ),
-              ],
-            ),
+          Image.asset(image, height: 24.h, width: 24.w),
+          SizedBox(height: 4.h),
+          CustomText(
+            label: title,
+            size: 12.sp,
+            fontWeight: FontWeight.w500,
+            color: kGrey400,
           ),
         ],
       ),
