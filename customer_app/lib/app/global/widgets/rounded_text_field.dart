@@ -14,6 +14,8 @@ class RoundedTextField extends StatelessWidget {
     required this.keyboardType,
     this.validator,
     this.isBorderEnable = false,
+    this.fillColor = kWhite,
+    this.maxLines = 1,
   });
 
   final TextEditingController? controller;
@@ -24,6 +26,8 @@ class RoundedTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final String? Function(String?)? validator;
   final bool isBorderEnable;
+  final Color fillColor;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +36,14 @@ class RoundedTextField extends StatelessWidget {
       obscureText: obscureText,
       keyboardType: keyboardType,
       validator: validator,
+      maxLines: maxLines,
       decoration: InputDecoration(
         labelText: label,
         labelStyle: appStyle(15, kDark, FontWeight.w200),
-        prefixIcon: prefixIcon, // 👈 now customizable
+        prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         filled: true,
-        fillColor: kWhite,
+        fillColor: fillColor,
         contentPadding: const EdgeInsets.symmetric(
           vertical: 12,
           horizontal: 12,

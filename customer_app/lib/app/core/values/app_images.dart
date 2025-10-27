@@ -41,6 +41,9 @@ class Appimages {
   static const String jobIcon = "assets/icons/jobIcon.png";
   static const String earnIcon = "assets/icons/earnIcon.png";
   static const String premiumIcon = "assets/icons/prIcon.png";
+  static const String step1 = "assets/icons/step_1.png";
+  static const String step2 = "assets/icons/step_2.png";
+  static const String step3 = "assets/icons/step_3.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";
