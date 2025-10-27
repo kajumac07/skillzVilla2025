@@ -6,6 +6,7 @@ import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
 import 'package:customer_app/app/screens/auth/login_screen.dart';
 import 'package:customer_app/app/screens/location/location_access_screen.dart';
+import 'package:customer_app/app/screens/providerSide/home/pr_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -162,7 +163,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Get.to(() => const LoginScreen());
   }
 
+  // _submitTap() {
+  //   Get.to(() => LocationAccessScreen());
+  // }
+
+  //went to provider screen
   _submitTap() {
-    Get.to(() => LocationAccessScreen());
+    Get.to(() => ProviderHomeScreen());
   }
 }

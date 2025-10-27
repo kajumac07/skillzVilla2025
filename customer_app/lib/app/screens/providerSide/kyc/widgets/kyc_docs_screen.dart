@@ -1,8 +1,12 @@
 import 'package:customer_app/app/core/constants/consts.dart';
+import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
+import 'package:customer_app/app/screens/providerSide/kyc/widgets/subscription_plan.dart';
+import 'package:customer_app/app/screens/providerSide/serviceAndPlanning/widgets/add_service_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class KycDocsScreen extends StatelessWidget {
   const KycDocsScreen({super.key});
@@ -44,6 +48,19 @@ class KycDocsScreen extends StatelessWidget {
             isUploadDocs: true,
           ),
         ],
+      ),
+      bottomSheet: // Add Button
+      Container(
+        padding: EdgeInsets.all(12.r),
+        margin: EdgeInsets.all(12.r),
+        child: CircularButton(
+          buttonColor: kPrimary,
+          buttonText: "Submit",
+          onPressed: () {
+            Get.to(() => SubscriptionPlanPricingScreen());
+          },
+          width: width,
+        ),
       ),
     );
   }
