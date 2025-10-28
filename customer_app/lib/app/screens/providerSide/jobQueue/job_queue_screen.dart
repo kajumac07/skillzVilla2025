@@ -3,8 +3,10 @@ import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
+import 'package:customer_app/app/screens/providerSide/jobQueue/widgets/job_invoice_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class JobsQueueScreen extends StatefulWidget {
   const JobsQueueScreen({super.key});
@@ -40,6 +42,7 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
           fontWeight: FontWeight.w600,
         ),
       ),
+
       body: Padding(
         padding: EdgeInsets.all(10.w),
         child: Column(
@@ -314,7 +317,7 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
             Expanded(
               child: CustomOutlineButton(
                 title: "View Invoice",
-                onPressed: () {},
+                onPressed: () => Get.to(() => JobInvoiceDetailScreen()),
                 isFullWidth: true,
               ),
             ),
