@@ -5,7 +5,6 @@ import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/screens/providerSide/serviceAndPlanning/widgets/add_service_screen.dart';
-import 'package:customer_app/app/screens/providerSide/serviceAndPlanning/widgets/service_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -224,7 +223,7 @@ class MyServiceCards extends StatelessWidget {
 
   Widget buildAdditionalServices(String title) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
       decoration: BoxDecoration(
         border: Border.all(color: kGrey400),
         borderRadius: BorderRadius.circular(20.r),
