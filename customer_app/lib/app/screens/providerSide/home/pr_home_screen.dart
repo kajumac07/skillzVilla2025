@@ -26,6 +26,8 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
       "color": kSuccess,
       "icon": Icons.check,
       "bgColor": Color(0xffECECEF),
+      "textColor": kGrey300,
+      "sTextColor": kGrey200,
     },
     {
       "service": "AC Repair",
@@ -34,6 +36,8 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
       "color": kSecondary,
       "icon": Icons.timelapse,
       "bgColor": Color(0xffECECEF),
+      "textColor": kGrey300,
+      "sTextColor": kGrey200,
     },
     {
       "service": "Car Wash",
@@ -41,7 +45,9 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
       "status": "Pending",
       "color": Color(0xffFCBA2B),
       "icon": Icons.calendar_month,
-      "bgColor": kSecondary,
+      "bgColor": kPrimary,
+      "textColor": kWhite,
+      "sTextColor": kWhite,
     },
     {
       "service": "Home Painting",
@@ -50,6 +56,8 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
       "color": kPrimary,
       "icon": Icons.cancel,
       "bgColor": Color(0xffECECEF),
+      "textColor": kGrey300,
+      "sTextColor": kGrey200,
     },
   ];
 
@@ -76,6 +84,43 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
             //status card
             buildBannerCard(),
             SizedBox(height: 2.h),
+            //ad started plan
+            buildAdStartedPlan(),
+
+            Padding(
+              padding: EdgeInsets.all(8.0.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                    label: "Reach Out to More Customers ",
+                    size: 16.sp,
+                    color: kGrey400,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  CustomText(
+                    label: "View All",
+                    size: 10.sp,
+                    color: kGrey300,
+                    fontWeight: FontWeight.w100,
+                  ),
+                ],
+              ),
+            ),
+
+            ReachOutMoreCustomersCard(
+              title: "Ad Starter Plan",
+              subTitle: "Days- 1 day & 7 days",
+            ),
+            ReachOutMoreCustomersCard(
+              title: "Addon Plan",
+              subTitle: "Days- 7 day & 14 days",
+            ),
+            ReachOutMoreCustomersCard(
+              title: "PromoAd Plan",
+              subTitle: "Days- 15 day & 30 days",
+            ),
+
             //latest 5 bookings
             Padding(
               padding: EdgeInsets.all(8.0.h),
@@ -97,6 +142,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                 ],
               ),
             ),
+
             //latest booking lists
             Column(
               children: dummyBookings.map((booking) {
@@ -109,6 +155,8 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                     color: booking["color"],
                     icon: booking["icon"],
                     bgColor: booking["bgColor"],
+                    textColor: booking["textColor"],
+                    sTextColor: booking["sTextColor"],
                   ),
                 );
               }).toList(),
@@ -132,6 +180,40 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
     );
   }
 
+  //ad started plan card
+  Widget buildAdStartedPlan() {
+    return Container(
+      padding: EdgeInsets.all(8.h),
+      margin: EdgeInsets.only(left: 12.w, right: 12.w, top: 8.h, bottom: 8.h),
+      decoration: BoxDecoration(
+        color: kWhite,
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomText(
+                label: "Ad Starter Plan",
+                size: 14.sp,
+                fontWeight: FontWeight.bold,
+              ),
+              CustomText(label: "6 days left", size: 10.sp, color: kGrey200),
+            ],
+          ),
+          Spacer(),
+          CircularButton(
+            buttonColor: kSecondary,
+            buttonText: "Upgrade",
+            onPressed: () {},
+            height: 32.h,
+          ),
+        ],
+      ),
+    );
+  }
+
   // build Banner Card with Slider
   Widget buildBannerCard() {
     return Column(
@@ -146,35 +228,19 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(22.r),
                 color: kWhite,
-                // image: DecorationImage(
-                //   image: AssetImage(Appimages.prBg),
-                //   fit: BoxFit.cover,
-                // ),
                 boxShadow: [BoxShadow(color: kPrimaryLight, blurRadius: 5)],
               ),
               clipBehavior: Clip.hardEdge,
               child: Stack(
                 children: [
-                  // Girl image (on right)
+                  // Text content (on right)
                   Positioned(
-                    right: 25.w,
-                    bottom: 15.h,
-                    child: Image.asset(
-                      Appimages.prBanner,
-                      height: 150.h,
-                      width: 150.w,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-
-                  // Text content (on left)
-                  Positioned(
-                    left: 20.w,
+                    right: 20.w,
                     top: 0,
                     bottom: 0,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
                           "EXISTING SERVICE PLAN",
@@ -216,10 +282,22 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
 
                         SizedBox(height: 8.h),
                         Text(
-                          "Expiring on 30Sept25",
+                          "14 Days left",
                           style: appStyle(10, kGrey300, FontWeight.bold),
                         ),
                       ],
+                    ),
+                  ),
+
+                  // product image (on left)
+                  Positioned(
+                    left: 25.w,
+                    bottom: 15.h,
+                    child: Image.asset(
+                      Appimages.prBanner,
+                      height: 150.h,
+                      width: 150.w,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ],
@@ -289,24 +367,6 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
             Container(
               height: 140.h,
               width: width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.r),
-                border: Border.all(color: kPrimary),
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xffEBDC7C),
-                    Color(0xffFFB17D),
-                    Color(0xffE65E60),
-                  ],
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: kGrey100,
-                    blurRadius: 0.8,
-                    spreadRadius: 0.10,
-                  ),
-                ],
-              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -315,7 +375,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                       Appimages.jobIcon,
                       "120",
                       "Jobs Completed",
-                      kSecondaryLight,
+                      kSecondary,
                     ),
                   ),
                   Expanded(
@@ -323,7 +383,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                       Appimages.earnIcon,
                       "300",
                       "Earnings To-Date",
-                      kPrimaryLight,
+                      kPrimary,
                     ),
                   ),
                   Expanded(
@@ -353,7 +413,8 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
     return Container(
       margin: EdgeInsets.all(8.w),
       decoration: BoxDecoration(
-        color: color,
+        border: Border.all(color: color),
+        color: kWhite,
         borderRadius: BorderRadius.circular(15.r),
       ),
       child: Padding(
@@ -384,6 +445,62 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
   }
 }
 
+class ReachOutMoreCustomersCard extends StatelessWidget {
+  const ReachOutMoreCustomersCard({
+    super.key,
+    required this.title,
+    required this.subTitle,
+  });
+  final String title;
+  final String subTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 12.w, right: 12.w, top: 8.h, bottom: 2.h),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xffEBDC7C), Color(0xffFFB17D), Color(0xffE65E60)],
+        ),
+        borderRadius: BorderRadius.circular(15.r),
+      ),
+      child: Container(
+        width: width,
+        margin: EdgeInsets.only(left: 15.w),
+        decoration: BoxDecoration(
+          color: kWhite,
+          borderRadius: BorderRadius.circular(15.r),
+        ),
+        child: ListTile(
+          contentPadding: EdgeInsets.only(left: 20.w, top: 8.h, bottom: 8.h),
+          leading: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomText(
+                label: title,
+                size: 16.sp,
+                color: kGrey400,
+                fontWeight: FontWeight.w500,
+              ),
+              CustomText(
+                label: subTitle,
+                size: 12.sp,
+                color: kGrey200,
+                fontWeight: FontWeight.w500,
+              ),
+            ],
+          ),
+          trailing: IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.arrow_forward_ios, color: kSecondary),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class LatestBookingLists extends StatelessWidget {
   const LatestBookingLists({
     super.key,
@@ -393,6 +510,8 @@ class LatestBookingLists extends StatelessWidget {
     required this.color,
     required this.icon,
     this.bgColor = const Color(0xffECECEF),
+    this.textColor = kGrey300,
+    this.sTextColor = kGrey200,
   });
   final String serviceName;
   final String clientName;
@@ -400,6 +519,8 @@ class LatestBookingLists extends StatelessWidget {
   final Color color;
   final IconData icon;
   final Color bgColor;
+  final Color textColor;
+  final Color sTextColor;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -423,8 +544,8 @@ class LatestBookingLists extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomText(label: serviceName, size: 16.sp, color: kGrey300),
-            CustomText(label: clientName, size: 14.sp, color: kGrey200),
+            CustomText(label: serviceName, size: 16.sp, color: textColor),
+            CustomText(label: clientName, size: 14.sp, color: sTextColor),
           ],
         ),
         trailing: Column(

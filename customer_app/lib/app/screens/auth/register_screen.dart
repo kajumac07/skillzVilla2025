@@ -163,12 +163,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Get.to(() => const LoginScreen());
   }
 
-  // _submitTap() {
-  //   Get.to(() => LocationAccessScreen());
-  // }
+  _submitTap() {
+    Get.to(() => LocationAccessScreen());
+  }
 
   //went to provider screen
-  _submitTap() {
-    Get.to(() => ProviderHomeScreen());
-  }
+  // _submitTap() {
+  //   Get.to(() => ProviderHomeScreen());
+  // }
 }
