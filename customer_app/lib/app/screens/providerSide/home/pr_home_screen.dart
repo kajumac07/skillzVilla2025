@@ -168,7 +168,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
               child: CircularButton(
                 buttonColor: kPrimary,
                 buttonText: "Manage Services",
-                onPressed: () {},
+                onPressed: () => Get.to(() => PServiceNdPlanningScreen()),
                 width: width,
                 height: 42.h,
               ),
