@@ -71,4 +71,5 @@ class Appimages {
   static const String profileBg = "assets/images/profile_bg.png";
   static const String prBg = "assets/images/prbg.png";
   static const String prBanner = "assets/images/pr_banner.png";
+  static const String empImage = "assets/images/emp_img.png";
 }
