@@ -5,6 +5,7 @@ import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/fourty_two_circle_icon.dart';
 import 'package:customer_app/app/screens/providerSide/employeeManagement/employee_management.dart';
+import 'package:customer_app/app/screens/providerSide/jobQueue/job_queue_screen.dart';
 import 'package:customer_app/app/screens/providerSide/kyc/kyc_screen.dart';
 import 'package:customer_app/app/screens/providerSide/serviceAndPlanning/p_service_nd_plan.dart';
 import 'package:flutter/material.dart';
@@ -350,7 +351,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                 ),
                 SizedBox(width: 10.w),
                 FourtyTwoCircleIcon(
-                  onTap: () {},
+                  onTap: () => Get.to(() => JobsQueueScreen()),
                   imageName: Appimages.drawerIcon,
                 ),
               ],

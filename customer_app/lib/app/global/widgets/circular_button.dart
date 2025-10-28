@@ -13,6 +13,7 @@ class CircularButton extends StatelessWidget {
     this.textColor = kWhite,
     this.width = 120,
     this.height = 45,
+    this.textSize = 16,
   });
   final Color buttonColor;
   final String buttonText;
@@ -20,6 +21,7 @@ class CircularButton extends StatelessWidget {
   final void Function()? onPressed;
   final double width;
   final double height;
+  final double textSize;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class CircularButton extends StatelessWidget {
       ),
       child: Text(
         buttonText,
-        style: appStyle(16.sp, textColor, FontWeight.w600),
+        style: appStyle(textSize, textColor, FontWeight.w600),
       ),
     );
   }
