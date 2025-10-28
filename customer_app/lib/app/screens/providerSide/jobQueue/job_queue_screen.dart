@@ -4,6 +4,7 @@ import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/screens/providerSide/jobQueue/widgets/job_invoice_detail.dart';
+import 'package:customer_app/app/screens/providerSide/jobQueue/widgets/job_report_issue.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -325,7 +326,7 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
             Expanded(
               child: CustomOutlineButton(
                 title: "Issue Report",
-                onPressed: () {},
+                onPressed: () => Get.to(() => ReportJobScreen()),
                 isFullWidth: true,
               ),
             ),
