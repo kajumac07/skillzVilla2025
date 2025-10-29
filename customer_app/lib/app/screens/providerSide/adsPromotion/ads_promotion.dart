@@ -56,7 +56,7 @@ class AdsPromotionScreen extends StatelessWidget {
         elevation: 0,
         automaticallyImplyLeading: false,
         title: CustomText(
-          label: "Active Plan",
+          label: "Ads",
           size: 18.sp,
           color: Colors.black,
           fontWeight: FontWeight.w600,
