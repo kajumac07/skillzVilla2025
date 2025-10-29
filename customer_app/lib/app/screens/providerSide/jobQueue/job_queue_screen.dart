@@ -4,6 +4,7 @@ import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/screens/providerSide/jobQueue/widgets/job_invoice_detail.dart';
+import 'package:customer_app/app/screens/providerSide/jobQueue/widgets/job_queue_details_screen.dart';
 import 'package:customer_app/app/screens/providerSide/jobQueue/widgets/job_report_issue.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,7 +44,6 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
           fontWeight: FontWeight.w600,
         ),
       ),
-
       body: Padding(
         padding: EdgeInsets.all(10.w),
         child: Column(
@@ -121,97 +121,105 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
 
   /// Builds the job card UI dynamically based on tab
   Widget buildJobCard(int status) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(10.w),
-      decoration: BoxDecoration(
-        color: kWhite,
-        border: Border.all(color: const Color(0xffCED6DE)),
-        borderRadius: BorderRadius.circular(12.r),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          /// TOP ROW - Booking info and Status badges
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              /// LEFT SIDE - Booking Information
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      label: "BK#20250921",
-                      size: 12.sp,
-                      color: kGrey400,
-                    ),
-                    CustomText(
-                      label: "Plumbing - Tap Fix",
-                      size: 16.sp,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ],
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => JobQueueDetailsScreen(selectedIndex: status));
+      },
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(10.w),
+        decoration: BoxDecoration(
+          color: kWhite,
+          border: Border.all(color: const Color(0xffCED6DE)),
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// TOP ROW - Booking info and Status badges
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                /// LEFT SIDE - Booking Information
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
+                        label: "BK#20250921",
+                        size: 12.sp,
+                        color: kGrey400,
+                      ),
+                      CustomText(
+                        label: "Plumbing - Tap Fix",
+                        size: 16.sp,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
 
-              SizedBox(width: 10.w),
+                SizedBox(width: 10.w),
 
-              /// RIGHT SIDE - Status badges
-              _buildStatusWidget(status),
-            ],
-          ),
+                /// RIGHT SIDE - Status badges
+                _buildStatusWidget(status),
+              ],
+            ),
 
-          SizedBox(height: 12.h),
+            SizedBox(height: 12.h),
 
-          /// MIDDLE SECTION - Customer and Date info
-          Row(
-            children: [
-              buildReusableIconText(
-                const Color(0xffF9F7F7),
-                Icons.person,
-                "Rohan Mehta",
-                kGrey200,
-              ),
-              SizedBox(width: 10.w),
-              buildReusableIconText(
-                const Color(0xffF9F7F7),
-                Icons.calendar_month,
-                "21 Sept 2025, 2:00 PM",
-                kGrey200,
-              ),
-            ],
-          ),
-
-          SizedBox(height: 8.h),
-
-          /// Employee chips for New tab
-          if (status == 0) ...[
+            /// MIDDLE SECTION - Customer and Date info
             Row(
               children: [
                 buildReusableIconText(
-                  kSecondaryLight.withOpacity(0.3),
-                  Icons.work_outline,
-                  "Emp#001",
-                  kSecondary,
+                  const Color(0xffF9F7F7),
+                  Icons.person,
+                  "Rohan Mehta",
+                  kGrey200,
                 ),
                 SizedBox(width: 10.w),
                 buildReusableIconText(
-                  kSecondaryLight.withOpacity(0.3),
-                  Icons.work_outline,
-                  "Emp#002",
-                  kSecondary,
+                  const Color(0xffF9F7F7),
+                  Icons.calendar_month,
+                  "21 Sept 2025, 2:00 PM",
+                  kGrey200,
                 ),
               ],
             ),
-            SizedBox(height: 12.h),
-          ],
 
-          /// BOTTOM SECTION - Full width buttons
-          Container(width: double.infinity, child: _buildActionButtons(status)),
-        ],
+            SizedBox(height: 8.h),
+
+            /// Employee chips for New tab
+            if (status == 0) ...[
+              Row(
+                children: [
+                  buildReusableIconText(
+                    kSecondaryLight.withOpacity(0.3),
+                    Icons.work_outline,
+                    "Emp#001",
+                    kSecondary,
+                  ),
+                  SizedBox(width: 10.w),
+                  buildReusableIconText(
+                    kSecondaryLight.withOpacity(0.3),
+                    Icons.work_outline,
+                    "Emp#002",
+                    kSecondary,
+                  ),
+                ],
+              ),
+              SizedBox(height: 12.h),
+            ],
+
+            /// BOTTOM SECTION - Full width buttons
+            Container(
+              width: double.infinity,
+              child: _buildActionButtons(status),
+            ),
+          ],
+        ),
       ),
     );
   }
