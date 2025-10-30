@@ -67,8 +67,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // SizedBox(height: 220.h),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.25),
-
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.08),
+                  Image.asset(Appimages.authImage, height: 150.h, width: width),
                   CustomText(label: "Login as", size: 32.sp, color: kDark),
                   SizedBox(height: 24.h),
 
@@ -81,6 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           buttonColor: kSecondary,
                           buttonText: "Customer",
                           onPressed: () {},
+                          textSize: 14.sp,
                         ),
                       ),
                       SizedBox(width: 12.w),
@@ -89,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           buttonColor: kPrimary,
                           buttonText: "Service Provider",
                           onPressed: () {},
+                          textSize: 14.sp,
                         ),
                       ),
                     ],

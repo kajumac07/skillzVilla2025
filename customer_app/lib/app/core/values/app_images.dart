@@ -54,6 +54,8 @@ class Appimages {
 
   //images
   static const String authBackground = "assets/images/auth_background.png";
+  static const String welcomImage = "assets/images/welcome_image.png";
+  static const String authImage = "assets/images/login_img.png";
   static const String locationBgImage = "assets/images/locationBgImg.png";
   static const String homeBannerImage = "assets/images/home_banner_img.png";
   static const String homeBannerGirl = "assets/images/girl.png";

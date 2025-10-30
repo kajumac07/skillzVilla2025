@@ -2,6 +2,7 @@ import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/screens/providerSide/adsPromotion/ads_promotion.dart';
 import 'package:customer_app/app/screens/providerSide/home/pr_home_screen.dart';
+import 'package:customer_app/app/screens/providerSide/payoutEarnings/payout_nd_earnings.dart';
 import 'package:customer_app/app/screens/providerSide/providerPlans/plans_screen.dart';
 import 'package:customer_app/app/screens/userSide/home/home_screen.dart';
 import 'package:customer_app/app/screens/userSide/myBookings/my_bookings_screen.dart';
@@ -34,7 +35,7 @@ class _RootScreenState extends State<RootScreen> {
     const ProfileScreen(),
     const PlansScreen(),
     const AdsPromotionScreen(),
-    Container(child: const Center(child: Text("Payout Page"))),
+    const PayoutNdEarningsScreen(),
   ];
 
   List<Widget> get _pages =>

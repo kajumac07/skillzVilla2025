@@ -6,7 +6,6 @@ import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
 import 'package:customer_app/app/screens/auth/login_screen.dart';
 import 'package:customer_app/app/screens/location/location_access_screen.dart';
-import 'package:customer_app/app/screens/providerSide/home/pr_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -48,8 +47,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // SizedBox(height: 220.h),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.22),
-
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.025),
+                  Image.asset(Appimages.authImage, height: 150.h, width: width),
+                  SizedBox(height: 10.h),
                   CustomText(label: "Sign Up", size: 32.sp, color: kDark),
                   SizedBox(height: 24.h),
 

@@ -1,5 +1,6 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
+import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,8 +21,8 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Spacer(),
-              Spacer(),
-              Spacer(),
+              Image.asset(Appimages.welcomImage, height: 300.h, width: width),
+              SizedBox(height: 20.h),
               // Tagline text
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),

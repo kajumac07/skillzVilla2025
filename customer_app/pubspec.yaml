@@ -20,6 +20,7 @@ dependencies:
   flutter_svg:
   rename:
   intl:
+  fl_chart: ^0.68.0
 
 dev_dependencies:
   flutter_test:
