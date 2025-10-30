@@ -1,6 +1,4 @@
-import 'package:customer_app/app/screens/providerSide/home/pr_home_screen.dart';
 import 'package:customer_app/app/screens/splash/splash_screen.dart';
-import 'package:customer_app/root_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

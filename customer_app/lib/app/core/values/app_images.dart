@@ -51,6 +51,8 @@ class Appimages {
   static const String deleteIcon = "assets/icons/delete.png";
   static const String rightIcon = "assets/icons/correct.png";
   static const String wrongIcon = "assets/icons/wrongIcon.png";
+  static const String bankIcon = "assets/icons/bankIcon.png";
+  static const String pIcon = "assets/icons/pIcon.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";

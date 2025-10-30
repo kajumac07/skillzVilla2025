@@ -7,6 +7,7 @@ import 'package:customer_app/app/global/widgets/icon_tap_image.dart';
 import 'package:customer_app/app/global/widgets/list_tile_options.dart';
 import 'package:customer_app/app/screens/notifications/notification_screens.dart';
 import 'package:customer_app/app/screens/userSide/coupons/coupons_screens.dart';
+import 'package:customer_app/app/screens/userSide/profileScreen/editProfile/edit_profile_screen.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/my_reviews_nd_rating.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_address_screen.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_settings_screen.dart';
@@ -35,26 +36,16 @@ class ProfileScreen extends StatelessWidget {
             onTap: () => Get.to(() => NotificationScreens()),
           ),
           SizedBox(width: 10.w),
-          TapImageIcon(imageName: Appimages.editIcon, onTap: () {}),
+          TapImageIcon(
+            imageName: Appimages.editIcon,
+            onTap: () => Get.to(() => EditProfileScreen()),
+          ),
           SizedBox(width: 10.w),
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            //top Profile Section
-            // Container(
-            //   height: 224.h,
-            //   width: width,
-            //   margin: EdgeInsets.all(12),
-            //   decoration: BoxDecoration(
-            //     image: DecorationImage(
-            //       image: AssetImage(Appimages.profileBg),
-            //       fit: BoxFit.cover,
-            //     ),
-            //   ),
-            // ),
-
             // Top Profile Section with overlapping card
             Stack(
               clipBehavior: Clip.none,
@@ -73,9 +64,24 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
+                Positioned(
+                  bottom: 30.h,
+                  left: 16.w,
+                  right: 16.w,
+                  child: Column(
+                    children: [
+                      CustomText(
+                        label: "XYZ Company",
+                        fontWeight: FontWeight.bold,
+                      ),
+                      CustomText(label: "778899002", size: 14.sp),
+                    ],
+                  ),
+                ),
+
                 // Overlapping Card
                 Positioned(
-                  bottom: -50.h, // controls how much overlaps
+                  bottom: -55.h,
                   left: 16.w,
                   right: 16.w,
                   child: Container(
