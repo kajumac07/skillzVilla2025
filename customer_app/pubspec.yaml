@@ -21,6 +21,7 @@ dependencies:
   rename:
   intl:
   fl_chart: ^0.68.0
+  device_preview:
 
 dev_dependencies:
   flutter_test:

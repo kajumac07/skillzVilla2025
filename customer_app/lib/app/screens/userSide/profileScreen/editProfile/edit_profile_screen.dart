@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
+import 'package:customer_app/app/global/services/shared_pref.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +16,44 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   String selectedSection = 'company'; // default section
+  final _sharedPref = AppSharedPrefData();
+
+  String? userType;
+  String? kycType;
+  String displayName = "Loading...";
+  String displayNumber = "—";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    userType = await _sharedPref.getUserType();
+    kycType = await _sharedPref.getKycType();
+    log("EditProfileScreen → userType: $userType | kycType: $kycType");
+
+    if (userType == "Customer" && kycType == "Customer") {
+      displayName = "Rahul Sharma";
+      displayNumber = "9876543210";
+    } else if (userType == "Provider" && kycType == "Freelance") {
+      displayName = "John Doe";
+      displayNumber = "9998887777";
+    } else if (userType == "Provider" && kycType == "Company") {
+      displayName = "XYZ Company";
+      displayNumber = "778899002";
+    } else {
+      displayName = "Guest User";
+      displayNumber = "N/A";
+    }
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color(0xffFAF9F9),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -34,7 +69,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // ========== TOP PROFILE CARD ==========
+            // ===== TOP PROFILE SECTION =====
             Column(
               children: [
                 // Background image
@@ -53,16 +88,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       CustomText(
-                        label: "XYZ Company",
+                        label: displayName,
                         fontWeight: FontWeight.bold,
+                        size: 18.sp,
                       ),
-                      CustomText(label: "778899002", size: 14.sp),
+                      CustomText(label: displayNumber, size: 14.sp),
                       SizedBox(height: 25.h),
                     ],
                   ),
                 ),
 
-                // Overlapping Card - USING TRANSFORM INSTEAD OF POSITIONED
+                // Overlapping tabs (Company / Bank)
                 Transform.translate(
                   offset: Offset(0, -30.h),
                   child: Container(
@@ -108,14 +144,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ],
             ),
 
-            // SizedBox(height: 40.h),
-            // ========== CONDITIONAL SECTION ==========
+            // ===== CONTENT SECTION =====
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),
               child: selectedSection == 'company'
                   ? _buildCompanyDetails()
                   : _buildBankDetails(),
             ),
+
             SizedBox(height: 40.h),
           ],
         ),
@@ -123,7 +159,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  // ====== SIMPLIFIED Tab Button Widget ======
+  // ===== TAB BUTTON =====
   Widget _tabButton({
     required IconData icon,
     required String title,
@@ -132,7 +168,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }) {
     return GestureDetector(
       onTap: onTap,
-      behavior: HitTestBehavior.opaque, // Important for tap detection
+      behavior: HitTestBehavior.opaque,
       child: Container(
         height: 60.h,
         margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 4.w),
@@ -164,7 +200,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  // ====== Company Details Form ======
+  // ===== COMPANY DETAILS FORM =====
   Widget _buildCompanyDetails() {
     return Container(
       key: const ValueKey('company'),
@@ -182,7 +218,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 12.h),
-          _inputField(label: "Company Name", hint: "XYZ Company"),
+          _inputField(label: "Company Name", hint: displayName),
           _dropdownField(label: "Company Type", hint: "Private"),
           _dropdownField(label: "Company Domain", hint: "Manufacturing"),
           SizedBox(height: 18.h),
@@ -191,7 +227,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 12.h),
-          _inputField(label: "Phone", hint: "234567876543"),
+          _inputField(label: "Phone", hint: displayNumber),
           _inputField(label: "Email", hint: "xyz@gmail.com"),
           _dropdownField(label: "Department", hint: "HR"),
           SizedBox(height: 24.h),
@@ -201,7 +237,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  // ====== Bank Details Form ======
+  // ===== BANK DETAILS FORM =====
   Widget _buildBankDetails() {
     return Padding(
       key: const ValueKey('bank'),
@@ -217,7 +253,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           _inputField(label: "Bank A/C", hint: "1234 5678 7890 0000"),
           _inputField(label: "Confirm Bank A/C", hint: "1234 5678 7890 0000"),
           _inputField(label: "IFSC Code", hint: "SBIN0001234"),
-          _inputField(label: "Phone", hint: "9876543210"),
+          _inputField(label: "Phone", hint: displayNumber),
           _inputField(label: "UPI Id", hint: "example@upi"),
           _inputField(label: "Branch Name", hint: "Andheri West"),
           _inputField(
@@ -243,7 +279,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  // ====== Reusable Input Widgets ======
+  // ===== INPUT FIELD WIDGET =====
   Widget _inputField({
     required String label,
     required String hint,

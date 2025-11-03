@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
+import 'package:customer_app/app/global/services/shared_pref.dart';
+import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/icon_tap_image.dart';
@@ -12,12 +16,61 @@ import 'package:customer_app/app/screens/userSide/profileScreen/widgets/my_revie
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_address_screen.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_settings_screen.dart';
 import 'package:customer_app/app/screens/userSide/wallets/wallet_screen.dart';
+import 'package:customer_app/app/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String? userType;
+  String? kycType;
+  String displayName = "Loading...";
+  String displayNumber = "";
+  final _sharedPref = AppSharedPrefData();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    userType = await _sharedPref.getUserType();
+    kycType = await _sharedPref.getKycType();
+    log("EditProfileScreen → userType: $userType | kycType: $kycType");
+
+    if (userType == "Customer" && kycType == "Customer") {
+      displayName = "Rahul Sharma";
+      displayNumber = "9876543210";
+    } else if (userType == "Provider" && kycType == "Freelance") {
+      displayName = "John Doe";
+      displayNumber = "9998887777";
+    } else if (userType == "Provider" && kycType == "Company") {
+      displayName = "XYZ Company";
+      displayNumber = "778899002";
+    } else {
+      displayName = "Guest User";
+      displayNumber = "N/A";
+    }
+
+    setState(() {});
+  }
+
+  Future<void> _logout() async {
+    await _sharedPref.clearAll();
+    Get.offAll(
+      () => const WelcomeScreen(),
+      transition: Transition.fadeIn,
+      duration: const Duration(milliseconds: 500),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,10 +124,10 @@ class ProfileScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       CustomText(
-                        label: "XYZ Company",
+                        label: displayName,
                         fontWeight: FontWeight.bold,
                       ),
-                      CustomText(label: "778899002", size: 14.sp),
+                      CustomText(label: displayNumber, size: 14.sp),
                     ],
                   ),
                 ),
@@ -204,6 +257,20 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
+
+            SizedBox(height: 10.h),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircularButton(
+                buttonColor: kPrimary,
+                buttonText: "Log Out",
+                onPressed: _logout,
+                width: width,
+                height: 40.h,
+              ),
+            ),
+            SizedBox(height: 10.h),
           ],
         ),
       ),

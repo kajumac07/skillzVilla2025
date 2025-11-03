@@ -33,6 +33,7 @@ class CouponsScreens extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             CouponCard(
@@ -77,6 +78,7 @@ class CouponsScreens extends StatelessWidget {
                 print('Applying coupon FINFIRST25');
               },
             ),
+            SizedBox(height: 10.h),
           ],
         ),
       ),

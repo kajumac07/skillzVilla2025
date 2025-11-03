@@ -63,12 +63,13 @@ class AdsPromotionScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.w),
+        physics: BouncingScrollPhysics(),
+        padding: EdgeInsets.all(10.w),
         child: Column(
           children: [
             for (var plan in plans) ...[
               AdPlanCard(plan: plan),
-              SizedBox(height: 16.h),
+              SizedBox(height: 5.h),
             ],
           ],
         ),

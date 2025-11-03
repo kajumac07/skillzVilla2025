@@ -30,7 +30,8 @@ class _KitSelectionScreenState extends State<KitSelectionScreen> {
           fontWeight: FontWeight.w600,
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +53,7 @@ class _KitSelectionScreenState extends State<KitSelectionScreen> {
               ),
             ),
 
-            Spacer(),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.2),
 
             // ==== BILL DETAILS CARD ====
             Container(
@@ -85,21 +86,23 @@ class _KitSelectionScreenState extends State<KitSelectionScreen> {
               ),
             ),
 
-            SizedBox(height: 60.h),
+            SizedBox(height: 10.h),
+            CircularButton(
+              buttonColor: kPrimary,
+              buttonText: "Save Service",
+              onPressed: () {},
+              width: width,
+              height: 42.h,
+              textSize: 16,
+            ),
+            SizedBox(height: 10.h),
           ],
         ),
       ),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: CircularButton(
-          buttonColor: kPrimary,
-          buttonText: "Save Service",
-          onPressed: () {},
-          width: width,
-          height: 42.h,
-          textSize: 16,
-        ),
-      ),
+      // bottomSheet: Padding(
+      //   padding: const EdgeInsets.all(8.0),
+      //   child:
+      // ),
     );
   }
 

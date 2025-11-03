@@ -9,7 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ManageAddressScreen extends StatelessWidget {
-  const ManageAddressScreen({super.key});
+  const ManageAddressScreen({super.key, required this.userType});
+  final String userType;
 
   @override
   Widget build(BuildContext context) {

@@ -9,13 +9,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class LocationAccessScreen extends StatelessWidget {
-  const LocationAccessScreen({super.key});
+  const LocationAccessScreen({super.key, required this.userType});
+  final String userType;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
             Spacer(),
@@ -44,11 +45,12 @@ class LocationAccessScreen extends StatelessWidget {
             CircularButton(
               buttonColor: greyBtnColor,
               buttonText: "I’ll enter my location manually",
-              onPressed: () => Get.to(() => ManageAddressScreen()),
+              onPressed: () =>
+                  Get.to(() => ManageAddressScreen(userType: userType)),
               width: width,
               textColor: kDark,
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.022),
           ],
         ),
       ),

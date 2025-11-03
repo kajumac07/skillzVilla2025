@@ -1,6 +1,9 @@
+import 'dart:developer';
 import 'package:customer_app/app/core/values/app_images.dart';
+import 'package:customer_app/app/global/services/shared_pref.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/screens/welcome/welcome_screen.dart';
+import 'package:customer_app/root_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,12 +16,32 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final _sharedPref = AppSharedPrefData();
+
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
+    _navigateAfterSplash();
+  }
+
+  Future<void> _navigateAfterSplash() async {
+    // Wait for 3 seconds (splash delay)
+    await Future.delayed(const Duration(seconds: 3));
+
+    // Fetch userType and kycType from SharedPreferences
+    final userType = await _sharedPref.getUserType();
+    final kycType = await _sharedPref.getKycType();
+
+    log("SplashScreen → userType: $userType | kycType: $kycType");
+
+    // Check conditions
+    if (userType != null && kycType != null) {
+      // ✅ Both available — go to RootScreen
+      Get.offAll(() => const RootScreen());
+    } else {
+      // ❌ Missing data — go to WelcomeScreen
       Get.offAll(() => const WelcomeScreen());
-    });
+    }
   }
 
   @override

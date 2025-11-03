@@ -37,6 +37,7 @@ class PServiceNdPlanningScreen extends StatelessWidget {
                   SizedBox(height: 8.h),
                   Expanded(
                     child: ListView.separated(
+                      physics: BouncingScrollPhysics(),
                       itemCount: 6,
                       separatorBuilder: (context, index) =>
                           SizedBox(height: 8.h),
@@ -51,8 +52,8 @@ class PServiceNdPlanningScreen extends StatelessWidget {
 
           // Add Button
           Container(
-            // padding: EdgeInsets.all(12.r),
-            margin: EdgeInsets.all(10.r),
+            padding: EdgeInsets.only(left: 12.r, right: 12.h),
+            margin: EdgeInsets.only(left: 10.h, right: 10.h, bottom: 12.h),
             child: CircularButton(
               buttonColor: kPrimary,
               buttonText: "Add Service",
@@ -62,6 +63,7 @@ class PServiceNdPlanningScreen extends StatelessWidget {
               width: width,
             ),
           ),
+          SizedBox(height: 10.h),
         ],
       ),
     );

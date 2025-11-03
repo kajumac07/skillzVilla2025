@@ -1,7 +1,10 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
+import 'package:customer_app/app/global/widgets/circular_button.dart';
+import 'package:customer_app/root_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SubscriptionPlanPricingScreen extends StatelessWidget {
   const SubscriptionPlanPricingScreen({super.key});
@@ -116,23 +119,11 @@ class SubscriptionPlanPricingScreen extends StatelessWidget {
                 SizedBox(height: 30.h),
 
                 // Continue Button
-                Container(
-                  width: double.infinity,
-                  height: 50.h,
-                  decoration: BoxDecoration(
-                    color: const Color(0xffD04D4D),
-                    borderRadius: BorderRadius.circular(30.r),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Continue",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
+                CircularButton(
+                  buttonColor: kPrimary,
+                  buttonText: "Continue",
+                  onPressed: () => Get.to(() => RootScreen()),
+                  width: width,
                 ),
               ],
             ),

@@ -81,17 +81,21 @@ class _EmployeeManagementScreenState extends State<EmployeeManagementScreen> {
           SizedBox(height: 10.h),
           //employees lists
           Expanded(child: EmployeesListsCard()),
+          Padding(
+            padding: EdgeInsets.only(left: 18.0, right: 18, bottom: 10),
+            child: CircularButton(
+              buttonColor: kPrimary,
+              buttonText: "+ Add Employee",
+              onPressed: () => Get.to(() => AddEmployeeScreen()),
+              height: 40.h,
+              width: width,
+            ),
+          ),
+          SizedBox(height: 10.h),
         ],
       ),
 
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: CircularButton(
-          buttonColor: kPrimary,
-          buttonText: "+ Add Employee",
-          onPressed: () => Get.to(() => AddEmployeeScreen()),
-        ),
-      ),
+      // bottomNavigationBar:
     );
   }
 

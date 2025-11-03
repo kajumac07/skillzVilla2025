@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
+import 'package:customer_app/app/global/services/shared_pref.dart';
 import 'package:customer_app/app/screens/providerSide/adsPromotion/ads_promotion.dart';
 import 'package:customer_app/app/screens/providerSide/home/pr_home_screen.dart';
 import 'package:customer_app/app/screens/providerSide/payoutEarnings/payout_nd_earnings.dart';
@@ -18,7 +20,11 @@ class RootScreen extends StatefulWidget {
 
 class _RootScreenState extends State<RootScreen> {
   int _currentIndex = 0;
-  String accountType = "Provider"; //customer or provider
+  String? accountType; // Customer or Provider
+  String? kycType; // Customer / Freelance / Company
+  bool isLoading = true;
+
+  final _sharedPref = AppSharedPrefData();
 
   // Customer pages
   List<Widget> get _customerPages => [
@@ -50,12 +56,6 @@ class _RootScreenState extends State<RootScreen> {
         height: 24,
         color: _currentIndex == 0 ? kPrimary : Colors.grey,
       ),
-      activeIcon: Image.asset(
-        Appimages.hrIcon,
-        width: 24,
-        height: 24,
-        color: kPrimary,
-      ),
       label: 'Home',
     ),
     BottomNavigationBarItem(
@@ -64,12 +64,6 @@ class _RootScreenState extends State<RootScreen> {
         width: 24,
         height: 24,
         color: _currentIndex == 1 ? kPrimary : Colors.grey,
-      ),
-      activeIcon: Image.asset(
-        Appimages.haIcon,
-        width: 24,
-        height: 24,
-        color: kPrimary,
       ),
       label: 'Account',
     ),
@@ -80,12 +74,6 @@ class _RootScreenState extends State<RootScreen> {
         height: 24,
         color: _currentIndex == 2 ? kPrimary : Colors.grey,
       ),
-      activeIcon: Image.asset(
-        Appimages.hcIcon,
-        width: 24,
-        height: 24,
-        color: kPrimary,
-      ),
       label: 'Category',
     ),
     BottomNavigationBarItem(
@@ -95,12 +83,6 @@ class _RootScreenState extends State<RootScreen> {
         height: 24,
         color: _currentIndex == 3 ? kPrimary : Colors.grey,
       ),
-      activeIcon: Image.asset(
-        Appimages.hcaIcon,
-        width: 24,
-        height: 24,
-        color: kPrimary,
-      ),
       label: 'Cart',
     ),
     BottomNavigationBarItem(
@@ -109,12 +91,6 @@ class _RootScreenState extends State<RootScreen> {
         width: 24,
         height: 24,
         color: _currentIndex == 4 ? kPrimary : Colors.grey,
-      ),
-      activeIcon: Image.asset(
-        Appimages.haBooking,
-        width: 24,
-        height: 24,
-        color: kPrimary,
       ),
       label: 'Booking',
     ),
@@ -129,12 +105,6 @@ class _RootScreenState extends State<RootScreen> {
         height: 24,
         color: _currentIndex == 0 ? kPrimary : Colors.grey,
       ),
-      activeIcon: Image.asset(
-        Appimages.hrIcon,
-        width: 24,
-        height: 24,
-        color: kPrimary,
-      ),
       label: 'Home',
     ),
     BottomNavigationBarItem(
@@ -143,12 +113,6 @@ class _RootScreenState extends State<RootScreen> {
         width: 24,
         height: 24,
         color: _currentIndex == 1 ? kPrimary : Colors.grey,
-      ),
-      activeIcon: Image.asset(
-        Appimages.haIcon,
-        width: 24,
-        height: 24,
-        color: kPrimary,
       ),
       label: 'Account',
     ),
@@ -159,12 +123,6 @@ class _RootScreenState extends State<RootScreen> {
         height: 24,
         color: _currentIndex == 2 ? kPrimary : Colors.grey,
       ),
-      activeIcon: Image.asset(
-        Appimages.planIcon,
-        width: 24,
-        height: 24,
-        color: kPrimary,
-      ),
       label: 'Plans',
     ),
     BottomNavigationBarItem(
@@ -173,12 +131,6 @@ class _RootScreenState extends State<RootScreen> {
         width: 24,
         height: 24,
         color: _currentIndex == 3 ? kPrimary : Colors.grey,
-      ),
-      activeIcon: Image.asset(
-        Appimages.adsIcon,
-        width: 24,
-        height: 24,
-        color: kPrimary,
       ),
       label: 'Ads',
     ),
@@ -189,12 +141,6 @@ class _RootScreenState extends State<RootScreen> {
         height: 24,
         color: _currentIndex == 4 ? kPrimary : Colors.grey,
       ),
-      activeIcon: Image.asset(
-        Appimages.payoutIcon,
-        width: 24,
-        height: 24,
-        color: kPrimary,
-      ),
       label: 'Payout',
     ),
   ];
@@ -203,7 +149,30 @@ class _RootScreenState extends State<RootScreen> {
       accountType == "Customer" ? _customerNavItems : _providerNavItems;
 
   @override
+  void initState() {
+    super.initState();
+    _loadAccountType();
+  }
+
+  Future<void> _loadAccountType() async {
+    final userType = await _sharedPref.getUserType();
+    final kyc = await _sharedPref.getKycType();
+
+    log("UserType: $userType | KycType: $kyc");
+
+    setState(() {
+      accountType = userType ?? "Customer";
+      kycType = kyc ?? "Customer";
+      isLoading = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: Container(
@@ -219,16 +188,12 @@ class _RootScreenState extends State<RootScreen> {
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
+            setState(() => _currentIndex = index);
           },
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
           selectedItemColor: kPrimary,
           unselectedItemColor: Colors.grey,
-          selectedLabelStyle: const TextStyle(fontSize: 12),
-          unselectedLabelStyle: const TextStyle(fontSize: 12),
           items: _navItems,
         ),
       ),

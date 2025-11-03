@@ -1,12 +1,14 @@
+import 'dart:developer';
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
+import 'package:customer_app/app/core/utils/toasts_msg.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
+import 'package:customer_app/app/global/services/shared_pref.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/fourty_two_circle_icon.dart';
 import 'package:customer_app/app/screens/providerSide/employeeManagement/employee_management.dart';
 import 'package:customer_app/app/screens/providerSide/jobQueue/job_queue_screen.dart';
-import 'package:customer_app/app/screens/providerSide/kyc/kyc_screen.dart';
 import 'package:customer_app/app/screens/providerSide/serviceAndPlanning/p_service_nd_plan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -63,10 +65,30 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
     },
   ];
 
+  String? userType;
+  String? kycType;
+  String displayName = "Loading...";
+  final _sharedPref = AppSharedPrefData();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    userType = await _sharedPref.getUserType();
+    kycType = await _sharedPref.getKycType();
+    log("ProfileScreen → userType: $userType | kycType: $kycType");
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -327,7 +349,17 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
             Row(
               children: [
                 GestureDetector(
-                  onTap: () => Get.to(() => KycScreen()),
+                  onTap: () {
+                    if (userType == "Provider" && kycType == "Company") {
+                      Get.to(() => EmployeeManagementScreen());
+                    } else {
+                      showToastMessage(
+                        "Profile",
+                        "Profile Screen",
+                        kGreenAccent,
+                      );
+                    }
+                  },
                   child: Image.asset(
                     Appimages.personIcon,
                     height: 42.h,
@@ -346,7 +378,8 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                 ),
                 SizedBox(width: 10.w),
                 FourtyTwoCircleIcon(
-                  onTap: () => Get.to(() => EmployeeManagementScreen()),
+                  onTap: () {},
+                  // onTap: () => Get.to(() => EmployeeManagementScreen()),
                   imageName: Appimages.notiIcon,
                 ),
                 SizedBox(width: 10.w),

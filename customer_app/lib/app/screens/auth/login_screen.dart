@@ -1,10 +1,13 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
+import 'package:customer_app/app/global/services/shared_pref.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
 import 'package:customer_app/app/screens/auth/register_screen.dart';
+import 'package:customer_app/app/screens/location/location_access_screen.dart';
+import 'package:customer_app/app/screens/providerSide/kyc/kyc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -20,6 +23,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   List<TextEditingController> _otpControllers = [];
   List<FocusNode> _otpFocusNodes = [];
+  final _sharedPref = AppSharedPrefData();
 
   @override
   void initState() {
@@ -37,6 +41,18 @@ class _LoginScreenState extends State<LoginScreen> {
       f.dispose();
     }
     super.dispose();
+  }
+
+  void _onCustomerTap() async {
+    await _sharedPref.saveUserType("Customer");
+    await _sharedPref.saveKycType("Customer");
+    Get.to(() => LocationAccessScreen(userType: "Customer"));
+  }
+
+  void _onProviderTap() async {
+    await _sharedPref.saveUserType("Provider");
+    await _sharedPref.saveKycType("Customer");
+    Get.to(() => KycScreen());
   }
 
   @override
@@ -80,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: CircularButton(
                           buttonColor: kSecondary,
                           buttonText: "Customer",
-                          onPressed: () {},
+                          onPressed: _onCustomerTap,
                           textSize: 14.sp,
                         ),
                       ),
@@ -89,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: CircularButton(
                           buttonColor: kPrimary,
                           buttonText: "Service Provider",
-                          onPressed: () {},
+                          onPressed: _onProviderTap,
                           textSize: 14.sp,
                         ),
                       ),

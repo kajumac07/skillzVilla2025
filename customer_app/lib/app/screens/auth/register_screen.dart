@@ -42,7 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           // Main content
           SafeArea(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 40.h),
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -87,7 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   CircularButton(
                     buttonColor: kPrimary,
                     buttonText: "Submit",
-                    onPressed: _submitTap,
+                    onPressed: () {},
                     width: double.infinity,
                   ),
                   SizedBox(height: 25.h),
@@ -108,30 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Spacer(),
                     ],
                   ),
-                  SizedBox(height: 25.h),
-
-                  // Social login buttons
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        radius: 22.r,
-                        backgroundColor: Colors.white,
-                        child: Image.asset(
-                          Appimages.googleIcon,
-                          height: 44.h,
-                          width: 44.w,
-                        ),
-                      ),
-                      SizedBox(width: 20.w),
-                      CircleAvatar(
-                        radius: 22.r,
-                        backgroundColor: Colors.white,
-                        child: Icon(Icons.apple, size: 26.sp),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 30.h),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.12),
 
                   // Sign up text
                   GestureDetector(
@@ -163,9 +140,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Get.to(() => const LoginScreen());
   }
 
-  _submitTap() {
-    Get.to(() => LocationAccessScreen());
-  }
+  // _submitTap() {
+  //   Get.to(() => LocationAccessScreen());
+  // }
 
   //went to provider screen
   // _submitTap() {

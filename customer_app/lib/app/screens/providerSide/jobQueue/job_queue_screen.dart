@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
+import 'package:customer_app/app/global/services/shared_pref.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/screens/providerSide/jobQueue/widgets/job_invoice_detail.dart';
@@ -26,6 +29,25 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
     Icons.access_time,
     Icons.verified_outlined,
   ];
+
+  String? userType;
+  String? kycType;
+  String displayName = "Loading...";
+  final _sharedPref = AppSharedPrefData();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    userType = await _sharedPref.getUserType();
+    kycType = await _sharedPref.getKycType();
+    log("ProfileScreen → userType: $userType | kycType: $kycType");
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,38 +159,46 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             /// TOP ROW - Booking info and Status badges
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                /// LEFT SIDE - Booking Information
-                Expanded(
-                  child: Column(
+            Container(
+              height: MediaQuery.of(context).size.height * 0.1,
+              width: width,
+              // color: kRed,
+              padding: EdgeInsets.symmetric(horizontal: 10.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomText(
                         label: "BK#20250921",
                         size: 12.sp,
                         color: kGrey400,
                       ),
+                      SizedBox(height: 2.h),
                       CustomText(
                         label: "Plumbing - Tap Fix",
                         size: 16.sp,
-                        color: Colors.black,
+                        color: kGrey300,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      SizedBox(height: 2.h),
+
+                      CustomText(
+                        label: "Palm Heights Tower B",
+                        size: 12.sp,
+                        color: kGrey200,
                         fontWeight: FontWeight.bold,
                       ),
                     ],
                   ),
-                ),
-
-                SizedBox(width: 10.w),
-
-                /// RIGHT SIDE - Status badges
-                _buildStatusWidget(status),
-              ],
+                  _buildStatusWidget(status),
+                ],
+              ),
             ),
 
-            SizedBox(height: 12.h),
+            SizedBox(height: 2.h),
 
             /// MIDDLE SECTION - Customer and Date info
             Row(
@@ -229,9 +259,10 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
     switch (status) {
       case 0: // New
         return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             buildCircle(kSuccess, Appimages.rightIcon),
-            SizedBox(height: 8.h),
+            // SizedBox(height: 1.h),
             buildCircle(kPrimary, Appimages.wrongIcon),
           ],
         );
@@ -239,7 +270,7 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
       case 1: // Ongoing
         return Container(
           height: 24.h,
-          width: 70.w,
+          width: 77.w,
           decoration: BoxDecoration(
             color: const Color(0xffFFF9D1),
             borderRadius: BorderRadius.circular(12.r),
@@ -255,7 +286,7 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
       case 2: // Completed
         return Container(
           height: 24.h,
-          width: 82.w,
+          width: MediaQuery.of(context).size.width * 0.27,
           decoration: BoxDecoration(
             color: const Color(0xffE8FBE2),
             borderRadius: BorderRadius.circular(12.r),
@@ -282,14 +313,16 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
   Widget _buildActionButtons(int status) {
     switch (status) {
       case 0: // New
-        return CircularButton(
-          buttonColor: kPrimary,
-          buttonText: "Assign Employee",
-          onPressed: () {},
-          height: 36.h,
-          width: double.infinity,
-          textSize: 14.sp,
-        );
+        return userType == "Provider" && kycType == "Company"
+            ? CircularButton(
+                buttonColor: kPrimary,
+                buttonText: "Assign Employee",
+                onPressed: () {},
+                height: 36.h,
+                width: double.infinity,
+                textSize: 14.sp,
+              )
+            : SizedBox();
 
       case 1: // Ongoing
         return Row(

@@ -38,7 +38,7 @@ class MyReviewsNdRatingScreen extends StatelessWidget {
             _buildReviewForm(),
             SizedBox(height: 30.h),
             _buildPreviousReview(),
-            SizedBox(height: 20.h),
+            SizedBox(height: 30.h),
           ],
         ),
       ),
