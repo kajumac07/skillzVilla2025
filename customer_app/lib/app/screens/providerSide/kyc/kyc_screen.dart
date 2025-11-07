@@ -37,6 +37,7 @@ class _KycScreenState extends State<KycScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Spacer(),
             Container(
               padding: EdgeInsets.all(8.h),
               margin: EdgeInsets.all(8.h),
@@ -71,21 +72,36 @@ class _KycScreenState extends State<KycScreen> {
                 ],
               ),
             ),
+            Spacer(),
+            CircularButton(
+              buttonColor: _selectedType != null
+                  ? kPrimary
+                  : Colors.grey.shade300,
+              buttonText: "Next",
+              onPressed: _selectedType == null
+                  ? null
+                  : () {
+                      Get.to(() => const KycDocsScreen());
+                    },
+              width: width,
+            ),
+            SizedBox(height: height * 0.02),
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 40),
-        child: CircularButton(
-          buttonColor: _selectedType != null ? kPrimary : Colors.grey.shade300,
-          buttonText: "Next",
-          onPressed: _selectedType == null
-              ? null
-              : () {
-                  Get.to(() => const KycDocsScreen());
-                },
-        ),
-      ),
+
+      // bottomNavigationBar: Padding(
+      //   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 40),
+      //   child: CircularButton(
+      //     buttonColor: _selectedType != null ? kPrimary : Colors.grey.shade300,
+      //     buttonText: "Next",
+      //     onPressed: _selectedType == null
+      //         ? null
+      //         : () {
+      //             Get.to(() => const KycDocsScreen());
+      //           },
+      //   ),
+      // ),
     );
   }
 

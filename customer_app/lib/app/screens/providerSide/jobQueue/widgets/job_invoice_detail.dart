@@ -109,6 +109,7 @@ class JobInvoiceDetailScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         padding: EdgeInsets.all(16.w),
         child: Column(
           children: [

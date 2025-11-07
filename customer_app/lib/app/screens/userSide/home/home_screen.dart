@@ -223,9 +223,8 @@ class _HomeScreenState extends State<HomeScreen> {
             //more categories card
             Container(
               height: MediaQuery.of(context).size.height * 0.11,
-
               child: Padding(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsets.only(left: 8.0.w),
                 child: ListView.builder(
                   itemCount: 5,
                   scrollDirection: Axis.horizontal,
@@ -234,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Container(
                           height: 68.h,
-                          width: 82.w,
+                          width: width * 0.2,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: kPrimaryLight),
@@ -243,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         CustomText(
                           label: "Water Purifier",
-                          size: 10.sp,
+                          size: 9.sp,
                           color: kGrey300,
                         ),
                       ],
@@ -518,37 +517,41 @@ class _HomeScreenState extends State<HomeScreen> {
   //=========== Top Header ==================
   Widget buildTopHeader() {
     return Container(
-      height: 278.h,
+      // height: 278.h,
       // width: do,
       decoration: BoxDecoration(gradient: kHeaderLinear),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            SizedBox(height: 40.h),
+            SizedBox(height: height * 0.02),
             //top section location, delivery and user icon
             Row(
               children: [
                 Spacer(),
                 //location
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      label: "Lorem Ipsum",
-                      size: 14,
-                      fontWeight: FontWeight.bold,
-                      color: k909090,
-                    ),
-                    CustomText(
-                      label: "#454,Colony, Noida, Uttar Pradesh",
-                      size: 14,
-                      fontWeight: FontWeight.w300,
-                      color: k424242,
-                    ),
-                  ],
+                SizedBox(
+                  width: width * 0.5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
+                        label: "Lorem Ipsum",
+                        size: 14,
+                        fontWeight: FontWeight.bold,
+                        color: k909090,
+                      ),
+                      CustomText(
+                        label: "#454,Colony, Noida, Uttar Pradesh",
+                        size: 14,
+                        fontWeight: FontWeight.w300,
+                        color: k424242,
+                      ),
+                    ],
+                  ),
                 ),
-                Spacer(),
+
+                SizedBox(width: width * 0.087),
                 // Delivery icon design
                 Container(
                   height: 36.h,

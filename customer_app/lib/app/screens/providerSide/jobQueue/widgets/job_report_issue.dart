@@ -39,6 +39,7 @@ class _ReportJobScreenState extends State<ReportJobScreen> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         padding: EdgeInsets.all(12.w),
         child: Column(
           children: [

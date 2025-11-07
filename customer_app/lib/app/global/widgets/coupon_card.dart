@@ -29,7 +29,7 @@ class CouponCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
       child: Container(
-        height: 180.h,
+        height: height * 0.2,
         width: width,
         decoration: BoxDecoration(
           color: kWhite,
@@ -56,6 +56,7 @@ class CouponCard extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,22 +77,23 @@ class CouponCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 5.h),
+                    SizedBox(height: 1.h),
                     Text(
                       code,
-                      style: appStyle(20.sp, kGrey400, FontWeight.w700),
+                      style: appStyle(18.sp, kGrey400, FontWeight.w700),
                     ),
-                    SizedBox(height: 3.h),
+                    SizedBox(height: 1.h),
                     Text(
                       description,
-                      style: appStyle(14.sp, kGrey400, FontWeight.w400),
+                      style: appStyle(13.sp, kGrey400, FontWeight.w400),
                     ),
-                    SizedBox(height: 3.h),
+                    SizedBox(height: 1.h),
                     Text(
                       expires,
                       style: appStyle(14.sp, kGrey400, FontWeight.w400),
                     ),
-                    const Spacer(),
+                    SizedBox(height: 5.h),
+                    // const Spacer(),
                     // Apply Code Button
                     Align(
                       alignment: Alignment.centerRight,

@@ -19,7 +19,7 @@ class NeedTodayCard extends StatelessWidget {
           Stack(
             children: [
               Container(
-                height: 100.h,
+                height: height * 0.11,
                 width: 105.w,
                 decoration: BoxDecoration(
                   color: kthemeYellow,

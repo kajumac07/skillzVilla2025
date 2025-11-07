@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
@@ -104,7 +103,7 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
                             Text(
                               tabs[index],
                               style: TextStyle(
-                                fontSize: 14.sp,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.w500,
                                 color: isSelected
                                     ? Colors.white
@@ -286,7 +285,7 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
       case 2: // Completed
         return Container(
           height: 24.h,
-          width: MediaQuery.of(context).size.width * 0.27,
+          width: MediaQuery.of(context).size.width * 0.29,
           decoration: BoxDecoration(
             color: const Color(0xffE8FBE2),
             borderRadius: BorderRadius.circular(12.r),
@@ -298,7 +297,7 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
               SizedBox(width: 4.w),
               Text(
                 "Completed",
-                style: appStyle(12.sp, kSuccess, FontWeight.w500),
+                style: appStyle(11.sp, kSuccess, FontWeight.bold),
               ),
             ],
           ),

@@ -21,46 +21,64 @@ class KycDocsScreen extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      body: Column(
-        children: [
-          UploadIDCard(
-            primaryBg: Color(0xffF6FEFF),
-            borderColor: kSecondary,
-            secondaryBg: kSecondaryLight,
-            label: "ID No:",
-            iconColor: kSecondary,
-          ),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            UploadIDCard(
+              primaryBg: Color(0xffF6FEFF),
+              borderColor: kSecondary,
+              secondaryBg: kSecondaryLight,
+              label: "ID No:",
+              iconColor: kSecondary,
+            ),
 
-          UploadIDCard(
-            primaryBg: Color(0xffFFF8F8),
-            borderColor: kPrimaryLight,
-            secondaryBg: kPrimaryLight,
-            label: "License No. :",
-            iconColor: kPrimary,
-          ),
-          UploadIDCard(
-            primaryBg: Color(0xffF7F2DE),
-            borderColor: kFFF9D1,
-            secondaryBg: kFFF9D1,
-            label: "License No. :",
-            iconColor: Color(0xffF1E7A3),
-            isUploadDocs: true,
-          ),
-        ],
-      ),
-      bottomSheet: // Add Button
-      Container(
-        padding: EdgeInsets.all(12.r),
-        margin: EdgeInsets.all(12.r),
-        child: CircularButton(
-          buttonColor: kPrimary,
-          buttonText: "Submit",
-          onPressed: () {
-            Get.to(() => SubscriptionPlanPricingScreen());
-          },
-          width: width,
+            UploadIDCard(
+              primaryBg: Color(0xffFFF8F8),
+              borderColor: kPrimaryLight,
+              secondaryBg: kPrimaryLight,
+              label: "License No. :",
+              iconColor: kPrimary,
+            ),
+            UploadIDCard(
+              primaryBg: Color(0xffF7F2DE),
+              borderColor: kFFF9D1,
+              secondaryBg: kFFF9D1,
+              label: "License No. :",
+              iconColor: Color(0xffF1E7A3),
+              isUploadDocs: true,
+            ),
+            // SizedBox(height: 10.h),
+            Container(
+              padding: EdgeInsets.all(12.r),
+              margin: EdgeInsets.all(12.r),
+              child: CircularButton(
+                buttonColor: kPrimary,
+                buttonText: "Submit",
+                onPressed: () {
+                  Get.to(() => SubscriptionPlanPricingScreen());
+                },
+                width: width,
+              ),
+            ),
+            SizedBox(height: 20.h),
+          ],
         ),
       ),
+
+      // bottomSheet: // Add Button
+      // Container(
+      //   padding: EdgeInsets.all(12.r),
+      //   margin: EdgeInsets.all(12.r),
+      //   child: CircularButton(
+      //     buttonColor: kPrimary,
+      //     buttonText: "Submit",
+      //     onPressed: () {
+      //       Get.to(() => SubscriptionPlanPricingScreen());
+      //     },
+      //     width: width,
+      //   ),
+      // ),
     );
   }
 }

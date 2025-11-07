@@ -151,14 +151,6 @@ class AdPlanCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: plan.color,
                   borderRadius: BorderRadius.circular(12.r),
-                  // border: Border.all(color: plan.borderColor),
-                  boxShadow: [
-                    // BoxShadow(
-                    //   color: Colors.black12,
-                    //   offset: const Offset(0, 2),
-                    //   blurRadius: 4,
-                    // ),
-                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,13 +161,13 @@ class AdPlanCard extends StatelessWidget {
                       children: [
                         CustomText(
                           label: plan.title,
-                          size: 22.sp,
+                          size: 18.sp,
                           color: plan.textColor,
                           fontWeight: FontWeight.bold,
                         ),
                         CustomText(
                           label: plan.subtitle,
-                          size: 13.sp,
+                          size: 12.sp,
                           color: kGrey300,
                         ),
                       ],
@@ -232,7 +224,7 @@ class AdPlanCard extends StatelessWidget {
       children: [
         CustomText(
           label: label,
-          size: 18.sp,
+          size: 14.sp,
           color: kGrey200,
           fontWeight: FontWeight.w500,
         ),
@@ -240,7 +232,7 @@ class AdPlanCard extends StatelessWidget {
         Expanded(
           child: CustomText(
             label: value,
-            size: 15.sp,
+            size: 14.sp,
             color: kGrey300,
             fontWeight: FontWeight.w400,
           ),

@@ -1,6 +1,7 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
+import 'package:customer_app/app/core/values/responsive_app.dart';
 import 'package:customer_app/app/global/services/shared_pref.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
@@ -57,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveAppValue(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -92,22 +94,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: CircularButton(
-                          buttonColor: kSecondary,
-                          buttonText: "Customer",
-                          onPressed: _onCustomerTap,
-                          textSize: 14.sp,
-                        ),
+                      CircularButton(
+                        buttonColor: kSecondary,
+                        buttonText: "Customer",
+                        onPressed: _onCustomerTap,
+                        textSize: 14.sp,
+                        height: responsive.screenHeight * 0.060,
                       ),
                       SizedBox(width: 12.w),
-                      Expanded(
-                        child: CircularButton(
-                          buttonColor: kPrimary,
-                          buttonText: "Service Provider",
-                          onPressed: _onProviderTap,
-                          textSize: 14.sp,
-                        ),
+                      CircularButton(
+                        buttonColor: kPrimary,
+                        buttonText: "Service Provider",
+                        onPressed: _onProviderTap,
+                        textSize: 14.sp,
+                        height: responsive.screenHeight * 0.060,
                       ),
                     ],
                   ),

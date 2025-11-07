@@ -74,8 +74,8 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
       itemCount: 3,
       itemBuilder: (context, index) {
         return Container(
-          margin: EdgeInsets.only(bottom: 16.h),
-          padding: EdgeInsets.all(16.w),
+          margin: EdgeInsets.only(bottom: 12.h),
+          padding: EdgeInsets.all(8.w),
           decoration: BoxDecoration(
             color: kWhite,
             borderRadius: BorderRadius.circular(16.r),
@@ -142,19 +142,32 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Image.asset(Appimages.mapIcon, width: 20.w, height: 20.w),
-                      SizedBox(width: 4.w),
-                      Text(
-                        '123 Main Street, India',
-                        style: appStyle(14.sp, kGrey200, FontWeight.w400),
-                      ),
-                    ],
+                  SizedBox(
+                    width: width * 0.44,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset(
+                          Appimages.mapIcon,
+                          width: 20.w,
+                          height: 20.w,
+                        ),
+                        // SizedBox(width: 4.w),
+                        Text(
+                          '123 Main Street, India',
+                          maxLines: 2,
+                          style: appStyle(14.sp, kGrey200, FontWeight.w400),
+                        ),
+                      ],
+                    ),
                   ),
-                  Text(
-                    'Booking ID - #212345',
-                    style: appStyle(14.sp, kGrey200, FontWeight.w400),
+                  Container(
+                    // color: kRed,
+                    width: width * 0.32,
+                    child: Text(
+                      'Booking ID - #212345',
+                      style: appStyle(12.sp, kGrey200, FontWeight.w400),
+                    ),
                   ),
                 ],
               ),

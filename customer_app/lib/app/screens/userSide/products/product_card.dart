@@ -29,7 +29,7 @@ class _ProductCardState extends State<ProductCard> {
     return Padding(
       padding: EdgeInsets.only(left: 18.0.w),
       child: Container(
-        height: 210.h,
+        // height: 212.h,
         width: 126.w,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
         child: Column(
@@ -69,7 +69,7 @@ class _ProductCardState extends State<ProductCard> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(left: 8.0.w, top: 5.h),
+              padding: EdgeInsets.only(left: 8.0.w, top: 2.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -37,15 +37,34 @@ class ManageAddressScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 7.h),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset(Appimages.mapIcon, color: kGreenAccent),
-                        SizedBox(width: 5.w),
-                        CustomText(
-                          label: "Luxmi Lok Sector24, Panchkula, Haryana",
-                          color: kGrey300,
-                          size: 12.sp,
+                        Container(
+                          // color: kRed,
+                          width: width * 0.6,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                Appimages.mapIcon,
+                                color: kGreenAccent,
+                              ),
+                              SizedBox(width: 5.w),
+                              Flexible(
+                                child: Text(
+                                  "Luxmi Lok Sector24, Panchkula, Haryana",
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: appStyle(
+                                    12.sp,
+                                    kGrey300,
+                                    FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        Spacer(),
                         CustomText(
                           label: "Change",
                           color: kPrimary,
@@ -53,7 +72,6 @@ class ManageAddressScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-
                     SizedBox(height: 20),
 
                     Container(
@@ -129,14 +147,14 @@ class ManageAddressScreen extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: 10),
+                    SizedBox(height: 10.h),
                     CircularButton(
                       buttonColor: kPrimary,
                       buttonText: "Save Address",
                       onPressed: () => Get.to(() => RootScreen()),
                       width: width,
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 10.h),
                   ],
                 ),
               ),

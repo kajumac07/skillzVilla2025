@@ -25,46 +25,46 @@ class PServiceNdPlanningScreen extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      body: Column(
-        children: [
-          // Services List
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 8.h),
-                  Expanded(
-                    child: ListView.separated(
-                      physics: BouncingScrollPhysics(),
-                      itemCount: 6,
-                      separatorBuilder: (context, index) =>
-                          SizedBox(height: 8.h),
-                      itemBuilder: (context, index) =>
-                          MyServiceCards(width: width),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Services List
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 8.h),
+                    Expanded(
+                      child: ListView.separated(
+                        physics: BouncingScrollPhysics(),
+                        itemCount: 6,
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: 8.h),
+                        itemBuilder: (context, index) =>
+                            MyServiceCards(width: width),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
 
-          // Add Button
-          Container(
-            padding: EdgeInsets.only(left: 12.r, right: 12.h),
-            margin: EdgeInsets.only(left: 10.h, right: 10.h, bottom: 12.h),
-            child: CircularButton(
-              buttonColor: kPrimary,
-              buttonText: "Add Service",
-              onPressed: () {
-                Get.to(() => AddServiceScreen());
-              },
-              width: width,
+            // Add Button
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+              child: CircularButton(
+                buttonColor: kPrimary,
+                buttonText: "Add Service",
+                onPressed: () => Get.to(() => const AddServiceScreen()),
+                width: width,
+              ),
             ),
-          ),
-          SizedBox(height: 10.h),
-        ],
+
+            // SizedBox(height: height * 0.01),
+          ],
+        ),
       ),
     );
   }
