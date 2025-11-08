@@ -193,7 +193,7 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                   ),
                   CircularButton(
                     buttonColor: kPrimary,
-                    buttonText: "Book Now",
+                    buttonText: "Choose Provider",
                     onPressed: () {},
                     width: 150.w,
                   ),

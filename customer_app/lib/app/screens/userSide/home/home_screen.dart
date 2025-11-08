@@ -3,15 +3,12 @@ import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/models/need_today.dart';
 import 'package:customer_app/app/global/models/product_model.dart';
-import 'package:customer_app/app/global/models/provider_model.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
 import 'package:customer_app/app/screens/userSide/home/widgets/offers_chips.dart';
 import 'package:customer_app/app/screens/userSide/home/widgets/top_provider_list.dart';
 import 'package:customer_app/app/screens/userSide/subCategory/sub_category_details_screen.dart';
 import 'package:customer_app/app/screens/userSide/home/widgets/need_today_card.dart';
-import 'package:customer_app/app/screens/userSide/products/product_card.dart';
-import 'package:customer_app/app/screens/userSide/products/widgets/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -198,11 +195,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             //top providers lists
-            TopProvidersSection(),
-            SizedBox(height: 20.h),
+            TopProvidersSection(isRecommended: false),
+            // SizedBox(height: 5.h),
             //more category
             Padding(
-              padding: EdgeInsets.only(left: 18.w, top: 18.h, bottom: 10.h),
+              padding: EdgeInsets.only(left: 18.w, top: 18.h, bottom: 5.h),
               child: CustomText(
                 label: "More Categories",
                 size: 18.sp,
@@ -244,52 +241,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
             //in the spot light banner
             _buildSpotlightBanner(),
-            //random products
-            Column(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.26,
-                  // color: kRed,
-                  child: ListView.builder(
-                    itemCount: products.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (ctx, index) {
-                      final pData = products[index];
-                      return GestureDetector(
-                        onTap: () => Get.to(() => ProductDetailsScreen()),
-                        child: ProductCard(
-                          bgImage: pData.imageUrl,
-                          price: pData.price,
-                          rating: pData.rating,
-                          title: pData.name,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.26,
-                  // color: kRed,
-                  child: ListView.builder(
-                    itemCount: products.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (ctx, index) {
-                      final pData = products[index];
-                      return GestureDetector(
-                        onTap: () => Get.to(() => ProductDetailsScreen()),
-                        child: ProductCard(
-                          bgImage: pData.imageUrl,
-                          price: pData.price,
-                          rating: pData.rating,
-                          title: pData.name,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
+            //recommended providers
+            TopProvidersSection(isRecommended: true),
             SizedBox(height: 10.h),
             Container(
               height: 109.h,

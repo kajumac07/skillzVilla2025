@@ -1,11 +1,13 @@
 import 'package:customer_app/app/core/constants/consts.dart';
+import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/models/provider_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TopProvidersSection extends StatelessWidget {
-  const TopProvidersSection({super.key});
+  const TopProvidersSection({super.key, required this.isRecommended});
+  final bool isRecommended;
 
   @override
   Widget build(BuildContext context) {
@@ -68,14 +70,29 @@ class TopProvidersSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 12.w, top: 18.h, bottom: 10.h),
-          child: Text(
-            "Top Providers in your Location",
-            style: TextStyle(
-              fontSize: 18.sp,
-              color: Colors.black87,
-              fontWeight: FontWeight.w600,
-            ),
+          padding: EdgeInsets.only(
+            left: 12.w,
+            top: 18.h,
+            bottom: 10.h,
+            right: 12.w,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                isRecommended
+                    ? "Recommended Providers "
+                    : "Top Providers in your Location",
+                style: appStyle(18.sp, k232323, FontWeight.w500),
+              ),
+
+              isRecommended
+                  ? Text(
+                      "View all",
+                      style: appStyle(13.sp, kGrey200, FontWeight.w500),
+                    )
+                  : SizedBox(),
+            ],
           ),
         ),
 
@@ -112,14 +129,10 @@ class TopProvidersSection extends StatelessWidget {
 
   Widget _buildProviderCard(ProviderModel pData) {
     return GestureDetector(
-      // onTap: () => Get.to(() => ProductDetailsScreen()),
       child: Container(
         width: 130.w,
         margin: EdgeInsets.only(right: 14.w),
-        decoration: BoxDecoration(
-          // color: Colors.white,
-          borderRadius: BorderRadius.circular(14.r),
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(14.r)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -165,11 +178,7 @@ class TopProvidersSection extends StatelessWidget {
                     children: [
                       Text(
                         "₹${pData.price}",
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w400,
-                        ),
+                        style: appStyle(14.sp, k232323, FontWeight.w500),
                       ),
                       Row(
                         children: [
@@ -177,11 +186,7 @@ class TopProvidersSection extends StatelessWidget {
                           SizedBox(width: 3.w),
                           Text(
                             pData.rating.toString(),
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: appStyle(12.sp, kGrey200, FontWeight.w500),
                           ),
                         ],
                       ),
@@ -195,11 +200,7 @@ class TopProvidersSection extends StatelessWidget {
                       Flexible(
                         child: Text(
                           pData.name,
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            color: Colors.grey[700],
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: appStyle(12.sp, kGrey400, FontWeight.w500),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -214,11 +215,7 @@ class TopProvidersSection extends StatelessWidget {
                   // Role
                   Text(
                     pData.role,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Colors.grey[600],
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: appStyle(10.sp, kGrey200, FontWeight.w500),
                   ),
                 ],
               ),
