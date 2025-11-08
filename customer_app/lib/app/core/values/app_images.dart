@@ -54,6 +54,11 @@ class Appimages {
   static const String bankIcon = "assets/icons/bankIcon.png";
   static const String pIcon = "assets/icons/pIcon.png";
   static const String pMembershipIcon = "assets/icons/plan_membership_icon.png";
+  static const String salonIcon = "assets/icons/salon.png";
+  static const String cleaningIcon = "assets/icons/cleaning.png";
+  static const String repairsIcon = "assets/icons/repairs.png";
+  static const String electricIcon = "assets/icons/electric.png";
+  static const String paintingIcon = "assets/icons/painting.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";

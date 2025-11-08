@@ -5,6 +5,7 @@ import 'package:customer_app/app/global/models/need_today.dart';
 import 'package:customer_app/app/global/models/product_model.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
+import 'package:customer_app/app/screens/userSide/home/widgets/offers_chips.dart';
 import 'package:customer_app/app/screens/userSide/subCategory/sub_category_details_screen.dart';
 import 'package:customer_app/app/screens/userSide/home/widgets/need_today_card.dart';
 import 'package:customer_app/app/screens/userSide/products/product_card.dart';
@@ -24,16 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentPage = 0;
 
   final List<Map<String, dynamic>> menus = [
-    {"icon": Appimages.searchIcon, "label": "Salon"},
-    {"icon": Appimages.searchIcon, "label": "Cleaning"},
-    {"icon": Appimages.searchIcon, "label": "Repairs"},
-    {"icon": Appimages.searchIcon, "label": "Electrics"},
-    {"icon": Appimages.searchIcon, "label": "Painting"},
-    {"icon": Appimages.searchIcon, "label": "Salon"},
-    {"icon": Appimages.searchIcon, "label": "Cleaning"},
-    {"icon": Appimages.searchIcon, "label": "Repairs"},
-    {"icon": Appimages.searchIcon, "label": "Electrics"},
-    {"icon": Appimages.searchIcon, "label": "Painting"},
+    {"icon": Appimages.salonIcon, "label": "Salon"},
+    {"icon": Appimages.cleaningIcon, "label": "Cleaning"},
+    {"icon": Appimages.repairsIcon, "label": "Repairs"},
+    {"icon": Appimages.electricIcon, "label": "Electrics"},
+    {"icon": Appimages.paintingIcon, "label": "Painting"},
   ];
 
   // Sample product data
@@ -110,6 +106,11 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             //Header
             buildTopHeader(),
+            //offers and discount
+            Padding(
+              padding: EdgeInsets.only(left: 8.0.w),
+              child: OfferList(),
+            ),
             buildBannerCard(),
             SizedBox(height: 2.h),
 
@@ -517,8 +518,6 @@ class _HomeScreenState extends State<HomeScreen> {
   //=========== Top Header ==================
   Widget buildTopHeader() {
     return Container(
-      // height: 278.h,
-      // width: do,
       decoration: BoxDecoration(gradient: kHeaderLinear),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -642,7 +641,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (ctx, index) {
                   final item = menus[index];
                   return Padding(
-                    padding: EdgeInsets.only(right: 22.w),
+                    padding: EdgeInsets.only(right: 22.w, left: 2.w),
                     child: Column(
                       children: [
                         Container(
@@ -651,7 +650,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.all(8.w),
                           child: Image.asset(item['icon']),
                         ),
-                        SizedBox(height: 6.h),
+                        // SizedBox(height: 6.h),
                         Text(
                           item['label'],
                           style: TextStyle(
