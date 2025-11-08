@@ -3,9 +3,11 @@ import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/models/need_today.dart';
 import 'package:customer_app/app/global/models/product_model.dart';
+import 'package:customer_app/app/global/models/provider_model.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
 import 'package:customer_app/app/screens/userSide/home/widgets/offers_chips.dart';
+import 'package:customer_app/app/screens/userSide/home/widgets/top_provider_list.dart';
 import 'package:customer_app/app/screens/userSide/subCategory/sub_category_details_screen.dart';
 import 'package:customer_app/app/screens/userSide/home/widgets/need_today_card.dart';
 import 'package:customer_app/app/screens/userSide/products/product_card.dart';
@@ -30,6 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
     {"icon": Appimages.repairsIcon, "label": "Repairs"},
     {"icon": Appimages.electricIcon, "label": "Electrics"},
     {"icon": Appimages.paintingIcon, "label": "Painting"},
+  ];
+
+  final List<Map<String, dynamic>> menusTwo = [
+    {"icon": Appimages.porterIcon, "label": "Porter"},
+    {"icon": Appimages.spaIcon, "label": "Spa"},
+    {"icon": Appimages.chefIcon, "label": "Chef"},
+    {"icon": Appimages.carpainterIcon, "label": "Carpenter"},
+    {"icon": Appimages.plumberIcon, "label": "Plumber"},
   ];
 
   // Sample product data
@@ -112,7 +122,42 @@ class _HomeScreenState extends State<HomeScreen> {
               child: OfferList(),
             ),
             buildBannerCard(),
-            SizedBox(height: 2.h),
+            SizedBox(height: 5.h),
+            //categories icon
+            Container(
+              height: 70.h,
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 3.h),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: menusTwo.length,
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (ctx, index) {
+                  final item = menusTwo[index];
+                  return Padding(
+                    padding: EdgeInsets.only(right: 22.w, left: 2.w),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 40.h,
+                          width: 40.w,
+                          padding: EdgeInsets.all(8.w),
+                          child: Image.asset(item['icon']),
+                        ),
+                        // SizedBox(height: 6.h),
+                        Text(
+                          item['label'],
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
 
             // what do you need today
             Column(
@@ -120,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 //headline
                 Padding(
-                  padding: EdgeInsets.only(left: 18.w, top: 18.h, bottom: 10.h),
+                  padding: EdgeInsets.only(left: 12.w, top: 18.h, bottom: 10.h),
                   child: CustomText(
                     label: "What do you need today ?",
                     size: 18.sp,
@@ -150,66 +195,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 ),
-
-                // NeedTodayCard(),
               ],
             ),
-
-            Padding(
-              padding: EdgeInsets.only(left: 18.w, top: 18.h, bottom: 10.h),
-              child: CustomText(
-                label: "Recommended For You",
-                size: 18.sp,
-                color: kDark,
-              ),
-            ),
-            //recommended product
-            Column(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.26,
-                  // color: kRed,
-                  child: ListView.builder(
-                    itemCount: products.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (ctx, index) {
-                      final pData = products[index];
-                      return GestureDetector(
-                        onTap: () => Get.to(() => ProductDetailsScreen()),
-                        child: ProductCard(
-                          bgImage: pData.imageUrl,
-                          price: pData.price,
-                          rating: pData.rating,
-                          title: pData.name,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.26,
-                  // color: kRed,
-                  child: ListView.builder(
-                    itemCount: products.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (ctx, index) {
-                      final pData = products[index];
-                      return GestureDetector(
-                        onTap: () => Get.to(() => ProductDetailsScreen()),
-                        child: ProductCard(
-                          bgImage: pData.imageUrl,
-                          price: pData.price,
-                          rating: pData.rating,
-                          title: pData.name,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-
+            //top providers lists
+            TopProvidersSection(),
             SizedBox(height: 20.h),
             //more category
             Padding(
@@ -628,7 +617,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             //menus
-            SizedBox(height: 20.h),
+            SizedBox(height: 7.h),
 
             //categories icon
             Container(

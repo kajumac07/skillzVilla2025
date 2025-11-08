@@ -59,6 +59,12 @@ class Appimages {
   static const String repairsIcon = "assets/icons/repairs.png";
   static const String electricIcon = "assets/icons/electric.png";
   static const String paintingIcon = "assets/icons/painting.png";
+  static const String porterIcon = "assets/icons/porter.png";
+  static const String spaIcon = "assets/icons/spa.png";
+  static const String chefIcon = "assets/icons/chef.png";
+  static const String carpainterIcon = "assets/icons/carpainter.png";
+  static const String plumberIcon = "assets/icons/plumber.png";
+  static const String verifiedIcon = "assets/icons/verified.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";
@@ -85,4 +91,5 @@ class Appimages {
   static const String prBanner = "assets/images/pr_banner.png";
   static const String empImage = "assets/images/emp_img.png";
   static const String plansPricing = "assets/images/plans_pricing.png";
+  static const String providerOne = "assets/images/provider1.png";
 }
