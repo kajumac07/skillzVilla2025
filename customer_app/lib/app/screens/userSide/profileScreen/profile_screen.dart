@@ -10,7 +10,9 @@ import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/icon_tap_image.dart';
 import 'package:customer_app/app/global/widgets/list_tile_options.dart';
 import 'package:customer_app/app/screens/about/about_skilzvilla_screen.dart';
+import 'package:customer_app/app/screens/faqs/faq_screen.dart';
 import 'package:customer_app/app/screens/notifications/notification_screens.dart';
+import 'package:customer_app/app/screens/policies/policies_screen.dart';
 import 'package:customer_app/app/screens/userSide/coupons/coupons_screens.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/editProfile/edit_profile_screen.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/my_reviews_nd_rating.dart';
@@ -248,12 +250,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ListTileOptions(
                     imageName: Appimages.faq,
                     title: 'FAQ',
-                    onTap: () {},
+                    onTap: () => Get.to(() => FaqScreen()),
                   ),
                   ListTileOptions(
                     imageName: Appimages.policies,
                     title: 'Policies',
-                    onTap: () {},
+                    onTap: () => Get.to(() => PoliciesScreen()),
                   ),
                 ],
               ),

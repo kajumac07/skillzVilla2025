@@ -1,8 +1,13 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
+import 'package:customer_app/app/core/values/app_images.dart';
+import 'package:customer_app/app/global/controller/sub_category_controller.dart';
+import 'package:customer_app/app/global/models/provider_model.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/screens/userSide/chooseProviderList/choose_provider_list.dart';
+import 'package:customer_app/app/screens/userSide/chooseProviderList/widgets/provider_card.dart';
+import 'package:customer_app/app/screens/userSide/products/widgets/product_details_screen.dart';
 import 'package:customer_app/app/screens/userSide/subCategory/widgets/sub_cat_category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,6 +28,60 @@ class SubCategoryDetailsScreen extends StatefulWidget {
 }
 
 class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
+  final controller = Get.put(SubCategoryController());
+
+  final List<ProviderModel> providers = [
+    ProviderModel(
+      name: "Shivam Kumar",
+      role: "AC Technician",
+      rating: 4.5,
+      price: 519,
+      oldPrice: 600,
+      imageUrl: Appimages.providerIcon,
+    ),
+    ProviderModel(
+      name: "Rahul Sharma",
+      role: "AC Technician",
+      rating: 4.5,
+      price: 519,
+      oldPrice: 600,
+      imageUrl: Appimages.providerIcon,
+    ),
+    ProviderModel(
+      name: "Amit Singh",
+      role: "AC Technician",
+      rating: 4.5,
+      price: 519,
+      oldPrice: 600,
+      imageUrl: Appimages.providerIcon,
+    ),
+    ProviderModel(
+      name: "Vivek Yadav",
+      role: "AC Technician",
+      rating: 4.5,
+      price: 519,
+      oldPrice: 600,
+      imageUrl: Appimages.providerIcon,
+    ),
+
+    ProviderModel(
+      name: "Anup Singh",
+      role: "AC Technician",
+      rating: 4.5,
+      price: 519,
+      oldPrice: 600,
+      imageUrl: Appimages.providerIcon,
+    ),
+    ProviderModel(
+      name: "Arpit Pandya",
+      role: "AC Technician",
+      rating: 4.5,
+      price: 519,
+      oldPrice: 600,
+      imageUrl: Appimages.providerIcon,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,7 +208,7 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                         itemCount: 5,
                         itemBuilder: (context, index) {
                           return GestureDetector(
-                            onTap: () => Get.to(() => ChooseProviderLists()),
+                            // onTap: () => Get.to(() => ChooseProviderLists()),
                             child: Padding(
                               padding: EdgeInsets.only(
                                 bottom: 10.0.h,
@@ -167,38 +226,136 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
             ),
           ),
 
+          // ✅ Sidebar with dismiss options
+          Obx(() {
+            return Stack(
+              children: [
+                if (controller.showSidebar.value)
+                  GestureDetector(
+                    onTap: () => controller.toggleSidebar(),
+                    child: AnimatedOpacity(
+                      opacity: controller.showSidebar.value ? 0.4 : 0.0,
+                      duration: const Duration(milliseconds: 300),
+                      child: Container(
+                        color: Colors.black,
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
+                    ),
+                  ),
+
+                // 🔹 Sidebar panel itself
+                AnimatedPositioned(
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.easeInOut,
+                  top: 0,
+                  bottom: 0,
+                  right: controller.showSidebar.value ? 0 : -220.w,
+                  width: 220.w,
+                  child: Container(
+                    padding: EdgeInsets.all(12.w),
+                    decoration: BoxDecoration(
+                      color: kWhite,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16.r),
+                        bottomLeft: Radius.circular(16.r),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 10,
+                          offset: const Offset(-2, 0),
+                        ),
+                      ],
+                    ),
+
+                    // 🔹 Sidebar content
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // ---- Top Header with Close Button ----
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Providers",
+                              style: appStyle(16.sp, k232323, FontWeight.w600),
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.close,
+                                color: Colors.black54,
+                              ),
+                              onPressed: () => controller.toggleSidebar(),
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(height: 12.h),
+
+                        // ---- Provider List ----
+                        Expanded(
+                          child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: providers.length,
+                            itemBuilder: (context, index) {
+                              final provider = providers[index];
+                              final isSelected =
+                                  controller.selectedProvider.value == index;
+                              return GestureDetector(
+                                // onTap: () => controller.selectProvider(index),
+                                child: ProviderCard(
+                                  provider: provider,
+                                  onTap: () =>
+                                      Get.to(() => ProductDetailsScreen()),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+
+                        // ---- Cancel Button ----
+                        Center(
+                          child: TextButton(
+                            onPressed: () => controller.toggleSidebar(),
+                            child: Text(
+                              "Cancel",
+                              style: appStyle(
+                                13.sp,
+                                Colors.redAccent,
+                                FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }),
+
           /// ---------------- Bottom Price Bar ----------------
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
-              decoration: BoxDecoration(color: kWhite),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "₹519",
-                        style: appStyle(18, k232323, FontWeight.w400),
-                      ),
-                      Text(
-                        "Inclusive of all taxes",
-                        style: appStyle(10, k454545, FontWeight.w300),
-                      ),
-                    ],
-                  ),
-                  CircularButton(
-                    buttonColor: kPrimary,
-                    buttonText: "Choose Provider",
-                    onPressed: () {},
-                    width: 150.w,
-                  ),
-                ],
-              ),
+          // ✅ Bottom Button Section
+          Obx(
+            () => AnimatedPositioned(
+              duration: const Duration(milliseconds: 300),
+              left: 0,
+              right: 0,
+              bottom: controller.showSidebar.value ? -100.h : 0,
+              child: _bottomPriceBar(controller),
+            ),
+          ),
+
+          // ✅ Alternate Bottom Buttons (when provider selected)
+          Obx(
+            () => AnimatedPositioned(
+              duration: const Duration(milliseconds: 300),
+              left: 0,
+              right: 0,
+              bottom: controller.selectedProvider.value != null ? 0 : -100.h,
+              child: _bottomActionButtons(),
             ),
           ),
         ],
@@ -296,6 +453,80 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  // 🔹 Default Bottom Bar
+  Widget _bottomPriceBar(SubCategoryController controller) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+      decoration: BoxDecoration(
+        color: kWhite,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 6,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("₹519", style: appStyle(18, k232323, FontWeight.w400)),
+              Text(
+                "Inclusive of all taxes",
+                style: appStyle(10, k454545, FontWeight.w300),
+              ),
+            ],
+          ),
+          CircularButton(
+            buttonColor: kPrimary,
+            buttonText: "Choose Provider",
+            onPressed: () => controller.toggleSidebar(),
+            width: 150.w,
+          ),
+        ],
+      ),
+    );
+  }
+
+  // 🔹 After provider selection
+  Widget _bottomActionButtons() {
+    return Container(
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: kWhite,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 6,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: CircularButton(
+              buttonColor: kSurfaceBg,
+              buttonText: "Continue Adding Service",
+              onPressed: () {},
+            ),
+          ),
+          SizedBox(width: 10.w),
+          Expanded(
+            child: CircularButton(
+              buttonColor: kPrimary,
+              buttonText: "Proceed to Checkout",
+              onPressed: () {},
+            ),
+          ),
+        ],
       ),
     );
   }

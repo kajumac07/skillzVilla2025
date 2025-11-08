@@ -6,11 +6,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProviderCard extends StatelessWidget {
   final ProviderModel provider;
-  const ProviderCard({super.key, required this.provider});
+  final VoidCallback? onTap;
+  const ProviderCard({super.key, required this.provider, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 12.h),
+      padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 10.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
         color: Colors.white,
@@ -23,63 +26,61 @@ class ProviderCard extends StatelessWidget {
         ],
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: EdgeInsets.only(right: 8.0.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  width: 41.w,
-                  height: 20.h,
-                  decoration: BoxDecoration(
-                    color: kSurfaceBg,
-                    borderRadius: BorderRadius.circular(12.r),
+          /// ⭐ Rating
+          Align(
+            alignment: Alignment.topRight,
+            child: Container(
+              width: 46.w,
+              height: 22.h,
+              decoration: BoxDecoration(
+                color: kSurfaceBg,
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.star, color: Colors.amber, size: 14),
+                  SizedBox(width: 2.w),
+                  Text(
+                    provider.rating.toString(),
+                    style: appStyle(
+                      10.sp,
+                      const Color(0xff7A7A7A),
+                      FontWeight.w400,
+                    ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 16),
-                      Text(
-                        provider.rating.toString(),
-                        style: appStyle(
-                          10.sp,
-                          Color(0xff7A7A7A),
-                          FontWeight.w100,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-          SizedBox(height: 8.h),
+
+          /// 👤 Image
           CircleAvatar(
             backgroundImage: AssetImage(provider.imageUrl),
-            radius: 28,
+            radius: 28.r,
           ),
           SizedBox(height: 8.h),
+
+          /// 🧑‍🔧 Name & Role
           Text(
             provider.name,
             style: appStyle(14.sp, kGrey400, FontWeight.w600),
           ),
           Text(
             provider.role,
-            style: appStyle(10.sp, kGrey100, FontWeight.bold),
+            style: appStyle(10.sp, kGrey100, FontWeight.w500),
           ),
-          SizedBox(height: 6.h),
+
+          SizedBox(height: 10.h),
+
+          /// 💰 Price & Old Price
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.only(
-                  left: 8.w,
-                  right: 8.w,
-                  top: 2.h,
-                  bottom: 2.h,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
                 decoration: BoxDecoration(
                   color: kWhite,
                   border: Border.all(color: kGreenAccent),
@@ -87,45 +88,53 @@ class ProviderCard extends StatelessWidget {
                 ),
                 child: Text(
                   "₹${provider.price.toStringAsFixed(0)}",
-                  style: appStyle(15.sp, kGreenAccent, FontWeight.w300),
+                  style: appStyle(14.sp, kGreenAccent, FontWeight.w500),
                 ),
               ),
-              const SizedBox(width: 5),
+              SizedBox(width: 6.w),
               Text(
                 "₹${provider.oldPrice.toStringAsFixed(0)}",
                 style: TextStyle(
                   color: kGrey100,
                   decoration: TextDecoration.lineThrough,
+                  fontSize: 12.sp,
                 ),
               ),
             ],
           ),
 
-          const SizedBox(height: 8),
-          Padding(
-            padding: EdgeInsets.only(left: 7.0.w, right: 7.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 32.h,
-                  width: 110.w,
+          SizedBox(height: 12.h),
+
+          /// 🔘 Book Now & Arrow Button
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Container(
+                  height: 36.h,
                   decoration: BoxDecoration(
                     color: surface200,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
-                  child: Center(child: Text("Book Now")),
+                  child: Center(
+                    child: Text(
+                      "Add to cart",
+                      style: appStyle(13.sp, k232323, FontWeight.w500),
+                    ),
+                  ),
                 ),
-                Spacer(),
-                CircleAvatar(
+              ),
+              SizedBox(width: 10.w),
+              GestureDetector(
+                onTap: onTap,
+                child: CircleAvatar(
                   backgroundColor: kSecondary,
                   radius: 18.r,
-                  child: Icon(Icons.arrow_outward, color: kWhite, size: 20.sp),
+                  child: Icon(Icons.arrow_outward, color: kWhite, size: 18.sp),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const SizedBox(height: 8),
         ],
       ),
     );
