@@ -109,7 +109,8 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
             buildBannerCard(),
             SizedBox(height: 2.h),
             //ad started plan
-            buildAdStartedPlan(),
+            buildAdStartedPlan(title: "Ad Starter Plan"),
+            buildAdStartedPlan(title: "Listening Plan"),
 
             Padding(
               padding: EdgeInsets.all(8.0.h),
@@ -205,7 +206,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
   }
 
   //ad started plan card
-  Widget buildAdStartedPlan() {
+  Widget buildAdStartedPlan({required String title}) {
     return Container(
       padding: EdgeInsets.all(8.h),
       margin: EdgeInsets.only(left: 12.w, right: 12.w, top: 8.h, bottom: 8.h),
@@ -219,7 +220,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(
-                label: "Ad Starter Plan",
+                label: title,
                 size: 14.sp,
                 fontWeight: FontWeight.bold,
               ),
@@ -337,7 +338,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
   Widget buildTopHeader(context) {
     return Container(
       // height: 278.h,
-      width: width,
+      width: double.infinity,
       decoration: BoxDecoration(gradient: kHeaderLinear),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
