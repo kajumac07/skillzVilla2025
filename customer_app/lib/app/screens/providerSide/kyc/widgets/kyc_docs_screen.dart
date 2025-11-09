@@ -31,6 +31,7 @@ class KycDocsScreen extends StatelessWidget {
               secondaryBg: kSecondaryLight,
               label: "ID No:",
               iconColor: kSecondary,
+              title: "Upload Docs",
             ),
 
             UploadIDCard(
@@ -39,6 +40,7 @@ class KycDocsScreen extends StatelessWidget {
               secondaryBg: kPrimaryLight,
               label: "License No. :",
               iconColor: kPrimary,
+              title: "Upload Docs",
             ),
             UploadIDCard(
               primaryBg: Color(0xffF7F2DE),
@@ -47,6 +49,16 @@ class KycDocsScreen extends StatelessWidget {
               label: "License No. :",
               iconColor: Color(0xffF1E7A3),
               isUploadDocs: true,
+              title: "Upload Docs",
+            ),
+            UploadIDCard(
+              primaryBg: Color(0xffF5F5F5),
+              borderColor: Color(0xffF5F5F5),
+              secondaryBg: Color(0xffE3E8EC),
+              label: "License No. :",
+              iconColor: kPrimary,
+              isUploadDocs: true,
+              title: "Criminal Record Docs",
             ),
             // SizedBox(height: 10.h),
             Container(
@@ -92,6 +104,7 @@ class UploadIDCard extends StatelessWidget {
     required this.label,
     required this.iconColor,
     this.isUploadDocs = false,
+    required this.title,
   });
   final Color primaryBg;
   final Color borderColor;
@@ -99,6 +112,7 @@ class UploadIDCard extends StatelessWidget {
   final String label;
   final Color iconColor;
   final bool isUploadDocs;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +128,7 @@ class UploadIDCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           isUploadDocs
-              ? CustomText(label: "Upload Docs", size: 14.sp, color: kGrey300)
+              ? CustomText(label: title, size: 14.sp, color: kGrey300)
               : RoundedTextField(
                   label: label,
                   obscureText: false,

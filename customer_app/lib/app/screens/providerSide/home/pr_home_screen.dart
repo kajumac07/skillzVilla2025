@@ -345,7 +345,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 40.h),
+            SizedBox(height: 0.01.sh),
             //top icon section
             Row(
               children: [
@@ -390,7 +390,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 15.h),
+            SizedBox(height: 0.02.sh),
             //heading
             CustomText(
               label: "Hi Rohan ! Check Insights",
@@ -398,7 +398,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
               color: kGrey400,
               fontWeight: FontWeight.w600,
             ),
-            SizedBox(height: 15.h),
+            // SizedBox(height: 0.01.sh),
             //Stats card
             Container(
               height: 140.h,
