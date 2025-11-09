@@ -177,7 +177,7 @@ class _PlansScreenState extends State<PlansScreen> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.all(12.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -217,16 +217,22 @@ class _PlansScreenState extends State<PlansScreen> {
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 250),
                         curve: Curves.easeInOut,
-                        margin: EdgeInsets.symmetric(horizontal: 1.w),
-                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 5.w,
+                          vertical: 2.h,
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: 9.h),
                         decoration: BoxDecoration(
                           color: isSelected ? kSecondary : kWhite,
+                          border: Border.all(
+                            color: isSelected ? kSecondary : kSecondary,
+                          ),
                           borderRadius: BorderRadius.circular(30.r),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(width: 6.w),
+                            // SizedBox(width: 6.w),
                             Text(
                               tabs[index],
                               style: TextStyle(
@@ -246,7 +252,7 @@ class _PlansScreenState extends State<PlansScreen> {
               ),
             ),
 
-            SizedBox(height: 20.h),
+            SizedBox(height: 10.h),
 
             // --- 3. EXPANDABLE PLAN CARDS ---
             Expanded(
@@ -259,66 +265,68 @@ class _PlansScreenState extends State<PlansScreen> {
                   return Padding(
                     padding: EdgeInsets.only(bottom: 12.h),
                     child: Card(
+                      color: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.r),
-                        // Border to highlight the expanded card
-                        side: plan.isExpanded
-                            ? BorderSide.none
-                            : BorderSide(color: kPrimary, width: 1.5),
+                        side: BorderSide(
+                          color: plan.isExpanded ? kPrimary : kPrimary,
+                          width: 1,
+                        ),
                       ),
                       elevation: 0,
-                      child: ExpansionTile(
-                        key: PageStorageKey<String>(plan.title),
-                        initiallyExpanded: plan.isExpanded,
-                        tilePadding: EdgeInsets.symmetric(horizontal: 16.w),
-
-                        onExpansionChanged: (bool expanded) {
-                          setState(() {
-                            // Collapse all others (Accordion effect)
-                            for (var otherPlan in plans) {
-                              if (otherPlan != plan) {
-                                otherPlan.isExpanded = false;
+                      margin: EdgeInsets.zero,
+                      child: Theme(
+                        data: Theme.of(context).copyWith(
+                          dividerColor: Colors.transparent,
+                        ), // 🚫 remove inner divider
+                        child: ExpansionTile(
+                          key: PageStorageKey<String>(plan.title),
+                          initiallyExpanded: plan.isExpanded,
+                          tilePadding: EdgeInsets.symmetric(horizontal: 16.w),
+                          childrenPadding: EdgeInsets.only(
+                            bottom: 10.h,
+                          ), // small inner space
+                          onExpansionChanged: (bool expanded) {
+                            setState(() {
+                              for (var otherPlan in plans) {
+                                if (otherPlan != plan) {
+                                  otherPlan.isExpanded = false;
+                                }
                               }
-                            }
-                            plan.isExpanded = expanded;
-                          });
-                        },
-
-                        // Use the custom header widget for the title content
-                        title: _PlanCardHeader(
-                          plan: plan,
-                          isExpanded: plan.isExpanded,
-                          primaryColor: kPrimary,
+                              plan.isExpanded = expanded;
+                            });
+                          },
+                          title: _PlanCardHeader(
+                            plan: plan,
+                            isExpanded: plan.isExpanded,
+                            primaryColor: kPrimary,
+                          ),
+                          trailing: Icon(
+                            plan.isExpanded
+                                ? Icons.keyboard_arrow_up_rounded
+                                : Icons.keyboard_arrow_down_rounded,
+                            color: kPrimary,
+                            size: 28.sp,
+                          ),
+                          children: plan.features.map((feature) {
+                            return ListTile(
+                              leading: Icon(
+                                Icons.check_circle_outline,
+                                color: kPrimary,
+                                size: 20.sp,
+                              ),
+                              title: Text(
+                                feature,
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
+                              contentPadding: EdgeInsets.only(
+                                left: 20.w,
+                                right: 10.w,
+                              ),
+                              dense: true,
+                            );
+                          }).toList(),
                         ),
-
-                        // Trailing arrow icon controlled by ExpansionTile
-                        trailing: Icon(
-                          plan.isExpanded
-                              ? Icons.keyboard_arrow_up_rounded
-                              : Icons.keyboard_arrow_down_rounded,
-                          color: kPrimary,
-                          size: 28.sp,
-                        ),
-
-                        // Expanded Content (Features)
-                        children: plan.features.map((feature) {
-                          return ListTile(
-                            leading: Icon(
-                              Icons.check_circle_outline,
-                              color: kSecondary,
-                              size: 20.sp,
-                            ),
-                            title: Text(
-                              feature,
-                              style: TextStyle(fontSize: 14.sp),
-                            ),
-                            contentPadding: EdgeInsets.only(
-                              left: 20.w,
-                              right: 10.w,
-                            ),
-                            dense: true,
-                          );
-                        }).toList(),
                       ),
                     ),
                   );
@@ -329,11 +337,11 @@ class _PlansScreenState extends State<PlansScreen> {
             SizedBox(height: 10.h),
 
             //explore kit selection
-            CircularButton(
-              buttonColor: kPrimary,
-              buttonText: "Kit Selection",
-              onPressed: () => Get.to(() => KitSelectionScreen()),
-            ),
+            // CircularButton(
+            //   buttonColor: kPrimary,
+            //   buttonText: "Kit Selection",
+            //   onPressed: () => Get.to(() => KitSelectionScreen()),
+            // ),
           ],
         ),
       ),

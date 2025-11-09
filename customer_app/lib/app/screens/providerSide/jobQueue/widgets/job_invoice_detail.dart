@@ -1,4 +1,5 @@
 import 'package:customer_app/app/core/constants/consts.dart';
+import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -134,6 +135,27 @@ class JobInvoiceDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // --- Header: Booking Info ---
+                    Container(
+                      height: 0.1.sh,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [
+                            Color(0xffFFF4DF),
+                            Color(0xffF8DACD),
+                            Color(0xffFFCECE),
+                          ],
+                          stops: [0.0, 0.5, 1.0],
+                        ),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Center(
+                        child: Image.asset(Appimages.logo, height: 60.h),
+                      ),
+                    ),
+
                     Center(
                       child: Column(
                         children: [
