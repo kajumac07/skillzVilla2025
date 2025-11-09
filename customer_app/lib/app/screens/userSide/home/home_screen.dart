@@ -29,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
     {"icon": Appimages.repairsIcon, "label": "Repairs"},
     {"icon": Appimages.electricIcon, "label": "Electrics"},
     {"icon": Appimages.paintingIcon, "label": "Painting"},
+    {"icon": Appimages.salonIcon, "label": "Salon"},
+    {"icon": Appimages.cleaningIcon, "label": "Cleaning"},
   ];
 
   final List<Map<String, dynamic>> menusTwo = [
@@ -37,6 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
     {"icon": Appimages.chefIcon, "label": "Chef"},
     {"icon": Appimages.carpainterIcon, "label": "Carpenter"},
     {"icon": Appimages.plumberIcon, "label": "Plumber"},
+    {"icon": Appimages.porterIcon, "label": "Porter"},
+    {"icon": Appimages.spaIcon, "label": "Spa"},
   ];
 
   // Sample product data
@@ -115,15 +119,16 @@ class _HomeScreenState extends State<HomeScreen> {
             buildTopHeader(),
             //offers and discount
             Padding(
-              padding: EdgeInsets.only(left: 8.0.w),
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
               child: OfferList(),
             ),
+            SizedBox(height: 2.h),
             buildBannerCard(),
             SizedBox(height: 5.h),
             //categories icon
             Container(
               height: 70.h,
-              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 3.h),
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 3.h),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: menusTwo.length,
@@ -132,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (ctx, index) {
                   final item = menusTwo[index];
                   return Padding(
-                    padding: EdgeInsets.only(right: 22.w, left: 2.w),
+                    padding: EdgeInsets.only(right: 18.w, left: 2.w),
                     child: Column(
                       children: [
                         Container(
@@ -329,7 +334,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Banner slider
             Padding(
-              padding: EdgeInsets.only(left: 18.w, right: 18.w, top: 8.h),
+              padding: EdgeInsets.only(left: 12.w, right: 12.w, top: 8.h),
               child: SizedBox(
                 height: 186.h,
                 width: width,
@@ -465,11 +470,12 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            SizedBox(height: height * 0.02),
+            SizedBox(height: height * 0.05),
             //top section location, delivery and user icon
             Row(
               children: [
-                Spacer(),
+                // Spacer(),
+                SizedBox(width: 10.w),
                 //location
                 SizedBox(
                   width: width * 0.5,
@@ -492,7 +498,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
 
-                SizedBox(width: width * 0.087),
+                // SizedBox(width: width * 0.087),
+                Spacer(),
+
                 // Delivery icon design
                 Container(
                   height: 36.h,
@@ -546,26 +554,30 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-
-                Spacer(),
+                SizedBox(width: 10.w),
+                // Spacer(),
                 //person icon
                 Image.asset(Appimages.personIcon, height: 42.h, width: 42.h),
-                Spacer(),
+                SizedBox(width: 5.w),
+                // Spacer(),
               ],
             ),
 
             SizedBox(height: 20.h),
             //searchbar
-            RoundedTextField(
-              label: "Search 'Home Cleaning' ",
-              obscureText: false,
-              keyboardType: TextInputType.webSearch,
-              prefixIcon: Padding(
-                padding: EdgeInsets.only(left: 12.w, right: 8.w),
-                child: Image.asset(
-                  Appimages.searchIcon,
-                  height: 22.h,
-                  width: 22.w,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4.0),
+              child: RoundedTextField(
+                label: "Search 'Home Cleaning' ",
+                obscureText: false,
+                keyboardType: TextInputType.webSearch,
+                prefixIcon: Padding(
+                  padding: EdgeInsets.only(left: 12.w, right: 8.w),
+                  child: Image.asset(
+                    Appimages.searchIcon,
+                    height: 22.h,
+                    width: 22.w,
+                  ),
                 ),
               ),
             ),
@@ -583,7 +595,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (ctx, index) {
                   final item = menus[index];
                   return Padding(
-                    padding: EdgeInsets.only(right: 22.w, left: 2.w),
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
                     child: Column(
                       children: [
                         Container(

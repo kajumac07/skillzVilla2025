@@ -5,7 +5,6 @@ import 'package:customer_app/app/global/controller/sub_category_controller.dart'
 import 'package:customer_app/app/global/models/provider_model.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
-import 'package:customer_app/app/screens/userSide/chooseProviderList/choose_provider_list.dart';
 import 'package:customer_app/app/screens/userSide/chooseProviderList/widgets/provider_card.dart';
 import 'package:customer_app/app/screens/userSide/products/widgets/product_details_screen.dart';
 import 'package:customer_app/app/screens/userSide/subCategory/widgets/sub_cat_category_card.dart';
@@ -274,6 +273,7 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // ---- Top Header with Close Button ----
+                        SizedBox(height: 10.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -291,7 +291,7 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                           ],
                         ),
 
-                        SizedBox(height: 12.h),
+                        // SizedBox(height: 12.h),
 
                         // ---- Provider List ----
                         Expanded(

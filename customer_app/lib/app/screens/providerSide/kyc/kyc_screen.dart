@@ -144,7 +144,7 @@ class _KycScreenState extends State<KycScreen> {
                         ? Radius.circular(50.r)
                         : Radius.zero,
                     topRight: title == "Company"
-                        ? Radius.circular(50.r)
+                        ? Radius.circular(40.r)
                         : Radius.zero,
                     bottomLeft: Radius.circular(15.r),
                     bottomRight: Radius.circular(15.r),

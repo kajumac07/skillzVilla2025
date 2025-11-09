@@ -6,6 +6,7 @@ import 'package:customer_app/app/screens/providerSide/adsPromotion/ads_promotion
 import 'package:customer_app/app/screens/providerSide/home/pr_home_screen.dart';
 import 'package:customer_app/app/screens/providerSide/payoutEarnings/payout_nd_earnings.dart';
 import 'package:customer_app/app/screens/providerSide/providerPlans/plans_screen.dart';
+import 'package:customer_app/app/screens/userSide/cart/cart_screen.dart';
 import 'package:customer_app/app/screens/userSide/home/home_screen.dart';
 import 'package:customer_app/app/screens/userSide/myBookings/my_bookings_screen.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/profile_screen.dart';
@@ -31,7 +32,7 @@ class _RootScreenState extends State<RootScreen> {
     const HomeScreen(),
     const ProfileScreen(),
     Container(child: const Center(child: Text("Category Page"))),
-    Container(child: const Center(child: Text("Cart Page"))),
+    CartScreen(),
     const MyBookingsScreen(),
   ];
 

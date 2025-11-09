@@ -163,6 +163,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       InclusionsSection(),
                       SizedBox(height: 10.h),
 
+                      /// ---------- Exclusion Section ----------
+                      ExclusionsDetails(),
+                      SizedBox(height: 10.h),
+
                       /// ---------- Description Section ----------
                       ProductDescriptionSection(),
                       SizedBox(height: 10.h),
@@ -794,6 +798,49 @@ class InclusionTile extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ExclusionsDetails extends StatelessWidget {
+  const ExclusionsDetails({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText(
+          label: "Exclusions Details",
+          size: 16.sp,
+          fontWeight: FontWeight.normal,
+          color: kSecondary,
+        ),
+        SizedBox(height: 8.h),
+        Container(
+          decoration: BoxDecoration(
+            color: surface200,
+            borderRadius: BorderRadius.circular(18.r),
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: const [
+                  Expanded(child: InclusionTile(label: "XYXXZGHHH")),
+                  Expanded(child: InclusionTile(label: "XYXXZGHHH")),
+                ],
+              ),
+              const Divider(height: 1, color: Color(0xffffffff)),
+              Row(
+                children: const [
+                  Expanded(child: InclusionTile(label: "XYXXZGHHH")),
+                  Expanded(child: InclusionTile(label: "XYXXZGHHH")),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

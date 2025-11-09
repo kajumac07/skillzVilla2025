@@ -6,6 +6,7 @@ import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/screens/userSide/cart/widgets/address_and_schedule.dart';
+import 'package:customer_app/app/screens/userSide/coupons/coupons_screens.dart';
 import 'package:customer_app/app/screens/userSide/products/product_card.dart';
 import 'package:customer_app/app/screens/userSide/products/widgets/product_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,7 @@ class _CartScreenState extends State<CartScreen> {
       appBar: AppBar(title: Text("CART")),
 
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             //top offer bar
@@ -221,22 +223,25 @@ class _CartScreenState extends State<CartScreen> {
 
             // Spacer(),
             //bottom coupon
-            Container(
-              height: 48.h,
-              width: width,
-              margin: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
-                color: kWhite,
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Image.asset(Appimages.coupon, height: 24.h, width: 24.w),
-                    SizedBox(width: 8.w),
-                    CustomText(label: "Use Coupons ", size: 16.sp),
-                  ],
+            GestureDetector(
+              onTap: () => Get.to(() => CouponsScreens()),
+              child: Container(
+                height: 48.h,
+                width: width,
+                margin: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.r),
+                  color: kWhite,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Image.asset(Appimages.coupon, height: 24.h, width: 24.w),
+                      SizedBox(width: 8.w),
+                      CustomText(label: "Use Coupons ", size: 16.sp),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -316,18 +321,27 @@ class _CartScreenState extends State<CartScreen> {
             ),
 
             SizedBox(height: 20.h),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircularButton(
+                buttonColor: kPrimary,
+                buttonText: "Add Address & Slot",
+                onPressed: () => Get.to(() => AddressAndSchedule()),
+                width: double.infinity,
+              ),
+            ),
           ],
         ),
       ),
 
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: CircularButton(
-          buttonColor: kPrimary,
-          buttonText: "Add Address & Slot",
-          onPressed: () => Get.to(() => AddressAndSchedule()),
-        ),
-      ),
+      // bottomNavigationBar:  Padding(
+      //   padding: const EdgeInsets.all(8.0),
+      //   child: CircularButton(
+      //     buttonColor: kPrimary,
+      //     buttonText: "Add Address & Slot",
+      //     onPressed: () => Get.to(() => AddressAndSchedule()),
+      //   ),
+      // ),
     );
   }
 }

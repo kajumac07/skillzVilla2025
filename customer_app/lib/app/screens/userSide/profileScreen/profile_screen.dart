@@ -217,7 +217,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ListTileOptions(
                     imageName: Appimages.pDoc,
                     title: 'Documents',
-                    onTap: () => Get.to(() => CouponsScreens()),
+                    onTap: () {},
+                    // onTap: () => Get.to(() => CouponsScreens()),
                   ),
                 ],
               ),
