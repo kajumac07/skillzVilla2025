@@ -87,119 +87,121 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //top card
-            buildTopHeader(context),
-            //Plan Status
-            Padding(
-              padding: EdgeInsets.all(8.0.h),
-              child: CustomText(
-                label: "Plan Status",
-                size: 16.sp,
-                color: kGrey400,
-                fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //top card
+              buildTopHeader(context),
+              //Plan Status
+              Padding(
+                padding: EdgeInsets.all(8.0.h),
+                child: CustomText(
+                  label: "Plan Status",
+                  size: 16.sp,
+                  color: kGrey400,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
 
-            //status card
-            buildBannerCard(),
-            SizedBox(height: 2.h),
-            //ad started plan
-            buildAdStartedPlan(title: "Ad Starter Plan"),
-            buildAdStartedPlan(title: "Listening Plan"),
+              //status card
+              buildBannerCard(),
+              SizedBox(height: 2.h),
+              //ad started plan
+              buildAdStartedPlan(title: "Ad Starter Plan"),
+              buildAdStartedPlan(title: "Listening Plan"),
 
-            Padding(
-              padding: EdgeInsets.all(8.0.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomText(
-                    label: "Reach Out to More Customers ",
-                    size: 16.sp,
-                    color: kGrey400,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  CustomText(
-                    label: "View All",
-                    size: 10.sp,
-                    color: kGrey300,
-                    fontWeight: FontWeight.w100,
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.all(8.0.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      label: "Reach Out to More Customers ",
+                      size: 16.sp,
+                      color: kGrey400,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    CustomText(
+                      label: "View All",
+                      size: 10.sp,
+                      color: kGrey300,
+                      fontWeight: FontWeight.w100,
+                    ),
+                  ],
+                ),
               ),
-            ),
 
-            ReachOutMoreCustomersCard(
-              title: "Ad Starter Plan",
-              subTitle: "Days- 1 day & 7 days",
-            ),
-            ReachOutMoreCustomersCard(
-              title: "Addon Plan",
-              subTitle: "Days- 7 day & 14 days",
-            ),
-            ReachOutMoreCustomersCard(
-              title: "PromoAd Plan",
-              subTitle: "Days- 15 day & 30 days",
-            ),
-
-            //latest 5 bookings
-            Padding(
-              padding: EdgeInsets.all(8.0.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomText(
-                    label: "Latest 5 Bookings",
-                    size: 16.sp,
-                    color: kGrey400,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  CustomText(
-                    label: "View All",
-                    size: 10.sp,
-                    color: kGrey300,
-                    fontWeight: FontWeight.w100,
-                  ),
-                ],
+              ReachOutMoreCustomersCard(
+                title: "Ad Starter Plan",
+                subTitle: "Days- 1 day & 7 days",
               ),
-            ),
-
-            //latest booking lists
-            Column(
-              children: dummyBookings.map((booking) {
-                return Padding(
-                  padding: EdgeInsets.only(bottom: 4.h),
-                  child: LatestBookingLists(
-                    serviceName: booking["service"],
-                    clientName: booking["client"],
-                    status: booking["status"],
-                    color: booking["color"],
-                    icon: booking["icon"],
-                    bgColor: booking["bgColor"],
-                    textColor: booking["textColor"],
-                    sTextColor: booking["sTextColor"],
-                  ),
-                );
-              }).toList(),
-            ),
-
-            SizedBox(height: 10.h),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircularButton(
-                buttonColor: kPrimary,
-                buttonText: "Manage Services",
-                onPressed: () => Get.to(() => PServiceNdPlanningScreen()),
-                width: width,
-                height: 42.h,
+              ReachOutMoreCustomersCard(
+                title: "Addon Plan",
+                subTitle: "Days- 7 day & 14 days",
               ),
-            ),
-            SizedBox(height: 10.h),
-          ],
+              ReachOutMoreCustomersCard(
+                title: "PromoAd Plan",
+                subTitle: "Days- 15 day & 30 days",
+              ),
+
+              //latest 5 bookings
+              Padding(
+                padding: EdgeInsets.all(8.0.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      label: "Latest 5 Bookings",
+                      size: 16.sp,
+                      color: kGrey400,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    CustomText(
+                      label: "View All",
+                      size: 10.sp,
+                      color: kGrey300,
+                      fontWeight: FontWeight.w100,
+                    ),
+                  ],
+                ),
+              ),
+
+              //latest booking lists
+              Column(
+                children: dummyBookings.map((booking) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 4.h),
+                    child: LatestBookingLists(
+                      serviceName: booking["service"],
+                      clientName: booking["client"],
+                      status: booking["status"],
+                      color: booking["color"],
+                      icon: booking["icon"],
+                      bgColor: booking["bgColor"],
+                      textColor: booking["textColor"],
+                      sTextColor: booking["sTextColor"],
+                    ),
+                  );
+                }).toList(),
+              ),
+
+              SizedBox(height: 10.h),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircularButton(
+                  buttonColor: kPrimary,
+                  buttonText: "Manage Services",
+                  onPressed: () => Get.to(() => PServiceNdPlanningScreen()),
+                  width: width,
+                  height: 42.h,
+                ),
+              ),
+              SizedBox(height: 10.h),
+            ],
+          ),
         ),
       ),
     );

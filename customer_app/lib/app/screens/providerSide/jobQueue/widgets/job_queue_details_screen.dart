@@ -48,197 +48,201 @@ class _JobQueueDetailsScreenState extends State<JobQueueDetailsScreen> {
           fontWeight: FontWeight.w600,
         ),
       ),
-      body: Container(
-        width: width,
-        decoration: BoxDecoration(
-          color: kWhite,
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        padding: EdgeInsets.all(8.w),
-        margin: EdgeInsets.all(8.h),
-        child: Column(
-          children: [
-            /// Segmented TabBar
-            Container(
-              padding: EdgeInsets.all(6.w),
-              decoration: BoxDecoration(
-                color: kSecondaryLight.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(40.r),
-              ),
-              child: Row(
-                children: List.generate(tabs.length, (index) {
-                  final bool isSelected = selectedIndex == index;
-                  return Expanded(
-                    child: GestureDetector(
-                      onTap: () => setState(() => selectedIndex = index),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 250),
-                        curve: Curves.easeInOut,
-                        margin: EdgeInsets.symmetric(horizontal: 3.w),
-                        padding: EdgeInsets.symmetric(vertical: 10.h),
-                        decoration: BoxDecoration(
-                          color: isSelected ? kSecondary : kWhite,
-                          borderRadius: BorderRadius.circular(30.r),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              icons[index],
-                              size: 18.sp,
-                              color: isSelected ? Colors.white : Colors.black54,
-                            ),
-                            SizedBox(width: 6.w),
-                            Text(
-                              tabs[index],
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
+      body: SafeArea(
+        child: Container(
+          width: width,
+          decoration: BoxDecoration(
+            color: kWhite,
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          padding: EdgeInsets.all(8.w),
+          margin: EdgeInsets.all(8.h),
+          child: Column(
+            children: [
+              /// Segmented TabBar
+              Container(
+                padding: EdgeInsets.all(6.w),
+                decoration: BoxDecoration(
+                  color: kSecondaryLight.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(40.r),
+                ),
+                child: Row(
+                  children: List.generate(tabs.length, (index) {
+                    final bool isSelected = selectedIndex == index;
+                    return Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => selectedIndex = index),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 250),
+                          curve: Curves.easeInOut,
+                          margin: EdgeInsets.symmetric(horizontal: 3.w),
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          decoration: BoxDecoration(
+                            color: isSelected ? kSecondary : kWhite,
+                            borderRadius: BorderRadius.circular(30.r),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                icons[index],
+                                size: 18.sp,
                                 color: isSelected
                                     ? Colors.white
-                                    : Colors.black87,
+                                    : Colors.black54,
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-              ),
-            ),
-
-            SizedBox(height: 20.h),
-
-            /// Body Section
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    // Booking Details Card
-                    JobInfoCard(
-                      title: "Booking Details",
-                      gradient: const LinearGradient(
-                        colors: [Color(0xffE6E6E6), Color(0xffFFDDD3)],
-                      ),
-                      children: [
-                        const DetailsListTileCard(
-                          title: "Booking ID:",
-                          subTitle: "Cleaning Service",
-                        ),
-                        const DetailsListTileCard(
-                          title: "Customer:",
-                          subTitle: "Rohan Mehta",
-                        ),
-                        const DetailsListTileCard(
-                          title: "Location:",
-                          subTitle: "Green Residency, Sector 45",
-                        ),
-                        const DetailsListTileCard(
-                          title: "Date & Time:",
-                          subTitle: "21 Sept 2025, 2:00 PM",
-                        ),
-                        const DetailsListTileCard(
-                          title: "Service:",
-                          subTitle: "Plumbing Tap Fix",
-                        ),
-                        if (selectedIndex == 1)
-                          const DetailsListTileCard(
-                            title: "Status:",
-                            subTitle: "At Job",
-                          ),
-                        if (selectedIndex == 2)
-                          const DetailsListTileCard(
-                            title: "Earnings:",
-                            subTitle: "₹1,200",
-                          ),
-                      ],
-                    ),
-
-                    SizedBox(height: 20.h),
-
-                    // Employee Details
-                    JobInfoCard(
-                      title: "Employee Details",
-                      gradient: const LinearGradient(
-                        colors: [Color(0xffE6E6E6), Color(0xffFFDDD3)],
-                      ),
-                      children: const [
-                        DetailsListTileCard(
-                          title: "Employee ID:",
-                          subTitle: "7665HBH876",
-                        ),
-                        DetailsListTileCard(
-                          title: "Employee Name:",
-                          subTitle: "Rahul Sharma",
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 20.h),
-
-                    // Feedback Section (only for completed)
-                    if (selectedIndex == 2)
-                      JobInfoCard(
-                        title: "Customer Feedback",
-                        backgroundColor: const Color(0xffF9F7F7),
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CustomText(
-                                label: "Good work but came 15 mins late",
-                                size: 14.sp,
-                                color: kGrey200,
-                              ),
-                              Row(
-                                children: List.generate(
-                                  5,
-                                  (index) => const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 2,
-                                    ),
-                                    child: Icon(
-                                      Icons.star,
-                                      color: Color(0xffE2D02A),
-                                      size: 12,
-                                    ),
-                                  ),
+                              SizedBox(width: 6.w),
+                              Text(
+                                tabs[index],
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: isSelected
+                                      ? Colors.white
+                                      : Colors.black87,
                                 ),
                               ),
                             ],
                           ),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+
+              SizedBox(height: 20.h),
+
+              /// Body Section
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      // Booking Details Card
+                      JobInfoCard(
+                        title: "Booking Details",
+                        gradient: const LinearGradient(
+                          colors: [Color(0xffE6E6E6), Color(0xffFFDDD3)],
+                        ),
+                        children: [
+                          const DetailsListTileCard(
+                            title: "Booking ID:",
+                            subTitle: "Cleaning Service",
+                          ),
+                          const DetailsListTileCard(
+                            title: "Customer:",
+                            subTitle: "Rohan Mehta",
+                          ),
+                          const DetailsListTileCard(
+                            title: "Location:",
+                            subTitle: "Green Residency, Sector 45",
+                          ),
+                          const DetailsListTileCard(
+                            title: "Date & Time:",
+                            subTitle: "21 Sept 2025, 2:00 PM",
+                          ),
+                          const DetailsListTileCard(
+                            title: "Service:",
+                            subTitle: "Plumbing Tap Fix",
+                          ),
+                          if (selectedIndex == 1)
+                            const DetailsListTileCard(
+                              title: "Status:",
+                              subTitle: "At Job",
+                            ),
+                          if (selectedIndex == 2)
+                            const DetailsListTileCard(
+                              title: "Earnings:",
+                              subTitle: "₹1,200",
+                            ),
                         ],
                       ),
 
-                    SizedBox(height: 50.h),
+                      SizedBox(height: 20.h),
 
-                    // Buttons
-                    CircularButton(
-                      buttonColor: kPrimary,
-                      buttonText: getPrimaryButtonText(),
-                      onPressed: onPrimaryPressed,
-                      height: 48.h,
-                      width: width,
-                      textSize: 16.sp,
-                    ),
-                    SizedBox(height: 5.h),
-                    CircularButton(
-                      buttonColor: const Color(0xffE3E8EC),
-                      buttonText: getSecondaryButtonText(),
-                      onPressed: onSecondaryPressed,
-                      height: 48.h,
-                      width: width,
-                      textSize: 16.sp,
-                      textColor: kGrey400,
-                    ),
-                    SizedBox(height: 10.h),
-                  ],
+                      // Employee Details
+                      JobInfoCard(
+                        title: "Employee Details",
+                        gradient: const LinearGradient(
+                          colors: [Color(0xffE6E6E6), Color(0xffFFDDD3)],
+                        ),
+                        children: const [
+                          DetailsListTileCard(
+                            title: "Employee ID:",
+                            subTitle: "7665HBH876",
+                          ),
+                          DetailsListTileCard(
+                            title: "Employee Name:",
+                            subTitle: "Rahul Sharma",
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 20.h),
+
+                      // Feedback Section (only for completed)
+                      if (selectedIndex == 2)
+                        JobInfoCard(
+                          title: "Customer Feedback",
+                          backgroundColor: const Color(0xffF9F7F7),
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomText(
+                                  label: "Good work but came 15 mins late",
+                                  size: 14.sp,
+                                  color: kGrey200,
+                                ),
+                                Row(
+                                  children: List.generate(
+                                    5,
+                                    (index) => const Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 2,
+                                      ),
+                                      child: Icon(
+                                        Icons.star,
+                                        color: Color(0xffE2D02A),
+                                        size: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+
+                      SizedBox(height: 50.h),
+
+                      // Buttons
+                      CircularButton(
+                        buttonColor: kPrimary,
+                        buttonText: getPrimaryButtonText(),
+                        onPressed: onPrimaryPressed,
+                        height: 48.h,
+                        width: width,
+                        textSize: 16.sp,
+                      ),
+                      SizedBox(height: 5.h),
+                      CircularButton(
+                        buttonColor: const Color(0xffE3E8EC),
+                        buttonText: getSecondaryButtonText(),
+                        onPressed: onSecondaryPressed,
+                        height: 48.h,
+                        width: width,
+                        textSize: 16.sp,
+                        textColor: kGrey400,
+                      ),
+                      // SizedBox(height: 20.h),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

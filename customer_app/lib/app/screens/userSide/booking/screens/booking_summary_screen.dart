@@ -48,145 +48,158 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
         ),
         // centerTitle: true,
       ),
-      body: Column(
-        children: [
-          builTopSection(context),
-          Expanded(
-            flex: 2,
-            child: Column(
-              children: [
-                ///------------ Recommended for You------------
-                Container(
-                  margin: EdgeInsets.only(top: 8.h, left: 16.w, right: 16.w),
-                  decoration: BoxDecoration(
-                    color: kWhite,
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 18.w,
-                          top: 18.h,
-                          // bottom: 10.h,
-                        ),
-                        child: CustomText(
-                          label: "You may also like",
-                          size: 18.sp,
-                          color: kDark,
-                        ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            builTopSection(context),
+            Expanded(
+              flex: 2,
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    ///------------ Recommended for You------------
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: 8.h,
+                        left: 16.w,
+                        right: 16.w,
                       ),
-                      SizedBox(height: 15.h),
-
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.26,
-                        child: ListView.builder(
-                          itemCount: products.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (ctx, index) {
-                            final pData = products[index];
-                            return GestureDetector(
-                              // onTap: () => Get.to(() => ProductDetailsScreen()),
-                              child: ProductCard(
-                                bgImage: pData.imageUrl,
-                                price: pData.price,
-                                rating: pData.rating,
-                                title: pData.name,
-                              ),
-                            );
-                          },
-                        ),
+                      decoration: BoxDecoration(
+                        color: kWhite,
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
-                    ],
-                  ),
-                ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 18.w,
+                              top: 18.h,
+                              // bottom: 10.h,
+                            ),
+                            child: CustomText(
+                              label: "You may also like",
+                              size: 18.sp,
+                              color: kDark,
+                            ),
+                          ),
+                          SizedBox(height: 15.h),
 
-                //------- Bill details section ---------
-                Container(
-                  height: 170.h,
-                  width: width,
-                  margin: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
-                  decoration: BoxDecoration(
-                    color: kWhite,
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomText(
-                          label: "Bill Details",
-                          size: 16.sp,
-                          color: kGrey400,
-                        ),
-                        SizedBox(height: 10.h),
-                        Row(
-                          children: [
-                            CustomText(
-                              label: "AC Cleaning",
-                              size: 14.sp,
-                              color: kGrey200,
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.26,
+                            child: ListView.builder(
+                              itemCount: products.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (ctx, index) {
+                                final pData = products[index];
+                                return GestureDetector(
+                                  // onTap: () => Get.to(() => ProductDetailsScreen()),
+                                  child: ProductCard(
+                                    bgImage: pData.imageUrl,
+                                    price: pData.price,
+                                    rating: pData.rating,
+                                    title: pData.name,
+                                  ),
+                                );
+                              },
                             ),
-                            Spacer(),
-                            CustomText(
-                              label: "₹500",
-                              size: 14.sp,
-                              color: kGrey200,
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: 5.h),
-                        Row(
-                          children: [
-                            CustomText(
-                              label: "Discount",
-                              size: 14.sp,
-                              color: kGrey200,
-                            ),
-                            Spacer(),
-                            CustomText(
-                              label: "₹2",
-                              size: 14.sp,
-                              color: kGrey200,
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 5.h),
-                        CustomText(
-                          label: "Offer applied to your amount",
-                          size: 10.sp,
-                          color: kPrimary,
-                        ),
-                        SizedBox(height: 5.h),
-                        CustomDivider(),
-                        Row(
-                          children: [
-                            CustomText(
-                              label: "Grand Total",
-                              size: 16.sp,
-                              color: k232323,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            Spacer(),
-                            CustomText(
-                              label: "₹498",
-                              size: 16.sp,
-                              color: k232323,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ],
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+
+                    //------- Bill details section ---------
+                    Container(
+                      height: 170.h,
+                      width: width,
+                      margin: EdgeInsets.only(
+                        top: 16.h,
+                        left: 16.w,
+                        right: 16.w,
+                      ),
+                      decoration: BoxDecoration(
+                        color: kWhite,
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              label: "Bill Details",
+                              size: 16.sp,
+                              color: kGrey400,
+                            ),
+                            SizedBox(height: 10.h),
+                            Row(
+                              children: [
+                                CustomText(
+                                  label: "AC Cleaning",
+                                  size: 14.sp,
+                                  color: kGrey200,
+                                ),
+                                Spacer(),
+                                CustomText(
+                                  label: "₹500",
+                                  size: 14.sp,
+                                  color: kGrey200,
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: 5.h),
+                            Row(
+                              children: [
+                                CustomText(
+                                  label: "Discount",
+                                  size: 14.sp,
+                                  color: kGrey200,
+                                ),
+                                Spacer(),
+                                CustomText(
+                                  label: "₹2",
+                                  size: 14.sp,
+                                  color: kGrey200,
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5.h),
+                            CustomText(
+                              label: "Offer applied to your amount",
+                              size: 10.sp,
+                              color: kPrimary,
+                            ),
+                            SizedBox(height: 5.h),
+                            CustomDivider(),
+                            Row(
+                              children: [
+                                CustomText(
+                                  label: "Grand Total",
+                                  size: 16.sp,
+                                  color: k232323,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                Spacer(),
+                                CustomText(
+                                  label: "₹498",
+                                  size: 16.sp,
+                                  color: k232323,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

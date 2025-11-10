@@ -38,127 +38,133 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
           fontWeight: FontWeight.w600,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-          margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-          decoration: BoxDecoration(
-            color: kWhite,
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomText(
-                label: "Enter service details",
-                size: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: kGrey300,
-              ),
-              SizedBox(height: 16.h),
-
-              // Category Dropdown
-              _buildLabel("Category"),
-              _buildDropdown(category!, [
-                'Healthcare',
-                'Education',
-                'Transport',
-              ]),
-              SizedBox(height: 12.h),
-
-              // Sub-Category Dropdown
-              _buildLabel("Sub-Category"),
-              _buildDropdown(subCategory!, ['Hospitals', 'Clinics', 'Labs']),
-              SizedBox(height: 20.h),
-
-              // Services & Duration
-              _buildLabel("Services & Duration"),
-              SizedBox(height: 8.h),
-              Row(
-                children: [
-                  Expanded(child: _buildBoxField("Ambulance")),
-                  SizedBox(width: 8.w),
-                  Expanded(child: _buildBoxField("1 hour")),
-                ],
-              ),
-              SizedBox(height: 8.h),
-              Row(
-                children: [
-                  Expanded(child: _buildTextField("Pick up")),
-                  SizedBox(width: 8.w),
-                  Expanded(child: _buildTextField("1 hour")),
-                ],
-              ),
-              SizedBox(height: 20.h),
-
-              // Pricing
-              _buildLabel("Pricing"),
-              _buildTextField("600 per ambulance"),
-              SizedBox(height: 20.h),
-
-              // Services Included
-              _buildLabel("Services included"),
-              _buildChips(included),
-              _buildTextField("Type here..."),
-              SizedBox(height: 20.h),
-
-              // Services Excluded
-              _buildLabel("Services excluded"),
-              _buildChips(excluded),
-              _buildTextField("Type here..."),
-              SizedBox(height: 15.h),
-
-              _buildLabel("Full Description"),
-              SizedBox(height: 15.h),
-              RoundedTextField(
-                label: "Enter.....",
-                obscureText: false,
-                keyboardType: TextInputType.name,
-                maxLines: 3,
-                fillColor: Color(0xffF3F4F9),
-              ),
-              SizedBox(height: 15.h),
-
-              Container(
-                height: 95.h,
-                width: width,
-                decoration: BoxDecoration(
-                  color: kWhite,
-                  borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: Color(0xffE3E8EC)),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+            margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+            decoration: BoxDecoration(
+              color: kWhite,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(
+                  label: "Enter service details",
+                  size: 18.sp,
+                  fontWeight: FontWeight.bold,
+                  color: kGrey300,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                SizedBox(height: 16.h),
+
+                // Category Dropdown
+                _buildLabel("Category"),
+                _buildDropdown(category!, [
+                  'Healthcare',
+                  'Education',
+                  'Transport',
+                ]),
+                SizedBox(height: 12.h),
+
+                // Sub-Category Dropdown
+                _buildLabel("Sub-Category"),
+                _buildDropdown(subCategory!, ['Hospitals', 'Clinics', 'Labs']),
+                SizedBox(height: 20.h),
+
+                // Services & Duration
+                _buildLabel("Services & Duration"),
+                SizedBox(height: 8.h),
+                Row(
                   children: [
-                    CircleAvatar(
-                      radius: 25.r,
-                      backgroundColor: Color(0xffE3E8EC),
-                      child: Icon(Icons.cloud_upload_outlined, color: kPrimary),
-                    ),
-                    SizedBox(height: 2.h),
-                    CustomText(
-                      label: "Upload Images",
-                      size: 14.sp,
-                      color: kGrey300,
-                      fontWeight: FontWeight.w300,
-                    ),
+                    Expanded(child: _buildBoxField("Ambulance")),
+                    SizedBox(width: 8.w),
+                    Expanded(child: _buildBoxField("1 hour")),
                   ],
                 ),
-              ),
+                SizedBox(height: 8.h),
+                Row(
+                  children: [
+                    Expanded(child: _buildTextField("Pick up")),
+                    SizedBox(width: 8.w),
+                    Expanded(child: _buildTextField("1 hour")),
+                  ],
+                ),
+                SizedBox(height: 20.h),
 
-              SizedBox(height: 40.h),
+                // Pricing
+                _buildLabel("Pricing"),
+                _buildTextField("600 per ambulance"),
+                SizedBox(height: 20.h),
 
-              //submit button
-              CircularButton(
-                buttonColor: kPrimary,
-                buttonText: "Save details",
-                onPressed: () {},
-                width: width,
-              ),
+                // Services Included
+                _buildLabel("Services included"),
+                _buildChips(included),
+                _buildTextField("Type here..."),
+                SizedBox(height: 20.h),
 
-              SizedBox(height: 20.h),
-            ],
+                // Services Excluded
+                _buildLabel("Services excluded"),
+                _buildChips(excluded),
+                _buildTextField("Type here..."),
+                SizedBox(height: 15.h),
+
+                _buildLabel("Full Description"),
+                SizedBox(height: 15.h),
+                RoundedTextField(
+                  label: "Enter.....",
+                  obscureText: false,
+                  keyboardType: TextInputType.name,
+                  maxLines: 3,
+                  fillColor: Color(0xffF3F4F9),
+                ),
+                SizedBox(height: 15.h),
+
+                Container(
+                  height: 95.h,
+                  width: width,
+                  decoration: BoxDecoration(
+                    color: kWhite,
+                    borderRadius: BorderRadius.circular(12.r),
+                    border: Border.all(color: Color(0xffE3E8EC)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 25.r,
+                        backgroundColor: Color(0xffE3E8EC),
+                        child: Icon(
+                          Icons.cloud_upload_outlined,
+                          color: kPrimary,
+                        ),
+                      ),
+                      SizedBox(height: 2.h),
+                      CustomText(
+                        label: "Upload Images",
+                        size: 14.sp,
+                        color: kGrey300,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 40.h),
+
+                //submit button
+                CircularButton(
+                  buttonColor: kPrimary,
+                  buttonText: "Save details",
+                  onPressed: () {},
+                  width: width,
+                ),
+
+                SizedBox(height: 20.h),
+              ],
+            ),
           ),
         ),
       ),

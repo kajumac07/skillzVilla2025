@@ -32,54 +32,56 @@ class CouponsScreens extends StatelessWidget {
           SizedBox(width: 10.w),
         ],
       ),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            CouponCard(
-              backgroundColor: kPrimary,
-              flatOffer: 'Flat ₹2000 off*',
-              code: 'FINFIRST25',
-              description: 'Subscription with our limited-time coupon.',
-              expires: 'Expires 10 Oct 2025',
-              onApplyCode: () {
-                print('Applying coupon FINFIRST25');
-              },
-            ),
-            CouponCard(
-              backgroundColor: kE2D02A,
-              flatOffer: 'Flat ₹2000 off*',
-              code: 'FINFIRST25',
-              description: 'Subscription with our limited-time coupon.',
-              expires: 'Expires 10 Oct 2025',
-              onApplyCode: () {
-                print('Applying coupon FINFIRST25');
-              },
-            ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              CouponCard(
+                backgroundColor: kPrimary,
+                flatOffer: 'Flat ₹2000 off*',
+                code: 'FINFIRST25',
+                description: 'Subscription with our limited-time coupon.',
+                expires: 'Expires 10 Oct 2025',
+                onApplyCode: () {
+                  print('Applying coupon FINFIRST25');
+                },
+              ),
+              CouponCard(
+                backgroundColor: kE2D02A,
+                flatOffer: 'Flat ₹2000 off*',
+                code: 'FINFIRST25',
+                description: 'Subscription with our limited-time coupon.',
+                expires: 'Expires 10 Oct 2025',
+                onApplyCode: () {
+                  print('Applying coupon FINFIRST25');
+                },
+              ),
 
-            CouponCard(
-              backgroundColor: kSecondary,
-              flatOffer: 'Flat ₹2000 off*',
-              code: 'FINFIRST25',
-              description: 'Subscription with our limited-time coupon.',
-              expires: 'Expires 10 Oct 2025',
-              onApplyCode: () {
-                print('Applying coupon FINFIRST25');
-              },
-            ),
+              CouponCard(
+                backgroundColor: kSecondary,
+                flatOffer: 'Flat ₹2000 off*',
+                code: 'FINFIRST25',
+                description: 'Subscription with our limited-time coupon.',
+                expires: 'Expires 10 Oct 2025',
+                onApplyCode: () {
+                  print('Applying coupon FINFIRST25');
+                },
+              ),
 
-            CouponCard(
-              backgroundColor: kGrey200,
-              flatOffer: 'Flat ₹2000 off*',
-              code: 'FINFIRST25',
-              description: 'Subscription with our limited-time coupon.',
-              expires: 'Expires 10 Oct 2025',
-              onApplyCode: () {
-                print('Applying coupon FINFIRST25');
-              },
-            ),
-            SizedBox(height: 10.h),
-          ],
+              CouponCard(
+                backgroundColor: kGrey200,
+                flatOffer: 'Flat ₹2000 off*',
+                code: 'FINFIRST25',
+                description: 'Subscription with our limited-time coupon.',
+                expires: 'Expires 10 Oct 2025',
+                onApplyCode: () {
+                  print('Applying coupon FINFIRST25');
+                },
+              ),
+              SizedBox(height: 10.h),
+            ],
+          ),
         ),
       ),
     );

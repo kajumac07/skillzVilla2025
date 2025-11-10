@@ -22,6 +22,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   String? kycType;
   String displayName = "Loading...";
   String displayNumber = "—";
+  String tabTitle = "Company Details";
 
   @override
   void initState() {
@@ -40,9 +41,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     } else if (userType == "Provider" && kycType == "Freelance") {
       displayName = "John Doe";
       displayNumber = "9998887777";
+      tabTitle = "Profile Details";
     } else if (userType == "Provider" && kycType == "Company") {
       displayName = "XYZ Company";
       displayNumber = "778899002";
+      tabTitle = "Company Details";
     } else {
       displayName = "Guest User";
       displayNumber = "N/A";
@@ -121,7 +124,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         Expanded(
                           child: _tabButton(
                             icon: Icons.person_outline,
-                            title: "Company Details",
+                            title: tabTitle,
                             isSelected: selectedSection == 'company',
                             onTap: () =>
                                 setState(() => selectedSection = 'company'),
@@ -213,25 +216,38 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Company Details",
-            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
-          ),
-          SizedBox(height: 12.h),
-          _inputField(label: "Company Name", hint: displayName),
-          _dropdownField(label: "Company Type", hint: "Private"),
-          _dropdownField(label: "Company Domain", hint: "Manufacturing"),
-          SizedBox(height: 18.h),
-          Text(
-            "POC Details",
-            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
-          ),
-          SizedBox(height: 12.h),
-          _inputField(label: "Phone", hint: displayNumber),
-          _inputField(label: "Email", hint: "xyz@gmail.com"),
-          _dropdownField(label: "Department", hint: "HR"),
-          SizedBox(height: 24.h),
-          _saveButton("Save & Verify"),
+          if (userType == "Provider" && kycType == "Company") ...[
+            Text(
+              "Company Details",
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+            ),
+            SizedBox(height: 12.h),
+            _inputField(label: "Company Name", hint: displayName),
+            _dropdownField(label: "Company Type", hint: "Private"),
+            _dropdownField(label: "Company Domain", hint: "Manufacturing"),
+            SizedBox(height: 18.h),
+            Text(
+              "POC Details",
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+            ),
+            SizedBox(height: 12.h),
+            _inputField(label: "Phone", hint: displayNumber),
+            _inputField(label: "Email", hint: "xyz@gmail.com"),
+            _dropdownField(label: "Department", hint: "HR"),
+            SizedBox(height: 24.h),
+            _saveButton("Save & Verify"),
+          ] else ...[
+            Text(
+              "Profile Details",
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+            ),
+            SizedBox(height: 12.h),
+            _inputField(label: "Full Name", hint: displayName),
+            _inputField(label: "Phone number", hint: "9876543456"),
+            _inputField(label: "Whatsapp Number", hint: "9876543234"),
+            _inputField(label: "DOB", hint: "DD/MM/YYYY"),
+            _inputField(label: "Email", hint: "john@gmail.com"),
+          ],
         ],
       ),
     );

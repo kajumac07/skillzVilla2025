@@ -27,21 +27,23 @@ class _PayModeScreenState extends State<PayModeScreen> {
         ),
         centerTitle: false,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const SizedBox(height: 10),
-            buildRecommendedOptions(),
-            const SizedBox(height: 25),
-            buildScheduleSection(),
-            const SizedBox(height: 25),
-            buildPayOnDelivery(),
-            const SizedBox(height: 25),
-            buildBillDetails(),
-            const SizedBox(height: 40),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const SizedBox(height: 10),
+              buildRecommendedOptions(),
+              const SizedBox(height: 25),
+              buildScheduleSection(),
+              const SizedBox(height: 25),
+              buildPayOnDelivery(),
+              const SizedBox(height: 25),
+              buildBillDetails(),
+              const SizedBox(height: 40),
+            ],
+          ),
         ),
       ),
     );

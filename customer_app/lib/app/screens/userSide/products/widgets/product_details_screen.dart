@@ -45,227 +45,233 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          /// ---------------- Background Image ----------------
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 240.h,
-            child: Image.asset(Appimages.subCategorybgImg, fit: BoxFit.cover),
-          ),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            /// ---------------- Background Image ----------------
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 240.h,
+              child: Image.asset(Appimages.subCategorybgImg, fit: BoxFit.cover),
+            ),
 
-          /// ---------------- Back & Profile Buttons ----------------
-          Positioned(
-            top: 50.h,
-            left: 16.w,
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: IconButton(
-                icon: Icon(Icons.arrow_back_ios_new, size: 20.sp),
-                onPressed: () => Navigator.pop(context),
+            /// ---------------- Back & Profile Buttons ----------------
+            Positioned(
+              top: 10.h,
+              left: 16.w,
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back_ios_new, size: 20.sp),
+                  onPressed: () => Navigator.pop(context),
+                ),
               ),
             ),
-          ),
-          Positioned(
-            top: 50.h,
-            right: 16.w,
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Icon(Icons.notifications_none_rounded, size: 20.sp),
+            Positioned(
+              top: 10.h,
+              right: 16.w,
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(Icons.notifications_none_rounded, size: 20.sp),
+              ),
             ),
-          ),
 
-          /// ---------------- Main Container ----------------
-          Positioned(
-            top: 210.h,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-                decoration: BoxDecoration(
-                  color: kWhite,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(22.r),
-                    topRight: Radius.circular(22.r),
+            /// ---------------- Main Container ----------------
+            Positioned(
+              top: 210.h,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 10.h,
                   ),
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      /// ----------Ratings & Time ----------
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "4.8",
-                                style: appStyle(
-                                  12.sp,
-                                  k232323,
-                                  FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                " ⭐ RATINGS",
-                                style: appStyle(
-                                  12.sp,
-                                  k232323,
-                                  FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          //time
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.timelapse_sharp,
-                                size: 14.sp,
-                                color: kGreenAccent,
-                              ),
-                              Text(
-                                "20 MINS",
-                                style: appStyle(
-                                  10.sp,
-                                  kGrey300,
-                                  FontWeight.w200,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20.h),
-
-                      /// ---------- title ----------
-                      CustomText(
-                        label: "AC Repair & Maintenance",
-                        size: 20.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      SizedBox(height: 2.h),
-                      CustomText(
-                        label: "₹500",
-                        size: 17.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      CustomDivider(),
-                      SizedBox(height: 2.h),
-
-                      /// ---------- Inclusions Section ----------
-                      InclusionsSection(),
-                      SizedBox(height: 10.h),
-
-                      /// ---------- Exclusion Section ----------
-                      ExclusionsDetails(),
-                      SizedBox(height: 10.h),
-
-                      /// ---------- Description Section ----------
-                      ProductDescriptionSection(),
-                      SizedBox(height: 10.h),
-
-                      ///----------- Prices Section -----------
-                      ProductPricesSection(),
-                      CustomDivider(),
-                      SizedBox(height: 5.h),
-
-                      ///------------ Provide Details Section -----------
-                      ProductProviderSection(),
-
-                      ///------------ Recommended for You------------
-                      Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  decoration: BoxDecoration(
+                    color: kWhite,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(22.r),
+                      topRight: Radius.circular(22.r),
+                    ),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        /// ----------Ratings & Time ----------
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 18.w,
-                                top: 18.h,
-                                // bottom: 10.h,
-                              ),
-                              child: CustomText(
-                                label: "Recommended For You",
-                                size: 18.sp,
-                                color: kDark,
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  "4.8",
+                                  style: appStyle(
+                                    12.sp,
+                                    k232323,
+                                    FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  " ⭐ RATINGS",
+                                  style: appStyle(
+                                    12.sp,
+                                    k232323,
+                                    FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
-                            SizedBox(height: 15.h),
-
-                            Container(
-                              height: MediaQuery.of(context).size.height * 0.26,
-                              // color: kRed,
-                              child: ListView.builder(
-                                itemCount: products.length,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (ctx, index) {
-                                  final pData = products[index];
-                                  return GestureDetector(
-                                    onTap: () =>
-                                        Get.to(() => ProductDetailsScreen()),
-                                    child: ProductCard(
-                                      bgImage: pData.imageUrl,
-                                      price: pData.price,
-                                      rating: pData.rating,
-                                      title: pData.name,
-                                    ),
-                                  );
-                                },
-                              ),
+                            //time
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.timelapse_sharp,
+                                  size: 14.sp,
+                                  color: kGreenAccent,
+                                ),
+                                Text(
+                                  "20 MINS",
+                                  style: appStyle(
+                                    10.sp,
+                                    kGrey300,
+                                    FontWeight.w200,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ),
+                        SizedBox(height: 20.h),
 
-                      SizedBox(height: 80.h),
-                    ],
+                        /// ---------- title ----------
+                        CustomText(
+                          label: "AC Repair & Maintenance",
+                          size: 20.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        SizedBox(height: 2.h),
+                        CustomText(
+                          label: "₹500",
+                          size: 17.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        CustomDivider(),
+                        SizedBox(height: 2.h),
+
+                        /// ---------- Inclusions Section ----------
+                        InclusionsSection(),
+                        SizedBox(height: 10.h),
+
+                        /// ---------- Exclusion Section ----------
+                        ExclusionsDetails(),
+                        SizedBox(height: 10.h),
+
+                        /// ---------- Description Section ----------
+                        ProductDescriptionSection(),
+                        SizedBox(height: 10.h),
+
+                        ///----------- Prices Section -----------
+                        ProductPricesSection(),
+                        CustomDivider(),
+                        SizedBox(height: 5.h),
+
+                        ///------------ Provide Details Section -----------
+                        ProductProviderSection(),
+
+                        ///------------ Recommended for You------------
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left: 18.w,
+                                  top: 18.h,
+                                  // bottom: 10.h,
+                                ),
+                                child: CustomText(
+                                  label: "Recommended For You",
+                                  size: 18.sp,
+                                  color: kDark,
+                                ),
+                              ),
+                              SizedBox(height: 15.h),
+
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.26,
+                                // color: kRed,
+                                child: ListView.builder(
+                                  itemCount: products.length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (ctx, index) {
+                                    final pData = products[index];
+                                    return GestureDetector(
+                                      onTap: () =>
+                                          Get.to(() => ProductDetailsScreen()),
+                                      child: ProductCard(
+                                        bgImage: pData.imageUrl,
+                                        price: pData.price,
+                                        rating: pData.rating,
+                                        title: pData.name,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(height: 80.h),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
 
-          /// ---------------- Bottom Price Bar ----------------
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
-              decoration: BoxDecoration(color: kWhite),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "₹500",
-                        style: appStyle(18, k232323, FontWeight.w400),
-                      ),
-                      Text(
-                        "Inclusive of all taxes",
-                        style: appStyle(10, k454545, FontWeight.w300),
-                      ),
-                    ],
-                  ),
-                  CircularButton(
-                    buttonColor: kPrimary,
-                    buttonText: "Book Now",
-                    onPressed: () => Get.to(() => CartScreen()),
-                    width: 150.w,
-                  ),
-                ],
+            /// ---------------- Bottom Price Bar ----------------
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                decoration: BoxDecoration(color: kWhite),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "₹500",
+                          style: appStyle(18, k232323, FontWeight.w400),
+                        ),
+                        Text(
+                          "Inclusive of all taxes",
+                          style: appStyle(10, k454545, FontWeight.w300),
+                        ),
+                      ],
+                    ),
+                    CircularButton(
+                      buttonColor: kPrimary,
+                      buttonText: "Book Now",
+                      onPressed: () => Get.to(() => CartScreen()),
+                      width: 150.w,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

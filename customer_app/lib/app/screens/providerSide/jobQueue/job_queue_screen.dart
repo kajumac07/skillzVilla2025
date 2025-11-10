@@ -65,76 +65,80 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
           fontWeight: FontWeight.w600,
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(10.w),
-        child: Column(
-          children: [
-            /// Segmented TabBar
-            Container(
-              padding: EdgeInsets.all(6.w),
-              decoration: BoxDecoration(
-                color: kSecondaryLight.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(40.r),
-              ),
-              child: Row(
-                children: List.generate(tabs.length, (index) {
-                  final bool isSelected = selectedIndex == index;
-                  return Expanded(
-                    child: GestureDetector(
-                      onTap: () => setState(() => selectedIndex = index),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 250),
-                        curve: Curves.easeInOut,
-                        margin: EdgeInsets.symmetric(horizontal: 3.w),
-                        padding: EdgeInsets.symmetric(vertical: 10.h),
-                        decoration: BoxDecoration(
-                          color: isSelected ? kSecondary : kWhite,
-                          borderRadius: BorderRadius.circular(30.r),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              icons[index],
-                              size: 18.sp,
-                              color: isSelected ? Colors.white : Colors.black54,
-                            ),
-                            SizedBox(width: 6.w),
-                            Text(
-                              tabs[index],
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w500,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(10.w),
+          child: Column(
+            children: [
+              /// Segmented TabBar
+              Container(
+                padding: EdgeInsets.all(6.w),
+                decoration: BoxDecoration(
+                  color: kSecondaryLight.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(40.r),
+                ),
+                child: Row(
+                  children: List.generate(tabs.length, (index) {
+                    final bool isSelected = selectedIndex == index;
+                    return Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => selectedIndex = index),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 250),
+                          curve: Curves.easeInOut,
+                          margin: EdgeInsets.symmetric(horizontal: 3.w),
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          decoration: BoxDecoration(
+                            color: isSelected ? kSecondary : kWhite,
+                            borderRadius: BorderRadius.circular(30.r),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                icons[index],
+                                size: 18.sp,
                                 color: isSelected
                                     ? Colors.white
-                                    : Colors.black87,
+                                    : Colors.black54,
                               ),
-                            ),
-                          ],
+                              SizedBox(width: 6.w),
+                              Text(
+                                tabs[index],
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: isSelected
+                                      ? Colors.white
+                                      : Colors.black87,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                }),
-              ),
-            ),
-
-            SizedBox(height: 20.h),
-
-            /// Tab Body
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    buildJobCard(selectedIndex),
-                    SizedBox(height: 10.h),
-                    buildJobCard(selectedIndex),
-                  ],
+                    );
+                  }),
                 ),
               ),
-            ),
-          ],
+
+              SizedBox(height: 20.h),
+
+              /// Tab Body
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      buildJobCard(selectedIndex),
+                      SizedBox(height: 10.h),
+                      buildJobCard(selectedIndex),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -247,6 +251,7 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
               width: double.infinity,
               child: _buildActionButtons(status),
             ),
+            // SizedBox(height: 20.h),
           ],
         ),
       ),

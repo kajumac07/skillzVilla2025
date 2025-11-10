@@ -18,47 +18,49 @@ class LocationAccessScreen extends StatelessWidget {
     final responsive = ResponsiveAppValue(context);
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            Spacer(),
-            //image section
-            Center(
-              child: Image.asset(
-                Appimages.locatonIcon,
-                height: responsive.screenHeight * 0.067,
-                width: responsive.screenWidth * 0.2,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              Spacer(),
+              //image section
+              Center(
+                child: Image.asset(
+                  Appimages.locatonIcon,
+                  height: responsive.screenHeight * 0.067,
+                  width: responsive.screenWidth * 0.2,
+                ),
               ),
-            ),
-            Spacer(),
-            CustomText(
-              label: "Where do you want your service",
-              size: 18.sp,
-              fontWeight: FontWeight.w500,
-            ),
-            SizedBox(height: 40.h),
-            CircularButton(
-              buttonColor: kPrimary,
-              buttonText: "At my Current Location",
-              onPressed: () => Get.to(() => AtCurrentLocationScreen()),
-              width: width,
-              height: responsive.screenHeight * 0.066,
-              textSize: 15.sp,
-            ),
-            SizedBox(height: 10.h),
-            CircularButton(
-              buttonColor: greyBtnColor,
-              buttonText: "I’ll enter my location manually",
-              onPressed: () =>
-                  Get.to(() => ManageAddressScreen(userType: userType)),
-              width: width,
-              height: responsive.screenHeight * 0.066,
-              textColor: kDark,
-              textSize: 15.sp,
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.022),
-          ],
+              Spacer(),
+              CustomText(
+                label: "Where do you want your service",
+                size: 18.sp,
+                fontWeight: FontWeight.w500,
+              ),
+              SizedBox(height: 40.h),
+              CircularButton(
+                buttonColor: kPrimary,
+                buttonText: "At my Current Location",
+                onPressed: () => Get.to(() => AtCurrentLocationScreen()),
+                width: width,
+                height: responsive.screenHeight * 0.066,
+                textSize: 15.sp,
+              ),
+              SizedBox(height: 10.h),
+              CircularButton(
+                buttonColor: greyBtnColor,
+                buttonText: "I’ll enter my location manually",
+                onPressed: () =>
+                    Get.to(() => ManageAddressScreen(userType: userType)),
+                width: width,
+                height: responsive.screenHeight * 0.066,
+                textColor: kDark,
+                textSize: 15.sp,
+              ),
+              // SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            ],
+          ),
         ),
       ),
     );

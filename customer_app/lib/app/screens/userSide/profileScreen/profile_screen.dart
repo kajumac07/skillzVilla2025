@@ -94,12 +94,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SizedBox(width: 10.w),
           TapImageIcon(
             imageName: Appimages.editIcon,
-            onTap: () => Get.to(() => EditProfileScreen()),
+            // onTap: () => Get.to(() => EditProfileScreen()),
+            onTap: () {
+              if (userType == "Customer" && kycType == "Customer") {
+                null;
+              } else {
+                Get.to(() => EditProfileScreen());
+              }
+            },
           ),
           SizedBox(width: 10.w),
         ],
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             // Top Profile Section with overlapping card

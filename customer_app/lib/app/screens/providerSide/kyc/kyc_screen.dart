@@ -31,77 +31,67 @@ class _KycScreenState extends State<KycScreen> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.all(8.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Spacer(),
-            Container(
-              padding: EdgeInsets.all(8.h),
-              margin: EdgeInsets.all(8.h),
-              decoration: BoxDecoration(
-                color: kWhite,
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(Appimages.logo, width: 60.w, height: 44.h),
-                      const Spacer(),
-                      CustomText(
-                        label: "Enter As",
-                        size: 18.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                  SizedBox(height: 10.h),
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(8.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(),
+              Container(
+                padding: EdgeInsets.all(8.h),
+                margin: EdgeInsets.all(8.h),
+                decoration: BoxDecoration(
+                  color: kWhite,
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(Appimages.logo, width: 60.w, height: 44.h),
+                        const Spacer(),
+                        CustomText(
+                          label: "Enter As",
+                          size: 18.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        const Spacer(),
+                      ],
+                    ),
+                    SizedBox(height: 10.h),
 
-                  // Freelance / Company Buttons
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      buildFreelanceAndCompany("Freelance"),
-                      buildFreelanceAndCompany("Company"),
-                    ],
-                  ),
-                ],
+                    // Freelance / Company Buttons
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        buildFreelanceAndCompany("Freelance"),
+                        buildFreelanceAndCompany("Company"),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Spacer(),
-            CircularButton(
-              buttonColor: _selectedType != null
-                  ? kPrimary
-                  : Colors.grey.shade300,
-              buttonText: "Next",
-              onPressed: _selectedType == null
-                  ? null
-                  : () {
-                      Get.to(() => const KycDocsScreen());
-                    },
-              width: width,
-            ),
-            SizedBox(height: height * 0.02),
-          ],
+              Spacer(),
+              CircularButton(
+                buttonColor: _selectedType != null
+                    ? kPrimary
+                    : Colors.grey.shade300,
+                buttonText: "Next",
+                onPressed: _selectedType == null
+                    ? null
+                    : () {
+                        Get.to(() => const KycDocsScreen());
+                      },
+                width: width,
+              ),
+
+              // SizedBox(height: height * 0.03),
+            ],
+          ),
         ),
       ),
-
-      // bottomNavigationBar: Padding(
-      //   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 40),
-      //   child: CircularButton(
-      //     buttonColor: _selectedType != null ? kPrimary : Colors.grey.shade300,
-      //     buttonText: "Next",
-      //     onPressed: _selectedType == null
-      //         ? null
-      //         : () {
-      //             Get.to(() => const KycDocsScreen());
-      //           },
-      //   ),
-      // ),
     );
   }
 
@@ -125,10 +115,10 @@ class _KycScreenState extends State<KycScreen> {
         decoration: BoxDecoration(
           color: isSelected ? kPrimary.withOpacity(0.15) : kFFF9D1,
           borderRadius: BorderRadius.circular(15.r),
-          border: Border.all(
-            color: isSelected ? kPrimary : Colors.transparent,
-            width: 2,
-          ),
+          // border: Border.all(
+          //   color: isSelected ? kPrimary : Colors.transparent,
+          //   width: 2,
+          // ),
         ),
         child: Stack(
           children: [

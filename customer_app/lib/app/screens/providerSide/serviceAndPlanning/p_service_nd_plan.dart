@@ -53,7 +53,7 @@ class PServiceNdPlanningScreen extends StatelessWidget {
 
             // Add Button
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+              padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 7.h),
               child: CircularButton(
                 buttonColor: kPrimary,
                 buttonText: "Add Service",

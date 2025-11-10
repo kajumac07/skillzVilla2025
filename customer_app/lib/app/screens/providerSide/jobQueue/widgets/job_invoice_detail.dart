@@ -109,201 +109,206 @@ class JobInvoiceDetailScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        padding: EdgeInsets.all(16.w),
-        child: Column(
-          children: [
-            // --- Receipt Card Container ---
-            ClipPath(
-              clipper: ReceiptClipper(radius: 10.0),
-              child: Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.r),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 6,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // --- Header: Booking Info ---
-                    Container(
-                      height: 0.1.sh,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [
-                            Color(0xffFFF4DF),
-                            Color(0xffF8DACD),
-                            Color(0xffFFCECE),
-                          ],
-                          stops: [0.0, 0.5, 1.0],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          padding: EdgeInsets.all(16.w),
+          child: Column(
+            children: [
+              // --- Receipt Card Container ---
+              ClipPath(
+                clipper: ReceiptClipper(radius: 10.0),
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 20.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // --- Header: Booking Info ---
+                      Container(
+                        height: 0.1.sh,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [
+                              Color(0xffFFF4DF),
+                              Color(0xffF8DACD),
+                              Color(0xffFFCECE),
+                            ],
+                            stops: [0.0, 0.5, 1.0],
+                          ),
+                          borderRadius: BorderRadius.circular(12.r),
                         ),
-                        borderRadius: BorderRadius.circular(12.r),
+                        child: Center(
+                          child: Image.asset(Appimages.logo, height: 60.h),
+                        ),
                       ),
-                      child: Center(
-                        child: Image.asset(Appimages.logo, height: 60.h),
-                      ),
-                    ),
 
-                    Center(
-                      child: Column(
+                      Center(
+                        child: Column(
+                          children: [
+                            SizedBox(height: 8.h),
+                            CustomText(
+                              label: "BK#20250921",
+                              size: 12.sp,
+                              color: kGrey400,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            SizedBox(height: 4.h),
+                            CustomText(
+                              label: "Home Cleaning - 2BHK",
+                              size: 20.sp,
+                              color: kGrey400,
+                              fontWeight: FontWeight.bold,
+                              // letterSpacing: 1.5,
+                            ),
+                            SizedBox(height: 4.h),
+                            CustomText(
+                              label: "15 Sept 2025, 11:00 AM",
+                              size: 10.sp,
+                              color: kSecondary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20.h),
+                      _dashedDivider(),
+
+                      SizedBox(height: 8.h),
+                      _buildInfoRow("Customer :", "Aman Verma"),
+                      _buildInfoRow("Place :", "ASilver Springs Apt, Tower C"),
+
+                      _dashedDivider(),
+
+                      // --- Service Provider Info ---
+                      CustomText(
+                        label: "SERVICE PROVIDER",
+                        size: 13.sp,
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      SizedBox(height: 8.h),
+                      _buildInfoRow("Service Type :", "Home Cleaning"),
+                      _buildInfoRow("Duration :", "2 hrs 30 mins"),
+                      _buildInfoRow("Employee :", "2"),
+
+                      _dashedDivider(),
+
+                      // --- Cost Breakdown ---
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(height: 8.h),
                           CustomText(
-                            label: "BK#20250921",
-                            size: 12.sp,
-                            color: kGrey400,
-                            fontWeight: FontWeight.w500,
+                            label: "COST BREAKDOWN",
+                            size: 13.sp,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w700,
                           ),
-                          SizedBox(height: 4.h),
                           CustomText(
-                            label: "Home Cleaning - 2BHK",
-                            size: 20.sp,
-                            color: kGrey400,
-                            fontWeight: FontWeight.bold,
-                            // letterSpacing: 1.5,
-                          ),
-                          SizedBox(height: 4.h),
-                          CustomText(
-                            label: "15 Sept 2025, 11:00 AM",
-                            size: 10.sp,
-                            color: kSecondary,
-                            fontWeight: FontWeight.bold,
+                            label: "Price",
+                            size: 13.sp,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w700,
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(height: 20.h),
-                    _dashedDivider(),
+                      SizedBox(height: 8.h),
+                      _buildInfoRow("Service Charges", "₹1,000"),
+                      _buildInfoRow("Materials (If any)", "₹150"),
+                      _buildInfoRow("Taxes (GST 18%)", "₹216"),
 
-                    SizedBox(height: 8.h),
-                    _buildInfoRow("Customer :", "Aman Verma"),
-                    _buildInfoRow("Place :", "ASilver Springs Apt, Tower C"),
+                      SizedBox(height: 8.h),
+                      const Divider(thickness: 1, color: Colors.black12),
 
-                    _dashedDivider(),
+                      _buildTotalRow("Total Amount", "₹1,366"),
 
-                    // --- Service Provider Info ---
-                    CustomText(
-                      label: "SERVICE PROVIDER",
-                      size: 13.sp,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w700,
-                    ),
-                    SizedBox(height: 8.h),
-                    _buildInfoRow("Service Type :", "Home Cleaning"),
-                    _buildInfoRow("Duration :", "2 hrs 30 mins"),
-                    _buildInfoRow("Employee :", "2"),
+                      _dashedDivider(),
 
-                    _dashedDivider(),
-
-                    // --- Cost Breakdown ---
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(
-                          label: "COST BREAKDOWN",
-                          size: 13.sp,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        CustomText(
-                          label: "Price",
-                          size: 13.sp,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 8.h),
-                    _buildInfoRow("Service Charges", "₹1,000"),
-                    _buildInfoRow("Materials (If any)", "₹150"),
-                    _buildInfoRow("Taxes (GST 18%)", "₹216"),
-
-                    SizedBox(height: 8.h),
-                    const Divider(thickness: 1, color: Colors.black12),
-
-                    _buildTotalRow("Total Amount", "₹1,366"),
-
-                    _dashedDivider(),
-
-                    // --- Payment Info ---
-                    CustomText(
-                      label: "PAYMENT INFO",
-                      size: 13.sp,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w700,
-                    ),
-                    SizedBox(height: 8.h),
-                    _buildInfoRow("Payment Mode :", "Online - UPI"),
-                    _buildInfoRow("Transaction ID :", "TXN_URIRO"),
-                    _buildInfoRow(
-                      "Payment Status :",
-                      "Successful",
-                      valueColor: Colors.green,
-                      isBold: true,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            // --- End of Receipt Card Container ---
-            SizedBox(height: 24.h),
-
-            // --- Action Buttons ---
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: kPrimary,
-                  padding: EdgeInsets.symmetric(vertical: 14.h),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.r),
+                      // --- Payment Info ---
+                      CustomText(
+                        label: "PAYMENT INFO",
+                        size: 13.sp,
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      SizedBox(height: 8.h),
+                      _buildInfoRow("Payment Mode :", "Online - UPI"),
+                      _buildInfoRow("Transaction ID :", "TXN_URIRO"),
+                      _buildInfoRow(
+                        "Payment Status :",
+                        "Successful",
+                        valueColor: Colors.green,
+                        isBold: true,
+                      ),
+                    ],
                   ),
                 ),
-                child: CustomText(
-                  label: "Download PDF",
-                  color: Colors.white,
-                  size: 16.sp,
-                  fontWeight: FontWeight.w600,
-                ),
               ),
-            ),
-            SizedBox(height: 12.h),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xffE3E8EC),
-                  elevation: 0,
-                  side: BorderSide(color: kGrey400, width: 1),
-                  padding: EdgeInsets.symmetric(vertical: 14.h),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.r),
+
+              // --- End of Receipt Card Container ---
+              SizedBox(height: 24.h),
+
+              // --- Action Buttons ---
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kPrimary,
+                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.r),
+                    ),
+                  ),
+                  child: CustomText(
+                    label: "Download PDF",
+                    color: Colors.white,
+                    size: 16.sp,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-                child: CustomText(
-                  label: "Share",
-                  color: Colors.black,
-                  size: 16.sp,
-                  fontWeight: FontWeight.w600,
+              ),
+              SizedBox(height: 12.h),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xffE3E8EC),
+                    elevation: 0,
+                    side: BorderSide(color: kGrey400, width: 1),
+                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.r),
+                    ),
+                  ),
+                  child: CustomText(
+                    label: "Share",
+                    color: Colors.black,
+                    size: 16.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

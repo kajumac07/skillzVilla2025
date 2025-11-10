@@ -84,281 +84,298 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          /// ---------------- Background Image ----------------
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 240.h,
-            child: Image.asset(widget.img, fit: BoxFit.cover),
-          ),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            /// ---------------- Background Image ----------------
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 240.h,
+              child: Image.asset(widget.img, fit: BoxFit.cover),
+            ),
 
-          /// ---------------- Back & Profile Buttons ----------------
-          Positioned(
-            top: 50.h,
-            left: 16.w,
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: IconButton(
-                icon: Icon(Icons.arrow_back_ios_new, size: 20.sp),
-                onPressed: () => Navigator.pop(context),
+            /// ---------------- Back & Profile Buttons ----------------
+            Positioned(
+              top: 10.h,
+              left: 16.w,
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back_ios_new, size: 20.sp),
+                  onPressed: () => Navigator.pop(context),
+                ),
               ),
             ),
-          ),
-          Positioned(
-            top: 50.h,
-            right: 16.w,
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Icon(Icons.share, size: 20.sp),
+            Positioned(
+              top: 10.h,
+              right: 16.w,
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(Icons.share, size: 20.sp),
+              ),
             ),
-          ),
 
-          /// ---------------- Main Container ----------------
-          Positioned(
-            top: 210.h,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-                decoration: BoxDecoration(
-                  color: kWhite,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(22.r),
-                    topRight: Radius.circular(22.r),
+            /// ---------------- Main Container ----------------
+            Positioned(
+              top: 210.h,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 10.h,
                   ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    /// ---------- Title & Ratings ----------
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(
-                          label: widget.title,
-                          size: 20.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        Row(
+                  decoration: BoxDecoration(
+                    color: kWhite,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(22.r),
+                      topRight: Radius.circular(22.r),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      /// ---------- Title & Ratings ----------
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomText(
+                            label: widget.title,
+                            size: 20.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "4.8",
+                                style: appStyle(
+                                  12.sp,
+                                  k232323,
+                                  FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                " ⭐ RATINGS",
+                                style: appStyle(
+                                  12.sp,
+                                  k232323,
+                                  FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20.h),
+
+                      /// ---------- Horizontal Chips ----------
+                      SizedBox(
+                        height: 90.h,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
                           children: [
-                            Text(
-                              "4.8",
-                              style: appStyle(12.sp, k232323, FontWeight.bold),
+                            SubCatCategoryCard(
+                              img: widget.img,
+                              title: widget.title,
+                              isSelected: true,
                             ),
-                            Text(
-                              " ⭐ RATINGS",
-                              style: appStyle(12.sp, k232323, FontWeight.bold),
+                            SubCatCategoryCard(
+                              img: widget.img,
+                              title: widget.title,
+                              isSelected: false,
+                            ),
+                            SubCatCategoryCard(
+                              img: widget.img,
+                              title: widget.title,
+                              isSelected: false,
+                            ),
+                            SubCatCategoryCard(
+                              img: widget.img,
+                              title: widget.title,
+                              isSelected: false,
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                    SizedBox(height: 20.h),
+                      ),
 
-                    /// ---------- Horizontal Chips ----------
-                    SizedBox(
-                      height: 90.h,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
+                      SizedBox(height: 10.h),
+                      Divider(color: kE9E9E9),
+                      SizedBox(height: 10.h),
+
+                      Text(
+                        "Repairs",
+                        style: appStyle(16.sp, kDark, FontWeight.w400),
+                      ),
+
+                      /// ---------- List of Services ----------
+                      Expanded(
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          itemCount: 5,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              // onTap: () => Get.to(() => ChooseProviderLists()),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: 10.0.h,
+                                  top: 20.h,
+                                ),
+                                child: _serviceTile(selected: index == 1),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            // ✅ Sidebar with dismiss options
+            Obx(() {
+              return Stack(
+                children: [
+                  if (controller.showSidebar.value)
+                    GestureDetector(
+                      onTap: () => controller.toggleSidebar(),
+                      child: AnimatedOpacity(
+                        opacity: controller.showSidebar.value ? 0.4 : 0.0,
+                        duration: const Duration(milliseconds: 300),
+                        child: Container(
+                          color: Colors.black,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                      ),
+                    ),
+
+                  // 🔹 Sidebar panel itself
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeInOut,
+                    top: 0,
+                    bottom: 0,
+                    right: controller.showSidebar.value ? 0 : -220.w,
+                    width: 220.w,
+                    child: Container(
+                      padding: EdgeInsets.all(12.w),
+                      decoration: BoxDecoration(
+                        color: kWhite,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16.r),
+                          bottomLeft: Radius.circular(16.r),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 10,
+                            offset: const Offset(-2, 0),
+                          ),
+                        ],
+                      ),
+
+                      // 🔹 Sidebar content
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SubCatCategoryCard(
-                            img: widget.img,
-                            title: widget.title,
-                            isSelected: true,
+                          // ---- Top Header with Close Button ----
+                          // SizedBox(height: 5.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Providers",
+                                style: appStyle(
+                                  16.sp,
+                                  k232323,
+                                  FontWeight.w600,
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.close,
+                                  color: Colors.black54,
+                                ),
+                                onPressed: () => controller.toggleSidebar(),
+                              ),
+                            ],
                           ),
-                          SubCatCategoryCard(
-                            img: widget.img,
-                            title: widget.title,
-                            isSelected: false,
+
+                          // SizedBox(height: 12.h),
+
+                          // ---- Provider List ----
+                          Expanded(
+                            child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: providers.length,
+                              itemBuilder: (context, index) {
+                                final provider = providers[index];
+                                final isSelected =
+                                    controller.selectedProvider.value == index;
+                                return GestureDetector(
+                                  // onTap: () => controller.selectProvider(index),
+                                  child: ProviderCard(
+                                    provider: provider,
+                                    onTap: () =>
+                                        Get.to(() => ProductDetailsScreen()),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
-                          SubCatCategoryCard(
-                            img: widget.img,
-                            title: widget.title,
-                            isSelected: false,
-                          ),
-                          SubCatCategoryCard(
-                            img: widget.img,
-                            title: widget.title,
-                            isSelected: false,
+
+                          // ---- Cancel Button ----
+                          Center(
+                            child: TextButton(
+                              onPressed: () => controller.toggleSidebar(),
+                              child: Text(
+                                "Cancel",
+                                style: appStyle(
+                                  13.sp,
+                                  Colors.redAccent,
+                                  FontWeight.w500,
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
                     ),
+                  ),
+                ],
+              );
+            }),
 
-                    SizedBox(height: 10.h),
-                    Divider(color: kE9E9E9),
-                    SizedBox(height: 10.h),
-
-                    Text(
-                      "Repairs",
-                      style: appStyle(16.sp, kDark, FontWeight.w400),
-                    ),
-
-                    /// ---------- List of Services ----------
-                    Expanded(
-                      child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            // onTap: () => Get.to(() => ChooseProviderLists()),
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                bottom: 10.0.h,
-                                top: 20.h,
-                              ),
-                              child: _serviceTile(selected: index == 1),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+            /// ---------------- Bottom Price Bar ----------------
+            // ✅ Bottom Button Section
+            Obx(
+              () => AnimatedPositioned(
+                duration: const Duration(milliseconds: 300),
+                left: 0,
+                right: 0,
+                bottom: controller.showSidebar.value ? -100.h : 0,
+                child: _bottomPriceBar(controller),
               ),
             ),
-          ),
 
-          // ✅ Sidebar with dismiss options
-          Obx(() {
-            return Stack(
-              children: [
-                if (controller.showSidebar.value)
-                  GestureDetector(
-                    onTap: () => controller.toggleSidebar(),
-                    child: AnimatedOpacity(
-                      opacity: controller.showSidebar.value ? 0.4 : 0.0,
-                      duration: const Duration(milliseconds: 300),
-                      child: Container(
-                        color: Colors.black,
-                        width: double.infinity,
-                        height: double.infinity,
-                      ),
-                    ),
-                  ),
-
-                // 🔹 Sidebar panel itself
-                AnimatedPositioned(
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.easeInOut,
-                  top: 0,
-                  bottom: 0,
-                  right: controller.showSidebar.value ? 0 : -220.w,
-                  width: 220.w,
-                  child: Container(
-                    padding: EdgeInsets.all(12.w),
-                    decoration: BoxDecoration(
-                      color: kWhite,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(16.r),
-                        bottomLeft: Radius.circular(16.r),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 10,
-                          offset: const Offset(-2, 0),
-                        ),
-                      ],
-                    ),
-
-                    // 🔹 Sidebar content
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // ---- Top Header with Close Button ----
-                        SizedBox(height: 10.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Providers",
-                              style: appStyle(16.sp, k232323, FontWeight.w600),
-                            ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.close,
-                                color: Colors.black54,
-                              ),
-                              onPressed: () => controller.toggleSidebar(),
-                            ),
-                          ],
-                        ),
-
-                        // SizedBox(height: 12.h),
-
-                        // ---- Provider List ----
-                        Expanded(
-                          child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: providers.length,
-                            itemBuilder: (context, index) {
-                              final provider = providers[index];
-                              final isSelected =
-                                  controller.selectedProvider.value == index;
-                              return GestureDetector(
-                                // onTap: () => controller.selectProvider(index),
-                                child: ProviderCard(
-                                  provider: provider,
-                                  onTap: () =>
-                                      Get.to(() => ProductDetailsScreen()),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-
-                        // ---- Cancel Button ----
-                        Center(
-                          child: TextButton(
-                            onPressed: () => controller.toggleSidebar(),
-                            child: Text(
-                              "Cancel",
-                              style: appStyle(
-                                13.sp,
-                                Colors.redAccent,
-                                FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            );
-          }),
-
-          /// ---------------- Bottom Price Bar ----------------
-          // ✅ Bottom Button Section
-          Obx(
-            () => AnimatedPositioned(
-              duration: const Duration(milliseconds: 300),
-              left: 0,
-              right: 0,
-              bottom: controller.showSidebar.value ? -100.h : 0,
-              child: _bottomPriceBar(controller),
+            // ✅ Alternate Bottom Buttons (when provider selected)
+            Obx(
+              () => AnimatedPositioned(
+                duration: const Duration(milliseconds: 300),
+                left: 0,
+                right: 0,
+                bottom: controller.selectedProvider.value != null ? 0 : -100.h,
+                child: _bottomActionButtons(),
+              ),
             ),
-          ),
-
-          // ✅ Alternate Bottom Buttons (when provider selected)
-          Obx(
-            () => AnimatedPositioned(
-              duration: const Duration(milliseconds: 300),
-              left: 0,
-              right: 0,
-              bottom: controller.selectedProvider.value != null ? 0 : -100.h,
-              child: _bottomActionButtons(),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

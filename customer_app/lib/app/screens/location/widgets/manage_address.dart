@@ -15,152 +15,158 @@ class ManageAddressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: kWhite,
-      body: Column(
-        children: [
-          // Map section
-          builTopSection(context),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Map section
+            builTopSection(context),
 
-          // Address details section
-          Expanded(
-            flex: 3,
-            child: SingleChildScrollView(
-              child: Container(
-                // color: Colors.white,
-                padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Enter Address Details',
-                      style: appStyle(18.sp, kGrey400, FontWeight.w300),
-                    ),
-                    SizedBox(height: 7.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          // color: kRed,
-                          width: width * 0.6,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                Appimages.mapIcon,
-                                color: kGreenAccent,
-                              ),
-                              SizedBox(width: 5.w),
-                              Flexible(
-                                child: Text(
-                                  "Luxmi Lok Sector24, Panchkula, Haryana",
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: appStyle(
-                                    12.sp,
-                                    kGrey300,
-                                    FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        CustomText(
-                          label: "Change",
-                          color: kPrimary,
-                          size: 12.sp,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-
-                    Container(
-                      padding: EdgeInsets.only(left: 8.w, right: 8.w, top: 8.h),
-                      // margin: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: kWhite,
-                        borderRadius: BorderRadius.circular(14.r),
+            // Address details section
+            Expanded(
+              flex: 3,
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Container(
+                  // color: Colors.white,
+                  padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Enter Address Details',
+                        style: appStyle(18.sp, kGrey400, FontWeight.w300),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      SizedBox(height: 7.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // Form fields
-                          _buildTextField('House/Flat'),
-                          SizedBox(height: 15),
-                          _buildTextField('Landmark'),
-                          SizedBox(height: 15),
-                          _buildTextField('Name'),
-                          SizedBox(height: 15),
-                          _buildTextField('Mobile'),
-                          SizedBox(height: 25),
-                          // Save as section
+                          Container(
+                            // color: kRed,
+                            width: width * 0.6,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  Appimages.mapIcon,
+                                  color: kGreenAccent,
+                                ),
+                                SizedBox(width: 5.w),
+                                Flexible(
+                                  child: Text(
+                                    "Luxmi Lok Sector24, Panchkula, Haryana",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: appStyle(
+                                      12.sp,
+                                      kGrey300,
+                                      FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           CustomText(
-                            label: "Save as",
-                            size: 16.sp,
-                            color: kGrey400,
+                            label: "Change",
+                            color: kPrimary,
+                            size: 12.sp,
                           ),
-                          SizedBox(height: 15),
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  height: 32.h,
-                                  width: 95.w,
-                                  decoration: BoxDecoration(
-                                    color: kGrey300,
-                                    borderRadius: BorderRadius.circular(12.r),
-                                  ),
-                                  child: Center(
-                                    child: CustomText(
-                                      label: "Home",
-                                      color: surface200,
-                                      size: 12.sp,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  height: 32.h,
-                                  width: 95.w,
-                                  decoration: BoxDecoration(
-                                    color: kWhite,
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    border: Border.all(color: kGrey100),
-                                  ),
-                                  child: Center(
-                                    child: CustomText(
-                                      label: "Work",
-                                      color: kGrey300,
-                                      size: 12.sp,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 15),
                         ],
                       ),
-                    ),
+                      SizedBox(height: 20),
 
-                    SizedBox(height: 10.h),
-                    CircularButton(
-                      buttonColor: kPrimary,
-                      buttonText: "Save Address",
-                      onPressed: () => Get.to(() => RootScreen()),
-                      width: width,
-                    ),
-                    SizedBox(height: 10.h),
-                  ],
+                      Container(
+                        padding: EdgeInsets.only(
+                          left: 8.w,
+                          right: 8.w,
+                          top: 8.h,
+                        ),
+                        // margin: EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: kWhite,
+                          borderRadius: BorderRadius.circular(14.r),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Form fields
+                            _buildTextField('House/Flat'),
+                            SizedBox(height: 15),
+                            _buildTextField('Landmark'),
+                            SizedBox(height: 15),
+                            _buildTextField('Name'),
+                            SizedBox(height: 15),
+                            _buildTextField('Mobile'),
+                            SizedBox(height: 25),
+                            // Save as section
+                            CustomText(
+                              label: "Save as",
+                              size: 16.sp,
+                              color: kGrey400,
+                            ),
+                            SizedBox(height: 15),
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: Container(
+                                    height: 32.h,
+                                    width: 95.w,
+                                    decoration: BoxDecoration(
+                                      color: kGrey300,
+                                      borderRadius: BorderRadius.circular(12.r),
+                                    ),
+                                    child: Center(
+                                      child: CustomText(
+                                        label: "Home",
+                                        color: surface200,
+                                        size: 12.sp,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: Container(
+                                    height: 32.h,
+                                    width: 95.w,
+                                    decoration: BoxDecoration(
+                                      color: kWhite,
+                                      borderRadius: BorderRadius.circular(12.r),
+                                      border: Border.all(color: kGrey100),
+                                    ),
+                                    child: Center(
+                                      child: CustomText(
+                                        label: "Work",
+                                        color: kGrey300,
+                                        size: 12.sp,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 15),
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(height: 10.h),
+                      CircularButton(
+                        buttonColor: kPrimary,
+                        buttonText: "Save Address",
+                        onPressed: () => Get.to(() => RootScreen()),
+                        width: width,
+                      ),
+                      SizedBox(height: 10.h),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
