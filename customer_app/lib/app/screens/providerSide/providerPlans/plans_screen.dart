@@ -1,4 +1,5 @@
 import 'package:customer_app/app/core/constants/consts.dart';
+import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
@@ -80,25 +81,24 @@ class _PlanCardHeader extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Row(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // Old Price (Cut)
-                  CustomText(
-                    label: plan.oldPrice,
-                    size: 12.sp,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w400,
-                    // decoration: TextDecoration.lineThrough, // Strikethrough
-                  ),
-                  SizedBox(width: 4.w),
-                  // Current Price (Bold and Primary Color)
                   CustomText(
                     label: plan.currentPrice,
-                    size: 18.sp,
+                    size: 15.sp,
                     color: primaryColor,
                     fontWeight: FontWeight.bold,
+                  ),
+                  // Old Price (Cut)
+                  Text(
+                    plan.oldPrice,
+                    style: appStyle(
+                      11.sp,
+                      kGrey100,
+                      FontWeight.w400,
+                    ).copyWith(decoration: TextDecoration.lineThrough),
                   ),
                 ],
               ),
@@ -139,7 +139,7 @@ class _PlansScreenState extends State<PlansScreen> {
     Plan(
       title: "3 Month Plan",
       subtitle: "Recommended for growing providers",
-      currentPrice: "₹800",
+      currentPrice: "₹600",
       oldPrice: "₹1299",
       features: [
         "All 1 Month features",
@@ -150,7 +150,7 @@ class _PlansScreenState extends State<PlansScreen> {
     Plan(
       title: "6 Month Plan",
       subtitle: "Best value for established providers",
-      currentPrice: "₹1500",
+      currentPrice: "₹1200",
       oldPrice: "₹2499",
       features: [
         "All 3 Month features",

@@ -21,10 +21,23 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           useInheritedMediaQuery: true,
           locale: DevicePreview.locale(context),
-          builder: DevicePreview.appBuilder,
+          builder: (context, widget) {
+            // 🧱 LOCK text scale and system font override here
+            final mediaQuery = MediaQuery.of(
+              context,
+            ).copyWith(textScaleFactor: 1.0);
+            return MediaQuery(data: mediaQuery, child: widget!);
+          },
           debugShowCheckedModeBanner: false,
           title: 'Customer App',
           theme: ThemeData(
+            fontFamily: 'ProductSans',
+            useMaterial3: true,
+            textTheme: const TextTheme(
+              bodyLarge: TextStyle(fontFamily: 'ProductSans'),
+              bodyMedium: TextStyle(fontFamily: 'ProductSans'),
+              bodySmall: TextStyle(fontFamily: 'ProductSans'),
+            ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           home: const SplashScreen(),

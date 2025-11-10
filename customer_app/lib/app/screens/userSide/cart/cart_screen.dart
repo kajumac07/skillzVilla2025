@@ -28,18 +28,21 @@ class _CartScreenState extends State<CartScreen> {
       price: "\₹455",
       rating: "4.5",
       imageUrl: Appimages.bathroomCleaning,
+      subtitle: "Ac Technician",
     ),
     Product(
       name: "Home Interior Walls Painting",
       price: "\₹555",
       rating: "4.8",
       imageUrl: Appimages.homeInterior,
+      subtitle: "Ac Technician",
     ),
     Product(
       name: "Swedish Stress Body Massage",
       price: "\₹699",
       rating: "4.3",
       imageUrl: Appimages.bodyMassage,
+      subtitle: "Ac Technician",
     ),
   ];
 
@@ -204,7 +207,7 @@ class _CartScreenState extends State<CartScreen> {
                     SizedBox(height: 15.h),
 
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.26,
+                      height: MediaQuery.of(context).size.height * 0.30,
                       child: ListView.builder(
                         itemCount: products.length,
                         scrollDirection: Axis.horizontal,
@@ -217,6 +220,7 @@ class _CartScreenState extends State<CartScreen> {
                               price: pData.price,
                               rating: pData.rating,
                               title: pData.name,
+                              subtitle: pData.subtitle,
                             ),
                           );
                         },
@@ -257,7 +261,7 @@ class _CartScreenState extends State<CartScreen> {
               SizedBox(height: 10.h),
               //pricing details will be here
               Container(
-                height: 170.h,
+                // height: 171.h,
                 width: width,
                 margin: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
                 decoration: BoxDecoration(

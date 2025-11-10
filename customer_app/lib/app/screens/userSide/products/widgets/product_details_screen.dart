@@ -27,18 +27,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       price: "\₹455",
       rating: "4.5",
       imageUrl: Appimages.bathroomCleaning,
+      subtitle: "Ac Technician",
     ),
     Product(
       name: "Home Interior Walls Painting",
       price: "\₹555",
       rating: "4.8",
       imageUrl: Appimages.homeInterior,
+      subtitle: "Ac Technician",
     ),
     Product(
       name: "Swedish Stress Body Massage",
       price: "\₹699",
       rating: "4.3",
       imageUrl: Appimages.bodyMassage,
+      subtitle: "Ac Technician",
     ),
   ];
 
@@ -204,7 +207,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
                               Container(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.26,
+                                    MediaQuery.of(context).size.height * 0.30,
                                 // color: kRed,
                                 child: ListView.builder(
                                   itemCount: products.length,
@@ -219,6 +222,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         price: pData.price,
                                         rating: pData.rating,
                                         title: pData.name,
+                                        subtitle: pData.subtitle,
                                       ),
                                     );
                                   },
@@ -380,8 +384,7 @@ class ProductProviderSection extends StatelessWidget {
                 ),
                 SizedBox(height: 10.h),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.13,
-
+                  height: MediaQuery.of(context).size.height * 0.15,
                   child: ListView.builder(
                     itemCount: 5,
                     scrollDirection: Axis.horizontal,
@@ -423,34 +426,26 @@ class TestimonialCard extends StatelessWidget {
         children: [
           /// --- Main Testimonial Card ---
           Container(
-            width: 250,
-            height: 90,
+            width: 250.w,
+            height: 0.3.sh,
             decoration: BoxDecoration(
               color: primary,
               borderRadius: BorderRadius.circular(18),
               border: Border.all(color: secondary, width: 1.2),
             ),
-            padding: const EdgeInsets.only(top: 22, left: 12, right: 12),
-            child: const Column(
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "“Great service, quick and clean”",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
-                  ),
+                  style: appStyle(14.sp, kDark, FontWeight.w800),
                 ),
                 SizedBox(height: 4),
                 Text(
                   "– Rajesh K.",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  style: appStyle(12.sp, kDark, FontWeight.w300),
                 ),
               ],
             ),

@@ -12,12 +12,14 @@ class ProductCard extends StatefulWidget {
     required this.price,
     required this.rating,
     required this.title,
+    required this.subtitle,
   });
 
   final String bgImage;
   final String price;
   final String rating;
   final String title;
+  final String subtitle;
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -40,7 +42,7 @@ class _ProductCardState extends State<ProductCard> {
               children: [
                 //image section
                 Container(
-                  height: 126.h,
+                  height: 0.14.sh,
                   width: 127.w,
                   decoration: BoxDecoration(
                     // color: kGreenAccent,
@@ -91,7 +93,7 @@ class _ProductCardState extends State<ProductCard> {
                       ),
                       CustomText(
                         label: widget.rating,
-                        size: 14.sp,
+                        size: 12.sp,
                         color: k232323,
                         fontWeight: FontWeight.w300,
                       ),
@@ -100,7 +102,15 @@ class _ProductCardState extends State<ProductCard> {
                   //title
                   Text(
                     widget.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: appStyle(12, k454545, FontWeight.w500),
+                  ),
+                  Text(
+                    widget.subtitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: appStyle(12, kGrey100, FontWeight.w500),
                   ),
                 ],
               ),

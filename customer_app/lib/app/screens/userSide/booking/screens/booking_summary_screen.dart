@@ -23,18 +23,21 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
       price: "\₹455",
       rating: "4.5",
       imageUrl: Appimages.bathroomCleaning,
+      subtitle: "Ac Technician",
     ),
     Product(
       name: "Home Interior Walls Painting",
       price: "\₹555",
       rating: "4.8",
       imageUrl: Appimages.homeInterior,
+      subtitle: "Ac Technician",
     ),
     Product(
       name: "Swedish Stress Body Massage",
       price: "\₹699",
       rating: "4.3",
       imageUrl: Appimages.bodyMassage,
+      subtitle: "Ac Technician",
     ),
   ];
 
@@ -87,7 +90,7 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
                           SizedBox(height: 15.h),
 
                           Container(
-                            height: MediaQuery.of(context).size.height * 0.26,
+                            height: MediaQuery.of(context).size.height * 0.30,
                             child: ListView.builder(
                               itemCount: products.length,
                               scrollDirection: Axis.horizontal,
@@ -100,6 +103,7 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
                                     price: pData.price,
                                     rating: pData.rating,
                                     title: pData.name,
+                                    subtitle: pData.subtitle,
                                   ),
                                 );
                               },

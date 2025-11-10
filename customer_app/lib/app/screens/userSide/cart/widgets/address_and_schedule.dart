@@ -7,7 +7,7 @@ import 'package:customer_app/app/screens/userSide/payMode/paymode_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart'; // 👈 for date formatting
+import 'package:intl/intl.dart';
 
 class AddressAndSchedule extends StatefulWidget {
   const AddressAndSchedule({super.key});
@@ -318,7 +318,10 @@ class _AddressAndScheduleState extends State<AddressAndSchedule> {
                     ),
                   ],
                 ),
-                child: Icon(Icons.arrow_back_ios, size: 20.sp),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 4.0),
+                  child: Icon(Icons.arrow_back_ios, size: 20.sp),
+                ),
               ),
             ),
           ),

@@ -12,7 +12,6 @@ import 'package:customer_app/app/screens/providerSide/kyc/kyc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -99,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         buttonText: "Customer",
                         onPressed: _onCustomerTap,
                         textSize: 14.sp,
-                        height: responsive.screenHeight * 0.060,
+                        height: responsive.screenHeight * 0.05,
                       ),
                       SizedBox(width: 12.w),
                       CircularButton(
@@ -107,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         buttonText: "Service Provider",
                         onPressed: _onProviderTap,
                         textSize: 14.sp,
-                        height: responsive.screenHeight * 0.060,
+                        height: responsive.screenHeight * 0.05,
                       ),
                     ],
                   ),
@@ -155,10 +154,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                   maxLength: 1,
                                   cursorWidth: 1.5,
                                   cursorColor: Colors.black,
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500,
-                                    height: 1.1,
+                                  // style: GoogleFonts.poppins(
+                                  //   fontSize: 14.sp,
+                                  //   fontWeight: FontWeight.w500,
+                                  //   height: 1.1,
+                                  // ),
+                                  style: appStyle(
+                                    14.sp,
+                                    k232323,
+                                    FontWeight.w500,
                                   ),
                                   decoration: InputDecoration(
                                     counterText: '',
@@ -204,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: Text(
                           "Or",
-                          style: GoogleFonts.poppins(color: Colors.black26),
+                          style: appStyle(14.sp, k232323, FontWeight.w500),
                         ),
                       ),
                       Expanded(child: Divider(color: Colors.grey.shade400)),

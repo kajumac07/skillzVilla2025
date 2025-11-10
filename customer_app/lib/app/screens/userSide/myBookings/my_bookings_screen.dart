@@ -165,8 +165,11 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                     // color: kRed,
                     width: width * 0.32,
                     child: Text(
-                      'Booking ID - #212345',
-                      style: appStyle(12.sp, kGrey200, FontWeight.w400),
+                      'Booking ID - #2123',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.end,
+                      style: appStyle(11.sp, kGrey200, FontWeight.w400),
                     ),
                   ),
                 ],

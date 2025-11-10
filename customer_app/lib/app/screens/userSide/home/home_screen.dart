@@ -43,46 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
     {"icon": Appimages.spaIcon, "label": "Spa"},
   ];
 
-  // Sample product data
-  final List<Product> products = [
-    Product(
-      name: "Intense Bathroom Cleaning",
-      price: "\₹455",
-      rating: "4.5",
-      imageUrl: Appimages.bathroomCleaning,
-    ),
-    Product(
-      name: "Home Interior Walls Painting",
-      price: "\₹555",
-      rating: "4.8",
-      imageUrl: Appimages.homeInterior,
-    ),
-    Product(
-      name: "Swedish Stress Body Massage",
-      price: "\₹699",
-      rating: "4.3",
-      imageUrl: Appimages.bodyMassage,
-    ),
-    Product(
-      name: "Intense Bathroom Cleaning",
-      price: "\₹455",
-      rating: "4.5",
-      imageUrl: Appimages.bathroomCleaning,
-    ),
-    Product(
-      name: "Home Interior Walls Painting",
-      price: "\₹555",
-      rating: "4.8",
-      imageUrl: Appimages.homeInterior,
-    ),
-    Product(
-      name: "Swedish Stress Body Massage",
-      price: "\₹699",
-      rating: "4.3",
-      imageUrl: Appimages.bodyMassage,
-    ),
-  ];
-
   // Sample need today data
   final List<NeedToday> needToday = [
     NeedToday(
@@ -216,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               height: MediaQuery.of(context).size.height * 0.11,
               child: Padding(
-                padding: EdgeInsets.only(left: 8.0.w),
+                padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                 child: ListView.builder(
                   itemCount: 5,
                   scrollDirection: Axis.horizontal,
@@ -224,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Column(
                       children: [
                         Container(
-                          height: 68.h,
+                          height: 50.h,
                           width: width * 0.2,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
@@ -232,9 +192,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: kWhite,
                           ),
                         ),
+                        SizedBox(height: 0.001.sh),
                         CustomText(
                           label: "Water Purifier",
-                          size: 9.sp,
+                          size: 10.sp,
                           color: kGrey300,
                         ),
                       ],

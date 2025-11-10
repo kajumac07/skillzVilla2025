@@ -16,7 +16,6 @@ dependencies:
   shared_preferences:
   get:
   flutter_screenutil:
-  google_fonts:
   flutter_svg:
   rename:
   intl:

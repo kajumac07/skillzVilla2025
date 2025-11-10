@@ -166,7 +166,7 @@ class TopProvidersSection extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 6.h),
+            SizedBox(height: 3.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: Column(
@@ -192,7 +192,7 @@ class TopProvidersSection extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 3.h),
+                  // SizedBox(height: 2.h),
                   // Name + Verified
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

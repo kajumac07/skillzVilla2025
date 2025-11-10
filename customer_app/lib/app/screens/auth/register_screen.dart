@@ -5,11 +5,9 @@ import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
 import 'package:customer_app/app/screens/auth/login_screen.dart';
-import 'package:customer_app/app/screens/location/location_access_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -101,7 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: Text(
                           "Or",
-                          style: GoogleFonts.poppins(color: Colors.black26),
+                          style: appStyle(14.sp, k232323, FontWeight.w500),
                         ),
                       ),
                       Expanded(child: Divider(color: Colors.grey.shade400)),

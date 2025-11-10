@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
@@ -15,6 +14,7 @@ import 'package:customer_app/app/screens/notifications/notification_screens.dart
 import 'package:customer_app/app/screens/policies/policies_screen.dart';
 import 'package:customer_app/app/screens/providerSide/requestLocation/request_location_screen.dart';
 import 'package:customer_app/app/screens/userSide/coupons/coupons_screens.dart';
+import 'package:customer_app/app/screens/userSide/myBookings/my_bookings_screen.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/editProfile/edit_profile_screen.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/my_reviews_nd_rating.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/profile_address_screen.dart';
@@ -95,7 +95,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SizedBox(width: 10.w),
           TapImageIcon(
             imageName: Appimages.editIcon,
-            // onTap: () => Get.to(() => EditProfileScreen()),
             onTap: () {
               if (userType == "Customer" && kycType == "Customer") {
                 null;
@@ -108,88 +107,108 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            // Top Profile Section with overlapping card
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                // Background image
-                Container(
-                  height: 224.h,
-                  width: width,
-                  margin: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(Appimages.profileBg),
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                ),
-
-                Positioned(
-                  bottom: 30.h,
-                  left: 16.w,
-                  right: 16.w,
-                  child: Column(
-                    children: [
-                      CustomText(
-                        label: displayName,
-                        fontWeight: FontWeight.bold,
+            // ✅ Fixed Top Profile Section (using Stack)
+            SizedBox(
+              height: 270.h,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  // Background profile image
+                  Positioned(
+                    top: 0,
+                    left: 12.w,
+                    right: 12.w,
+                    child: Container(
+                      height: 224.h,
+                      // width: 320,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(Appimages.profileBg),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
-                      CustomText(label: displayNumber, size: 14.sp),
-                    ],
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          CustomText(
+                            label: displayName,
+                            fontWeight: FontWeight.bold,
+                            size: 15.sp,
+                          ),
+                          CustomText(label: displayNumber, size: 12.sp),
+                          SizedBox(height: 25.h),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
 
-                // Overlapping Card
-                Positioned(
-                  bottom: -55.h,
-                  left: 16.w,
-                  right: 16.w,
-                  child: Container(
-                    height: 80.h,
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    decoration: BoxDecoration(
-                      color: kWhite,
-                      borderRadius: BorderRadius.circular(12.r),
-                      boxShadow: [
-                        BoxShadow(
-                          color: kPrimaryLight,
-                          blurRadius: 6,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _buildProfileOption(
-                          image: Appimages.walletIcon,
-                          title: 'Wallet',
-                          onTap: () => Get.to(() => WalletScreen()),
-                        ),
-                        _buildProfileOption(
-                          image: Appimages.privacy,
-                          title: 'My Bookings',
-                          onTap: () {},
-                        ),
-                        _buildProfileOption(
-                          image: Appimages.helpCenter,
-                          title: 'Help & Support',
-                          onTap: () {},
-                        ),
-                      ],
+                  // Camera icon (top-right corner)
+                  Positioned(
+                    top: 0.h,
+                    right: 20.w,
+                    // left: 0,
+                    child: Image.asset(
+                      Appimages.cameraIcon,
+                      height: 24.h,
+                      width: 24.w,
                     ),
                   ),
-                ),
-              ],
+
+                  // Overlapping white card (Wallet, Bookings, Help)
+                  Positioned(
+                    bottom: -15.h,
+                    left: 12.w,
+                    right: 12.w,
+                    child: Container(
+                      height: 70.h,
+                      padding: EdgeInsets.all(12.h),
+                      decoration: BoxDecoration(
+                        color: kWhite,
+                        borderRadius: BorderRadius.circular(12.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: kPrimaryLight,
+                            blurRadius: 6,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // SizedBox(width: 2.w),
+                          _buildProfileOption(
+                            image: Appimages.walletIcon,
+                            title: 'Wallet',
+                            onTap: () => Get.to(() => WalletScreen()),
+                          ),
+                          // SizedBox(width: 1.w),
+                          _buildProfileOption(
+                            image: Appimages.privacy,
+                            title: 'My Bookings',
+                            onTap: () => Get.to(() => MyBookingsScreen()),
+                          ),
+                          _buildProfileOption(
+                            image: Appimages.helpCenter,
+                            title: 'Help & Support',
+                            onTap: () {},
+                          ),
+                          // SizedBox(width: 10.w),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 70.h),
 
-            //Your Information
+            SizedBox(height: 20.h),
+
+            // ✅ Your Information Section
             Container(
               width: width,
               margin: EdgeInsets.all(12.h),
@@ -201,7 +220,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //heading section
                   CustomText(
                     label: "Your Information",
                     size: 20.sp,
@@ -223,7 +241,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: 'Settings',
                     onTap: () => Get.to(() => ProfileSettingsScreen()),
                   ),
-
                   if (userType == "Customer" && kycType == "Customer")
                     ...[]
                   else ...[
@@ -237,7 +254,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
 
-            //More
+            // ✅ More Section
             Container(
               width: width,
               margin: EdgeInsets.all(12.h),
@@ -249,7 +266,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //heading section
                   CustomText(
                     label: "More",
                     size: 20.sp,
@@ -287,7 +303,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 40.h,
               ),
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 20.h),
           ],
         ),
       ),

@@ -79,7 +79,17 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
   Future<void> _loadUserData() async {
     userType = await _sharedPref.getUserType();
     kycType = await _sharedPref.getKycType();
-    log("ProfileScreen → userType: $userType | kycType: $kycType");
+    log("EditProfileScreen → userType: $userType | kycType: $kycType");
+
+    if (userType == "Customer" && kycType == "Customer") {
+      displayName = "Rahul";
+    } else if (userType == "Provider" && kycType == "Freelance") {
+      displayName = "Rohan";
+    } else if (userType == "Provider" && kycType == "Company") {
+      displayName = "XYZ Company";
+    } else {
+      displayName = "Guest User";
+    }
 
     setState(() {});
   }
@@ -111,7 +121,8 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
               SizedBox(height: 2.h),
               //ad started plan
               buildAdStartedPlan(title: "Ad Starter Plan"),
-              buildAdStartedPlan(title: "Listening Plan"),
+              if (userType == "Provider" && kycType == "Company")
+                buildAdStartedPlan(title: "Listening Plan"),
 
               Padding(
                 padding: EdgeInsets.all(8.0.h),
@@ -395,7 +406,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
             SizedBox(height: 0.02.sh),
             //heading
             CustomText(
-              label: "Hi Rohan ! Check Insights",
+              label: "Hi ${displayName} ! Check Insights",
               size: 18.sp,
               color: kGrey400,
               fontWeight: FontWeight.w600,

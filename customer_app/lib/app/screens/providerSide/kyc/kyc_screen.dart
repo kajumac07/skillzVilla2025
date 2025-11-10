@@ -58,6 +58,7 @@ class _KycScreenState extends State<KycScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                         const Spacer(),
+                        const Spacer(),
                       ],
                     ),
                     SizedBox(height: 10.h),
@@ -86,8 +87,6 @@ class _KycScreenState extends State<KycScreen> {
                       },
                 width: width,
               ),
-
-              // SizedBox(height: height * 0.03),
             ],
           ),
         ),

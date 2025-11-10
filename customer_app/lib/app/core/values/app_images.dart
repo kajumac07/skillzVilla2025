@@ -65,6 +65,7 @@ class Appimages {
   static const String carpainterIcon = "assets/icons/carpainter.png";
   static const String plumberIcon = "assets/icons/plumber.png";
   static const String verifiedIcon = "assets/icons/verified.png";
+  static const String cameraIcon = "assets/icons/camera-icon.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";

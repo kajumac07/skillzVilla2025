@@ -8,7 +8,7 @@ class CustomText extends StatelessWidget {
     required this.label,
     this.size = 16,
     this.color = kDark,
-    this.fontWeight = FontWeight.w600,
+    this.fontWeight = FontWeight.w400,
   });
   final String label;
   final double size;
