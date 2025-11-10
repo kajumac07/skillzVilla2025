@@ -13,6 +13,7 @@ import 'package:customer_app/app/screens/about/about_skilzvilla_screen.dart';
 import 'package:customer_app/app/screens/faqs/faq_screen.dart';
 import 'package:customer_app/app/screens/notifications/notification_screens.dart';
 import 'package:customer_app/app/screens/policies/policies_screen.dart';
+import 'package:customer_app/app/screens/providerSide/requestLocation/request_location_screen.dart';
 import 'package:customer_app/app/screens/userSide/coupons/coupons_screens.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/editProfile/edit_profile_screen.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/widgets/my_reviews_nd_rating.dart';
@@ -222,12 +223,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: 'Settings',
                     onTap: () => Get.to(() => ProfileSettingsScreen()),
                   ),
-                  ListTileOptions(
-                    imageName: Appimages.pDoc,
-                    title: 'Documents',
-                    onTap: () {},
-                    // onTap: () => Get.to(() => CouponsScreens()),
-                  ),
+
+                  if (userType == "Customer" && kycType == "Customer")
+                    ...[]
+                  else ...[
+                    ListTileOptions(
+                      imageName: Appimages.pDoc,
+                      title: 'Relocation Request',
+                      onTap: () => Get.to(() => RequestLocationScreen()),
+                    ),
+                  ],
                 ],
               ),
             ),

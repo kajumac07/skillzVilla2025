@@ -92,4 +92,7 @@ class Appimages {
   static const String empImage = "assets/images/emp_img.png";
   static const String plansPricing = "assets/images/plans_pricing.png";
   static const String providerOne = "assets/images/provider1.png";
+  static const String locationProfile = "assets/images/locationProfile.png";
+  static const String requestLocationImage =
+      "assets/images/request_location.png";
 }
