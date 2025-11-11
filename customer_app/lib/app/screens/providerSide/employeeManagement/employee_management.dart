@@ -132,15 +132,42 @@ class EmployeesListsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> employees = [
-      {"name": "Rahul Sharma", "id": "EMP001", "isActive": true},
-      {"name": "Manish Sharma", "id": "EMP002", "isActive": false},
-      {"name": "Priya Patel", "id": "EMP003", "isActive": true},
-      {"name": "Vikram Singh", "id": "EMP004", "isActive": false},
-      {"name": "Sneha Iyer", "id": "EMP005", "isActive": true},
-      {"name": "Amit Verma", "id": "EMP006", "isActive": false},
-      {"name": "Ritika Mehra", "id": "EMP007", "isActive": true},
-      {"name": "Nikhil Jain", "id": "EMP008", "isActive": true},
-      {"name": "Pooja Reddy", "id": "EMP009", "isActive": false},
+      {
+        "name": "Rahul Sharma",
+        "id": "EMP001",
+        "isActive": true,
+        "gender": "Male",
+      },
+      {
+        "name": "Manish Sharma",
+        "id": "EMP002",
+        "isActive": false,
+        "gender": "Male",
+      },
+      {
+        "name": "Priya Patel",
+        "id": "EMP003",
+        "isActive": true,
+        "gender": "Female",
+      },
+      {
+        "name": "Vikram Singh",
+        "id": "EMP004",
+        "isActive": false,
+        "gender": "Male",
+      },
+      {
+        "name": "Sneha Iyer",
+        "id": "EMP005",
+        "isActive": true,
+        "gender": "Female",
+      },
+      {
+        "name": "Rajesh Kumar",
+        "id": "EMP006",
+        "isActive": false,
+        "gender": "Male",
+      },
     ];
 
     return Container(
@@ -172,6 +199,7 @@ class EmployeesListsCard extends StatelessWidget {
                 return EmployeesListsTile(
                   empName: emp["name"],
                   empId: emp["id"],
+                  gender: emp['gender'],
                   isActive: emp["isActive"],
                 );
               },
@@ -188,11 +216,13 @@ class EmployeesListsTile extends StatelessWidget {
     super.key,
     required this.empName,
     required this.empId,
+    required this.gender,
     required this.isActive,
   });
 
   final String empName;
   final String empId;
+  final String gender;
   final bool isActive;
 
   @override
@@ -224,11 +254,25 @@ class EmployeesListsTile extends StatelessWidget {
               color: kGrey400,
               fontWeight: FontWeight.w500,
             ),
-            CustomText(
-              label: empId,
-              size: 12.sp,
-              color: kPrimary,
-              fontWeight: FontWeight.w500,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomText(
+                  label: empId,
+                  size: 12.sp,
+                  color: kPrimary,
+                  fontWeight: FontWeight.w500,
+                ),
+                SizedBox(width: 4.w),
+                Container(width: 1.w, height: 14.h, color: kGrey100),
+                SizedBox(width: 4.w),
+                CustomText(
+                  label: gender,
+                  size: 12.sp,
+                  color: kGrey200,
+                  fontWeight: FontWeight.w500,
+                ),
+              ],
             ),
           ],
         ),
@@ -242,7 +286,7 @@ class EmployeesListsTile extends StatelessWidget {
               decoration: BoxDecoration(
                 color: kWhite,
                 border: Border.all(color: isActive ? kSuccess : kGrey200),
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(8.r),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

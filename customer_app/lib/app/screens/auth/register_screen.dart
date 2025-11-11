@@ -30,7 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: ClipRRect(
               child: Image.asset(
                 Appimages.authBackground,
-                height: MediaQuery.of(context).size.height * 0.87,
+                height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.cover,
               ),
@@ -48,7 +48,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                   Image.asset(Appimages.authImage, height: 150.h, width: width),
                   SizedBox(height: 10.h),
-                  CustomText(label: "Sign Up", size: 32.sp, color: kDark),
+                  CustomText(
+                    label: "Sign Up",
+                    size: 24.sp,
+                    color: kDark,
+                    fontWeight: FontWeight.bold,
+                  ),
                   SizedBox(height: 24.h),
 
                   // Mobile number text field
@@ -57,13 +62,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     obscureText: false,
                     keyboardType: TextInputType.phone,
                   ),
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 10.h),
                   RoundedTextField(
                     label: "Email",
                     obscureText: false,
                     keyboardType: TextInputType.emailAddress,
                   ),
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 10.h),
                   RoundedTextField(
                     label: "Password",
                     obscureText: true,
@@ -90,23 +95,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 25.h),
 
-                  // Divider with Or
-                  Row(
-                    children: [
-                      Spacer(),
-                      Expanded(child: Divider(color: Colors.grey.shade400)),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        child: Text(
-                          "Or",
-                          style: appStyle(14.sp, k232323, FontWeight.w500),
-                        ),
-                      ),
-                      Expanded(child: Divider(color: Colors.grey.shade400)),
-                      Spacer(),
-                    ],
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.12),
+                  // // Divider with Or
+                  // Row(
+                  //   children: [
+                  //     Spacer(),
+                  //     Expanded(child: Divider(color: Colors.grey.shade400)),
+                  //     Padding(
+                  //       padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  //       child: Text(
+                  //         "Or",
+                  //         style: appStyle(14.sp, k232323, FontWeight.w500),
+                  //       ),
+                  //     ),
+                  //     Expanded(child: Divider(color: Colors.grey.shade400)),
+                  //     Spacer(),
+                  //   ],
+                  // ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.18),
 
                   // Sign up text
                   GestureDetector(
@@ -124,7 +129,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 50.h),
                 ],
               ),
             ),

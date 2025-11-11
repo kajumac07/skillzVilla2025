@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
@@ -137,11 +139,29 @@ class _TrackMyBookingsScrenState extends State<TrackMyBookingsScren> {
           Row(
             children: [
               Expanded(
-                child: CircularButton(
-                  buttonColor: kPrimary,
-                  buttonText: "Call",
-                  onPressed: () {},
-                  height: 40.h,
+                child: InkWell(
+                  onTap: () {
+                    log("Whatsapp Button Tapped");
+                  },
+                  child: Container(
+                    height: 40.h,
+                    decoration: BoxDecoration(
+                      color: kPrimary,
+                      borderRadius: BorderRadius.circular(15.r),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(Appimages.whatsappIcon),
+                        SizedBox(width: 5.w),
+                        Text(
+                          "Whatsapp",
+                          style: appStyle(14.sp, kWhite, FontWeight.w300),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SizedBox(width: 10.h),
@@ -194,8 +214,8 @@ class _TrackMyBookingsScrenState extends State<TrackMyBookingsScren> {
 
     return Container(
       width: width,
-      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-      padding: EdgeInsets.all(12.w),
+      margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+      padding: EdgeInsets.all(8.w),
       decoration: BoxDecoration(
         color: kWhite,
         borderRadius: BorderRadius.circular(12.r),
@@ -213,51 +233,60 @@ class _TrackMyBookingsScrenState extends State<TrackMyBookingsScren> {
           SizedBox(height: 5.h),
           CustomDivider(),
           buildRowTextAndIcon(Appimages.bookingProfile, "SkilzVilla"),
-
-          SizedBox(height: 20.h),
-
-          // 🔽 Dropdown for cancellation reason
-          Text(
-            "Reason for Cancellation",
-            style: appStyle(14.sp, kGrey300, FontWeight.w500),
-          ),
-          SizedBox(height: 8.h),
+          SizedBox(height: 15.h),
           StatefulBuilder(
             builder: (context, setState) {
               return Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                height: 40.h,
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32.r),
-                  border: Border.all(color: kGrey100, width: 1),
-                ),
-                child: DropdownButtonFormField<String>(
-                  value: selectedReason,
-                  decoration: const InputDecoration(border: InputBorder.none),
-                  hint: Text(
-                    "Reason for Cancellation",
-                    style: appStyle(16.sp, kGrey200, FontWeight.w400),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30.r),
+                  border: Border.all(
+                    color: Colors.grey.shade400, // subtle grey border
+                    width: 1,
                   ),
-                  icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                  items: cancelReasons.map((reason) {
-                    return DropdownMenuItem(
-                      value: reason,
-                      child: Text(
-                        reason,
-                        style: appStyle(14.sp, kGrey400, FontWeight.w400),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: selectedReason,
+                    isExpanded: true,
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: Colors.grey.shade600,
+                    ),
+                    hint: Text(
+                      "Reason for Cancellation",
+                      style: appStyle(
+                        15.sp,
+                        Colors.grey.shade600,
+                        FontWeight.w400,
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedReason = value;
-                    });
-                  },
+                    ),
+                    items: cancelReasons.map((reason) {
+                      return DropdownMenuItem(
+                        value: reason,
+                        child: Text(
+                          reason,
+                          style: appStyle(
+                            15.sp,
+                            Colors.grey.shade800,
+                            FontWeight.w400,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedReason = value;
+                      });
+                    },
+                  ),
                 ),
               );
             },
           ),
-
-          SizedBox(height: 24.h),
+          SizedBox(height: 8.h),
 
           CircularButton(
             buttonColor: kPrimary,

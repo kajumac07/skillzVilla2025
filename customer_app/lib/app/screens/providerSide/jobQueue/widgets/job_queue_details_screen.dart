@@ -1,4 +1,5 @@
 import 'package:customer_app/app/core/constants/consts.dart';
+import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
@@ -20,10 +21,16 @@ class _JobQueueDetailsScreenState extends State<JobQueueDetailsScreen> {
   late int selectedIndex;
 
   final List<String> tabs = ["New", "Ongoing", "Completed"];
-  final List<IconData> icons = [
-    Icons.work_outline,
-    Icons.access_time,
-    Icons.verified_outlined,
+  // final List<IconData> icons = [
+  //   Icons.work_outline,
+  //   Icons.access_time,
+  //   Icons.verified_outlined,
+  // ];
+
+  final List<String> icons = [
+    Appimages.newJob,
+    Appimages.ongoingJob,
+    Appimages.completedJob,
   ];
 
   @override
@@ -84,18 +91,19 @@ class _JobQueueDetailsScreenState extends State<JobQueueDetailsScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              Image.asset(
                                 icons[index],
-                                size: 18.sp,
+                                height: 20.h,
+                                width: 20.w,
                                 color: isSelected
                                     ? Colors.white
                                     : Colors.black54,
                               ),
-                              SizedBox(width: 6.w),
+                              SizedBox(width: 4.w),
                               Text(
                                 tabs[index],
                                 style: TextStyle(
-                                  fontSize: 14.sp,
+                                  fontSize: 13.sp,
                                   fontWeight: FontWeight.w500,
                                   color: isSelected
                                       ? Colors.white
@@ -156,6 +164,7 @@ class _JobQueueDetailsScreenState extends State<JobQueueDetailsScreen> {
                               title: "Earnings:",
                               subTitle: "₹1,200",
                             ),
+                          SizedBox(height: 10.h),
                         ],
                       ),
 
@@ -167,7 +176,7 @@ class _JobQueueDetailsScreenState extends State<JobQueueDetailsScreen> {
                         gradient: const LinearGradient(
                           colors: [Color(0xffE6E6E6), Color(0xffFFDDD3)],
                         ),
-                        children: const [
+                        children: [
                           DetailsListTileCard(
                             title: "Employee ID:",
                             subTitle: "7665HBH876",
@@ -176,6 +185,7 @@ class _JobQueueDetailsScreenState extends State<JobQueueDetailsScreen> {
                             title: "Employee Name:",
                             subTitle: "Rahul Sharma",
                           ),
+                          SizedBox(height: 10.h),
                         ],
                       ),
 

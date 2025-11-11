@@ -17,8 +17,7 @@ class KycScreen extends StatefulWidget {
 
 class _KycScreenState extends State<KycScreen> {
   final _sharedPref = AppSharedPrefData();
-
-  String? _selectedType; // 'Freelance' or 'Company'
+  String? _selectedType = "Company";
 
   @override
   Widget build(BuildContext context) {
@@ -30,52 +29,79 @@ class _KycScreenState extends State<KycScreen> {
           color: kGrey400,
           fontWeight: FontWeight.bold,
         ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.black,
+          ),
+          onPressed: () => Get.back(),
+        ),
       ),
       body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.all(8.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Spacer(),
-              Container(
-                padding: EdgeInsets.all(8.h),
-                margin: EdgeInsets.all(8.h),
-                decoration: BoxDecoration(
-                  color: kWhite,
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Image.asset(Appimages.logo, width: 60.w, height: 44.h),
-                        const Spacer(),
-                        CustomText(
-                          label: "Enter As",
-                          size: 18.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        const Spacer(),
-                        const Spacer(),
-                      ],
-                    ),
-                    SizedBox(height: 10.h),
+        child: Column(
+          children: [
+            const Spacer(),
 
-                    // Freelance / Company Buttons
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        buildFreelanceAndCompany("Freelance"),
-                        buildFreelanceAndCompany("Company"),
-                      ],
-                    ),
-                  ],
+            // ✅ Card with background image, logo, illustration, and buttons
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsets.all(16.w),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.r),
+                image: DecorationImage(
+                  image: AssetImage(Appimages.kycBg),
+                  fit: BoxFit.cover,
                 ),
               ),
-              Spacer(),
-              CircularButton(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Logo on top-left corner
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Image.asset(
+                      Appimages.logo,
+                      width: 70.w,
+                      height: 50.h,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+
+                  // Center Image
+                  Image.asset(Appimages.kycImage, height: 140.h),
+                  SizedBox(height: 12.h),
+
+                  // Enter As Text
+                  CustomText(
+                    label: "Enter As",
+                    size: 18.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                  SizedBox(height: 12.h),
+
+                  // Freelance / Company buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildFreelanceAndCompany("Freelance", kPrimary),
+                      buildFreelanceAndCompany("Company", kSecondary),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            const Spacer(),
+
+            // ✅ Bottom Next Button
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+              child: CircularButton(
                 buttonColor: _selectedType != null
                     ? kPrimary
                     : Colors.grey.shade300,
@@ -85,87 +111,136 @@ class _KycScreenState extends State<KycScreen> {
                     : () {
                         Get.to(() => const KycDocsScreen());
                       },
-                width: width,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  // ---------------------------------------------------------------------------
-  // ✅ Custom widget for Freelance/Company box
-  // ---------------------------------------------------------------------------
-  Widget buildFreelanceAndCompany(String title) {
-    final isSelected = _selectedType == title;
-
-    return GestureDetector(
-      onTap: () async {
-        setState(() {
-          _selectedType = title;
-        });
-        await _sharedPref.saveKycType(title); // Save 'Freelance' or 'Company'
-      },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        height: 150.h,
-        width: 150.w,
-        decoration: BoxDecoration(
-          color: isSelected ? kPrimary.withOpacity(0.15) : kFFF9D1,
-          borderRadius: BorderRadius.circular(15.r),
-          // border: Border.all(
-          //   color: isSelected ? kPrimary : Colors.transparent,
-          //   width: 2,
-          // ),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: 0,
-              child: Container(
-                height: 66.h,
-                width: 150.w,
-                decoration: BoxDecoration(
-                  color: isSelected ? kPrimary : kDAFAFF,
-                  borderRadius: BorderRadius.only(
-                    topLeft: title == "Freelance"
-                        ? Radius.circular(50.r)
-                        : Radius.zero,
-                    topRight: title == "Company"
-                        ? Radius.circular(40.r)
-                        : Radius.zero,
-                    bottomLeft: Radius.circular(15.r),
-                    bottomRight: Radius.circular(15.r),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 10,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: EdgeInsets.all(4.h),
-                margin: EdgeInsets.only(left: 20.w, right: 20.w),
-                decoration: BoxDecoration(
-                  color: isSelected ? kPrimary : kSecondary,
-                  borderRadius: BorderRadius.circular(20.r),
-                ),
-                child: Center(
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      color: isSelected ? Colors.white : Colors.black,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+                width: double.infinity,
               ),
             ),
           ],
         ),
       ),
+      backgroundColor: Colors.white,
+    );
+  }
+
+  // ---------------------------------------------------------------------------
+  // ✅ Custom widget for Freelance/Company button
+  // ---------------------------------------------------------------------------
+  Widget buildFreelanceAndCompany(String title, Color color) {
+    final bool isSelected = _selectedType == title;
+
+    return GestureDetector(
+      onTap: () async {
+        setState(() => _selectedType = title);
+        await _sharedPref.saveKycType(title);
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+        child: CircularButton(
+          buttonColor: isSelected ? color : Colors.grey.shade300,
+          buttonText: title,
+          onPressed: () async {
+            setState(() => _selectedType = title);
+            await _sharedPref.saveKycType(title);
+          },
+          height: 40.h,
+          textSize: 16.sp,
+        ),
+      ),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Widget buildFreelanceAndCompany(String title) {
+  //   final isSelected = _selectedType == title;
+
+  //   return GestureDetector(
+  //     onTap: () async {
+  //       setState(() {
+  //         _selectedType = title;
+  //       });
+  //       await _sharedPref.saveKycType(title);
+  //     },
+  //     child: AnimatedContainer(
+  //       duration: const Duration(milliseconds: 200),
+  //       height: 150.h,
+  //       width: 150.w,
+  //       decoration: BoxDecoration(
+  //         color: isSelected ? kPrimary.withOpacity(0.15) : kFFF9D1,
+  //         borderRadius: BorderRadius.circular(15.r),
+  //         // border: Border.all(
+  //         //   color: isSelected ? kPrimary : Colors.transparent,
+  //         //   width: 2,
+  //         // ),
+  //       ),
+  //       child: Stack(
+  //         children: [
+  //           Positioned(
+  //             bottom: 0,
+  //             child: Container(
+  //               height: 66.h,
+  //               width: 150.w,
+  //               decoration: BoxDecoration(
+  //                 color: isSelected ? kPrimary : kDAFAFF,
+  //                 borderRadius: BorderRadius.only(
+  //                   topLeft: title == "Freelance"
+  //                       ? Radius.circular(50.r)
+  //                       : Radius.zero,
+  //                   topRight: title == "Company"
+  //                       ? Radius.circular(40.r)
+  //                       : Radius.zero,
+  //                   bottomLeft: Radius.circular(15.r),
+  //                   bottomRight: Radius.circular(15.r),
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //           Positioned(
+  //             bottom: 10,
+  //             left: 0,
+  //             right: 0,
+  //             child: Container(
+  //               padding: EdgeInsets.all(4.h),
+  //               margin: EdgeInsets.only(left: 20.w, right: 20.w),
+  //               decoration: BoxDecoration(
+  //                 color: isSelected ? kPrimary : kSecondary,
+  //                 borderRadius: BorderRadius.circular(20.r),
+  //               ),
+  //               child: Center(
+  //                 child: Text(
+  //                   title,
+  //                   style: TextStyle(
+  //                     color: isSelected ? Colors.white : Colors.black,
+  //                     fontWeight: FontWeight.w600,
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }

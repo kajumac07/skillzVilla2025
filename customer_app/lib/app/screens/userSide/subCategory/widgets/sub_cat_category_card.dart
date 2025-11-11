@@ -1,6 +1,5 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
-import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,11 +20,7 @@ class SubCatCategoryCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 8.w, right: 4.w),
       child: Container(
-        constraints: BoxConstraints(
-          minHeight: 75.h,
-          maxWidth:
-              95.w, // Set a max width to prevent it from becoming too large
-        ),
+        constraints: BoxConstraints(minHeight: 75.h, maxWidth: 90.w),
         padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 4.w),
         decoration: BoxDecoration(
           color: isSelected ? kWhite : kDAFAFF,
@@ -40,7 +35,7 @@ class SubCatCategoryCard extends StatelessWidget {
             // Image
             Container(
               height: 42.h,
-              width: 75.w,
+              width: 85.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.r),
                 image: DecorationImage(

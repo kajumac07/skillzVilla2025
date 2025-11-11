@@ -20,8 +20,8 @@ class ProviderCard extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
-            blurRadius: 6,
-            offset: const Offset(0, 3),
+            blurRadius: 10,
+            offset: const Offset(10, 10),
           ),
         ],
       ),

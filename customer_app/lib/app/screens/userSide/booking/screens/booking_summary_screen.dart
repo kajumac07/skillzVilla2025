@@ -4,9 +4,11 @@ import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/models/product_model.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
+import 'package:customer_app/app/screens/userSide/addMoreService/add_more_services.dart';
 import 'package:customer_app/app/screens/userSide/products/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class BookingSummaryScreen extends StatefulWidget {
   const BookingSummaryScreen({super.key});
@@ -97,7 +99,7 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
                               itemBuilder: (ctx, index) {
                                 final pData = products[index];
                                 return GestureDetector(
-                                  // onTap: () => Get.to(() => ProductDetailsScreen()),
+                                  onTap: () => Get.to(() => AddMoreServices()),
                                   child: ProductCard(
                                     bgImage: pData.imageUrl,
                                     price: pData.price,

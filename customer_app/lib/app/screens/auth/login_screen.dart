@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final responsive = ResponsiveAppValue(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: Stack(
         children: [
           // Curved background shape
@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: ClipRRect(
               child: Image.asset(
                 Appimages.authBackground,
-                height: MediaQuery.of(context).size.height * 0.87,
+                height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.cover,
               ),
@@ -86,8 +86,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   // SizedBox(height: 220.h),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.08),
                   Image.asset(Appimages.authImage, height: 150.h, width: width),
-                  CustomText(label: "Login as", size: 32.sp, color: kDark),
-                  SizedBox(height: 24.h),
+                  SizedBox(height: 14.h),
+                  CustomText(
+                    label: "Login as",
+                    size: 24.sp,
+                    color: kDark,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  SizedBox(height: 14.h),
 
                   // Customer / Service Provider toggle buttons
                   Row(
@@ -111,11 +117,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
 
-                  SizedBox(height: 30.h),
+                  SizedBox(height: 15.h),
 
                   // Mobile number text field
                   RoundedTextField(
-                    label: "Mobile/Email ID",
+                    label: "Mobile No.",
                     obscureText: false,
                     keyboardType: TextInputType.phone,
                   ),
@@ -123,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   // OTP input field with TextFields
                   Container(
-                    height: 60.h,
+                    height: 40.h,
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
                     decoration: BoxDecoration(
                       color: kWhite,
@@ -235,12 +241,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       CircleAvatar(
                         radius: 22.r,
                         backgroundColor: Colors.white,
-                        child: Icon(Icons.apple, size: 26.sp),
+                        child: Icon(Icons.apple, size: 26.sp, color: k232323),
                       ),
                     ],
                   ),
 
-                  SizedBox(height: 50.h),
+                  SizedBox(height: 80.h),
 
                   // Sign up text
                   GestureDetector(

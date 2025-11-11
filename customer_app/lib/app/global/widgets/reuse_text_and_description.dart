@@ -10,27 +10,30 @@ class ReUseRowTextAndDetail extends StatelessWidget {
     required this.title,
     required this.detail,
   });
+
   final String title;
   final String detail;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(
-          label: title,
-          size: 14.sp,
-          color: k232323,
-          fontWeight: FontWeight.w700,
+        SizedBox(width: 8.w),
+        SizedBox(
+          width: 70.w,
+          child: Text(
+            "$title",
+            style: appStyle(14.sp, k232323, FontWeight.w500),
+          ),
         ),
-        Container(
-          // color: kRed,
-          width: 220.w,
+        SizedBox(width: 8.w),
+        Expanded(
           child: Text(
             detail,
             maxLines: 3,
-            style: appStyle(14.sp, kGrey200, FontWeight.w300),
+            overflow: TextOverflow.ellipsis,
+            style: appStyle(13.sp, kGrey200, FontWeight.w400),
           ),
         ),
       ],

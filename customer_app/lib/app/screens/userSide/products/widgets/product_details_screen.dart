@@ -56,7 +56,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               top: 0,
               left: 0,
               right: 0,
-              height: 240.h,
+              height: 190.h,
               child: Image.asset(Appimages.subCategorybgImg, fit: BoxFit.cover),
             ),
 
@@ -83,7 +83,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
             /// ---------------- Main Container ----------------
             Positioned(
-              top: 210.h,
+              top: 130.h,
               left: 0,
               right: 0,
               bottom: 0,
@@ -97,8 +97,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   decoration: BoxDecoration(
                     color: kWhite,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(22.r),
-                      topRight: Radius.circular(22.r),
+                      topLeft: Radius.circular(10.r),
+                      topRight: Radius.circular(10.r),
                     ),
                   ),
                   child: SingleChildScrollView(
@@ -669,19 +669,14 @@ class ProductDescriptionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 205.h,
+      // height: 205.h,
       width: width,
       decoration: BoxDecoration(
         color: kSurfaceBg,
         borderRadius: BorderRadius.circular(14.r),
       ),
       child: Padding(
-        padding: EdgeInsets.only(
-          left: 12.h,
-          right: 12.h,
-          top: 12.h,
-          bottom: 12.h,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
         child: Column(
           children: [
             //heading section
@@ -697,26 +692,26 @@ class ProductDescriptionSection extends StatelessWidget {
                 Icon(Icons.keyboard_arrow_down_sharp, color: kGrey400),
               ],
             ),
-            SizedBox(height: 8.h),
+            // SizedBox(height: 8.h),
             CustomDivider(color: c8c8c8),
             SizedBox(height: 8.h),
             ReUseRowTextAndDetail(
               title: "Service",
               detail: "Professional AC servicing with filter cleaning",
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: 4.h),
 
             ReUseRowTextAndDetail(
               title: "Works",
               detail: "Gas refill, repair & maintenance options",
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: 4.h),
 
             ReUseRowTextAndDetail(
               title: "Feature",
               detail: "Spare parts cost extra",
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: 4.h),
           ],
         ),
       ),
@@ -750,13 +745,13 @@ class InclusionsSection extends StatelessWidget {
               Row(
                 children: const [
                   Expanded(child: InclusionTile(label: "Technician Visit")),
-                  Expanded(child: InclusionTile(label: "Basic Service Tools")),
+                  Expanded(child: InclusionTile(label: "Cleaning")),
                 ],
               ),
               const Divider(height: 1, color: Color(0xffffffff)),
               Row(
                 children: const [
-                  Expanded(child: InclusionTile(label: "Cleaning & Fixes")),
+                  Expanded(child: InclusionTile(label: "Basic Service Tools")),
                   Expanded(child: InclusionTile(label: "Season Service")),
                 ],
               ),
@@ -770,7 +765,12 @@ class InclusionsSection extends StatelessWidget {
 
 class InclusionTile extends StatelessWidget {
   final String label;
-  const InclusionTile({required this.label, super.key});
+  final String image;
+  const InclusionTile({
+    required this.label,
+    this.image = Appimages.checkIcon,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -788,7 +788,7 @@ class InclusionTile extends StatelessWidget {
               color: Colors.white,
               shape: BoxShape.circle,
             ),
-            child: Image.asset(Appimages.checkIcon, width: 20.w, height: 20.w),
+            child: Image.asset(image, width: 20.w, height: 20.w),
           ),
           SizedBox(width: 8.w),
           Flexible(
@@ -827,15 +827,35 @@ class ExclusionsDetails extends StatelessWidget {
             children: [
               Row(
                 children: const [
-                  Expanded(child: InclusionTile(label: "XYXXZGHHH")),
-                  Expanded(child: InclusionTile(label: "XYXXZGHHH")),
+                  Expanded(
+                    child: InclusionTile(
+                      label: "XYXXZGHHH",
+                      image: Appimages.crossIcon,
+                    ),
+                  ),
+                  Expanded(
+                    child: InclusionTile(
+                      label: "XYXXZGHHH",
+                      image: Appimages.crossIcon,
+                    ),
+                  ),
                 ],
               ),
               const Divider(height: 1, color: Color(0xffffffff)),
               Row(
                 children: const [
-                  Expanded(child: InclusionTile(label: "XYXXZGHHH")),
-                  Expanded(child: InclusionTile(label: "XYXXZGHHH")),
+                  Expanded(
+                    child: InclusionTile(
+                      label: "XYXXZGHHH",
+                      image: Appimages.crossIcon,
+                    ),
+                  ),
+                  Expanded(
+                    child: InclusionTile(
+                      label: "XYXXZGHHH",
+                      image: Appimages.crossIcon,
+                    ),
+                  ),
                 ],
               ),
             ],

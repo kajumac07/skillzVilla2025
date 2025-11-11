@@ -226,6 +226,7 @@ class TransactionListTile extends StatelessWidget {
     required this.time,
     required this.money,
   });
+
   final String imageName;
   final String personName;
   final String time;
@@ -233,6 +234,10 @@ class TransactionListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Determine color based on + or -
+    final bool isCredit = money.trim().startsWith('+');
+    final Color moneyColor = isCredit ? kSuccess : kPrimary;
+
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: CircleAvatar(
@@ -242,12 +247,16 @@ class TransactionListTile extends StatelessWidget {
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(personName, style: appStyle(18.sp, kGrey400, FontWeight.bold)),
-
+          Text(personName, style: appStyle(15.sp, kGrey400, FontWeight.bold)),
           Text(time, style: appStyle(12.sp, kGrey200, FontWeight.w500)),
         ],
       ),
-      trailing: CustomText(label: money),
+      trailing: CustomText(
+        label: money,
+        size: 13.sp,
+        color: moneyColor,
+        fontWeight: FontWeight.w600,
+      ),
     );
   }
 }

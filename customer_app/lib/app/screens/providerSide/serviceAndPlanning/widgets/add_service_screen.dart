@@ -22,6 +22,14 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
   final List<String> included = ['Ventilator', 'Critical care medicines'];
   final List<String> excluded = ['Ventilator', 'Critical care medicines'];
 
+  // For Services & Duration dynamic list
+  List<Map<String, String>> services = [
+    {"service": "Ambulance", "duration": "1 hour"},
+  ];
+
+  final TextEditingController serviceController = TextEditingController();
+  final TextEditingController durationController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +48,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
             margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
@@ -73,24 +81,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
                 _buildDropdown(subCategory!, ['Hospitals', 'Clinics', 'Labs']),
                 SizedBox(height: 20.h),
 
-                // Services & Duration
-                _buildLabel("Services & Duration"),
-                SizedBox(height: 8.h),
-                Row(
-                  children: [
-                    Expanded(child: _buildBoxField("Ambulance")),
-                    SizedBox(width: 8.w),
-                    Expanded(child: _buildBoxField("1 hour")),
-                  ],
-                ),
-                SizedBox(height: 8.h),
-                Row(
-                  children: [
-                    Expanded(child: _buildTextField("Pick up")),
-                    SizedBox(width: 8.w),
-                    Expanded(child: _buildTextField("1 hour")),
-                  ],
-                ),
+                _buildServicesDurationSection(),
                 SizedBox(height: 20.h),
 
                 // Pricing
@@ -117,7 +108,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
                   obscureText: false,
                   keyboardType: TextInputType.name,
                   maxLines: 3,
-                  fillColor: Color(0xffF3F4F9),
+                  fillColor: const Color(0xffF3F4F9),
                 ),
                 SizedBox(height: 15.h),
 
@@ -127,7 +118,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
                   decoration: BoxDecoration(
                     color: kWhite,
                     borderRadius: BorderRadius.circular(12.r),
-                    border: Border.all(color: Color(0xffE3E8EC)),
+                    border: Border.all(color: const Color(0xffE3E8EC)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,7 +126,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
                     children: [
                       CircleAvatar(
                         radius: 25.r,
-                        backgroundColor: Color(0xffE3E8EC),
+                        backgroundColor: const Color(0xffE3E8EC),
                         child: Icon(
                           Icons.cloud_upload_outlined,
                           color: kPrimary,
@@ -154,7 +145,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
 
                 SizedBox(height: 40.h),
 
-                //submit button
+                // Submit button
                 CircularButton(
                   buttonColor: kPrimary,
                   buttonText: "Save details",
@@ -171,6 +162,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
     );
   }
 
+  // 🔹 Helper: Label with red asterisk
   Widget _buildLabel(String text) {
     return Padding(
       padding: EdgeInsets.only(bottom: 4.h),
@@ -179,7 +171,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
           CustomText(
             label: text,
             size: 14.sp,
-            color: Color(0xff23334A),
+            color: const Color(0xff23334A),
             fontWeight: FontWeight.w500,
           ),
           CustomText(
@@ -193,6 +185,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
     );
   }
 
+  // 🔹 Helper: Dropdown field
   Widget _buildDropdown(String value, List<String> items) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -224,17 +217,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
     );
   }
 
-  Widget _buildBoxField(String text) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.r),
-        color: Color(0xffF3F4F9),
-      ),
-      child: Text(text, style: appStyle(14.sp, kGrey300, FontWeight.w200)),
-    );
-  }
-
+  // 🔹 Helper: Reusable TextField
   Widget _buildTextField(String hint) {
     return TextField(
       decoration: InputDecoration(
@@ -242,13 +225,14 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
         hintStyle: appStyle(14.sp, kGrey100, FontWeight.w300),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.r),
-          borderSide: BorderSide(color: Color(0xffE3E8EC)),
+          borderSide: const BorderSide(color: Color(0xffE3E8EC)),
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
       ),
     );
   }
 
+  // 🔹 Helper: Chips for included/excluded
   Widget _buildChips(List<String> items) {
     return Wrap(
       spacing: 8.w,
@@ -256,7 +240,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
       children: items
           .map(
             (e) => Chip(
-              side: BorderSide(color: Color(0xffE3E8EC)),
+              side: const BorderSide(color: Color(0xffE3E8EC)),
               label: Text(e),
               onDeleted: () => setState(() => items.remove(e)),
               deleteIcon: const Icon(Icons.close, size: 16),
@@ -267,6 +251,157 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
             ),
           )
           .toList(),
+    );
+  }
+
+  Widget _buildServicesDurationSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildLabel("Services & Duration"),
+        SizedBox(height: 8.h),
+
+        // Display existing service-duration pairs
+        Wrap(
+          spacing: 8.w,
+          runSpacing: 8.h,
+          children: services.map((entry) {
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Service Box
+                Expanded(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10.h,
+                      horizontal: 14.w,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xffF3F4F9),
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: Text(
+                      entry["service"]!,
+                      style: appStyle(14.sp, kGrey400, FontWeight.w500),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 8.w),
+                // Spacer(),
+
+                // Duration Box with close icon stacked
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10.h,
+                        horizontal: 14.w,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xffF3F4F9),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Text(
+                        entry["duration"]!,
+                        style: appStyle(14.sp, kGrey400, FontWeight.w400),
+                      ),
+                    ),
+                    Positioned(
+                      top: -6,
+                      right: -6,
+                      child: GestureDetector(
+                        onTap: () => setState(() => services.remove(entry)),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: kGrey100, width: 1),
+                          ),
+                          padding: EdgeInsets.all(3.w),
+                          child: Icon(
+                            Icons.close,
+                            size: 14.sp,
+                            color: kGrey300,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          }).toList(),
+        ),
+
+        SizedBox(height: 16.h),
+
+        // Input fields for adding new pair
+        Row(
+          children: [
+            Expanded(
+              child: _buildTextFieldWithController(
+                controller: serviceController,
+                hint: "Pick up",
+              ),
+            ),
+            SizedBox(width: 8.w),
+            Expanded(
+              child: _buildTextFieldWithController(
+                controller: durationController,
+                hint: "1 hour",
+              ),
+            ),
+          ],
+        ),
+
+        SizedBox(height: 12.h),
+
+        // Add button
+        Center(
+          child: GestureDetector(
+            onTap: () {
+              if (serviceController.text.isNotEmpty &&
+                  durationController.text.isNotEmpty) {
+                setState(() {
+                  services.add({
+                    "service": serviceController.text,
+                    "duration": durationController.text,
+                  });
+                  serviceController.clear();
+                  durationController.clear();
+                });
+              }
+            },
+            child: CircleAvatar(
+              radius: 24.r,
+              backgroundColor: kPrimary,
+              child: Icon(Icons.add, color: Colors.white, size: 26.sp),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // 🔹 TextField with controller
+  Widget _buildTextFieldWithController({
+    required TextEditingController controller,
+    required String hint,
+  }) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: appStyle(14.sp, kGrey100, FontWeight.w300),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(color: Color(0xffE3E8EC)),
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+      ),
     );
   }
 }

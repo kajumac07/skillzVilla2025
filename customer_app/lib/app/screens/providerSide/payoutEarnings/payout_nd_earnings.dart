@@ -42,6 +42,7 @@ class _PayoutNdEarningsScreenState extends State<PayoutNdEarningsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 👤 Profile + Earnings Header
+            SizedBox(height: 5.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -57,17 +58,11 @@ class _PayoutNdEarningsScreenState extends State<PayoutNdEarningsScreen> {
                       children: [
                         Text(
                           "Ajmal’s",
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: appStyle(16.sp, kGrey200, FontWeight.w500),
                         ),
                         Text(
                           "Total Earnings",
-                          style: TextStyle(
-                            fontSize: 13.sp,
-                            color: Colors.grey[600],
-                          ),
+                          style: appStyle(14.sp, kDark, FontWeight.bold),
                         ),
                       ],
                     ),
@@ -83,7 +78,7 @@ class _PayoutNdEarningsScreenState extends State<PayoutNdEarningsScreen> {
               ],
             ),
 
-            SizedBox(height: 10.h),
+            SizedBox(height: 5.h),
 
             // 📅 Time Filter
             GestureDetector(
@@ -119,7 +114,7 @@ class _PayoutNdEarningsScreenState extends State<PayoutNdEarningsScreen> {
 
             // 📊 Chart
             SizedBox(
-              height: 250.h,
+              height: 260.h,
               child: BarChart(
                 BarChartData(
                   alignment: BarChartAlignment.spaceAround,
@@ -159,32 +154,31 @@ class _PayoutNdEarningsScreenState extends State<PayoutNdEarningsScreen> {
                               },
                               child: Column(
                                 children: [
-                                  // SizedBox(height: 8.h),
-                                  Text(
-                                    months[index],
-                                    style: TextStyle(
-                                      fontSize: 13.sp,
-                                      fontWeight: isActive
-                                          ? FontWeight.w600
-                                          : FontWeight.w400,
-                                      color: isActive
-                                          ? Colors.redAccent
-                                          : Colors.black87,
-                                    ),
-                                  ),
-
-                                  if (isActive)
-                                    Container(
-                                      margin: EdgeInsets.only(top: 4.h),
-                                      width: 30.w,
-                                      height: 4.h,
-                                      decoration: BoxDecoration(
-                                        color: kPrimary,
-                                        borderRadius: BorderRadius.circular(
-                                          2.r,
+                                  Container(
+                                    margin: EdgeInsets.only(top: 4.h),
+                                    width: 45.w,
+                                    height: 17.h,
+                                    decoration: isActive
+                                        ? BoxDecoration(
+                                            color: kPrimary,
+                                            borderRadius: BorderRadius.circular(
+                                              5.r,
+                                            ),
+                                          )
+                                        : BoxDecoration(),
+                                    child: Center(
+                                      child: Text(
+                                        months[index],
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          fontWeight: isActive
+                                              ? FontWeight.w600
+                                              : FontWeight.w400,
+                                          color: isActive ? kWhite : kGrey200,
                                         ),
                                       ),
                                     ),
+                                  ),
                                 ],
                               ),
                             );

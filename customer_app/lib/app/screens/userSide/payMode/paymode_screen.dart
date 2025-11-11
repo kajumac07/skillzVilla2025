@@ -1,5 +1,6 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
+import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
 import 'package:customer_app/app/screens/userSide/booking/booking_confirmed_screen.dart';
@@ -63,11 +64,11 @@ class _PayModeScreenState extends State<PayModeScreen> {
         children: [
           Text(
             'Recommended Payment Options',
-            style: appStyle(16.sp, kGrey300, FontWeight.bold),
+            style: appStyle(16.sp, kGrey300, FontWeight.w400),
           ),
           SizedBox(height: 10.h),
           CustomDivider(),
-          buildRadioOption('Google Pay'),
+          buildRadioOption('Google Pay', imagePath: Appimages.gPayIcon),
 
           // Continue Button
           CircularButton(
@@ -77,18 +78,28 @@ class _PayModeScreenState extends State<PayModeScreen> {
             width: width,
           ),
           // Other Recommended Options
-          buildRadioOption('Cash on Delivery'),
-          buildRadioOption('PhonePe'),
-          buildRadioOption('Paytm'),
+          buildRadioOption('Cash on Delivery', imagePath: Appimages.codIcon),
+          buildRadioOption('PhonePe', imagePath: Appimages.phonePeIcon),
+          buildRadioOption('Paytm', imagePath: Appimages.paytmIcon),
         ],
       ),
     );
   }
 
   // Helper to build the radio options
-  Widget buildRadioOption(String title) {
+  Widget buildRadioOption(String title, {String? imagePath}) {
     return RadioListTile<String>(
-      title: Text(title, style: appStyle(14.sp, k232323, FontWeight.w500)),
+      title: Row(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(title, style: appStyle(14.sp, k232323, FontWeight.w500)),
+          Spacer(),
+          if (imagePath != null) ...[
+            Image.asset(imagePath, height: 36.h, width: 36.w),
+            SizedBox(width: 10.w),
+          ],
+        ],
+      ),
       value: title,
       groupValue: _selectedPaymentOption,
       onChanged: (String? value) {
@@ -116,7 +127,7 @@ class _PayModeScreenState extends State<PayModeScreen> {
         children: <Widget>[
           Text(
             'Schedule Time and Date',
-            style: appStyle(16.sp, kGrey300, FontWeight.bold),
+            style: appStyle(16.sp, kGrey300, FontWeight.w400),
           ),
           SizedBox(height: 10.h),
 
@@ -231,7 +242,7 @@ class _PayModeScreenState extends State<PayModeScreen> {
         children: [
           Text(
             'Pay on Delivery Option',
-            style: appStyle(16.sp, kGrey300, FontWeight.bold),
+            style: appStyle(16.sp, kGrey300, FontWeight.w400),
           ),
           SizedBox(height: 10.h),
           CustomDivider(),
@@ -240,7 +251,7 @@ class _PayModeScreenState extends State<PayModeScreen> {
           RadioListTile<String>(
             title: Text(
               'Cash on Delivery (Cash/UPI)',
-              style: appStyle(14.sp, k232323, FontWeight.bold),
+              style: appStyle(14.sp, k232323, FontWeight.w400),
             ),
             value: 'Cash on Delivery (Pay on Delivery)',
             groupValue: _selectedPaymentOption,
@@ -331,7 +342,17 @@ class _PayModeScreenState extends State<PayModeScreen> {
           ),
           const SizedBox(height: 10),
 
-          buildDetailRow('AC Cleaning', '₹500'),
+          // buildDetailRow('AC Cleaning', '₹500'),
+          Row(
+            children: [
+              Text(
+                "AC Cleaning",
+                style: appStyle(14.sp, k232323, FontWeight.w500),
+              ),
+              Spacer(),
+              Text("₹500", style: appStyle(14.sp, k232323, FontWeight.w500)),
+            ],
+          ),
           buildDetailRow('Discount', '₹2', isDiscount: true),
 
           const Divider(color: Colors.black45, height: 20),

@@ -92,7 +92,7 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
               top: 0,
               left: 0,
               right: 0,
-              height: 240.h,
+              height: 200.h,
               child: Image.asset(widget.img, fit: BoxFit.cover),
             ),
 
@@ -113,13 +113,13 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
               right: 16.w,
               child: CircleAvatar(
                 backgroundColor: Colors.white,
-                child: Icon(Icons.share, size: 20.sp),
+                child: Image.asset(Appimages.shareIcon),
               ),
             ),
 
             /// ---------------- Main Container ----------------
             Positioned(
-              top: 210.h,
+              top: 150.h,
               left: 0,
               right: 0,
               bottom: 0,
@@ -133,8 +133,8 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                   decoration: BoxDecoration(
                     color: kWhite,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(22.r),
-                      topRight: Radius.circular(22.r),
+                      topLeft: Radius.circular(10.r),
+                      topRight: Radius.circular(10.r),
                     ),
                   ),
                   child: Column(
@@ -175,7 +175,7 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
 
                       /// ---------- Horizontal Chips ----------
                       SizedBox(
-                        height: 90.h,
+                        height: 80.h,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: [
@@ -203,9 +203,9 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 10.h),
+                      // SizedBox(height: 10.h),
                       Divider(color: kE9E9E9),
-                      SizedBox(height: 10.h),
+                      SizedBox(height: 2.h),
 
                       Text(
                         "Repairs",
@@ -222,8 +222,8 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                               // onTap: () => Get.to(() => ChooseProviderLists()),
                               child: Padding(
                                 padding: EdgeInsets.only(
-                                  bottom: 10.0.h,
-                                  top: 20.h,
+                                  // bottom: 10.0.h,
+                                  top: 10.h,
                                 ),
                                 child: _serviceTile(selected: index == 1),
                               ),
@@ -382,21 +382,21 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
 
   Widget _serviceTile({bool selected = false}) {
     return Container(
-      padding: EdgeInsets.all(8.h),
+      padding: EdgeInsets.all(4.h),
       decoration: BoxDecoration(
         color: selected ? kFFF9D1 : kSurfaceBg,
         borderRadius: BorderRadius.circular(14.r),
       ),
       child: ListTile(
+        contentPadding: EdgeInsets.zero,
         leading: Stack(
           clipBehavior: Clip.none,
           children: [
             Container(
-              width: 70.w,
-              height: 80.h,
+              width: 60.w,
               decoration: BoxDecoration(
-                color: Colors.grey.shade400,
-                borderRadius: BorderRadius.circular(10),
+                color: Color(0xff797979),
+                borderRadius: BorderRadius.circular(12.r),
               ),
             ),
 
@@ -419,7 +419,7 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text("+", style: TextStyle(fontSize: 12)),
+                      Text("+", style: TextStyle(fontSize: 14.sp)),
                       SizedBox(width: 6.w),
                       const Text(
                         "1",
@@ -429,7 +429,7 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                         ),
                       ),
                       SizedBox(width: 6.w),
-                      const Text("-", style: TextStyle(fontSize: 12)),
+                      Text("-", style: TextStyle(fontSize: 14.sp)),
                     ],
                   ),
                 ),
@@ -447,7 +447,14 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
             Row(
               children: [
                 Text("₹519 ", style: appStyle(13, kGrey300, FontWeight.w300)),
-                Text("₹519", style: appStyle(13, kGrey100, FontWeight.w300)),
+                Text(
+                  "₹519",
+                  style: appStyle(
+                    13,
+                    kGrey100,
+                    FontWeight.w300,
+                  ).copyWith(decoration: TextDecoration.lineThrough),
+                ),
               ],
             ),
             Row(
@@ -477,7 +484,7 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
   // 🔹 Default Bottom Bar
   Widget _bottomPriceBar(SubCategoryController controller) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
       decoration: BoxDecoration(
         color: kWhite,
         boxShadow: [

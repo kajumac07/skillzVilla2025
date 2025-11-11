@@ -1,5 +1,6 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
+import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
@@ -87,9 +88,10 @@ class _BookingCardState extends State<BookingCard> {
     final String badgeText = isRejected
         ? "Request Rejected"
         : "Request Approved";
-    final IconData badgeIcon = isRejected
-        ? Icons.error
-        : Icons.check_circle_outline;
+
+    final String badgeIcon = isRejected
+        ? "assets/icons/reqRej.png"
+        : "assets/icons/reqApp.png";
 
     return Container(
       width: double.infinity,
@@ -119,7 +121,7 @@ class _BookingCardState extends State<BookingCard> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(badgeIcon, color: textColor, size: 16),
+                Image.asset(badgeIcon, height: 20.h, width: 20.w),
                 SizedBox(width: 6.w),
                 Text(
                   badgeText,

@@ -18,6 +18,7 @@ class Appimages {
   static const String providerIcon = "assets/icons/provider_icon.png";
   static const String rProviderIcon = "assets/icons/r_provider.png";
   static const String checkIcon = "assets/icons/check.png";
+  static const String crossIcon = "assets/icons/crossIcon.png";
   static const String checkOffer = "assets/icons/checkout_offer.png";
   static const String cartComponent = "assets/icons/cart_comp.png";
   static const String coupon = "assets/icons/coupon.png";
@@ -66,6 +67,17 @@ class Appimages {
   static const String plumberIcon = "assets/icons/plumber.png";
   static const String verifiedIcon = "assets/icons/verified.png";
   static const String cameraIcon = "assets/icons/camera-icon.png";
+  static const String whatsappIcon = "assets/icons/whatsapp.png";
+  static const String newJob = "assets/icons/newjob.png";
+  static const String ongoingJob = "assets/icons/ongoingjob.png";
+  static const String completedJob = "assets/icons/comjob.png";
+  static const String requestReject = "assets/icons/reqRej.png";
+  static const String requestApprove = "assets/icons/reqApp.png";
+  static const String gPayIcon = "assets/icons/gPay.png";
+  static const String codIcon = "assets/icons/cod.png";
+  static const String phonePeIcon = "assets/icons/phonepe.png";
+  static const String paytmIcon = "assets/icons/paytm.png";
+  static const String shareIcon = "assets/icons/shareIcon.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";
@@ -96,4 +108,6 @@ class Appimages {
   static const String locationProfile = "assets/images/locationProfile.png";
   static const String requestLocationImage =
       "assets/images/request_location.png";
+  static const String kycImage = "assets/images/kyc_vpn.png";
+  static const String kycBg = "assets/images/kyc_bg.png";
 }

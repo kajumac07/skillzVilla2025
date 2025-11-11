@@ -23,10 +23,16 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
   int selectedIndex = 0;
 
   final List<String> tabs = ["New", "Ongoing", "Completed"];
-  final List<IconData> icons = [
-    Icons.work_outline,
-    Icons.access_time,
-    Icons.verified_outlined,
+  // final List<IconData> icons = [
+  //   Icons.work_outline,
+  //   Icons.access_time,
+  //   Icons.verified_outlined,
+  // ];
+
+  final List<String> icons = [
+    Appimages.newJob,
+    Appimages.ongoingJob,
+    Appimages.completedJob,
   ];
 
   String? userType;
@@ -95,9 +101,10 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              Image.asset(
                                 icons[index],
-                                size: 18.sp,
+                                height: 20.h,
+                                width: 20.w,
                                 color: isSelected
                                     ? Colors.white
                                     : Colors.black54,
