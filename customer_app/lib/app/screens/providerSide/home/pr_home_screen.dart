@@ -264,9 +264,13 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 2.w),
               decoration: BoxDecoration(
+                // color: kRed,
                 borderRadius: BorderRadius.circular(22.r),
-                color: kWhite,
-                boxShadow: [BoxShadow(color: kPrimaryLight, blurRadius: 5)],
+                image: DecorationImage(
+                  image: AssetImage(Appimages.providerBg2),
+                  fit: BoxFit.cover,
+                ),
+                boxShadow: [BoxShadow(color: kPrimaryLight, blurRadius: 1)],
               ),
               clipBehavior: Clip.hardEdge,
               child: Stack(

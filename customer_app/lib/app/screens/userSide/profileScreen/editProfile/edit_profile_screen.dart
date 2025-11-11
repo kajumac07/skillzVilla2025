@@ -73,79 +73,124 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         child: Column(
           children: [
             // ===== TOP PROFILE SECTION =====
-            Column(
-              children: [
-                // Background image
-                Container(
-                  height: 224.h,
-                  width: width,
-                  margin: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(Appimages.profileBg),
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      CustomText(
-                        label: displayName,
-                        fontWeight: FontWeight.bold,
-                        size: 18.sp,
+            // ✅ Fixed Top Profile Section (using Stack)
+            SizedBox(
+              height: 270.h,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  // Background profile image
+                  Positioned(
+                    top: 20.h,
+                    left: 20.w,
+                    right: 20.w,
+                    child: Container(
+                      height: 224.h,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(Appimages.profileEditBg),
+                          fit: BoxFit.fill,
+                        ),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
-                      CustomText(label: displayNumber, size: 14.sp),
-                      SizedBox(height: 25.h),
-                    ],
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          CustomText(
+                            label: displayName,
+                            fontWeight: FontWeight.bold,
+                            size: 15.sp,
+                          ),
+                          CustomText(label: displayNumber, size: 12.sp),
+                          SizedBox(height: 25.h),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
 
-                // Overlapping tabs (Company / Bank)
-                Transform.translate(
-                  offset: Offset(0, -30.h),
-                  child: Container(
-                    height: 70.h,
-                    width: width,
-                    margin: EdgeInsets.symmetric(horizontal: 28.w),
-                    decoration: BoxDecoration(
-                      color: kWhite,
-                      borderRadius: BorderRadius.circular(12.r),
-                      boxShadow: [
-                        BoxShadow(
-                          color: kPrimaryLight,
-                          blurRadius: 6,
-                          offset: Offset(0, 3),
+                  // Profile image
+                  Positioned(
+                    top: 60.h,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: 105.h,
+                      width: 100.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: kRed,
+                        image: DecorationImage(
+                          image: AssetImage(Appimages.profileNew),
+                          fit: BoxFit.contain,
                         ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: _tabButton(
-                            icon: Icons.person_outline,
-                            title: tabTitle,
-                            isSelected: selectedSection == 'company',
-                            onTap: () =>
-                                setState(() => selectedSection = 'company'),
-                          ),
-                        ),
-                        SizedBox(width: 8.w),
-                        Expanded(
-                          child: _tabButton(
-                            icon: Icons.account_balance_outlined,
-                            title: "Bank Details",
-                            isSelected: selectedSection == 'bank',
-                            onTap: () =>
-                                setState(() => selectedSection = 'bank'),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+
+                  // Camera icon (top-right corner)
+                  Positioned(
+                    top: 32.h,
+                    right: 60.w,
+                    child: Image.asset(
+                      Appimages.cameraIcon,
+                      height: 30.h,
+                      width: 24.w,
+                    ),
+                  ),
+
+                  // Overlapping white card (Wallet, Bookings, Help)
+                  Positioned(
+                    bottom: -35.h,
+                    left: 10.w,
+                    right: 10.w,
+                    child: Container(
+                      height: 78.h,
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 5.w,
+                        vertical: 8.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: kWhite,
+                        borderRadius: BorderRadius.circular(12.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: kPrimaryLight,
+                            blurRadius: 6,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: _tabButton(
+                              icon: Icons.person_outline,
+                              title: tabTitle,
+                              isSelected: selectedSection == 'company',
+                              onTap: () =>
+                                  setState(() => selectedSection = 'company'),
+                            ),
+                          ),
+                          SizedBox(width: 8.w),
+                          Expanded(
+                            child: _tabButton(
+                              icon: Icons.account_balance_outlined,
+                              title: "Bank Details",
+                              isSelected: selectedSection == 'bank',
+                              onTap: () =>
+                                  setState(() => selectedSection = 'bank'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
+
+            SizedBox(height: 40.h),
 
             // ===== CONTENT SECTION =====
             AnimatedSwitcher(
@@ -255,9 +300,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   // ===== BANK DETAILS FORM =====
   Widget _buildBankDetails() {
-    return Padding(
+    return Container(
       key: const ValueKey('bank'),
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+      margin: EdgeInsets.all(12.r),
+      decoration: BoxDecoration(
+        color: kWhite,
+        borderRadius: BorderRadius.circular(12.r),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

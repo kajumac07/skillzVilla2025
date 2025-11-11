@@ -78,6 +78,7 @@ class Appimages {
   static const String phonePeIcon = "assets/icons/phonepe.png";
   static const String paytmIcon = "assets/icons/paytm.png";
   static const String shareIcon = "assets/icons/shareIcon.png";
+  static const String profileNew = "assets/icons/profileN.png";
 
   //images
   static const String authBackground = "assets/images/auth_background.png";
@@ -100,6 +101,7 @@ class Appimages {
   static const String bookingMap = "assets/images/booking_map.png";
   static const String walletBackground = "assets/images/Wallet.png";
   static const String profileBg = "assets/images/profile_bg.png";
+  static const String profileBg2 = "assets/images/profile_bg_n.png";
   static const String prBg = "assets/images/prbg.png";
   static const String prBanner = "assets/images/pr_banner.png";
   static const String empImage = "assets/images/emp_img.png";
@@ -110,4 +112,7 @@ class Appimages {
       "assets/images/request_location.png";
   static const String kycImage = "assets/images/kyc_vpn.png";
   static const String kycBg = "assets/images/kyc_bg.png";
+  static const String providerBg = "assets/images/providerBg.png";
+  static const String providerBg2 = "assets/images/planBgProvider.png";
+  static const String profileEditBg = "assets/images/editPrBg.png";
 }

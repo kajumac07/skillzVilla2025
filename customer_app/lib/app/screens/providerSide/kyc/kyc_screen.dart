@@ -17,7 +17,7 @@ class KycScreen extends StatefulWidget {
 
 class _KycScreenState extends State<KycScreen> {
   final _sharedPref = AppSharedPrefData();
-  String? _selectedType = "Company";
+  String? _selectedType;
 
   @override
   Widget build(BuildContext context) {
@@ -72,13 +72,13 @@ class _KycScreenState extends State<KycScreen> {
                   SizedBox(height: 8.h),
 
                   // Center Image
-                  Image.asset(Appimages.kycImage, height: 140.h),
+                  Image.asset(Appimages.kycImage, height: 180.h),
                   SizedBox(height: 12.h),
 
                   // Enter As Text
                   CustomText(
                     label: "Enter As",
-                    size: 18.sp,
+                    size: 14.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
@@ -88,8 +88,16 @@ class _KycScreenState extends State<KycScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      buildFreelanceAndCompany("Freelance", kPrimary),
-                      buildFreelanceAndCompany("Company", kSecondary),
+                      Expanded(
+                        child: buildFreelanceAndCompany("Company", kPrimary),
+                      ),
+                      SizedBox(width: 15.w),
+                      Expanded(
+                        child: buildFreelanceAndCompany(
+                          "Freelancer",
+                          kSecondary,
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -124,26 +132,39 @@ class _KycScreenState extends State<KycScreen> {
   // ---------------------------------------------------------------------------
   // ✅ Custom widget for Freelance/Company button
   // ---------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+  // ✅ Custom widget for Freelance/Company button (with scale animation)
+  // ---------------------------------------------------------------------------
   Widget buildFreelanceAndCompany(String title, Color color) {
     final bool isSelected = _selectedType == title;
 
     return GestureDetector(
-      onTap: () async {
+      onTapDown: (_) {
+        // add immediate visual feedback
         setState(() => _selectedType = title);
-        await _sharedPref.saveKycType(title);
       },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeInOut,
-        child: CircularButton(
-          buttonColor: isSelected ? color : Colors.grey.shade300,
-          buttonText: title,
-          onPressed: () async {
-            setState(() => _selectedType = title);
-            await _sharedPref.saveKycType(title);
-          },
-          height: 40.h,
-          textSize: 16.sp,
+      onTapUp: (_) async {
+        await _sharedPref.saveKycType(title);
+        // optional: trigger a small delay to let animation finish
+        await Future.delayed(const Duration(milliseconds: 100));
+      },
+      child: AnimatedScale(
+        duration: const Duration(milliseconds: 150),
+        scale: isSelected ? 1.05 : 1.0, // scale-up on selection
+        curve: Curves.easeOutBack,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOut,
+          child: CircularButton(
+            buttonColor: color,
+            buttonText: title,
+            onPressed: () async {
+              setState(() => _selectedType = title);
+              await _sharedPref.saveKycType(title);
+            },
+            height: 40.h,
+            textSize: 16.sp,
+          ),
         ),
       ),
     );
