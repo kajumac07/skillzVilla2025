@@ -228,7 +228,7 @@ class _RequestLocationScreenState extends State<RequestLocationScreen> {
               // 🔹 Button Area
               CircularButton(
                 buttonColor: kPrimary,
-                buttonText: isSubmitted ? "Upgrade Plan" : "Submit",
+                buttonText: isSubmitted ? "Submit" : "Submit",
                 onPressed: () {
                   setState(() {
                     // toggle between states

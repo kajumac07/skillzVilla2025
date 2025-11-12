@@ -2,7 +2,6 @@ import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/models/need_today.dart';
-import 'package:customer_app/app/global/models/product_model.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
 import 'package:customer_app/app/screens/userSide/home/widgets/offers_chips.dart';
@@ -29,8 +28,12 @@ class _HomeScreenState extends State<HomeScreen> {
     {"icon": Appimages.repairsIcon, "label": "Repairs"},
     {"icon": Appimages.electricIcon, "label": "Electrics"},
     {"icon": Appimages.paintingIcon, "label": "Painting"},
+
     {"icon": Appimages.salonIcon, "label": "Salon"},
     {"icon": Appimages.cleaningIcon, "label": "Cleaning"},
+    {"icon": Appimages.repairsIcon, "label": "Repairs"},
+    {"icon": Appimages.electricIcon, "label": "Electrics"},
+    {"icon": Appimages.paintingIcon, "label": "Painting"},
   ];
 
   final List<Map<String, dynamic>> menusTwo = [
@@ -39,8 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
     {"icon": Appimages.chefIcon, "label": "Chef"},
     {"icon": Appimages.carpainterIcon, "label": "Carpenter"},
     {"icon": Appimages.plumberIcon, "label": "Plumber"},
+
     {"icon": Appimages.porterIcon, "label": "Porter"},
     {"icon": Appimages.spaIcon, "label": "Spa"},
+    {"icon": Appimages.chefIcon, "label": "Chef"},
+    {"icon": Appimages.carpainterIcon, "label": "Carpenter"},
+    {"icon": Appimages.plumberIcon, "label": "Plumber"},
   ];
 
   // Sample need today data
@@ -86,38 +93,40 @@ class _HomeScreenState extends State<HomeScreen> {
             buildBannerCard(),
             SizedBox(height: 5.h),
             //categories icon
-            Container(
-              height: 70.h,
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 3.h),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: menusTwo.length,
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                itemBuilder: (ctx, index) {
-                  final item = menusTwo[index];
-                  return Padding(
-                    padding: EdgeInsets.only(right: 18.w, left: 2.w),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 40.h,
-                          width: 40.w,
-                          padding: EdgeInsets.all(8.w),
-                          child: Image.asset(item['icon']),
-                        ),
-                        // SizedBox(height: 6.h),
-                        Text(
-                          item['label'],
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            color: Colors.black,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+              child: Container(
+                height: 70.h,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: menus.length,
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (ctx, index) {
+                    final item = menusTwo[index];
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 13.w),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 40.h,
+                            width: 40.w,
+                            padding: EdgeInsets.all(8.w),
+                            child: Image.asset(item['icon']),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                          // SizedBox(height: 6.h),
+                          Text(
+                            item['label'],
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
 
@@ -184,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Column(
                       children: [
                         Container(
-                          height: 50.h,
+                          height: 62.h,
                           width: width * 0.2,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
@@ -556,7 +565,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (ctx, index) {
                   final item = menus[index];
                   return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    padding: EdgeInsets.symmetric(horizontal: 12.w),
                     child: Column(
                       children: [
                         Container(

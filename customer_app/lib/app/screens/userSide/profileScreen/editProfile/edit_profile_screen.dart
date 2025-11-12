@@ -219,7 +219,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       behavior: HitTestBehavior.opaque,
       child: Container(
         height: 60.h,
-        margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 4.w),
+        margin: EdgeInsets.symmetric(vertical: 3.h, horizontal: 6.w),
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xFFFFEAEA) : Colors.transparent,
           borderRadius: BorderRadius.circular(12.r),
@@ -279,8 +279,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             _inputField(label: "Phone", hint: displayNumber),
             _inputField(label: "Email", hint: "xyz@gmail.com"),
             _dropdownField(label: "Department", hint: "HR"),
-            SizedBox(height: 24.h),
-            _saveButton("Save & Verify"),
+            // SizedBox(height: 24.h),
+            // _saveButton("Save & Verify"),
           ] else ...[
             Text(
               "Profile Details",
@@ -293,6 +293,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             _inputField(label: "DOB", hint: "DD/MM/YYYY"),
             _inputField(label: "Email", hint: "john@gmail.com"),
           ],
+          SizedBox(height: 20.h),
+          _saveButton("Save & Verify"),
         ],
       ),
     );

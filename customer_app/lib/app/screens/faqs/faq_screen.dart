@@ -38,7 +38,7 @@ class FaqScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('FAQ', style: appStyle(18.sp, k232323, FontWeight.w600)),
+        title: Text('Faq', style: appStyle(18.sp, k232323, FontWeight.w600)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

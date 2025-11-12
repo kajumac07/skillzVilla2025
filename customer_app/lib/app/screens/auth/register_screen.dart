@@ -45,8 +45,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // SizedBox(height: 220.h),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.025),
-                  Image.asset(Appimages.authImage, height: 150.h, width: width),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.071),
+                  Image.asset(Appimages.authImage, height: 140.h, width: width),
                   SizedBox(height: 10.h),
                   CustomText(
                     label: "Sign Up",
@@ -93,25 +93,52 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: () {},
                     width: double.infinity,
                   ),
-                  SizedBox(height: 25.h),
+                  SizedBox(height: 15.h),
 
                   // // Divider with Or
-                  // Row(
-                  //   children: [
-                  //     Spacer(),
-                  //     Expanded(child: Divider(color: Colors.grey.shade400)),
-                  //     Padding(
-                  //       padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  //       child: Text(
-                  //         "Or",
-                  //         style: appStyle(14.sp, k232323, FontWeight.w500),
-                  //       ),
-                  //     ),
-                  //     Expanded(child: Divider(color: Colors.grey.shade400)),
-                  //     Spacer(),
-                  //   ],
-                  // ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.18),
+
+                  // Divider with Or
+                  Row(
+                    children: [
+                      Spacer(),
+                      Expanded(child: Divider(color: Colors.grey.shade400)),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        child: Text(
+                          "Or",
+                          style: appStyle(14.sp, k232323, FontWeight.w500),
+                        ),
+                      ),
+                      Expanded(child: Divider(color: Colors.grey.shade400)),
+                      Spacer(),
+                    ],
+                  ),
+
+                  SizedBox(height: 15.h),
+
+                  // Social login buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 22.r,
+                        backgroundColor: Colors.white,
+                        child: Image.asset(
+                          Appimages.googleIcon,
+                          height: 44.h,
+                          width: 44.w,
+                        ),
+                      ),
+                      SizedBox(width: 20.w),
+                      CircleAvatar(
+                        radius: 22.r,
+                        backgroundColor: Colors.white,
+                        child: Icon(Icons.apple, size: 26.sp, color: k232323),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.05),
 
                   // Sign up text
                   GestureDetector(

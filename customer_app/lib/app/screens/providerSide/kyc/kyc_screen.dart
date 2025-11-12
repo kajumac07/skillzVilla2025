@@ -94,7 +94,7 @@ class _KycScreenState extends State<KycScreen> {
                       SizedBox(width: 15.w),
                       Expanded(
                         child: buildFreelanceAndCompany(
-                          "Freelancer",
+                          "Freelance",
                           kSecondary,
                         ),
                       ),
@@ -129,12 +129,6 @@ class _KycScreenState extends State<KycScreen> {
     );
   }
 
-  // ---------------------------------------------------------------------------
-  // ✅ Custom widget for Freelance/Company button
-  // ---------------------------------------------------------------------------
-  // ---------------------------------------------------------------------------
-  // ✅ Custom widget for Freelance/Company button (with scale animation)
-  // ---------------------------------------------------------------------------
   Widget buildFreelanceAndCompany(String title, Color color) {
     final bool isSelected = _selectedType == title;
 

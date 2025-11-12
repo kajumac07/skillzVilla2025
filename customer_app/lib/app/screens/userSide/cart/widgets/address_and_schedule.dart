@@ -319,7 +319,7 @@ class _AddressAndScheduleState extends State<AddressAndSchedule> {
                   ],
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 4.0),
+                  padding: EdgeInsets.only(left: 6.0.w),
                   child: Icon(Icons.arrow_back_ios, size: 20.sp),
                 ),
               ),

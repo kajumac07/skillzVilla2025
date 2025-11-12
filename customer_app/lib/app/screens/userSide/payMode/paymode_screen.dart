@@ -23,7 +23,7 @@ class _PayModeScreenState extends State<PayModeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'PAYMENT',
+          'Payment',
           style: appStyle(18.sp, k232323, FontWeight.w500),
         ),
         centerTitle: false,

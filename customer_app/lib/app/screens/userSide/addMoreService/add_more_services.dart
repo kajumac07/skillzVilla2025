@@ -4,8 +4,10 @@ import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
+import 'package:customer_app/app/screens/userSide/payMode/paymode_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class AddMoreServices extends StatefulWidget {
@@ -60,7 +62,7 @@ class _AddMoreServicesState extends State<AddMoreServices> {
       appBar: AppBar(
         title: Text(
           'Add More Services',
-          style: appStyle(18.sp, k232323, FontWeight.w600),
+          style: appStyle(18.sp, k232323, FontWeight.w500),
         ),
       ),
       body: SingleChildScrollView(
@@ -457,7 +459,7 @@ class _AddMoreServicesState extends State<AddMoreServices> {
               child: CircularButton(
                 buttonColor: kPrimary,
                 buttonText: "Procees to Checkout",
-                onPressed: () {},
+                onPressed: () => Get.to(() => PayModeScreen()),
                 width: 1.sw,
               ),
             ),
