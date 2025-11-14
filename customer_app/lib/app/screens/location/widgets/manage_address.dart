@@ -49,6 +49,8 @@ class ManageAddressScreen extends StatelessWidget {
                                 Image.asset(
                                   Appimages.mapIcon,
                                   color: kGreenAccent,
+                                  height: 35.h,
+                                  width: 35.w,
                                 ),
                                 SizedBox(width: 5.w),
                                 Flexible(

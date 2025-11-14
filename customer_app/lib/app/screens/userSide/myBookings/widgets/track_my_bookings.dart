@@ -153,7 +153,11 @@ class _TrackMyBookingsScrenState extends State<TrackMyBookingsScren> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset(Appimages.whatsappIcon),
+                        Image.asset(
+                          Appimages.whatsappIcon,
+                          height: 25.h,
+                          width: 25.w,
+                        ),
                         SizedBox(width: 5.w),
                         Text(
                           "Whatsapp",

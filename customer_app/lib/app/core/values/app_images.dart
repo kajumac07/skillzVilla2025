@@ -94,7 +94,7 @@ class Appimages {
   static const String deepClean = "assets/images/deep_clean.png";
   static const String waterPurifier = "assets/images/water_purifier.png";
   static const String laptopService = "assets/images/laptop.png";
-  static const String garden = "assets/images/gardeing.png";
+  static const String garden = "assets/images/gardening.png";
   static const String slashBg = "assets/images/splash_bg.png";
   static const String subCategorybgImg = "assets/images/subServiceImage.png";
   static const String bookingConfirmed = "assets/images/booking_confirmed.png";

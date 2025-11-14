@@ -149,7 +149,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     top: 60.h,
                     left: 0,
                     right: 0,
-
                     child: Container(
                       height: 105.h,
                       width: 100.w,
@@ -166,12 +165,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   // Camera icon (top-right corner)
                   Positioned(
-                    top: 20.h,
-                    right: 25.w,
+                    top: 27.h,
+                    right: 40.w,
                     child: Image.asset(
                       Appimages.cameraIcon,
                       height: 24.h,
-                      width: 24.w,
+                      width: 44.w,
                     ),
                   ),
 
