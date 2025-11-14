@@ -184,6 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
             //more categories card
             Container(
               height: MediaQuery.of(context).size.height * 0.11,
+              width: double.maxFinite,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                 child: ListView.builder(
@@ -193,8 +194,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Column(
                       children: [
                         Container(
-                          height: 62.h,
-                          width: width * 0.2,
+                          height: 60.h,
+                          width: 72.w,
+                          // width: width * 0.2,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: kPrimaryLight),
@@ -264,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(Appimages.magicIcon),
+            Image.asset(Appimages.magicIcon, height: 40.h, width: 40.w),
             SizedBox(width: 10.w),
             CustomText(
               label: "In The Spotlight",
@@ -272,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
               fontWeight: FontWeight.bold,
             ),
             SizedBox(width: 5.w),
-            Image.asset(Appimages.magicIcon),
+            Image.asset(Appimages.magicIcon, height: 40.h, width: 40.w),
           ],
         ),
         //Image banner

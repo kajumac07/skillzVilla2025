@@ -37,7 +37,7 @@ class Appimages {
   static const String language = "assets/icons/lng.png";
   static const String privacy = "assets/icons/privacy.png";
   static const String helpCenter = "assets/icons/help_center.png";
-  static const String walletIcon = "assets/icons/wallet_icon.png";
+  static const String walletIcon = "assets/icons/Wallet.png";
   static const String drawerIcon = "assets/icons/drawer.png";
   static const String jobIcon = "assets/icons/jobIcon.png";
   static const String earnIcon = "assets/icons/earnIcon.png";
@@ -51,7 +51,7 @@ class Appimages {
   static const String sCheckIcon = "assets/icons/SealCheck.png";
   static const String deleteIcon = "assets/icons/delete.png";
   static const String rightIcon = "assets/icons/correct.png";
-  static const String wrongIcon = "assets/icons/wrongIcon.png";
+  static const String wrongIcon = "assets/icons/wrong.png";
   static const String bankIcon = "assets/icons/bankIcon.png";
   static const String pIcon = "assets/icons/pIcon.png";
   static const String pMembershipIcon = "assets/icons/plan_membership_icon.png";
@@ -65,8 +65,8 @@ class Appimages {
   static const String chefIcon = "assets/icons/chef.png";
   static const String carpainterIcon = "assets/icons/carpainter.png";
   static const String plumberIcon = "assets/icons/plumber.png";
-  static const String verifiedIcon = "assets/icons/verified.png";
-  static const String cameraIcon = "assets/icons/camera-icon.png";
+  static const String verifiedIcon = "assets/icons/verify.png";
+  static const String cameraIcon = "assets/icons/camera_icon.png";
   static const String whatsappIcon = "assets/icons/whatsapp.png";
   static const String newJob = "assets/icons/newjob.png";
   static const String ongoingJob = "assets/icons/ongoingjob.png";

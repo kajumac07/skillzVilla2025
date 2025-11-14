@@ -184,7 +184,7 @@ class ManageAddressScreen extends StatelessWidget {
           ),
           // Back button
           Positioned(
-            top: 50,
+            top: 10,
             left: 20,
             child: GestureDetector(
               onTap: () {
@@ -204,7 +204,10 @@ class ManageAddressScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Icon(Icons.arrow_back_ios, size: 20.sp),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  child: Icon(Icons.arrow_back_ios, size: 20.sp),
+                ),
               ),
             ),
           ),
