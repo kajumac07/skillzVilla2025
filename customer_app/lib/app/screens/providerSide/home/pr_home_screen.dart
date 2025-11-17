@@ -476,7 +476,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(imageName, height: 24.h, width: 24.w),
+            Image.asset(imageName, height: 24.h, width: 24.w, color: kDark),
             SizedBox(height: 8.h),
             CustomText(
               label: count,

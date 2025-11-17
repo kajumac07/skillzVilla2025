@@ -9,18 +9,18 @@ class ListTileOptions extends StatelessWidget {
     required this.imageName,
     required this.title,
     required this.onTap,
-    this.color = kSecondary,
+    // this.color = kSecondary,
   });
   final String imageName;
   final String title;
   final void Function()? onTap;
-  final Color color;
+  // final Color color;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      leading: Image.asset(imageName, height: 24.h, width: 24.w, color: color),
+      leading: Image.asset(imageName, height: 25.h, width: 25.w),
       title: CustomText(
         label: title,
         size: 16.sp,

@@ -231,6 +231,21 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
 
             SizedBox(height: 8.h),
 
+            if (status == 2) ...[
+              Container(
+                padding: EdgeInsets.all(5.w),
+                decoration: BoxDecoration(
+                  color: kSecondaryLight.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Text(
+                  "Earnings: 1200",
+                  style: appStyle(12.sp, kSecondary, FontWeight.w300),
+                ),
+              ),
+              SizedBox(height: 8.h),
+            ],
+
             /// Employee chips for New tab
             if (status == 0) ...[
               Row(
@@ -297,7 +312,7 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
       case 2: // Completed
         return Container(
           height: 24.h,
-          width: MediaQuery.of(context).size.width * 0.29,
+          width: MediaQuery.of(context).size.width * 0.27,
           decoration: BoxDecoration(
             color: const Color(0xffE8FBE2),
             borderRadius: BorderRadius.circular(12.r),
@@ -305,7 +320,7 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(Appimages.rightIcon, height: 14.h),
+              Image.asset(Appimages.rightIcon, height: 10.h, width: 10.w),
               SizedBox(width: 4.w),
               Text(
                 "Completed",
@@ -399,7 +414,9 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
         shape: BoxShape.circle,
         border: Border.all(color: color),
       ),
-      child: Center(child: Image.asset(image)),
+      child: Center(
+        child: Image.asset(image, height: 20.h, width: 20.w),
+      ),
     );
   }
 

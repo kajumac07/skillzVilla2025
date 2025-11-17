@@ -45,7 +45,7 @@ class ProfileSettingsScreen extends StatelessWidget {
         imageName: imageName,
         title: title,
         onTap: onTap,
-        color: k232323,
+        // color: k232323,
       ),
     );
   }

@@ -37,7 +37,7 @@ class _PayoutNdEarningsScreenState extends State<PayoutNdEarningsScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -122,7 +122,7 @@ class _PayoutNdEarningsScreenState extends State<PayoutNdEarningsScreen> {
                   gridData: FlGridData(
                     show: false,
                     getDrawingHorizontalLine: (value) =>
-                        FlLine(color: Colors.grey.shade200, strokeWidth: 1),
+                        FlLine(color: Colors.grey.shade200, strokeWidth: 2),
                   ),
                   titlesData: FlTitlesData(
                     leftTitles: AxisTitles(
@@ -157,7 +157,7 @@ class _PayoutNdEarningsScreenState extends State<PayoutNdEarningsScreen> {
                                   Container(
                                     margin: EdgeInsets.only(top: 4.h),
                                     width: 45.w,
-                                    height: 17.h,
+                                    height: 16.h,
                                     decoration: isActive
                                         ? BoxDecoration(
                                             color: kPrimary,
@@ -226,7 +226,7 @@ class _PayoutNdEarningsScreenState extends State<PayoutNdEarningsScreen> {
 
             Container(
               width: width,
-              padding: EdgeInsets.all(8.r),
+              padding: EdgeInsets.all(5.r),
               // margin: EdgeInsets.all(4.r),
               decoration: BoxDecoration(
                 color: kWhite,
@@ -288,8 +288,8 @@ class _PayoutNdEarningsScreenState extends State<PayoutNdEarningsScreen> {
       barRods: [
         BarChartRodData(
           toY: y,
-          width: 26.w, // thicker bars
-          borderRadius: BorderRadius.circular(8.r),
+          width: 40.w, // thicker bars
+          borderRadius: BorderRadius.circular(14.r),
           gradient: LinearGradient(
             colors: isActive
                 ? [Color(0xffFFBEBF), Color(0xffFFBEBF)]

@@ -28,7 +28,7 @@ class ManageAddressScreen extends StatelessWidget {
                 physics: BouncingScrollPhysics(),
                 child: Container(
                   // color: Colors.white,
-                  padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                  padding: EdgeInsets.only(left: 10.w, right: 10.w, top: 10.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -93,12 +93,18 @@ class ManageAddressScreen extends StatelessWidget {
                           children: [
                             // Form fields
                             _buildTextField('House/Flat'),
-                            SizedBox(height: 15),
+                            SizedBox(height: 10.h),
                             _buildTextField('Landmark'),
-                            SizedBox(height: 15),
+                            SizedBox(height: 10.h),
                             _buildTextField('Name'),
-                            SizedBox(height: 15),
+                            SizedBox(height: 10.h),
                             _buildTextField('Mobile'),
+                            SizedBox(height: 10.h),
+                            _buildTextField('City'),
+                            SizedBox(height: 10.h),
+                            _buildTextField('State'),
+                            SizedBox(height: 10.h),
+                            _buildTextField('Country'),
                             SizedBox(height: 25),
                             // Save as section
                             CustomText(

@@ -1,12 +1,9 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
-import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
-import 'package:customer_app/app/screens/providerSide/kitSelection/kit_selection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class Plan {
   final String title;
@@ -122,7 +119,7 @@ class PlansScreen extends StatefulWidget {
 class _PlansScreenState extends State<PlansScreen> {
   int selectedIndex = 0;
 
-  final List<String> tabs = ["Basic", "Platinum", "Royal"];
+  final List<String> tabs = ["Launch", "Platinum", "Royal"];
 
   final List<Plan> plans = [
     Plan(
@@ -282,10 +279,10 @@ class _PlansScreenState extends State<PlansScreen> {
                         child: ExpansionTile(
                           key: PageStorageKey<String>(plan.title),
                           initiallyExpanded: plan.isExpanded,
-                          tilePadding: EdgeInsets.symmetric(horizontal: 16.w),
-                          childrenPadding: EdgeInsets.only(
-                            bottom: 10.h,
-                          ), // small inner space
+                          // tilePadding: EdgeInsets.symmetric(horizontal: 16.w),
+                          // childrenPadding: EdgeInsets.only(
+                          //   bottom: 10.h,
+                          // ), // small inner space
                           onExpansionChanged: (bool expanded) {
                             setState(() {
                               for (var otherPlan in plans) {
@@ -311,7 +308,7 @@ class _PlansScreenState extends State<PlansScreen> {
                           children: plan.features.map((feature) {
                             return ListTile(
                               leading: Icon(
-                                Icons.check_circle_outline,
+                                Icons.check_circle,
                                 color: kPrimary,
                                 size: 20.sp,
                               ),

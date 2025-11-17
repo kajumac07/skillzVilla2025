@@ -39,7 +39,7 @@ class Appimages {
   static const String helpCenter = "assets/icons/help_center.png";
   static const String walletIcon = "assets/icons/Wallet.png";
   static const String drawerIcon = "assets/icons/drawer.png";
-  static const String jobIcon = "assets/icons/jobIcon.png";
+  static const String jobIcon = "assets/icons/job.png";
   static const String earnIcon = "assets/icons/earnIcon.png";
   static const String premiumIcon = "assets/icons/prIcon.png";
   static const String step1 = "assets/icons/step_1.png";
