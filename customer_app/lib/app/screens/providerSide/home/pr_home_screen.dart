@@ -268,9 +268,9 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                 borderRadius: BorderRadius.circular(22.r),
                 image: DecorationImage(
                   image: AssetImage(Appimages.providerBg2),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
-                boxShadow: [BoxShadow(color: kPrimaryLight, blurRadius: 1)],
+                // boxShadow: [BoxShadow(color: kPrimaryLight, blurRadius: 1)],
               ),
               clipBehavior: Clip.hardEdge,
               child: Stack(

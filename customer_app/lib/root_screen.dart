@@ -31,7 +31,7 @@ class _RootScreenState extends State<RootScreen> {
   List<Widget> get _customerPages => [
     const HomeScreen(),
     const ProfileScreen(),
-    Container(child: const Center(child: Text("Category Page"))),
+    Container(child: const Center(child: Text("Category Screen"))),
     CartScreen(),
     const MyBookingsScreen(),
   ];

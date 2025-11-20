@@ -320,7 +320,7 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(Appimages.rightIcon, height: 10.h, width: 10.w),
+              Image.asset(Appimages.rightIcon, height: 8.h, width: 8.w),
               SizedBox(width: 4.w),
               Text(
                 "Completed",
@@ -383,12 +383,16 @@ class _JobsQueueScreenState extends State<JobsQueueScreen> {
         return Row(
           children: [
             Expanded(
-              child: CustomOutlineButton(
-                title: "View Invoice",
+              child: CircularButton(
+                buttonColor: kPrimary,
+                buttonText: "View Invoice",
                 onPressed: () => Get.to(() => JobInvoiceDetailScreen()),
-                isFullWidth: true,
+                height: 36.h,
+                width: double.infinity,
+                textSize: 14.sp,
               ),
             ),
+
             SizedBox(width: 8.w),
             Expanded(
               child: CustomOutlineButton(
