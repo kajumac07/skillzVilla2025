@@ -336,11 +336,7 @@ class AuthController extends GetxController {
 
       await auth.verifyPhoneNumber(
         phoneNumber: "+91$phone",
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          // Auto verification (rare case)
-          await auth.signInWithCredential(credential);
-          _handleSuccessfulLogin();
-        },
+        verificationCompleted: (PhoneAuthCredential) {},
         verificationFailed: (FirebaseAuthException e) {
           showToastMessage("Error", e.message!, kRed);
         },
@@ -380,13 +376,12 @@ class AuthController extends GetxController {
       );
 
       // Check if user exists in Firestore
-      DocumentSnapshot userDoc = await firestore
+      final docRef = firestore
           .collection('users')
-          .doc(userCredential.user!.uid)
-          .get();
+          .doc(userCredential.user!.uid);
+      final userDoc = await docRef.get();
 
       if (!userDoc.exists) {
-        // User doesn't exist - this shouldn't happen for login
         await auth.signOut();
         showToastMessage(
           "Error",
@@ -396,25 +391,57 @@ class AuthController extends GetxController {
         return;
       }
 
-      _handleSuccessfulLogin();
+      // Defensive: ensure data is a map
+      final data = userDoc.data();
+      if (data == null) {
+        // Unexpected shape
+        await auth.signOut();
+        showToastMessage("Error", "Invalid user data. Contact support.", kRed);
+        return;
+      }
+
+      // Use your UserModel to parse (handles typos/timestamps/types)
+      final userData = UserModel.fromMap(Map<String, dynamic>.from(data));
+
+      // Debug - remove or replace with logger in production
+      print(
+        "DEBUG: userType=${userData.userType}, kycType=${userData.kycType}, isDocSubmitted=${userData.isDocSubmitted}",
+      );
+
+      showToastMessage("Success", "Login successful", kGreenAccent);
+
+      // Navigate based on normalized model fields
+      if (userData.userType == 'customer') {
+        Get.offAll(() => RootScreen());
+        return;
+      }
+
+      if (userData.userType == 'provider') {
+        final kyc = userData.kycType.toLowerCase();
+        if (kyc == 'company' || kyc == 'freelance') {
+          if (userData.isDocSubmitted == true) {
+            Get.offAll(() => RootScreen());
+          } else {
+            Get.offAll(() => KycDocsScreen());
+          }
+        } else {
+          // fallback KYC screen for other provider types
+          Get.offAll(() => KycScreen());
+        }
+        return;
+      }
+
+      // Fallback
+      Get.offAll(() => RootScreen());
     } on FirebaseAuthException catch (e) {
       showToastMessage("Error", e.message ?? "Invalid OTP", kRed);
-    } catch (e) {
+    } catch (e, st) {
+      print("verifyLoginOtp error: $e\n$st");
       showToastMessage("Error", "Something went wrong", kRed);
     } finally {
       isLoginLoading = false;
       update();
     }
-  }
-
-  // -----------------------------
-  // HANDLE SUCCESSFUL LOGIN
-  // -----------------------------
-  void _handleSuccessfulLogin() {
-    showToastMessage("Success", "Login successful", kGreenAccent);
-
-    // Navigate based on user type or to home screen
-    Get.offAll(() => RootScreen());
   }
 
   // -----------------------------

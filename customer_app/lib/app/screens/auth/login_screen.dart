@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   List<FocusNode> _otpFocusNodes = [];
 
   final AuthController authCont = Get.find<AuthController>();
-  String selectedUserType = "customer";
+  // String selectedUserType = "customer";
   bool otpSent = false;
 
   @override
@@ -90,7 +90,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final responsive = ResponsiveAppValue(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -119,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Image.asset(Appimages.authImage, height: 150.h, width: width),
                   SizedBox(height: 14.h),
                   CustomText(
-                    label: "Login as",
+                    label: "Login ",
                     size: 24.sp,
                     color: kDark,
                     fontWeight: FontWeight.bold,
@@ -127,39 +126,38 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 14.h),
 
                   // Customer / Service Provider toggle buttons
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularButton(
-                        buttonColor: selectedUserType == "customer"
-                            ? kPrimary
-                            : kSecondary,
-                        buttonText: "Customer",
-                        onPressed: () {
-                          setState(() {
-                            selectedUserType = "customer";
-                          });
-                        },
-                        textSize: 14.sp,
-                        height: responsive.screenHeight * 0.05,
-                      ),
-                      SizedBox(width: 12.w),
-                      CircularButton(
-                        buttonColor: selectedUserType == "provider"
-                            ? kPrimary
-                            : kSecondary,
-                        buttonText: "Service Provider",
-                        onPressed: () {
-                          setState(() {
-                            selectedUserType = "provider";
-                          });
-                        },
-                        textSize: 14.sp,
-                        height: responsive.screenHeight * 0.05,
-                      ),
-                    ],
-                  ),
-
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     CircularButton(
+                  //       buttonColor: selectedUserType == "customer"
+                  //           ? kPrimary
+                  //           : kSecondary,
+                  //       buttonText: "Customer",
+                  //       onPressed: () {
+                  //         setState(() {
+                  //           selectedUserType = "customer";
+                  //         });
+                  //       },
+                  //       textSize: 14.sp,
+                  //       height: responsive.screenHeight * 0.05,
+                  //     ),
+                  //     SizedBox(width: 12.w),
+                  //     CircularButton(
+                  //       buttonColor: selectedUserType == "provider"
+                  //           ? kPrimary
+                  //           : kSecondary,
+                  //       buttonText: "Service Provider",
+                  //       onPressed: () {
+                  //         setState(() {
+                  //           selectedUserType = "provider";
+                  //         });
+                  //       },
+                  //       textSize: 14.sp,
+                  //       height: responsive.screenHeight * 0.05,
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(height: 15.h),
 
                   Form(
