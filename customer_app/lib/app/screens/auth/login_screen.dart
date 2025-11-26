@@ -2,13 +2,11 @@ import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/core/values/responsive_app.dart';
-import 'package:customer_app/app/global/services/shared_pref.dart';
+import 'package:customer_app/app/global/controller/auth_controller.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/rounded_text_field.dart';
 import 'package:customer_app/app/screens/auth/register_screen.dart';
-import 'package:customer_app/app/screens/location/location_access_screen.dart';
-import 'package:customer_app/app/screens/providerSide/kyc/kyc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -21,45 +19,79 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _phoneController = TextEditingController();
   List<TextEditingController> _otpControllers = [];
   List<FocusNode> _otpFocusNodes = [];
-  final _sharedPref = AppSharedPrefData();
+
+  final AuthController authCont = Get.find<AuthController>();
+  String selectedUserType = "customer";
+  bool otpSent = false;
 
   @override
   void initState() {
     super.initState();
-    _otpControllers = List.generate(5, (_) => TextEditingController());
-    _otpFocusNodes = List.generate(5, (_) => FocusNode());
+    _otpControllers = List.generate(6, (_) => TextEditingController());
+    _otpFocusNodes = List.generate(6, (_) => FocusNode());
+
+    // Add listener to phone controller for auto-send OTP
+    _phoneController.addListener(_onPhoneChanged);
+
+    // Add listener to last OTP field for auto-verify
+    _otpControllers[5].addListener(_onLastOtpChanged);
+  }
+
+  void _onPhoneChanged() {
+    if (_phoneController.text.length == 10 && !otpSent) {
+      // Auto send OTP when phone number reaches 10 digits
+      authCont.checkAndSendOtp(_phoneController.text.trim());
+      setState(() {
+        otpSent = true;
+      });
+
+      // Move focus to first OTP field
+      if (_otpFocusNodes[0].canRequestFocus) {
+        _otpFocusNodes[0].requestFocus();
+      }
+    }
+  }
+
+  void _onLastOtpChanged() {
+    if (_otpControllers[5].text.isNotEmpty) {
+      // Auto verify when last digit (6th) is entered
+      _verifyOtp();
+    }
+  }
+
+  void _verifyOtp() {
+    String otp = _getOtpFromControllers();
+    if (otp.length == 6) {
+      authCont.verifyLoginOtp(otp);
+    }
+  }
+
+  String _getOtpFromControllers() {
+    return _otpControllers.map((controller) => controller.text).join();
   }
 
   @override
   void dispose() {
+    _phoneController.removeListener(_onPhoneChanged);
+    _phoneController.dispose();
     for (var c in _otpControllers) {
       c.dispose();
     }
     for (var f in _otpFocusNodes) {
       f.dispose();
     }
+    _otpControllers[5].removeListener(_onLastOtpChanged);
     super.dispose();
-  }
-
-  void _onCustomerTap() async {
-    await _sharedPref.saveUserType("Customer");
-    await _sharedPref.saveKycType("Customer");
-    Get.to(() => LocationAccessScreen(userType: "Customer"));
-  }
-
-  void _onProviderTap() async {
-    await _sharedPref.saveUserType("Provider");
-    await _sharedPref.saveKycType("Customer");
-    Get.to(() => KycScreen());
   }
 
   @override
   Widget build(BuildContext context) {
     final responsive = ResponsiveAppValue(context);
     return Scaffold(
-      // backgroundColor: Colors.white,
       body: Stack(
         children: [
           // Curved background shape
@@ -83,7 +115,6 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // SizedBox(height: 220.h),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                   Image.asset(Appimages.authImage, height: 150.h, width: width),
                   SizedBox(height: 14.h),
@@ -100,17 +131,29 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CircularButton(
-                        buttonColor: kSecondary,
+                        buttonColor: selectedUserType == "customer"
+                            ? kPrimary
+                            : kSecondary,
                         buttonText: "Customer",
-                        onPressed: _onCustomerTap,
+                        onPressed: () {
+                          setState(() {
+                            selectedUserType = "customer";
+                          });
+                        },
                         textSize: 14.sp,
                         height: responsive.screenHeight * 0.05,
                       ),
                       SizedBox(width: 12.w),
                       CircularButton(
-                        buttonColor: kPrimary,
+                        buttonColor: selectedUserType == "provider"
+                            ? kPrimary
+                            : kSecondary,
                         buttonText: "Service Provider",
-                        onPressed: _onProviderTap,
+                        onPressed: () {
+                          setState(() {
+                            selectedUserType = "provider";
+                          });
+                        },
                         textSize: 14.sp,
                         height: responsive.screenHeight * 0.05,
                       ),
@@ -119,15 +162,32 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   SizedBox(height: 15.h),
 
-                  // Mobile number text field
-                  RoundedTextField(
-                    label: "Mobile No.",
-                    obscureText: false,
-                    keyboardType: TextInputType.phone,
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        // Mobile number text field
+                        RoundedTextField(
+                          label: "Mobile No.",
+                          obscureText: false,
+                          keyboardType: TextInputType.phone,
+                          controller: _phoneController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your mobile number';
+                            } else if (value.length != 10) {
+                              return 'Mobile number must be 10 digits';
+                            }
+                            return null;
+                          },
+                        ),
+                      ],
+                    ),
                   ),
+
                   SizedBox(height: 16.h),
 
-                  // OTP input field with TextFields
+                  // OTP Section
                   Container(
                     height: 40.h,
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -144,10 +204,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.w300,
                         ),
                         Row(
-                          children: List.generate(5, (index) {
+                          children: List.generate(6, (index) {
                             return Padding(
                               padding: EdgeInsets.only(
-                                right: index != 4 ? 4.w : 0,
+                                right: index != 5 ? 4.w : 0,
                               ),
                               child: SizedBox(
                                 width: 29.w,
@@ -160,11 +220,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   maxLength: 1,
                                   cursorWidth: 1.5,
                                   cursorColor: Colors.black,
-                                  // style: GoogleFonts.poppins(
-                                  //   fontSize: 14.sp,
-                                  //   fontWeight: FontWeight.w500,
-                                  //   height: 1.1,
-                                  // ),
                                   style: appStyle(
                                     14.sp,
                                     k232323,
@@ -188,7 +243,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                   onChanged: (value) {
-                                    if (value.isNotEmpty && index < 4) {
+                                    if (value.isNotEmpty && index < 5) {
+                                      // Changed to 5 for 6 digits
                                       _otpFocusNodes[index + 1].requestFocus();
                                     } else if (value.isEmpty && index > 0) {
                                       _otpFocusNodes[index - 1].requestFocus();
@@ -201,6 +257,67 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
+                  ),
+
+                  SizedBox(height: 16.h),
+
+                  // Status message and Resend OTP
+                  GetBuilder<AuthController>(
+                    builder: (controller) {
+                      return Column(
+                        children: [
+                          if (controller.isSendingOtp)
+                            Text(
+                              "Sending OTP...",
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                color: kPrimary,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            )
+                          else if (otpSent && !controller.isSendingOtp)
+                            Text(
+                              "OTP sent to +91${_phoneController.text}",
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                color: kGreenAccent,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+
+                          SizedBox(height: 8.h),
+
+                          // Resend OTP option
+                          if (otpSent)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Didn't receive OTP? ",
+                                  style: TextStyle(fontSize: 12.sp),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    if (_phoneController.text.length == 10) {
+                                      authCont.loginWithPhone(
+                                        phone: _phoneController.text.trim(),
+                                      );
+                                    }
+                                  },
+                                  child: Text(
+                                    "Resend OTP",
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: kPrimary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                        ],
+                      );
+                    },
                   ),
 
                   SizedBox(height: 30.h),

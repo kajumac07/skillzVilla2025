@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
-import 'package:customer_app/app/global/services/shared_pref.dart';
+import 'package:customer_app/app/global/controller/auth_controller.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/screens/providerSide/kyc/widgets/kyc_docs_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,8 +18,43 @@ class KycScreen extends StatefulWidget {
 }
 
 class _KycScreenState extends State<KycScreen> {
-  final _sharedPref = AppSharedPrefData();
+  final AuthController authCont = Get.find<AuthController>();
   String? _selectedType;
+  bool _isUpdating = false;
+
+  // Function to update kycType in Firebase
+  Future<void> _updateKycType() async {
+    if (_selectedType == null) return;
+
+    try {
+      setState(() {
+        _isUpdating = true;
+      });
+
+      final User? user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        Get.snackbar("Error", "User not logged in");
+        return;
+      }
+
+      // Update kycType in Firestore
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).update(
+        {
+          'kycType': _selectedType!.toLowerCase(), // 'company' or 'freelance'
+          'updatedAt': FieldValue.serverTimestamp(),
+        },
+      );
+
+      // Navigate to KYC Docs screen
+      Get.to(() => const KycDocsScreen());
+    } catch (e) {
+      Get.snackbar("Error", "Failed to update KYC type: ${e.toString()}");
+    } finally {
+      setState(() {
+        _isUpdating = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,15 +147,13 @@ class _KycScreenState extends State<KycScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
               child: CircularButton(
-                buttonColor: _selectedType != null
+                buttonColor: _selectedType != null && !_isUpdating
                     ? kPrimary
                     : Colors.grey.shade300,
-                buttonText: "Next",
-                onPressed: _selectedType == null
-                    ? null
-                    : () {
-                        Get.to(() => const KycDocsScreen());
-                      },
+                buttonText: _isUpdating ? "Updating..." : "Next",
+                onPressed: _selectedType != null && !_isUpdating
+                    ? _updateKycType
+                    : null,
                 width: double.infinity,
               ),
             ),
@@ -133,18 +168,12 @@ class _KycScreenState extends State<KycScreen> {
     final bool isSelected = _selectedType == title;
 
     return GestureDetector(
-      onTapDown: (_) {
-        // add immediate visual feedback
+      onTap: () {
         setState(() => _selectedType = title);
-      },
-      onTapUp: (_) async {
-        await _sharedPref.saveKycType(title);
-        // optional: trigger a small delay to let animation finish
-        await Future.delayed(const Duration(milliseconds: 100));
       },
       child: AnimatedScale(
         duration: const Duration(milliseconds: 150),
-        scale: isSelected ? 1.05 : 1.0, // scale-up on selection
+        scale: isSelected ? 1.05 : 1.0,
         curve: Curves.easeOutBack,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
@@ -152,9 +181,8 @@ class _KycScreenState extends State<KycScreen> {
           child: CircularButton(
             buttonColor: color,
             buttonText: title,
-            onPressed: () async {
+            onPressed: () {
               setState(() => _selectedType = title);
-              await _sharedPref.saveKycType(title);
             },
             height: 40.h,
             textSize: 16.sp,
@@ -164,98 +192,3 @@ class _KycScreenState extends State<KycScreen> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // Widget buildFreelanceAndCompany(String title) {
-  //   final isSelected = _selectedType == title;
-
-  //   return GestureDetector(
-  //     onTap: () async {
-  //       setState(() {
-  //         _selectedType = title;
-  //       });
-  //       await _sharedPref.saveKycType(title);
-  //     },
-  //     child: AnimatedContainer(
-  //       duration: const Duration(milliseconds: 200),
-  //       height: 150.h,
-  //       width: 150.w,
-  //       decoration: BoxDecoration(
-  //         color: isSelected ? kPrimary.withOpacity(0.15) : kFFF9D1,
-  //         borderRadius: BorderRadius.circular(15.r),
-  //         // border: Border.all(
-  //         //   color: isSelected ? kPrimary : Colors.transparent,
-  //         //   width: 2,
-  //         // ),
-  //       ),
-  //       child: Stack(
-  //         children: [
-  //           Positioned(
-  //             bottom: 0,
-  //             child: Container(
-  //               height: 66.h,
-  //               width: 150.w,
-  //               decoration: BoxDecoration(
-  //                 color: isSelected ? kPrimary : kDAFAFF,
-  //                 borderRadius: BorderRadius.only(
-  //                   topLeft: title == "Freelance"
-  //                       ? Radius.circular(50.r)
-  //                       : Radius.zero,
-  //                   topRight: title == "Company"
-  //                       ? Radius.circular(40.r)
-  //                       : Radius.zero,
-  //                   bottomLeft: Radius.circular(15.r),
-  //                   bottomRight: Radius.circular(15.r),
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //           Positioned(
-  //             bottom: 10,
-  //             left: 0,
-  //             right: 0,
-  //             child: Container(
-  //               padding: EdgeInsets.all(4.h),
-  //               margin: EdgeInsets.only(left: 20.w, right: 20.w),
-  //               decoration: BoxDecoration(
-  //                 color: isSelected ? kPrimary : kSecondary,
-  //                 borderRadius: BorderRadius.circular(20.r),
-  //               ),
-  //               child: Center(
-  //                 child: Text(
-  //                   title,
-  //                   style: TextStyle(
-  //                     color: isSelected ? Colors.white : Colors.black,
-  //                     fontWeight: FontWeight.w600,
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }

@@ -2,6 +2,7 @@ import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/toasts_msg.dart';
 import 'package:customer_app/app/global/services/db_service.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
+import 'package:customer_app/app/screens/providerSide/kyc/kyc_screen.dart';
 import 'package:customer_app/app/screens/providerSide/kyc/widgets/kyc_docs_screen.dart';
 import 'package:customer_app/root_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,6 +28,8 @@ class AuthController extends GetxController {
   String tempPhone = "";
   String tempUserType = "customer";
   bool isGoogleFlow = false;
+
+  //===================================== Registration Functions =====================================
 
   // -----------------------------
   // STEP 1 — REGISTER WITH PHONE
@@ -122,9 +125,15 @@ class AuthController extends GetxController {
           name: tempName.isEmpty ? "SkilzVilla User" : tempName,
           phNumber: tempPhone,
           email: tempEmail,
-          userTYpe: tempUserType,
+          userType: tempUserType,
           kycType: tempUserType == "customer" ? "customer" : "company",
           imageUrl: "",
+          additionalInfo: [],
+          isDocSubmitted: false,
+          isPhoneVerify: true,
+          isGoogleAccountVerify: isGoogleFlow,
+          createdAt: Timestamp.now(),
+          updatedAt: Timestamp.now(),
         ),
       );
 
@@ -134,7 +143,7 @@ class AuthController extends GetxController {
       if (tempUserType == "customer") {
         Get.offAll(() => RootScreen());
       } else {
-        Get.offAll(() => KycDocsScreen());
+        Get.offAll(() => KycScreen());
       }
     } on FirebaseAuthException catch (e) {
       showToastMessage("Error", e.message ?? "Invalid OTP", kRed);
@@ -293,5 +302,134 @@ class AuthController extends GetxController {
   void setUserType(String type) {
     tempUserType = type;
     update();
+  }
+
+  //===================================== Login Functions =====================================
+
+  bool isLoginLoading = false;
+  bool isSendingOtp = false;
+
+  // -----------------------------
+  // LOGIN WITH PHONE
+  // -----------------------------
+  Future<void> loginWithPhone({required String phone}) async {
+    try {
+      isSendingOtp = true;
+      update();
+
+      tempPhone = phone;
+      await sendLoginOtp(phone);
+    } catch (e) {
+      showToastMessage("Error", "Failed to send OTP", kRed);
+    } finally {
+      isSendingOtp = false;
+      update();
+    }
+  }
+
+  // -----------------------------
+  // SEND LOGIN OTP
+  // -----------------------------
+  Future<void> sendLoginOtp(String phone) async {
+    try {
+      tempPhone = phone;
+
+      await auth.verifyPhoneNumber(
+        phoneNumber: "+91$phone",
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // Auto verification (rare case)
+          await auth.signInWithCredential(credential);
+          _handleSuccessfulLogin();
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          showToastMessage("Error", e.message!, kRed);
+        },
+        codeSent: (String verId, int? resendToken) {
+          verificationId = verId;
+          showToastMessage("Success", "OTP sent successfully", kGreenAccent);
+        },
+        codeAutoRetrievalTimeout: (String verId) {
+          verificationId = verId;
+        },
+      );
+    } catch (e) {
+      showToastMessage("Error", "Failed to send OTP", kRed);
+    }
+  }
+
+  // -----------------------------
+  // VERIFY LOGIN OTP
+  // -----------------------------
+  Future<void> verifyLoginOtp(String otp) async {
+    if (otp.length != 6) {
+      showToastMessage("Error", "Please enter 6-digit OTP", kRed);
+      return;
+    }
+
+    try {
+      isLoginLoading = true;
+      update();
+
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: otp,
+      );
+
+      UserCredential userCredential = await auth.signInWithCredential(
+        credential,
+      );
+
+      // Check if user exists in Firestore
+      DocumentSnapshot userDoc = await firestore
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .get();
+
+      if (!userDoc.exists) {
+        // User doesn't exist - this shouldn't happen for login
+        await auth.signOut();
+        showToastMessage(
+          "Error",
+          "User not found. Please register first.",
+          kRed,
+        );
+        return;
+      }
+
+      _handleSuccessfulLogin();
+    } on FirebaseAuthException catch (e) {
+      showToastMessage("Error", e.message ?? "Invalid OTP", kRed);
+    } catch (e) {
+      showToastMessage("Error", "Something went wrong", kRed);
+    } finally {
+      isLoginLoading = false;
+      update();
+    }
+  }
+
+  // -----------------------------
+  // HANDLE SUCCESSFUL LOGIN
+  // -----------------------------
+  void _handleSuccessfulLogin() {
+    showToastMessage("Success", "Login successful", kGreenAccent);
+
+    // Navigate based on user type or to home screen
+    Get.offAll(() => RootScreen());
+  }
+
+  // -----------------------------
+  // GET OTP FROM CONTROLLERS
+  // -----------------------------
+  String getOtpFromControllers(List<TextEditingController> controllers) {
+    return controllers.map((controller) => controller.text).join();
+  }
+
+  // -----------------------------
+  // AUTO SEND OTP WHEN PHONE IS COMPLETE
+  // -----------------------------
+  void checkAndSendOtp(String phone) {
+    if (phone.length == 10) {
+      loginWithPhone(phone: phone);
+    }
   }
 }
