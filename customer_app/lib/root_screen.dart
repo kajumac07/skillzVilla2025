@@ -1,7 +1,8 @@
 import 'dart:developer';
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
-import 'package:customer_app/app/global/services/shared_pref.dart';
+import 'package:customer_app/app/global/controller/profile_controller.dart';
+import 'package:customer_app/app/screens/auth/login_screen.dart';
 import 'package:customer_app/app/screens/providerSide/adsPromotion/ads_promotion.dart';
 import 'package:customer_app/app/screens/providerSide/home/pr_home_screen.dart';
 import 'package:customer_app/app/screens/providerSide/payoutEarnings/payout_nd_earnings.dart';
@@ -10,7 +11,10 @@ import 'package:customer_app/app/screens/userSide/cart/cart_screen.dart';
 import 'package:customer_app/app/screens/userSide/home/home_screen.dart';
 import 'package:customer_app/app/screens/userSide/myBookings/my_bookings_screen.dart';
 import 'package:customer_app/app/screens/userSide/profileScreen/profile_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
@@ -21,11 +25,14 @@ class RootScreen extends StatefulWidget {
 
 class _RootScreenState extends State<RootScreen> {
   int _currentIndex = 0;
-  String? accountType; // Customer or Provider
-  String? kycType; // Customer / Freelance / Company
+  String userType = "customer"; // customer or provider
+  String kycType = "customer"; // customer / freelance / company
   bool isLoading = true;
+  bool hasError = false;
 
-  final _sharedPref = AppSharedPrefData();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final ProfileController _profileController = Get.find<ProfileController>();
 
   // Customer pages
   List<Widget> get _customerPages => [
@@ -46,7 +53,7 @@ class _RootScreenState extends State<RootScreen> {
   ];
 
   List<Widget> get _pages =>
-      accountType == "Customer" ? _customerPages : _providerPages;
+      userType == "customer" ? _customerPages : _providerPages;
 
   // Customer bottom navigation items
   List<BottomNavigationBarItem> get _customerNavItems => [
@@ -147,31 +154,81 @@ class _RootScreenState extends State<RootScreen> {
   ];
 
   List<BottomNavigationBarItem> get _navItems =>
-      accountType == "Customer" ? _customerNavItems : _providerNavItems;
+      userType == "customer" ? _customerNavItems : _providerNavItems;
 
   @override
   void initState() {
     super.initState();
-    _loadAccountType();
+    _loadUserData();
+    _profileController.fetchUserProfile();
   }
 
-  Future<void> _loadAccountType() async {
-    final userType = await _sharedPref.getUserType();
-    final kyc = await _sharedPref.getKycType();
+  Future<void> _loadUserData() async {
+    try {
+      final User? user = _auth.currentUser;
 
-    log("UserType: $userType | KycType: $kyc");
+      if (user == null) {
+        // User not logged in, redirect to login
+        Get.offAll(() => LoginScreen());
+        return;
+      }
 
-    setState(() {
-      accountType = userType ?? "Customer";
-      kycType = kyc ?? "Customer";
-      isLoading = false;
-    });
+      // Fetch user data from Firestore
+      DocumentSnapshot userDoc = await _firestore
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      if (!userDoc.exists) {
+        // User document doesn't exist
+        setState(() {
+          hasError = true;
+          isLoading = false;
+        });
+        return;
+      }
+
+      // Extract user data
+      Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+
+      setState(() {
+        userType = userData['userType'] ?? 'customer';
+        kycType = userData['kycType'] ?? 'customer';
+        isLoading = false;
+      });
+
+      log("UserType: $userType | KycType: $kycType");
+    } catch (e) {
+      log("Error loading user data: $e");
+      setState(() {
+        hasError = true;
+        isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
+    if (hasError) {
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Error loading user data",
+                style: TextStyle(fontSize: 16, color: Colors.red),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(onPressed: _loadUserData, child: Text("Retry")),
+            ],
+          ),
+        ),
+      );
     }
 
     return Scaffold(
