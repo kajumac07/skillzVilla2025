@@ -46,7 +46,7 @@ class _KycScreenState extends State<KycScreen> {
       );
 
       // Navigate to KYC Docs screen
-      Get.to(() => const KycDocsScreen());
+      Get.to(() => KycDocsScreen());
     } catch (e) {
       Get.snackbar("Error", "Failed to update KYC type: ${e.toString()}");
     } finally {

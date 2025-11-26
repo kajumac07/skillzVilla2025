@@ -1,4 +1,5 @@
 import 'package:customer_app/app/global/controller/auth_controller.dart';
+import 'package:customer_app/app/global/controller/kyc_controller.dart';
 import 'package:customer_app/app/screens/splash/splash_screen.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,6 +12,7 @@ void main() async {
   await Firebase.initializeApp();
   // Initialize
   Get.put(AuthController());
+  Get.put(KycController());
   runApp(DevicePreview(enabled: false, builder: (context) => const MyApp()));
 }
 
