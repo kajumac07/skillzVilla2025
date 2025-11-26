@@ -21,6 +21,11 @@ dependencies:
   intl:
   fl_chart: ^0.68.0
   device_preview:
+  firebase_core:
+  firebase_auth:
+  cloud_firestore:
+  firebase_storage:
+  google_sign_in:
 
 dev_dependencies:
   flutter_test:

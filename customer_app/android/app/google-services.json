@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "83113031694",
+    "firebase_url": "https://skilvilla-default-rtdb.firebaseio.com",
+    "project_id": "skilvilla",
+    "storage_bucket": "skilvilla.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83113031694:android:7742812de52fc4d1a6645f",
+        "android_client_info": {
+          "package_name": "com.skilzvilla.provider"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEqaC4-UaMwwvCwWpNFwScDoMCc0ITgos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83113031694:android:23ad03f946cb23bfa6645f",
+        "android_client_info": {
+          "package_name": "com.skilzvilla.services_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEqaC4-UaMwwvCwWpNFwScDoMCc0ITgos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83113031694:android:9f1eea1d9b2cca7da6645f",
+        "android_client_info": {
+          "package_name": "com.skilzvilla.user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEqaC4-UaMwwvCwWpNFwScDoMCc0ITgos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
