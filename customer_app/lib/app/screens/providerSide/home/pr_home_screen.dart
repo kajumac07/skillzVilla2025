@@ -1,9 +1,8 @@
-import 'dart:developer';
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/utils/toasts_msg.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
-import 'package:customer_app/app/global/services/shared_pref.dart';
+import 'package:customer_app/app/global/controller/profile_controller.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:customer_app/app/global/widgets/fourty_two_circle_icon.dart';
@@ -22,6 +21,8 @@ class ProviderHomeScreen extends StatefulWidget {
 }
 
 class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
+  final profController = Get.find<ProfileController>();
+
   final List<Map<String, dynamic>> dummyBookings = [
     {
       "service": "Deep Cleaning",
@@ -68,30 +69,11 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
   String? userType;
   String? kycType;
   String displayName = "Loading...";
-  final _sharedPref = AppSharedPrefData();
 
   @override
   void initState() {
     super.initState();
-    _loadUserData();
-  }
-
-  Future<void> _loadUserData() async {
-    userType = await _sharedPref.getUserType();
-    kycType = await _sharedPref.getKycType();
-    log("EditProfileScreen → userType: $userType | kycType: $kycType");
-
-    if (userType == "Customer" && kycType == "Customer") {
-      displayName = "Rahul";
-    } else if (userType == "Provider" && kycType == "Freelance") {
-      displayName = "Rohan";
-    } else if (userType == "Provider" && kycType == "Company") {
-      displayName = "XYZ Company";
-    } else {
-      displayName = "Guest User";
-    }
-
-    setState(() {});
+    profController.fetchUserProfile();
   }
 
   @override
@@ -410,7 +392,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
             SizedBox(height: 0.02.sh),
             //heading
             CustomText(
-              label: "Hi ${displayName} ! Check Insights",
+              label: "Hi ${profController.userName} ! Check Insights",
               size: 18.sp,
               color: kGrey400,
               fontWeight: FontWeight.w600,

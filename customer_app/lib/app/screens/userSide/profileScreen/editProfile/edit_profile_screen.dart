@@ -71,148 +71,189 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
         ),
       ),
-      body: GetBuilder<ProfileController>(
-        builder: (controller) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                // ===== TOP PROFILE SECTION =====
-                // ✅ Fixed Top Profile Section (using Stack)
-                SizedBox(
-                  height: 270.h,
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      // Background profile image
-                      Positioned(
-                        top: 20.h,
-                        left: 20.w,
-                        right: 20.w,
-                        child: Container(
-                          height: 224.h,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(Appimages.profileEditBg),
-                              fit: BoxFit.fill,
-                            ),
-                            borderRadius: BorderRadius.circular(12.r),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              CustomText(
-                                label: controller.userName,
-                                fontWeight: FontWeight.bold,
-                                size: 15.sp,
-                              ),
-                              CustomText(
-                                label: controller.userPhone,
-                                size: 12.sp,
-                              ),
-                              SizedBox(height: 25.h),
-                            ],
-                          ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // ===== TOP PROFILE SECTION =====
+            // ✅ Fixed Top Profile Section (using Stack)
+            SizedBox(
+              height: 270.h,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  // Background profile image
+                  Positioned(
+                    top: 20.h,
+                    left: 20.w,
+                    right: 20.w,
+                    child: Container(
+                      height: 224.h,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(Appimages.profileEditBg),
+                          fit: BoxFit.fill,
                         ),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
-
-                      // Profile image
-                      Positioned(
-                        top: 60.h,
-                        left: 0,
-                        right: 0,
-                        child: Container(
-                          height: 105.h,
-                          width: 100.w,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: kRed,
-                            image: DecorationImage(
-                              image: AssetImage(Appimages.profileNew),
-                              fit: BoxFit.contain,
-                            ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          CustomText(
+                            label: profileController.userName,
+                            fontWeight: FontWeight.bold,
+                            size: 15.sp,
                           ),
-                        ),
+                          CustomText(
+                            label: profileController.userPhone,
+                            size: 12.sp,
+                          ),
+                          SizedBox(height: 25.h),
+                        ],
                       ),
-
-                      // Camera icon (top-right corner)
-                      Positioned(
-                        top: 32.h,
-                        right: 60.w,
-                        child: Image.asset(
-                          Appimages.cameraIcon,
-                          height: 30.h,
-                          width: 24.w,
-                        ),
-                      ),
-
-                      // Overlapping white card (Wallet, Bookings, Help)
-                      Positioned(
-                        bottom: -35.h,
-                        left: 10.w,
-                        right: 10.w,
-                        child: Container(
-                          height: 78.h,
-                          width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 5.w,
-                            vertical: 8.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: kWhite,
-                            borderRadius: BorderRadius.circular(12.r),
-                            boxShadow: [
-                              BoxShadow(
-                                color: kPrimaryLight,
-                                blurRadius: 6,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: _tabButton(
-                                  icon: Icons.person_outline,
-                                  title: tabTitle,
-                                  isSelected: selectedSection == 'company',
-                                  onTap: () => setState(
-                                    () => selectedSection = 'company',
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 8.w),
-                              Expanded(
-                                child: _tabButton(
-                                  icon: Icons.account_balance_outlined,
-                                  title: "Bank Details",
-                                  isSelected: selectedSection == 'bank',
-                                  onTap: () =>
-                                      setState(() => selectedSection = 'bank'),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
 
-                SizedBox(height: 40.h),
+                  // Profile image
+                  Positioned(
+                    top: 60.h,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: 105.h,
+                      width: 100.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: kRed,
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            profileController.userModel!.imageUrl,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
 
-                // ===== CONTENT SECTION =====
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: selectedSection == 'company'
-                      ? _buildCompanyDetails()
-                      : _buildBankDetails(),
-                ),
+                  // Camera icon (top-right corner)
+                  Positioned(
+                    top: 32.h,
+                    right: 45.w,
+                    child: GestureDetector(
+                      onTap: () {
+                        // show bottom sheet to choose camera / gallery
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (_) => SafeArea(
+                            child: Wrap(
+                              children: [
+                                ListTile(
+                                  leading: Icon(Icons.camera_alt),
+                                  title: Text('Camera'),
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    // call controller: camera
+                                    final ProfileController pc =
+                                        Get.find<ProfileController>();
+                                    pc.pickAndUploadProfileImage(
+                                      fromCamera: true,
+                                    );
+                                  },
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.photo_library),
+                                  title: Text('Gallery'),
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    final ProfileController pc =
+                                        Get.find<ProfileController>();
+                                    pc.pickAndUploadProfileImage(
+                                      fromCamera: false,
+                                    );
+                                  },
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.close),
+                                  title: Text('Cancel'),
+                                  onTap: () => Navigator.of(context).pop(),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      child: Image.asset(
+                        Appimages.cameraIcon,
+                        height: 24.h,
+                        width: 44.w,
+                      ),
+                    ),
+                  ),
 
-                SizedBox(height: 40.h),
-              ],
+                  // Overlapping white card (Wallet, Bookings, Help)
+                  Positioned(
+                    bottom: -35.h,
+                    left: 10.w,
+                    right: 10.w,
+                    child: Container(
+                      height: 78.h,
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 5.w,
+                        vertical: 8.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: kWhite,
+                        borderRadius: BorderRadius.circular(12.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: kPrimaryLight,
+                            blurRadius: 6,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: _tabButton(
+                              icon: Icons.person_outline,
+                              title: tabTitle,
+                              isSelected: selectedSection == 'company',
+                              onTap: () =>
+                                  setState(() => selectedSection = 'company'),
+                            ),
+                          ),
+                          SizedBox(width: 8.w),
+                          Expanded(
+                            child: _tabButton(
+                              icon: Icons.account_balance_outlined,
+                              title: "Bank Details",
+                              isSelected: selectedSection == 'bank',
+                              onTap: () =>
+                                  setState(() => selectedSection = 'bank'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          );
-        },
+
+            SizedBox(height: 40.h),
+
+            // ===== CONTENT SECTION =====
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              child: selectedSection == 'company'
+                  ? _buildCompanyDetails()
+                  : _buildBankDetails(),
+            ),
+
+            SizedBox(height: 40.h),
+          ],
+        ),
       ),
     );
   }

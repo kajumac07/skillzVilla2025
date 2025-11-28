@@ -130,12 +130,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           width: 100.w,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: kRed,
+                            color: kWhite,
                             image: DecorationImage(
                               image: NetworkImage(
                                 profileController.userModel!.imageUrl,
                               ),
-                              fit: BoxFit.contain,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
@@ -145,10 +145,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Positioned(
                         top: 27.h,
                         right: 40.w,
-                        child: Image.asset(
-                          Appimages.cameraIcon,
-                          height: 24.h,
-                          width: 44.w,
+                        child: GestureDetector(
+                          onTap: () {
+                            // show bottom sheet to choose camera / gallery
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (_) => SafeArea(
+                                child: Wrap(
+                                  children: [
+                                    ListTile(
+                                      leading: Icon(Icons.camera_alt),
+                                      title: Text('Camera'),
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                        // call controller: camera
+                                        final ProfileController pc =
+                                            Get.find<ProfileController>();
+                                        pc.pickAndUploadProfileImage(
+                                          fromCamera: true,
+                                        );
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: Icon(Icons.photo_library),
+                                      title: Text('Gallery'),
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                        final ProfileController pc =
+                                            Get.find<ProfileController>();
+                                        pc.pickAndUploadProfileImage(
+                                          fromCamera: false,
+                                        );
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: Icon(Icons.close),
+                                      title: Text('Cancel'),
+                                      onTap: () => Navigator.of(context).pop(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          child: Image.asset(
+                            Appimages.cameraIcon,
+                            height: 24.h,
+                            width: 44.w,
+                          ),
                         ),
                       ),
 
