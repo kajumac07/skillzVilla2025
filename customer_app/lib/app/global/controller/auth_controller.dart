@@ -1,6 +1,8 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/toasts_msg.dart';
 import 'package:customer_app/app/global/models/bank_details_model.dart';
+import 'package:customer_app/app/global/models/plan_details_model.dart';
+import 'package:customer_app/app/global/models/plan_model.dart';
 import 'package:customer_app/app/global/services/db_service.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/screens/providerSide/kyc/kyc_screen.dart';
@@ -147,6 +149,22 @@ class AuthController extends GetxController {
             branch: "",
             documentUrl: "",
           ),
+          planDetails: PlanDetailsModel(
+            durationInMonths: 0,
+            expiryDate: Timestamp.now(),
+            features: [],
+            isActive: false,
+            originalPrice: "",
+            paymentDocumentId: "",
+            planTitle: "",
+            planType: "",
+            price: "",
+            subscriptionDate: Timestamp.now(),
+          ),
+          isPlanPurchased: false,
+          currentPlan: "",
+          lastPaymentId: "",
+          paymentHistory: [],
         ),
       );
 

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:customer_app/app/global/models/bank_details_model.dart';
+import 'package:customer_app/app/global/models/plan_details_model.dart';
 
 class UserModel {
   final String uid;
@@ -16,8 +17,13 @@ class UserModel {
   final bool isDocSubmitted;
   final bool isPhoneVerify;
   final bool isGoogleAccountVerify;
+  final bool isPlanPurchased;
+  final String currentPlan;
+  final String lastPaymentId;
+  final List<dynamic> paymentHistory;
 
   final BankDetailsModel bankDetails;
+  final PlanDetailsModel planDetails;
 
   final Timestamp createdAt;
   final Timestamp updatedAt;
@@ -34,9 +40,14 @@ class UserModel {
     required this.dob,
     required this.additionalInfo,
     required this.bankDetails,
+    required this.planDetails,
     required this.isPhoneVerify,
     required this.isDocSubmitted,
     required this.isGoogleAccountVerify,
+    required this.isPlanPurchased,
+    required this.currentPlan,
+    required this.lastPaymentId,
+    required this.paymentHistory,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -54,9 +65,14 @@ class UserModel {
       "dob": dob,
       "additionalInfo": additionalInfo,
       "bankDetails": bankDetails.toMap(),
+      "planDetails": planDetails,
       "isPhoneVerify": isPhoneVerify,
       "isDocSubmitted": isDocSubmitted,
       "isGoogleAccountVerify": isGoogleAccountVerify,
+      "isPlanPurchased": isPlanPurchased,
+      "currentPlan": currentPlan,
+      "lastPaymentId": lastPaymentId,
+      "paymentHistory": paymentHistory,
       "createdAt": createdAt,
       "updatedAt": updatedAt,
     };
@@ -77,9 +93,16 @@ class UserModel {
           ? List<dynamic>.from(map["additionalInfo"])
           : [],
       bankDetails: BankDetailsModel.fromMap(map["bankDetails"]),
+      planDetails: PlanDetailsModel.fromMap(map["planDetails"]),
       isDocSubmitted: map["isDocSubmitted"] ?? false,
       isPhoneVerify: map["isPhoneVerify"] ?? false,
       isGoogleAccountVerify: map["isGoogleAccountVerify"] ?? false,
+      isPlanPurchased: map["isPlanPurchased"] ?? false,
+      currentPlan: map["currentPlan"] ?? "",
+      lastPaymentId: map["lastPaymentId"] ?? "",
+      paymentHistory: map["paymentHistory"] != null
+          ? List<dynamic>.from(map["paymentHistory"])
+          : [],
       createdAt: map["createdAt"] ?? Timestamp.now(),
       updatedAt: map["updatedAt"] ?? Timestamp.now(),
     );

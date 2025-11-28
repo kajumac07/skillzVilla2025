@@ -66,10 +66,6 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
     },
   ];
 
-  String? userType;
-  String? kycType;
-  String displayName = "Loading...";
-
   @override
   void initState() {
     super.initState();
@@ -103,7 +99,8 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
               SizedBox(height: 2.h),
               //ad started plan
               buildAdStartedPlan(title: "Ad Starter Plan"),
-              if (userType == "Provider" && kycType == "Company")
+              if (profController.userType == "provider" &&
+                  profController.kycType == "company")
                 buildAdStartedPlan(title: "Listening Plan"),
 
               Padding(
@@ -350,7 +347,8 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    if (userType == "Provider" && kycType == "Company") {
+                    if (profController.userType == "provider" &&
+                        profController.kycType == "company") {
                       Get.to(() => EmployeeManagementScreen());
                     } else {
                       showToastMessage(

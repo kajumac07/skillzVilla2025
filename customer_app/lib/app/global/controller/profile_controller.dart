@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/toasts_msg.dart';
 import 'package:customer_app/app/global/models/bank_details_model.dart';
+import 'package:customer_app/app/global/models/plan_details_model.dart';
 import 'package:customer_app/app/global/models/user_model.dart';
 import 'package:customer_app/app/screens/welcome/welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -137,6 +138,22 @@ class ProfileController extends GetxController {
           isPhoneVerify: userModel!.isPhoneVerify,
           isDocSubmitted: userModel!.isDocSubmitted,
           isGoogleAccountVerify: userModel!.isGoogleAccountVerify,
+          planDetails: PlanDetailsModel(
+            durationInMonths: 0,
+            expiryDate: Timestamp.now(),
+            features: [],
+            isActive: false,
+            originalPrice: "",
+            paymentDocumentId: "",
+            planTitle: "",
+            planType: "",
+            price: "",
+            subscriptionDate: Timestamp.now(),
+          ),
+          isPlanPurchased: false,
+          currentPlan: "",
+          lastPaymentId: "",
+          paymentHistory: [],
           createdAt: userModel!.createdAt,
           updatedAt: Timestamp.now(),
         );
@@ -276,6 +293,22 @@ class ProfileController extends GetxController {
           isPhoneVerify: userModel!.isPhoneVerify,
           isDocSubmitted: userModel!.isDocSubmitted,
           isGoogleAccountVerify: userModel!.isGoogleAccountVerify,
+          planDetails: PlanDetailsModel(
+            durationInMonths: 0,
+            expiryDate: Timestamp.now(),
+            features: [],
+            isActive: false,
+            originalPrice: "",
+            paymentDocumentId: "",
+            planTitle: "",
+            planType: "",
+            price: "",
+            subscriptionDate: Timestamp.now(),
+          ),
+          isPlanPurchased: false,
+          currentPlan: "",
+          lastPaymentId: "",
+          paymentHistory: [],
           createdAt: userModel!.createdAt,
           updatedAt: Timestamp.now(),
         );

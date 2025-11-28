@@ -1,27 +1,12 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
+import 'package:customer_app/app/global/models/plan_model.dart';
+import 'package:customer_app/app/global/services/payment_service.dart';
+import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-class Plan {
-  final String title;
-  final String subtitle;
-  final String currentPrice;
-  final String oldPrice;
-  final List<String> features;
-  bool isExpanded;
-
-  Plan({
-    required this.title,
-    required this.subtitle,
-    required this.currentPrice,
-    required this.oldPrice,
-    required this.features,
-    this.isExpanded = false,
-  });
-}
 
 class _PlanCardHeader extends StatelessWidget {
   final Plan plan;
@@ -118,48 +103,77 @@ class PlansScreen extends StatefulWidget {
 
 class _PlansScreenState extends State<PlansScreen> {
   int selectedIndex = 0;
-
   final List<String> tabs = ["Launch", "Platinum", "Royal"];
+  List<bool> expansionStates = [false, false, false];
 
-  final List<Plan> plans = [
-    Plan(
-      title: "1 Month Plan",
-      subtitle: "Perfect for regular service providers",
-      currentPrice: "₹300",
-      oldPrice: "₹499",
-      features: [
-        "Feature A: Free delivery",
-        "Feature B: 5% off on services",
-        "Feature C: 24/7 Chat Support",
-      ],
-    ),
-    Plan(
-      title: "3 Month Plan",
-      subtitle: "Recommended for growing providers",
-      currentPrice: "₹600",
-      oldPrice: "₹1299",
-      features: [
-        "All 1 Month features",
-        "Premium Feature D: Priority Booking",
-        "Dedicated Account Manager",
-      ],
-    ),
-    Plan(
-      title: "6 Month Plan",
-      subtitle: "Best value for established providers",
-      currentPrice: "₹1200",
-      oldPrice: "₹2499",
-      features: [
-        "All 3 Month features",
-        "Exclusive Access to new features",
-        "Priority Service & VIP Support",
-      ],
-    ),
-  ];
+  List<Plan> get plans {
+    return [
+      Plan(
+        title: "1 Month Plan",
+        subtitle: "Perfect for regular service providers",
+        currentPrice: "300",
+        oldPrice: "499",
+        type: tabs[selectedIndex],
+        durationInMonths: 1,
+        features: [
+          "Feature A: Free delivery",
+          "Feature B: 5% off on services",
+          "Feature C: 24/7 Chat Support",
+        ],
+        isExpanded: expansionStates[0],
+      ),
+      Plan(
+        title: "3 Month Plan",
+        subtitle: "Recommended for growing providers",
+        currentPrice: "600",
+        oldPrice: "1299",
+        type: tabs[selectedIndex],
+        durationInMonths: 3,
+        features: [
+          "All 1 Month features",
+          "Premium Feature D: Priority Booking",
+          "Dedicated Account Manager",
+        ],
+        isExpanded: expansionStates[1],
+      ),
+      Plan(
+        title: "6 Month Plan",
+        subtitle: "Best value for established providers",
+        currentPrice: "1200",
+        oldPrice: "2499",
+        type: tabs[selectedIndex],
+        durationInMonths: 6,
+        features: [
+          "All 3 Month features",
+          "Exclusive Access to new features",
+          "Priority Service & VIP Support",
+        ],
+        isExpanded: expansionStates[2],
+      ),
+    ];
+  }
+
+  void _onExpansionChanged(int index, bool expanded) {
+    setState(() {
+      // Reset all other expansion states and set current one
+      for (int i = 0; i < expansionStates.length; i++) {
+        expansionStates[i] = i == index ? expanded : false;
+      }
+    });
+  }
+
+  void _onTabChanged(int index) {
+    setState(() {
+      selectedIndex = index;
+      // Reset expansion states when tab changes
+      expansionStates = [false, false, false];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
+    PaymentService paymentService = PaymentService(context: context);
 
     return Scaffold(
       appBar: AppBar(
@@ -199,7 +213,7 @@ class _PlansScreenState extends State<PlansScreen> {
             ),
             SizedBox(height: 10.h),
 
-            /// Segmented TabBar (Existing code)
+            /// Segmented TabBar
             Container(
               decoration: BoxDecoration(
                 color: kSecondaryLight.withOpacity(0.3),
@@ -210,7 +224,7 @@ class _PlansScreenState extends State<PlansScreen> {
                   final bool isSelected = selectedIndex == index;
                   return Expanded(
                     child: GestureDetector(
-                      onTap: () => setState(() => selectedIndex = index),
+                      onTap: () => _onTabChanged(index),
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 250),
                         curve: Curves.easeInOut,
@@ -229,7 +243,6 @@ class _PlansScreenState extends State<PlansScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // SizedBox(width: 6.w),
                             Text(
                               tabs[index],
                               style: TextStyle(
@@ -251,7 +264,7 @@ class _PlansScreenState extends State<PlansScreen> {
 
             SizedBox(height: 10.h),
 
-            // --- 3. EXPANDABLE PLAN CARDS ---
+            // --- EXPANDABLE PLAN CARDS ---
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.zero,
@@ -273,25 +286,16 @@ class _PlansScreenState extends State<PlansScreen> {
                       elevation: 0,
                       margin: EdgeInsets.zero,
                       child: Theme(
-                        data: Theme.of(context).copyWith(
-                          dividerColor: Colors.transparent,
-                        ), // 🚫 remove inner divider
+                        data: Theme.of(
+                          context,
+                        ).copyWith(dividerColor: Colors.transparent),
                         child: ExpansionTile(
-                          key: PageStorageKey<String>(plan.title),
+                          key: PageStorageKey<String>(
+                            '${plan.title}-${tabs[selectedIndex]}',
+                          ),
                           initiallyExpanded: plan.isExpanded,
-                          // tilePadding: EdgeInsets.symmetric(horizontal: 16.w),
-                          // childrenPadding: EdgeInsets.only(
-                          //   bottom: 10.h,
-                          // ), // small inner space
                           onExpansionChanged: (bool expanded) {
-                            setState(() {
-                              for (var otherPlan in plans) {
-                                if (otherPlan != plan) {
-                                  otherPlan.isExpanded = false;
-                                }
-                              }
-                              plan.isExpanded = expanded;
-                            });
+                            _onExpansionChanged(index, expanded);
                           },
                           title: _PlanCardHeader(
                             plan: plan,
@@ -305,24 +309,45 @@ class _PlansScreenState extends State<PlansScreen> {
                             color: kPrimary,
                             size: 28.sp,
                           ),
-                          children: plan.features.map((feature) {
-                            return ListTile(
-                              leading: Icon(
-                                Icons.check_circle,
-                                color: kPrimary,
-                                size: 20.sp,
-                              ),
-                              title: Text(
-                                feature,
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                              contentPadding: EdgeInsets.only(
-                                left: 20.w,
-                                right: 10.w,
-                              ),
-                              dense: true,
-                            );
-                          }).toList(),
+                          children: [
+                            ...plan.features.map((feature) {
+                              return ListTile(
+                                leading: Icon(
+                                  Icons.check_circle,
+                                  color: kPrimary,
+                                  size: 20.sp,
+                                ),
+                                title: Text(
+                                  feature,
+                                  style: TextStyle(fontSize: 14.sp),
+                                ),
+                                contentPadding: EdgeInsets.only(
+                                  left: 20.w,
+                                  right: 10.w,
+                                ),
+                                dense: true,
+                              );
+                            }).toList(),
+                            SizedBox(height: 10.h),
+                            CircularButton(
+                              buttonColor: kPrimary,
+                              buttonText: "Subscribe",
+                              onPressed: () {
+                                double amount = double.parse(plan.currentPrice);
+                                String packageType = tabs[selectedIndex];
+
+                                paymentService.pay(
+                                  amount,
+                                  packageType,
+                                  plan,
+                                  true,
+                                );
+                              },
+                              height: 35.h,
+                              width: 320.w,
+                            ),
+                            SizedBox(height: 10.h),
+                          ],
                         ),
                       ),
                     ),
@@ -333,7 +358,7 @@ class _PlansScreenState extends State<PlansScreen> {
 
             SizedBox(height: 10.h),
 
-            //explore kit selection
+            // Explore kit selection (commented out)
             // CircularButton(
             //   buttonColor: kPrimary,
             //   buttonText: "Kit Selection",
