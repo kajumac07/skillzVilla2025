@@ -164,6 +164,8 @@ class AuthController extends GetxController {
           isPlanPurchased: false,
           currentPlan: "",
           lastPaymentId: "",
+          jobsCompleted: 0,
+          totalEarning: 0,
           paymentHistory: [],
         ),
       );

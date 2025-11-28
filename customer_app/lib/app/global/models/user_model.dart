@@ -24,6 +24,8 @@ class UserModel {
 
   final BankDetailsModel bankDetails;
   final PlanDetailsModel planDetails;
+  final num jobsCompleted;
+  final num totalEarning;
 
   final Timestamp createdAt;
   final Timestamp updatedAt;
@@ -48,6 +50,8 @@ class UserModel {
     required this.currentPlan,
     required this.lastPaymentId,
     required this.paymentHistory,
+    required this.jobsCompleted,
+    required this.totalEarning,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -73,6 +77,8 @@ class UserModel {
       "currentPlan": currentPlan,
       "lastPaymentId": lastPaymentId,
       "paymentHistory": paymentHistory,
+      "jobsCompleted": jobsCompleted,
+      "totalEarning": totalEarning,
       "createdAt": createdAt,
       "updatedAt": updatedAt,
     };
@@ -103,6 +109,8 @@ class UserModel {
       paymentHistory: map["paymentHistory"] != null
           ? List<dynamic>.from(map["paymentHistory"])
           : [],
+      jobsCompleted: map["jobsCompleted"] ?? 0,
+      totalEarning: map["totalEarning"] ?? 0,
       createdAt: map["createdAt"] ?? Timestamp.now(),
       updatedAt: map["updatedAt"] ?? Timestamp.now(),
     );

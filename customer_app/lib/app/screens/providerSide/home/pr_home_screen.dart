@@ -1,5 +1,6 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
+import 'package:customer_app/app/core/utils/calculate_remaining_days.dart';
 import 'package:customer_app/app/core/utils/toasts_msg.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/controller/profile_controller.dart';
@@ -216,7 +217,12 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                 size: 14.sp,
                 fontWeight: FontWeight.bold,
               ),
-              CustomText(label: "6 days left", size: 10.sp, color: kGrey200),
+              CustomText(
+                label:
+                    "${calculateRemainingDays(profController.userModel!.planDetails.subscriptionDate, profController.userModel!.planDetails.expiryDate)} days left",
+                size: 10.sp,
+                color: kGrey200,
+              ),
             ],
           ),
           Spacer(),
@@ -249,7 +255,6 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                   image: AssetImage(Appimages.providerBg2),
                   fit: BoxFit.fill,
                 ),
-                // boxShadow: [BoxShadow(color: kPrimaryLight, blurRadius: 1)],
               ),
               clipBehavior: Clip.hardEdge,
               child: Stack(
@@ -303,7 +308,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
 
                         SizedBox(height: 8.h),
                         Text(
-                          "14 Days left",
+                          "${calculateRemainingDays(profController.userModel!.planDetails.subscriptionDate, profController.userModel!.planDetails.expiryDate)} days left",
                           style: appStyle(10, kGrey300, FontWeight.bold),
                         ),
                       ],
@@ -406,7 +411,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                   Expanded(
                     child: buildStatsCard(
                       Appimages.jobIcon,
-                      "120",
+                      profController.userModel!.jobsCompleted.toString(),
                       "Jobs Completed",
                       kSecondary,
                     ),
@@ -414,7 +419,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                   Expanded(
                     child: buildStatsCard(
                       Appimages.earnIcon,
-                      "300",
+                      profController.userModel!.totalEarning.toString(),
                       "Earnings To-Date",
                       kPrimary,
                     ),
@@ -422,7 +427,10 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                   Expanded(
                     child: buildStatsCard(
                       Appimages.premiumIcon,
-                      "30 days",
+                      calculateRemainingDays(
+                        profController.userModel!.planDetails.subscriptionDate,
+                        profController.userModel!.planDetails.expiryDate,
+                      ),
                       "Plan Premium",
                       kFFF9D1,
                     ),
