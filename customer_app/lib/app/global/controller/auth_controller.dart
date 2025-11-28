@@ -1,5 +1,6 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/toasts_msg.dart';
+import 'package:customer_app/app/global/models/bank_details_model.dart';
 import 'package:customer_app/app/global/services/db_service.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/screens/providerSide/kyc/kyc_screen.dart';
@@ -127,13 +128,25 @@ class AuthController extends GetxController {
           email: tempEmail,
           userType: tempUserType,
           kycType: tempUserType == "customer" ? "customer" : "company",
-          imageUrl: "",
+          imageUrl:
+              "https://firebasestorage.googleapis.com/v0/b/skilvilla.appspot.com/o/profileN.png?alt=media&token=75de6f1c-851d-4d1d-8e8f-a225813ba703",
+          whatsApp: "",
+          dob: "",
           additionalInfo: [],
           isDocSubmitted: false,
           isPhoneVerify: true,
           isGoogleAccountVerify: isGoogleFlow,
           createdAt: Timestamp.now(),
           updatedAt: Timestamp.now(),
+          bankDetails: BankDetailsModel(
+            accountNumber: "",
+            confirmAccountNumber: "",
+            ifscCode: "",
+            phone: "",
+            upiId: "",
+            branch: "",
+            documentUrl: "",
+          ),
         ),
       );
 

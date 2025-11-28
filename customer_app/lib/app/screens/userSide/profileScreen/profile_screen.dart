@@ -1,9 +1,7 @@
-import 'dart:developer';
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
 import 'package:customer_app/app/core/values/app_images.dart';
 import 'package:customer_app/app/global/controller/profile_controller.dart';
-import 'package:customer_app/app/global/services/shared_pref.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_divider.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
@@ -59,12 +57,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onTap: () => Get.to(() => NotificationScreens()),
           ),
           SizedBox(width: 10.w),
-          TapImageIcon(
-            imageName: Appimages.editIcon,
-            onTap: () {
-              Get.to(() => EditProfileScreen());
-            },
-          ),
+          if (profileController.canEditProfile)
+            TapImageIcon(
+              imageName: Appimages.editIcon,
+              onTap: () {
+                Get.to(() => EditProfileScreen());
+              },
+            ),
           SizedBox(width: 10.w),
         ],
       ),
@@ -133,7 +132,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             shape: BoxShape.circle,
                             color: kRed,
                             image: DecorationImage(
-                              image: AssetImage(Appimages.profileNew),
+                              image: NetworkImage(
+                                profileController.userModel!.imageUrl,
+                              ),
                               fit: BoxFit.contain,
                             ),
                           ),

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:customer_app/app/global/models/bank_details_model.dart';
 
 class UserModel {
   final String uid;
@@ -8,11 +9,15 @@ class UserModel {
   final String userType;
   final String kycType;
   final String imageUrl;
+  final String whatsApp;
+  final String dob;
 
   final List<dynamic> additionalInfo;
   final bool isDocSubmitted;
   final bool isPhoneVerify;
   final bool isGoogleAccountVerify;
+
+  final BankDetailsModel bankDetails;
 
   final Timestamp createdAt;
   final Timestamp updatedAt;
@@ -25,7 +30,10 @@ class UserModel {
     required this.userType,
     required this.kycType,
     required this.imageUrl,
+    required this.whatsApp,
+    required this.dob,
     required this.additionalInfo,
+    required this.bankDetails,
     required this.isPhoneVerify,
     required this.isDocSubmitted,
     required this.isGoogleAccountVerify,
@@ -33,7 +41,6 @@ class UserModel {
     required this.updatedAt,
   });
 
-  // Convert model → Firestore map
   Map<String, dynamic> toMap() {
     return {
       "uid": uid,
@@ -43,7 +50,10 @@ class UserModel {
       "userType": userType,
       "kycType": kycType,
       "imageUrl": imageUrl,
+      "whatsApp": whatsApp,
+      "dob": dob,
       "additionalInfo": additionalInfo,
+      "bankDetails": bankDetails.toMap(),
       "isPhoneVerify": isPhoneVerify,
       "isDocSubmitted": isDocSubmitted,
       "isGoogleAccountVerify": isGoogleAccountVerify,
@@ -52,7 +62,6 @@ class UserModel {
     };
   }
 
-  // Firestore map → Model
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       uid: map["uid"] ?? "",
@@ -62,15 +71,15 @@ class UserModel {
       userType: map["userType"] ?? "",
       kycType: map["kycType"] ?? "",
       imageUrl: map["imageUrl"] ?? "",
-
+      whatsApp: map["whatsApp"] ?? "",
+      dob: map["dob"] ?? "",
       additionalInfo: map["additionalInfo"] != null
           ? List<dynamic>.from(map["additionalInfo"])
           : [],
-
+      bankDetails: BankDetailsModel.fromMap(map["bankDetails"]),
       isDocSubmitted: map["isDocSubmitted"] ?? false,
       isPhoneVerify: map["isPhoneVerify"] ?? false,
       isGoogleAccountVerify: map["isGoogleAccountVerify"] ?? false,
-
       createdAt: map["createdAt"] ?? Timestamp.now(),
       updatedAt: map["updatedAt"] ?? Timestamp.now(),
     );

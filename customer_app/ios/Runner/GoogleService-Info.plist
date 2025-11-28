@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>83113031694-rqeoq6rpmd82tsald8amk9q55ng6q9hp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.83113031694-rqeoq6rpmd82tsald8amk9q55ng6q9hp</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>83113031694-ipo718f342ljq45pdiqhp217ob4lkush.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDeOq83Rv7X98hvXzkwYuNtR8fw-q27Fs8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>83113031694</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.customerApp</string>
+	<key>PROJECT_ID</key>
+	<string>skilvilla</string>
+	<key>STORAGE_BUCKET</key>
+	<string>skilvilla.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:83113031694:ios:812febcade7b7083a6645f</string>
+	<key>DATABASE_URL</key>
+	<string>https://skilvilla-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
