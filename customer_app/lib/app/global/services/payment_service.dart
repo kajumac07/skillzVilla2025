@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:customer_app/app/global/models/plan_model.dart';
-import 'package:customer_app/app/screens/providerSide/providerPlans/plans_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -54,6 +53,51 @@ class PaymentService {
     }
   }
 
+  //handle kit purchase
+  Future<void> payForKit(
+    double amount,
+    String tshirtSizes,
+    String waistSizes,
+    String idCardType,
+    num idCardQuantity,
+  ) async {
+    _razorpay = Razorpay();
+    var options = {
+      'key': "rzp_test_jWDZLNgkvFm2JM",
+      'amount': (amount * 100).round(),
+      'name': 'Skilz Villa',
+      'description': 'Payment for the Kit Purchase',
+      'retry': {'enabled': true, 'max_count': 3},
+      'send_sms_hash': true,
+      'prefill': {
+        'contact': FirebaseAuth.instance.currentUser?.phoneNumber,
+        'email': 'support@skilzvilla.com',
+      },
+    };
+
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, (
+      PaymentSuccessResponse response,
+    ) {
+      _handleKitPaymentSuccess(
+        amount,
+        response,
+        tshirtSizes,
+        waistSizes,
+        idCardType,
+        idCardQuantity,
+      );
+    });
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentErrorResponse);
+
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      dispose();
+      debugPrint('Error: $e');
+    }
+  }
+
+  //handle plan purchase success
   void _handlePaymentSuccess(
     double amount,
     PaymentSuccessResponse response,
@@ -125,6 +169,67 @@ class PaymentService {
         },
         'paymentHistory': FieldValue.arrayUnion([paymentDocId]),
       });
+
+      Fluttertoast.showToast(msg: 'Payment Successful!');
+
+      // Show success message
+      _showAlertDialog('Success', 'Subscription activated successfully!');
+    } catch (error) {
+      debugPrint('Error storing payment data: $error');
+      _showAlertDialog(
+        'Error',
+        'Failed to save payment details. Please contact support.',
+      );
+    }
+  }
+
+  //handle kit purchase success
+  void _handleKitPaymentSuccess(
+    double amount,
+    PaymentSuccessResponse response,
+    String tshirtSizes,
+    String waistSizes,
+    String idCardType,
+    num idCardQuantity,
+  ) async {
+    Fluttertoast.showToast(msg: 'Please wait.....');
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      _showAlertDialog('Error', 'User not found');
+      return;
+    }
+    final userId = user.uid;
+    CollectionReference userCollection = FirebaseFirestore.instance.collection(
+      'users',
+    );
+    CollectionReference kitCollections = FirebaseFirestore.instance.collection(
+      'kits',
+    );
+
+    try {
+      DocumentReference kitDocRef = kitCollections.doc();
+      String kitDocId = kitDocRef.id;
+
+      await kitDocRef.set({
+        'id': kitDocId,
+        'userID': userId,
+        'tshirtSizes': tshirtSizes,
+        'waistSizes': waistSizes,
+        'idCardType': idCardType,
+        'idCardQuantity': idCardQuantity,
+        'amount': amount.toString(),
+        'razorpayPaymentId': response.paymentId,
+        'razorpayOrderId': response.orderId,
+        'razorpaySignature': response.signature,
+        'timepaid': FieldValue.serverTimestamp(),
+        'subscriptionDate': FieldValue.serverTimestamp(),
+        'status': 'completed',
+        'createdAt': FieldValue.serverTimestamp(),
+        'updatedAt': FieldValue.serverTimestamp(),
+      });
+
+      // Step 2: Then update user collection with plan details and payment document ID
+      await userCollection.doc(userId).update({'isKitIssued': true});
 
       Fluttertoast.showToast(msg: 'Payment Successful!');
 

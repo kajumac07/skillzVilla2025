@@ -1,5 +1,6 @@
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/appStyles.dart';
+import 'package:customer_app/app/global/services/payment_service.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/global/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +16,53 @@ class KitSelectionScreen extends StatefulWidget {
 class _KitSelectionScreenState extends State<KitSelectionScreen> {
   int idCardCount = 1;
 
+  // Dropdown values
+  final List<String> tshirtSizes = ['S', 'M', 'L', 'XL', 'XXL', '2XL'];
+  final List<String> waistSizes = ['28', '30', '32', '34', '36', '38', '40'];
+  final List<String> idCardOptions = ['Standard', 'Premium', 'Laminated'];
+
+  // Selected values
+  String? selectedTshirtSize;
+  String? selectedWaistSize;
+  String? selectedIdCardType;
+
+  // Price constants
+  final double uniformPrice = 1000.0;
+  final double waistSizePrice = 200.0;
+  final double idCardBasePrice = 200.0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Set default values if needed
+    selectedTshirtSize = tshirtSizes[0];
+    selectedWaistSize = waistSizes[0];
+    selectedIdCardType = idCardOptions[0];
+  }
+
+  // Calculate total amount dynamically
+  double calculateTotalAmount() {
+    return uniformPrice + waistSizePrice + (idCardBasePrice * idCardCount);
+  }
+
+  // Calculate ID card amount (quantity * base price)
+  double calculateIdCardAmount() {
+    return idCardBasePrice * idCardCount;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final PaymentService paymentService = PaymentService(context: context);
+
+    // Calculate amounts
+    final double totalAmount = calculateTotalAmount();
+    final double idCardAmount = calculateIdCardAmount();
+
     return Scaffold(
       backgroundColor: const Color(0xffFAF9F9),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        // automaticallyImplyLeading: false,
         title: CustomText(
           label: "Kit Selection",
           size: 18.sp,
@@ -45,10 +85,37 @@ class _KitSelectionScreenState extends State<KitSelectionScreen> {
               ),
               child: Column(
                 children: [
-                  _dropdownField("T-Shirt Size :"),
-                  _dropdownField("Waist Size :"),
-                  _dropdownField("ID Card :"),
-                  _quantityField("ID Card :"),
+                  _dropdownField(
+                    label: "T-Shirt Size :",
+                    value: selectedTshirtSize,
+                    items: tshirtSizes,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedTshirtSize = value;
+                      });
+                    },
+                  ),
+                  _dropdownField(
+                    label: "Waist Size :",
+                    value: selectedWaistSize,
+                    items: waistSizes,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedWaistSize = value;
+                      });
+                    },
+                  ),
+                  _dropdownField(
+                    label: "ID Card Type :",
+                    value: selectedIdCardType,
+                    items: idCardOptions,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedIdCardType = value;
+                      });
+                    },
+                  ),
+                  _quantityField("ID Card Quantity :"),
                 ],
               ),
             ),
@@ -77,11 +144,28 @@ class _KitSelectionScreenState extends State<KitSelectionScreen> {
                     style: appStyle(16.sp, kGrey400, FontWeight.w100),
                   ),
                   SizedBox(height: 10.h),
-                  _billRow("Uniform", "₹1000"),
-                  _billRow("ID Card", "₹200"),
-                  _billRow("Cap", "₹200"),
+                  _billRow(
+                    "Uniform (${selectedTshirtSize ?? 'Not selected'})",
+                    "₹${uniformPrice.toStringAsFixed(0)}",
+                  ),
+                  _billRow(
+                    "ID Card (${selectedIdCardType ?? 'Not selected'})",
+                    "₹${idCardBasePrice.toStringAsFixed(0)}",
+                  ),
+                  _billRow(
+                    "Waist Size (${selectedWaistSize ?? 'Not selected'})",
+                    "₹${waistSizePrice.toStringAsFixed(0)}",
+                  ),
+                  _billRow(
+                    "ID Card Quantity (x$idCardCount)",
+                    "₹${idCardAmount.toStringAsFixed(0)}",
+                  ),
                   const Divider(height: 25),
-                  _billRow("Grand Total", "₹1400", isBold: true),
+                  _billRow(
+                    "Grand Total",
+                    "₹${totalAmount.toStringAsFixed(0)}",
+                    isBold: true,
+                  ),
                 ],
               ),
             ),
@@ -89,8 +173,34 @@ class _KitSelectionScreenState extends State<KitSelectionScreen> {
             SizedBox(height: 10.h),
             CircularButton(
               buttonColor: kPrimary,
-              buttonText: "Save Service",
-              onPressed: () {},
+              buttonText: "Save Kit Selection",
+              onPressed: () async {
+                // Get the dynamically calculated amount
+                double amount = calculateTotalAmount();
+
+                // Validate that all selections are made
+                if (selectedTshirtSize == null ||
+                    selectedWaistSize == null ||
+                    selectedIdCardType == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        "Please make all selections before proceeding",
+                      ),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                  return;
+                }
+
+                await paymentService.payForKit(
+                  amount,
+                  selectedTshirtSize!,
+                  selectedWaistSize!,
+                  selectedIdCardType!,
+                  idCardCount,
+                );
+              },
               width: width,
               height: 42.h,
               textSize: 16,
@@ -99,16 +209,17 @@ class _KitSelectionScreenState extends State<KitSelectionScreen> {
           ],
         ),
       ),
-      // bottomSheet: Padding(
-      //   padding: const EdgeInsets.all(8.0),
-      //   child:
-      // ),
     );
   }
 
   // ==== REUSABLE WIDGETS ====
 
-  Widget _dropdownField(String label) {
+  Widget _dropdownField({
+    required String label,
+    required String? value,
+    required List<String> items,
+    required Function(String?) onChanged,
+  }) {
     return Padding(
       padding: EdgeInsets.only(bottom: 12.h),
       child: Container(
@@ -125,7 +236,32 @@ class _KitSelectionScreenState extends State<KitSelectionScreen> {
               label,
               style: TextStyle(fontSize: 14.sp, color: Colors.black87),
             ),
-            const Icon(Icons.arrow_drop_down, color: kGrey400),
+            Container(
+              width: 120.w, // Fixed width for dropdown
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  value: value,
+                  isExpanded: true,
+                  icon: const Icon(Icons.arrow_drop_down, color: kGrey400),
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  items: items.map((String item) {
+                    return DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(
+                        item,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 14.sp),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: onChanged,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -141,7 +277,7 @@ class _KitSelectionScreenState extends State<KitSelectionScreen> {
           color: const Color(0xffF2F2F6),
           borderRadius: BorderRadius.circular(12.r),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 5.w),
+        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 5.w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -191,14 +327,18 @@ class _KitSelectionScreenState extends State<KitSelectionScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: appStyle(
-              14.sp,
-              kGrey300,
-              isBold ? FontWeight.bold : FontWeight.w200,
+          Expanded(
+            child: Text(
+              title,
+              style: appStyle(
+                14.sp,
+                kGrey300,
+                isBold ? FontWeight.bold : FontWeight.w200,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
+          SizedBox(width: 10.w),
           Text(
             amount,
             style: appStyle(

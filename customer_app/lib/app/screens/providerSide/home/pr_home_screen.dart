@@ -219,7 +219,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
               ),
               CustomText(
                 label:
-                    "${calculateRemainingDays(profController.userModel!.planDetails.subscriptionDate, profController.userModel!.planDetails.expiryDate)} days left",
+                    "${calculateRemainingDays(profController.userModel!.planDetails!.subscriptionDate, profController.userModel!.planDetails!.expiryDate)} days left",
                 size: 10.sp,
                 color: kGrey200,
               ),
@@ -308,7 +308,7 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
 
                         SizedBox(height: 8.h),
                         Text(
-                          "${calculateRemainingDays(profController.userModel!.planDetails.subscriptionDate, profController.userModel!.planDetails.expiryDate)} days left",
+                          "${calculateRemainingDays(profController.userModel!.planDetails!.subscriptionDate, profController.userModel!.planDetails!.expiryDate)} days left",
                           style: appStyle(10, kGrey300, FontWeight.bold),
                         ),
                       ],
@@ -428,8 +428,8 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                     child: buildStatsCard(
                       Appimages.premiumIcon,
                       calculateRemainingDays(
-                        profController.userModel!.planDetails.subscriptionDate,
-                        profController.userModel!.planDetails.expiryDate,
+                        profController.userModel!.planDetails!.subscriptionDate,
+                        profController.userModel!.planDetails!.expiryDate,
                       ),
                       "Plan Premium",
                       kFFF9D1,

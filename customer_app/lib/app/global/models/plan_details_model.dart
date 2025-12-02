@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PlanDetailsModel {
-  final int durationInMonths; // 1/3/6 etc.
-  final Timestamp expiryDate; // end date of subscription
-  final List<String> features; // list of plan features
-  final bool isActive; // true if plan still active
-  final String originalPrice; // old price with ₹ or string
-  final String paymentDocumentId; // id from 'plan_purchases'
-  final String planTitle; // e.g. "3 Month Plan"
-  final String planType; // "Launch" | "Platinum" | "Royal"
-  final String price; // current price string like ₹600
-  final Timestamp subscriptionDate; // start date timestamp
+  final int durationInMonths;
+  final Timestamp expiryDate;
+  final List<String> features;
+  final bool isActive;
+  final String originalPrice;
+  final String paymentDocumentId;
+  final String planTitle;
+  final String planType;
+  final String price;
+  final Timestamp subscriptionDate;
 
   PlanDetailsModel({
     required this.durationInMonths,
@@ -25,6 +25,23 @@ class PlanDetailsModel {
     required this.subscriptionDate,
   });
 
+  // ✅ Helper to create an empty/default model cleanly
+  factory PlanDetailsModel.empty() {
+    return PlanDetailsModel(
+      durationInMonths: 0,
+      expiryDate: Timestamp.now(),
+      features: [],
+      isActive: false,
+      originalPrice: "",
+      paymentDocumentId: "",
+      planTitle: "",
+      planType: "",
+      price: "",
+      subscriptionDate: Timestamp.now(),
+    );
+  }
+
+  // ✅ This function is correct, but YOU MUST CALL IT in UserModel
   Map<String, dynamic> toMap() {
     return {
       'durationInMonths': durationInMonths,

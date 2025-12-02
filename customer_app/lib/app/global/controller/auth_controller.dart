@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/toasts_msg.dart';
 import 'package:customer_app/app/global/models/bank_details_model.dart';
@@ -148,18 +150,6 @@ class AuthController extends GetxController {
             branch: "",
             documentUrl: "",
           ),
-          planDetails: PlanDetailsModel(
-            durationInMonths: 0,
-            expiryDate: Timestamp.now(),
-            features: [],
-            isActive: false,
-            originalPrice: "",
-            paymentDocumentId: "",
-            planTitle: "",
-            planType: "",
-            price: "",
-            subscriptionDate: Timestamp.now(),
-          ),
           isPlanPurchased: false,
           currentPlan: "",
           lastPaymentId: "",
@@ -181,7 +171,8 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       showToastMessage("Error", e.message ?? "Invalid OTP", kRed);
     } catch (e) {
-      showToastMessage("Error", "Something went wrong", kRed);
+      log("Error" + e.toString());
+      showToastMessage("Error", "Something went wrong ${e}", kRed);
     } finally {
       isOtpLoading = false;
       update();
