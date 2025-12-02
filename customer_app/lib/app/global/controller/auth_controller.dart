@@ -2,7 +2,6 @@ import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/core/utils/toasts_msg.dart';
 import 'package:customer_app/app/global/models/bank_details_model.dart';
 import 'package:customer_app/app/global/models/plan_details_model.dart';
-import 'package:customer_app/app/global/models/plan_model.dart';
 import 'package:customer_app/app/global/services/db_service.dart';
 import 'package:customer_app/app/global/widgets/circular_button.dart';
 import 'package:customer_app/app/screens/providerSide/kyc/kyc_screen.dart';
@@ -166,6 +165,7 @@ class AuthController extends GetxController {
           lastPaymentId: "",
           jobsCompleted: 0,
           totalEarning: 0,
+          isKitIssued: false,
           paymentHistory: [],
         ),
       );

@@ -2,6 +2,7 @@ import 'package:customer_app/app/core/constants/consts.dart';
 import 'package:customer_app/app/global/controller/auth_controller.dart';
 import 'package:customer_app/app/global/controller/kyc_controller.dart';
 import 'package:customer_app/app/global/controller/profile_controller.dart';
+import 'package:customer_app/app/global/controller/user_controller.dart';
 import 'package:customer_app/app/screens/splash/splash_screen.dart';
 import 'package:customer_app/root_screen.dart';
 import 'package:device_preview/device_preview.dart';
@@ -18,6 +19,7 @@ void main() async {
   Get.put(AuthController());
   Get.put(KycController());
   Get.put(ProfileController());
+  Get.put(UserController());
   runApp(DevicePreview(enabled: false, builder: (context) => const MyApp()));
 }
 

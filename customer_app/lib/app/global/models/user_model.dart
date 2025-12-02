@@ -27,6 +27,8 @@ class UserModel {
   final num jobsCompleted;
   final num totalEarning;
 
+  final bool isKitIssued;
+
   final Timestamp createdAt;
   final Timestamp updatedAt;
 
@@ -52,6 +54,7 @@ class UserModel {
     required this.paymentHistory,
     required this.jobsCompleted,
     required this.totalEarning,
+    required this.isKitIssued,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -79,6 +82,7 @@ class UserModel {
       "paymentHistory": paymentHistory,
       "jobsCompleted": jobsCompleted,
       "totalEarning": totalEarning,
+      "isKitIssued": isKitIssued,
       "createdAt": createdAt,
       "updatedAt": updatedAt,
     };
@@ -111,6 +115,7 @@ class UserModel {
           : [],
       jobsCompleted: map["jobsCompleted"] ?? 0,
       totalEarning: map["totalEarning"] ?? 0,
+      isKitIssued: map["isKitIssued"] ?? false,
       createdAt: map["createdAt"] ?? Timestamp.now(),
       updatedAt: map["updatedAt"] ?? Timestamp.now(),
     );

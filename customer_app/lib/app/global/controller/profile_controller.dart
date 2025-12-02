@@ -156,6 +156,7 @@ class ProfileController extends GetxController {
           paymentHistory: [],
           jobsCompleted: userModel!.jobsCompleted,
           totalEarning: userModel!.totalEarning,
+          isKitIssued: userModel!.isKitIssued,
           createdAt: userModel!.createdAt,
           updatedAt: Timestamp.now(),
         );
@@ -313,6 +314,7 @@ class ProfileController extends GetxController {
           paymentHistory: [],
           jobsCompleted: userModel!.jobsCompleted,
           totalEarning: userModel!.totalEarning,
+          isKitIssued: userModel!.isKitIssued,
           createdAt: userModel!.createdAt,
           updatedAt: Timestamp.now(),
         );
